@@ -1,3 +1,5 @@
+#include "Outil.h"
+#define TMAX 30
 /** Définition de différente structures utiles et fonctions associées
 
 Booleen
@@ -5,8 +7,7 @@ Pile
 File
 
 */
-#include <stdio.h>
-#include <stdlib.h>
+
 
 /**Booléen*/
 
@@ -14,16 +15,14 @@ typedef enum{faux,vrai} t_bool;
 
 
 /**Pile*/
-int taille,sommet;
-int tab[taille];
 
-typedef struct {int taille;int tab[taille];int sommet} t_pile;
+typedef struct {int tab[TMAX];int sommet;} t_pile;
 
 void initpile(t_pile pile){
     pile.sommet=-1;
 }
-void empiler(t_pile pile; int i){
-    if (pile.sommet<pile.taille){
+void empiler(t_pile pile, int i){
+    if (pile.sommet<TMAX-1){
         (pile.sommet)++;
         pile.tab[pile.sommet] = i;
     }
@@ -31,14 +30,14 @@ void empiler(t_pile pile; int i){
         printf("erreur la pile est pleine");
 }
 
-void depiler(t_pile pile; int *i){
+void depiler(t_pile pile, int *i){
     if (pile.sommet>-1){
 
-        *i= tab[pile.sommet];
+        *i= pile.tab[pile.sommet];
         (pile.sommet)--;
     }
      else
-        printf("erreur la pile est vide")
+        printf("erreur la pile est vide");
 }
 
 int pilevide(t_pile pile){
@@ -46,43 +45,43 @@ int pilevide(t_pile pile){
 }
 
 /**File*/
-int taille,nb_valeurs,tete,queue;
-typedef struct {int taille;int tab[taille];int nb_valeurs;int tete;int queue} t_file;
+
+typedef struct {int tab[TMAX];int tete; int queue;int nb_valeurs;} t_file;
 
 void initfile(t_file file){
    file.nb_valeurs =0;
-   tete=0;
-   queue=taille-1;
+   file.tete=0;
+   file.queue=TMAX-1;
 }
-void ajouter(t_file file; int i){
-    if (file.nb_valeurs<file.taille){
+void ajouter(t_file file, int i){
+    if (file.nb_valeurs<TMAX){
 
-        if (file.queue== taille-1)
+        if (file.queue== TMAX-1)
                 file.queue=0;
         else
             file.queue++;
-        file.tab[file.sommet] = i;
+        file.tab[file.queue] = i;
         file.nb_valeurs++;
     }
     else
-        printf("erreur la file est pleine")
+        printf("erreur la file est pleine");
 }
 
 
-void retirer(t_file file; int *i){
+void retirer(t_file file, int *i){
     if (file.nb_valeurs> 0){
 
         *i= file.tab[file.tete];
         file.nb_valeurs--;
-        if(file.tete == file.taille-1)
+        if(file.tete == TMAX-1)
             file.tete=0;
         else
-            tete++;
+            file.tete++;
     }
     else
-        printf("erreur la file est vide")
+        printf("erreur la file est vide");
 }
 
 int filevide(t_file file){
-    return(file.nb_valeurs == file.taille);
+    return(file.nb_valeurs == 0);
 }
