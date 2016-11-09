@@ -25,7 +25,7 @@ typedef struct {int coutPA; float mul_ATQ; int portee; int type;}t_attaque ;
 *\brief contient les caractéristiques d'une attaque
 */
 
-typedef struct {int PVmax;  int gainPA; int ATQ;  int DEF; int INI; float poids;  t_attaque atq1; t_attaque atq2; t_spe spe;}t_classe ;
+typedef struct {int coutPE, int PVmax;  int gainPA; int ATQ;  int DEF; int INI; float poids;  t_attaque atq1; t_attaque atq2; t_spe spe;}t_classe ;
 /**
 *\struct t_classe
 *\brief contient les caractéristiques d'une classe de personnage
@@ -37,13 +37,13 @@ typedef struct {t_classe classe ;t_classe statscour; int joueur; int pa; int pv;
 *\brief contient les caractéristiques d'un personnage ainsi que son équipe
 */
 
-typedef struct element{t_personnage personnage; struct element* pred; struct element* succ;}t_personnage;
+typedef struct element{t_personnage personnage; struct element* pred; struct element* succ;}t_element;
 /**
 *\struct t_personnage
 *\brief definition d'une liste de personnage 
 */
 
-typedef struct {t_personnage * drapeau; t_personnage * ec;}t_liste;
+typedef struct {t_element * drapeau; t_element * ec;}t_liste;
 /**
 *\struct t_liste
 *\brief création du type liste (pour gérer simultanément plusieures listes de type t_personnage

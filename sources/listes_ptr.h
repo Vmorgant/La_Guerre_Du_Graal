@@ -1,0 +1,12 @@
+void init_liste(liste*);
+int liste_vide(liste*);
+int hors_liste(liste*);
+void en_tete(liste*);
+void en_queue(liste*);
+void precedent(liste*);
+void suivant(liste*);
+void valeur_elt(liste*,int*);
+void modif_elt(liste*,int);
+void oter_elt(liste*,void);
+void ajout_droit(liste*,int);
+void ajout_gauche(liste*,int);
