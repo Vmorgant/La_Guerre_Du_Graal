@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
-
-void init_liste(liste * p) {
+#include "global.h"
+void init_liste(t_liste * p) {
 	p->drapeau =  malloc (sizeof(t_element));
 	p->ec =  malloc (sizeof(t_element));
 	p->drapeau -> pred = p->drapeau;
@@ -9,49 +9,49 @@ void init_liste(liste * p) {
 	p->ec = p->drapeau;
 }
 
-int liste_vide (liste * p) {
+int liste_vide (t_liste * p) {
 	if(p->drapeau -> pred == p->drapeau)
 		return 1;
 	else return 0;
 }
 
-int hors_liste (liste * p) {
+int hors_liste (t_liste * p) {
 	if(p->ec == p->drapeau)
 		return 1;
 	else return 0;
 }
 
-void en_tete (liste * p) {
+void en_tete (t_liste * p) {
 	p->ec = p->drapeau -> succ;
 }
 
-void en_queue (liste * p) {
+void en_queue (t_liste * p) {
 	p->ec = p->drapeau -> pred;
 }
 
-void suivant(liste * p) {
+void suivant(t_liste * p) {
 	if (!hors_liste(p)){
 		p->ec = p->ec -> succ;
 	}
 }
 
-void precedent(liste * p) {
+void precedent(t_liste * p) {
 	if (!hors_liste(p)){
 		p->ec = p->ec -> pred;
 	}
 }
 
-void valeur_elt(liste * p, int * v) {
+void valeur_elt(t_liste * p, int * v) {
 	if(!hors_liste)
 		*v = p->ec -> valeur;
 }
 
-void modif_elt(liste * p, int v) {
+void modif_elt(t_liste * p, int v) {
 	if(!hors_liste(p))
 		p->ec -> valeur = v;
 }
 
-void oter_elt(liste * p) {
+void oter_elt(t_liste * p) {
 	if(!hors_liste(p)) {
 		t_element * temp;
 		temp = malloc (sizeof(t_element));
@@ -64,7 +64,7 @@ void oter_elt(liste * p) {
 	}
 }
 
-void ajout_droit(liste * p, int v) {
+void ajout_droit(t_liste * p, int v) {
 	if (liste_vide(p) || !hors_liste(p) ) {
 		t_element * nouv;
 		nouv = malloc (sizeof(t_element));
@@ -76,7 +76,7 @@ void ajout_droit(liste * p, int v) {
 	}
 }
 
-void ajout_gauche(liste * p, int v) {
+void ajout_gauche(t_liste * p, int v) {
 	if (liste_vide(p) || !hors_liste(p) ) {
 		t_element * nouv;
 		nouv = malloc (sizeof(t_element));
