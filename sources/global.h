@@ -1,3 +1,7 @@
+#ifndef GLOBAL_H
+
+#define GLOBAL_H
+
 #include<stdio.h>
 
 /**
@@ -49,4 +53,9 @@ typedef struct{t_element * drapeau; t_element * ec;}t_liste;
 *\brief création du type liste (pour gérer simultanément plusieures listes de type t_personnage
 */
 
+extern t_classe sab;
+extern t_attaque autoAttaque;
+extern t_attaque attaquePuissante;
 
+
+#endif

@@ -6,7 +6,6 @@
 *\date 09/11/2016
 */
 
-#include "global.h"
 void init_liste(t_liste*);
 int liste_vide(t_liste*);
 int hors_liste(t_liste*);

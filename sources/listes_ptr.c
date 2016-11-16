@@ -12,16 +12,13 @@
 
 void init_liste(t_liste * p) {
 	p->drapeau =  malloc (sizeof(t_element));
-	//p->ec =  malloc (sizeof(t_element));
 	p->drapeau -> pred = p->drapeau;
 	p->drapeau -> succ = p->drapeau;
 	p->ec = p->drapeau;
 }
 
 int liste_vide(t_liste * p) {
-	if(p->drapeau -> pred == p->drapeau)
-		return 1;
-	else return 0;
+	return(p->drapeau->pred == p->drapeau);
 }
 
 int hors_liste(t_liste * p) {
@@ -98,10 +95,13 @@ void ajout_gauche(t_liste * p, t_personnage v) {
 }
 
 void afficher(t_liste* p) {
-		if(!hors_liste(p)) {
-			en_tete(p);
-			while(!hors_liste(p)){
-				printf("%s", p->ec->personnage.classe.nom);
-			}
+	//if(!liste_vide(p)){
+		en_tete(p);
+		printf("L'equipe %i est constituée de :\t",  p->ec->personnage.joueur);
+		while(!hors_liste(p)){
+				printf("%s(%iPE)\t", p->ec->personnage.classe.nom, p->ec->personnage.classe.coutPE);
+				suivant(p);
 		}
+		printf("\n");
+	//}else printf("L'equipe %i est vide.\n",  p->ec->personnage.joueur);
 }

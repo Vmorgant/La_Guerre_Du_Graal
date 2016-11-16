@@ -7,17 +7,12 @@
 */
 #include<stdio.h>
 #include<stdlib.h>
+#include "global.h"
 #include"listes_ptr.h"
-#include"actions.h"
-#include"classes.h"
-#define clear() printf("\033[H\033[J")
 
-extern t_classe sab;
-extern t_attaque autoAttaque;
-extern t_attaque attaquePuissante;
-
-void creer_perso(t_personnage * perso, t_classe classe, int joueur, int PE) {
-	if(PE >= classe.coutPE) {
+	
+void creer_perso(t_liste * equipe, t_personnage * perso, t_classe classe, int joueur, int * PE) {
+	if(* PE >= classe.coutPE) {
 		perso->classe = classe;
 		perso->joueur = joueur;
 		perso->pa = 5;
@@ -25,28 +20,31 @@ void creer_perso(t_personnage * perso, t_classe classe, int joueur, int PE) {
 		perso->x = -1;//permettra de savoir si le perso a été placé lors de l'initialisation de la partie
 		perso->y = -1;//permettra de savoir si le perso a été placé lors de l'initialisation de la partie
 		perso->etat = vie;
+		* PE -= classe.coutPE;
+		ajout_droit(equipe, *perso); 
 		
 	} else printf("Vous n'avez pas les PE requis pour ajouter ce personnage !\n");
 }
 
-void ajout_equipe(t_liste * equipe, int joueur, int PE) {
+void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 	int choix;
 	t_personnage p_nouv;
 	
-	do {
-		/* Affichage du menu et saisie d'une classe */
-		printf("\nMenu :\n");
-		printf(" 1 - Saber\n");
-		printf("Choisissez une classe : ");
-		scanf("%d",&choix);
-		/* Traitement du choix de l'utilisateur */
-		switch(choix) {
-			case 1: creer_perso(&p_nouv, sab, joueur, PE); ajout_droit(equipe, p_nouv); break;
-			default: printf("Erreur: votre choix doit �tre compris entre 1 et 1\n");
-		}
+	/* Affichage du menu et saisie d'une classe */
+	printf("\nMenu :\n");
+	printf(" 1 - Saber\n");
+	printf("Choisissez une classe : ");
+	scanf("%d",&choix);
+	/* Traitement du choix de l'utilisateur */
+	switch(choix) {
+		case 1: creer_perso(equipe, &p_nouv, sab, joueur, PE); break;
+		default: printf("Erreur: votre choix doit �tre compris entre 1 et 1\n");
 	}
-	while(choix!=8);
 }
+
+void init_partie(){}
+
+void oter_equipe(){}
 
 void init_equipe(t_liste * equipe, int joueur) {	
 	int choix;
@@ -55,22 +53,22 @@ void init_equipe(t_liste * equipe, int joueur) {
 	do {
 		/* Affichage du menu et saisie du choix */
 		printf("\nMenu :\n");
-		printf(" 1 - Ajouter un personnage dans l'equipe\n");
-		printf(" 2 - Supprimer un personnage de l'equipe\n");
-		printf(" 3 - Valider l'équipes\n");
+		printf(" 1 - Ajouter un personnage dans l'equipe %i\n", joueur);
+		printf(" 2 - Supprimer un personnage de l'equipe %i\n", joueur);
+		printf(" 3 - Valider l'équipe %i\n", joueur);
 		printf("Votre choix : ");
 		scanf("%d",&choix);
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
-			case 1: ajout_equipe(equipe, joueur, PE);  afficher(equipe); break;
-			case 2: oter_equipe(equipe, joueur, PE); afficher(equipe); break;
+			case 1: ajout_equipe(equipe, joueur, &PE);  afficher(equipe); break;
+			case 2: oter_equipe(); afficher(equipe); break;
 			case 3: init_partie();
 			case 4: break;
 			default: printf("Erreur: votre choix doit �tre compris entre 1 et 3\n");
 		}
 	}
-	while(choix!=8);
+	while(choix!=3);
 	printf(" !\n");
 }
 
