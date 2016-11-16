@@ -2,7 +2,7 @@
 *\file main.c
 *\brief Menu principal et lancement de la partie
 *\version 1.0
-*\auteur Victor Morgant
+*\auteur Victor Morgant, Corentin Petit
 *\date 11/11/2016
 */
 #include<stdio.h>
@@ -10,59 +10,122 @@
 #include"listes_ptr.h"
 #include"actions.h"
 #include"classes.h"
+#define clear() printf("\033[H\033[J")
 
-int InitEquipe(void)
-{	int choix;
-	int PE_MAX = 9;
-	t_liste *equipe1;
-	t_liste *equipe2;
-	t_liste *ordre_action;
+extern t_classe sab;
+extern t_attaque autoAttaque;
+extern t_attaque attaquePuissante;
 
-/* Initialisation des listes de personnages */
-	init_liste(equipe1);
-	init_liste(equipe2);
-	init_liste(ordre_action);
+void creer_perso(t_personnage * perso, t_classe classe, int joueur, int PE) {
+	if(PE >= classe.coutPE) {
+		perso->classe = classe;
+		perso->joueur = joueur;
+		perso->pa = 5;
+		perso->pv = classe.PVmax;
+		perso->x = -1;//permettra de savoir si le perso a été placé lors de l'initialisation de la partie
+		perso->y = -1;//permettra de savoir si le perso a été placé lors de l'initialisation de la partie
+		perso->etat = vie;
+		
+	} else printf("Vous n'avez pas les PE requis pour ajouter ce personnage !\n");
+}
 
-	do
-/* Affichage du menu et saisie du choix */
-	{	printf("\nMenu :\n");
-		printf(" 1 - Ajouter un personnage dans l'equipe 1\n");
-		printf(" 2 - Ajouter un personnage dans l'equipe 2 \n");
-		printf(" 3 - Supprimer un personnage dans l'equipe 1\n");
-		printf(" 4 - Supprimer un personnage dans l'equipe 2\n");
-		printf(" 5 - Effacer l'equipe 1\n");
-		printf(" 6 - Effacer l'equipe 2\n");
-		printf(" 7 - Valider les deux équipes\n");
-		printf(" 8 - Quitter\n");
-		printf("Votre choix : ");
+void ajout_equipe(t_liste * equipe, int joueur, int PE) {
+	int choix;
+	t_personnage p_nouv;
+	
+	do {
+		/* Affichage du menu et saisie d'une classe */
+		printf("\nMenu :\n");
+		printf(" 1 - Saber\n");
+		printf("Choisissez une classe : ");
 		scanf("%d",&choix);
-
-/* Traitement du choix de l'utilisateur */
-		switch(choix)
-		{	case 1: inserer(equipe1);  afficher(equipe1); break;
-			case 2: inserer(equipe2);  afficher(equipe2); break;
-			case 3: supprimer(equipe1); afficher(equipe1); break;
-			case 4: supprimer(equipe2); afficher(equipe2); break;
-			case 5: vider_liste(equipe1); afficher(equipe1); break;
-			case 6: vider_liste(equipe2); afficher(equipe2); break;
-			case 7: InitPartie();
-			case 8: break;
-			default: printf("Erreur: votre choix doit �tre compris entre 1 et 8\n");
+		/* Traitement du choix de l'utilisateur */
+		switch(choix) {
+			case 1: creer_perso(&p_nouv, sab, joueur, PE); ajout_droit(equipe, p_nouv); break;
+			default: printf("Erreur: votre choix doit �tre compris entre 1 et 1\n");
 		}
 	}
 	while(choix!=8);
+}
 
-	printf("Au revoir !\n");
-	return EXIT_SUCCESS;
+void init_equipe(t_liste * equipe, int joueur) {	
+	int choix;
+	int PE = 9;
+
+	do {
+		/* Affichage du menu et saisie du choix */
+		printf("\nMenu :\n");
+		printf(" 1 - Ajouter un personnage dans l'equipe\n");
+		printf(" 2 - Supprimer un personnage de l'equipe\n");
+		printf(" 3 - Valider l'équipes\n");
+		printf("Votre choix : ");
+		scanf("%d",&choix);
+
+		/* Traitement du choix de l'utilisateur */
+		switch(choix) {
+			case 1: ajout_equipe(equipe, joueur, PE);  afficher(equipe); break;
+			case 2: oter_equipe(equipe, joueur, PE); afficher(equipe); break;
+			case 3: init_partie();
+			case 4: break;
+			default: printf("Erreur: votre choix doit �tre compris entre 1 et 3\n");
+		}
+	}
+	while(choix!=8);
+	printf(" !\n");
 }
 
 
 
-int main(void)
-{	int choix;
-	do
-/* Affichage du menu et saisie du choix */
-	{	printf("\nMenu :\n");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main(void) {
+	int choix;
+	t_liste equipe1;
+	t_liste equipe2;
+
+	/* Initialisation des listes de personnages */
+	init_liste(&equipe1);
+	init_liste(&equipe2);
+	
+	do {
+		/* Affichage du menu et saisie du choix */
+		printf("\nMenu :\n");
 		printf(" 1 - Mode Duel\n");
 		printf(" 2 - Mode Arcade\n");
 		printf(" 3 - Mode Histoire\n");
@@ -71,9 +134,9 @@ int main(void)
 		printf("Votre choix : ");
 		scanf("%d",&choix);
 
-/* Traitement du choix de l'utilisateur */
-		switch(choix)
-		{	case 1: InitEquipe(); break;
+		/* Traitement du choix de l'utilisateur */
+		switch(choix) {
+			case 1: init_equipe(&equipe1, 1); init_equipe(&equipe2, 2);break;
 			case 2: printf("Ce mode n'est pas encore jouable "); break;
 			case 3: printf("Ce mode n'est pas encore jouable "); break;
 			case 4: printf("Jeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
