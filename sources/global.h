@@ -39,7 +39,7 @@ typedef struct{t_classe classe ;t_classe statscour; int joueur; int pa; int pv; 
 
 typedef struct{t_personnage personnage; struct element* pred; struct element* succ;}t_element;
 /**
-*\struct t_personnage
+*\struct t_element
 *\brief definition d'une liste de personnage
 */
 
