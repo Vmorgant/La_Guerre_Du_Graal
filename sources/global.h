@@ -65,7 +65,11 @@ typedef struct{t_element * drapeau; t_element * ec;}t_liste;
 
 
 
-
+typedef struct{int x; int y; int cout; int heuristique;}t_noeud;
+/**
+*\struct t_noeud 
+*\brief contient les coordonnées d'un noeud et son poids
+*/
 
 typedef struct element_noeud{t_noeud noeud; struct element_noeud* pred; struct element_noeud* succ;}t_element_noeud;
 /**
