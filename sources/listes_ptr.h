@@ -19,3 +19,4 @@ void oter_elt(t_liste*);
 void ajout_droit(t_liste*,t_personnage);
 void ajout_gauche(t_liste*,t_personnage);
 void afficher(t_liste*);
+void compter_elts(t_liste*,int*);

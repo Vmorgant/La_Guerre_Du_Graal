@@ -53,8 +53,8 @@ typedef struct{t_element * drapeau; t_element * ec;}t_liste;
 *\brief création du type liste (pour gérer simultanément plusieures listes de type t_personnage
 */
 
-#define nb_classes 3
-extern t_classe tab_classes[nb_classes];
+extern t_classe sab;
+extern t_classe arc;
 
 
 #endif

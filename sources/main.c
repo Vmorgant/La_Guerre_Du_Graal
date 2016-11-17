@@ -2,111 +2,22 @@
 *\file main.c
 *\brief Menu principal et lancement de la partie
 *\version 1.0
-*\auteur Victor Morgant, Corentin Petit
+*\auteur Corentin Petit
 *\date 11/11/2016
 */
 #include<stdio.h>
 #include<stdlib.h>
+#include <unistd.h>
+#include <curses.h>
+#include <string.h>
 #include "global.h"
+#include"ges_equipes.h"
 #include"listes_ptr.h"
 
-	
-void creer_perso(t_liste * equipe, t_personnage * perso, t_classe classe, int joueur, int * PE) {
-	if(* PE >= classe.coutPE) {
-		perso->classe = classe;
-		perso->joueur = joueur;
-		perso->pa = 5;
-		perso->pv = classe.PVmax;
-		perso->x = -1;//permettra de savoir si le perso a été placé lors de l'initialisation de la partie
-		perso->y = -1;//permettra de savoir si le perso a été placé lors de l'initialisation de la partie
-		perso->etat = vie;
-		* PE -= classe.coutPE;
-		ajout_droit(equipe, *perso); 
-		
-	} else printf("Vous n'avez pas les PE requis pour ajouter ce personnage !\n");
+void clearScreen(){
+	const char* CLEAR_SCREE_ANSI = "\e[1;1H\e[2J";
+	write(STDOUT_FILENO,CLEAR_SCREE_ANSI,12);
 }
-
-void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
-	int choix;
-	t_personnage p_nouv;
-	
-	/* Affichage du menu et saisie d'une classe */
-	printf("\nMenu :\n");
-	printf(" 1 - Saber\n");
-	printf("Choisissez une classe : ");
-	scanf("%d",&choix);
-	/* Traitement du choix de l'utilisateur */
-	switch(choix) {
-		case 1: creer_perso(equipe, &p_nouv, sab, joueur, PE); break;
-		default: printf("Erreur: votre choix doit �tre compris entre 1 et 1\n");
-	}
-}
-
-void init_partie(){}
-
-void oter_equipe(){}
-
-void init_equipe(t_liste * equipe, int joueur) {	
-	int choix;
-	int PE = 9;
-
-	do {
-		/* Affichage du menu et saisie du choix */
-		printf("\nMenu :\n");
-		printf(" 1 - Ajouter un personnage dans l'equipe %i\n", joueur);
-		printf(" 2 - Supprimer un personnage de l'equipe %i\n", joueur);
-		printf(" 3 - Valider l'équipe %i\n", joueur);
-		printf("Votre choix : ");
-		scanf("%d",&choix);
-
-		/* Traitement du choix de l'utilisateur */
-		switch(choix) {
-			case 1: ajout_equipe(equipe, joueur, &PE);  afficher(equipe); break;
-			case 2: oter_equipe(); afficher(equipe); break;
-			case 3: init_partie();
-			case 4: break;
-			default: printf("Erreur: votre choix doit �tre compris entre 1 et 3\n");
-		}
-	}
-	while(choix!=3);
-	printf(" !\n");
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -120,8 +31,12 @@ int main(void) {
 	/* Initialisation des listes de personnages */
 	init_liste(&equipe1);
 	init_liste(&equipe2);
+
+	//initscr();
 	
 	do {
+		//refresh();		
+	
 		/* Affichage du menu et saisie du choix */
 		printf("\nMenu :\n");
 		printf(" 1 - Mode Duel\n");
@@ -145,5 +60,6 @@ int main(void) {
 	while(choix!=5);
 
 	printf("Au revoir !\n");
+	//endwin();
 	return EXIT_SUCCESS;
 }
