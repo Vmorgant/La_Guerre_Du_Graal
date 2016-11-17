@@ -56,7 +56,7 @@ t_map creerMat(){
 
 void afficherMat (t_map mat){
     int i, j;
-    system("clear");								 //Effacer le terminal
+    clearscreen();					 //Effacer le terminal
     mat.cell[1][1]=2;
     mat.cell[1][1]=1;
     for (i=0; i < 10; i++){
