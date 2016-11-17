@@ -1,0 +1,13 @@
+#include "global.h"
+void init_liste(t_liste_noeud*);
+int liste_vide(t_liste_noeud*);
+int hors_liste(t_liste_noeud*);
+void en_tete(t_liste_noeud*);
+void en_queue(t_liste_noeud*);
+void precedent(t_liste_noeud*);
+void suivant(t_liste_noeud*);
+void valeur_elt(t_liste_noeud*,t_noeud*);
+void modif_elt(t_liste_noeud*,t_noeud);
+void oter_elt(t_liste_noeud*);
+void ajout_droit(t_liste_noeud*,t_noeud);
+void ajout_gauche(t_liste_noeud*,t_noeud);
