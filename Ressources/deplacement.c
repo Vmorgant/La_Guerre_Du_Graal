@@ -1,20 +1,67 @@
-/**
-*\file Pathfinding.c
-*\brief Gestion de la planification du déplacement
-*\version 1.0
-*\author Martin Lebourdais
-*\date 17/11/2016
-*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+typedef struct{int nlignes,ncolonnes;int ** cell;}t_map;
+t_map creerMat(){
+	/*Initialisation de la matrice map à 0*/
+    t_map matrice;
+    int i, j;
+    matrice.cell = (int**) malloc(10 * sizeof(int*));
+    for (i=0; i < 10; i++){
+        matrice.cell[i] = (int*) malloc(10 * sizeof(int));
+        for (j=0; j < 10; j++){    	
+        	matrice.cell[i][j] = 0;
+        }
+            
+    }
+    return matrice;
+}
 
-typedef struct {int x, y, cout, heuristique;}t_noeud;
-typedef struct{t_noeud noeud; struct element* pred; struct element* succ;}t_element;
-typedef struct{t_element * drapeau; t_element * ec;}t_liste;
-
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-
+void permuter(t_noeud *actuel,t_noeud *suivant){
+	t_noeud tampon;
+	tampon = *actuel;
+	*actuel = *suivant;
+	*suivant = tampon;
+}
+t_map actumap(t_personnage * ordre_action, t_map map){
+   //Fontion qui actualise la map en place le perso de l'élement courant
+       	 
+    
+    if (ordre_action->ec.equipe == 1){     
+        		if (ordre_action->ec.classe.nom == "Saber") map.cell[ordre_action->ec.x][ordre_action->ec.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
+        	}
+    if (ordre_action->ec.equipe == 2){
+        		if (ordre_action->ec.classe.nom == "Saber") map.cell[ordre_action->ec.x][ordre_action->ec.y] = 2;
+        	}
+    
+    return map;
+}
+void afficherMat (t_map mat){
+    int i, j;
+    clearscreen();					 //Effacer le terminal
+    mat.cell[1][1]=2;
+    mat.cell[1][1]=1;
+    for (i=0; i < 10; i++){
+	    printf("|");
+	    for (j=0; j < 10; j++){
+	    	if(mat.cell[i][j] == 0) printf(" --- "); 
+	    	if(mat.cell[i][j] == 1) {				 //Si la case contient une "Saber" Bleue
+	    		couleur("34;1");					 //On écrit en bleu et en gras
+	    		printf(" SAB ");					
+	    		couleur("0");						 //On réinitialise le système de couleur
+	    		
+	    	}
+	    	if(mat.cell[i][j] == 2) {				 //Si la case contient une "Saber" Rouge
+	    		couleur("31;1");					 //On écrit en rouge et en gras
+	    		printf(" SAB ");
+	    		couleur("0");
+	    	}
+			
+	    }
+	printf("|\n");
+    }
+        printf("\n");
+}
 void init_liste(t_liste_noeud * p) {
 	p->drapeau =  malloc (sizeof(t_element_noeud));
 	p->ec =  malloc (sizeof(t_element_noeud));
@@ -184,19 +231,23 @@ void pathfinding(int x, int y,int objx,int objy){
 	
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void deplacement(t_liste *ordre_action,t_map map){
+	printf("Rentrez des coordonnées séparées par une vigule\n");
+	scanf("%i,%i",xobj,yobj);
+	printf("\n");
+	
+	t_liste openlist;
+	t_liste closedlist;
+	init_list(&openlist);
+	init_list(&closedlist);
+	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,&openlist,&closedlist);     //On cherche le openlist le plus court
+	en_tete(&openlist);
+	while(openlist.ec->personnage.x != xobj || openlist.ec->personnage.y != yobj){
+		
+	permuter(openlist.ec,openlist.ec->succ->ec);        //On permute avec la case suivante dans le openlist défini
+	ordre_action->ec->personnage.x = openlist.ec->personnage.x;   //On actualise les coordonnées dans les structures des persos
+	ordre_action->ec->personnage.y = openlist.ec->personnage.y;
+	actumap(ordre_action,map);					  //On actualise la map
+	afficherMat(map);							  //On affiche la map
+	}
+}
