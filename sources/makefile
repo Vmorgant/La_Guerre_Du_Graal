@@ -16,3 +16,5 @@ classes.o: classes.c global.h
 
 clean: 
 	rm -f *.~ *.o 
+
+mrroper: clean
