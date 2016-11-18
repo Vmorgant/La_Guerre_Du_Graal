@@ -50,7 +50,7 @@ typedef struct{t_classe classe ; int joueur; int pa; int pv; int x; int y; t_eta
 
 typedef struct element{t_personnage personnage; struct element* pred; struct element* succ;}t_element;
 /**
-*\struct t_personnage
+*\struct t_element
 *\brief definition d'une liste de personnage
 */
 
