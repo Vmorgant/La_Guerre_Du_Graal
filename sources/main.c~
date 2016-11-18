@@ -34,7 +34,8 @@ int main(void) {
 
 	//initscr();
 	
-	do {		
+	do {
+		//refresh();		
 	
 		/* Affichage du menu et saisie du choix */
 		printf("\nMenu :\n");

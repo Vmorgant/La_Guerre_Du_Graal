@@ -1,22 +1,20 @@
-/**
-*\file makefile
-*\brief Compilation séparée des fichiers
-*
-*\author Lebourdais Martin
-*\date 14/11/2016
-*/
-
 all:LGDG
-LGDG: main.o list_ptr.o actions.o classes.o global.h
-	gcc -o LGDG main.o list_ptr.o actions.o classes.o global.h 
-main.o:main.c global.h 
-	gcc -c maxi.c global.h -g -W  
-list_ptr.o:list_ptr.c global.h
-	gcc -c list_ptr.c global.h -g -W 
-actions.o:actions.c global.h
-  gcc -c actions.c global.h -g -W
-classes.o:classes.c global.h
-  gcc -c classes.c global.h -g -W
+LGDG: main.o listes_ptr.o ges_equipes.o classes.o
+	gcc -o LGDG main.o listes_ptr.o ges_equipes.o classes.o -lncurses
+
+main.o: main.c global.h 
+	gcc  -c main.c global.h -lncurses -g -W  
+
+ges_equipes.o: ges_equipes.c global.h
+	gcc -c ges_equipes.c global.h -g -W
+
+listes_ptr.o: listes_ptr.c global.h
+	gcc -c listes_ptr.c global.h -g -W 
+
+classes.o: classes.c global.h
+	gcc -c classes.c global.h -g -W
 
 clean: 
 	rm -f *.~ *.o 
+
+mrroper: clean
