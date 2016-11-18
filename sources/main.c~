@@ -13,10 +13,6 @@
 #include "global.h"
 #include"ges_equipes.h"
 #include"listes_ptr.h"
-#include"liste_chemin.h"
-#include"Init_map.h"
-#include"deplacement.h"
-#include"ges_partie.h"
 
 void clearScreen(){
 	const char* CLEAR_SCREE_ANSI = "\e[1;1H\e[2J";
