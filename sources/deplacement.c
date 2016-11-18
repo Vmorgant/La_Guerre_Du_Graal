@@ -27,12 +27,12 @@ void permuter(t_noeud *actuel,t_noeud *suivant){
 
 int existinf(t_liste_noeud liste,t_noeud valeur){
 /**Fonction qui teste si il existe le même noeud avec un cout inferieur à la valeur entrée en paramètre dans la liste en paramètre.*/
-	en_tete(&liste);
+	en_tete_noeud(&liste);
 	t_noeud vcour;
-	while(!hors_liste(&liste)){
-		valeur_elt(&liste,&vcour);
+	while(!hors_liste_noeud(&liste)){
+		valeur_elt_noeud(&liste,&vcour);
 		if ((vcour.x==valeur.x) && (vcour.y==valeur.y) && (vcour.cout<valeur.cout)) return 1;/*On compare les coordonnées pour savoir si le noeud est le même*/
-		suivant(&liste);
+		suivant_noeud(&liste);
 	}
 	return 0;
 }
@@ -48,19 +48,19 @@ void pathfinding(int x, int y,int objx,int objy){
     t_noeud depart={x,y,0,0};
     t_liste openlist;				/*Liste des noeuds à tester*/
     t_liste closedlist;				/*Liste des noeuds testés*/
-    init_liste(&openlist);
-    init_liste(&closedlist);
-    ajout_droit(&openlist,depart);
-	en_tete(&openlist);
-	en_tete(&closedlist);
+    init_liste_noeud(&openlist);
+    init_liste_noeud(&closedlist);
+    ajout_droit_noeud(&openlist,depart);
+	en_tete_noeud(&openlist);
+	en_tete_noeud(&closedlist);
 	t_noeud q;	
-	while(!liste_vide(&openlist)){  
+	while(!liste_vide_noeud(&openlist)){  
 			
-		valeur_elt(&openlist,&q);
-		oter_elt(&openlist);
+		valeur_elt_noeud(&openlist,&q);
+		oter_elt_noeud(&openlist);
 		if (q.x == objx && q.y == objy){			/*On teste si on est arrivé*/
-			en_tete(&openlist);
-			while(!hors_liste(&openlist)){
+			en_tete_noeud(&openlist);
+			while(!hors_liste_noeud(&openlist)){
 				printf("[%i,%i]\n",openlist.ec->noeud.x,openlist.ec->noeud.y);			
 			}
 			
@@ -75,30 +75,30 @@ void pathfinding(int x, int y,int objx,int objy){
 		else{
 			v1.cout=q.cout+1;
 			v1.heuristique = v1.cout + distance(v1.x,v1.y,objx,objy);
-			ajout_droit(&openlist,v1);
+			ajout_droit_noeud(&openlist,v1);
 		}
 
 		if (existinf(openlist,v2)||existinf(closedlist,v2));
 		else{
 			v2.cout=q.cout+1;
 			v2.heuristique = v2.cout + distance(v2.x,v2.y,objx,objy);
-			ajout_droit(&openlist,v2);
+			ajout_droit_noeud(&openlist,v2);
 		}
 
 		if (existinf(openlist,v3)||existinf(closedlist,v3));
 		else{
 			v3.cout=q.cout+1;
 			v3.heuristique = v3.cout + distance(v3.x,v3.y,objx,objy);
-			ajout_droit(&openlist,v3);
+			ajout_droit_noeud(&openlist,v3);
 		}
 		if (existinf(openlist,v4)||existinf(closedlist,v4));
 		else{
 			v4.cout=q.cout+1;
 			v4.heuristique = v4.cout + distance(v4.x,v4.y,objx,objy);
-			ajout_droit(&openlist,v4);
+			ajout_droit_noeud(&openlist,v4);
 		}
 		
-		ajout_droit(&closedlist,q); /*On ajoute la case que l'on vient de tester à la liste*/
+		ajout_droit_noeud(&closedlist,q); /*On ajoute la case que l'on vient de tester à la liste*/
 	
 	}	
 	
@@ -114,10 +114,10 @@ void deplacement(t_liste *ordre_action,t_map map){
 	
 	t_liste openlist;
 	t_liste closedlist;
-	init_list(&openlist);
-	init_list(&closedlist);
+	init_list_noeud(&openlist);
+	init_list_noeud(&closedlist);
 	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,&openlist,&closedlist);     //On cherche le openlist le plus court
-	en_tete(&openlist);
+	en_tete_noeud(&openlist);
 	while(openlist.ec->personnage.x != xobj || openlist.ec->personnage.y != yobj){
 		
 	permuter(openlist.ec,openlist.ec->succ->ec);        //On permute avec la case suivante dans le openlist défini
