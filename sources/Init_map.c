@@ -9,8 +9,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define X 10
-#define Y 10
 #define couleur(param) printf("\033[%sm",param)
 /*   param devant être un const char *, vide (identique à "0") ou formé
      d'une où plusieurs valeurs séparées par des ; parmi
@@ -20,6 +18,7 @@
          40, 41, 42, 43, 44, 45, 46, 47 couleur du fond
          les couleurs, suivant la logique RGB, étant respectivement
          noir, rouge, vert, jaune, bleu, magenta, cyan et blanc */
+         
 typedef struct{int nlignes,ncolonnes;int ** cell;}t_map;
 
 t_map creerMat(){
@@ -37,7 +36,7 @@ t_map creerMat(){
     return matrice;
 }
 
-/*t_map actumap(t_personnage * ordreaction, t_map map){
+t_map actumap(t_personnage * ordreaction, t_map map){
    //Fontion qui actualise la map en place le perso de l'élement courant
        	 
     
@@ -50,60 +49,10 @@ t_map creerMat(){
     
     return map;
 }
-*/
 
 
 
 
-void afficherMat (t_map mat){
-    int i, j;
-    clearscreen();					 //Effacer le terminal
-    mat.cell[1][1]=2;
-    mat.cell[1][1]=1;
-    for (i=0; i < 10; i++){
-	    printf("|");
-	    for (j=0; j < 10; j++){
-	    	if(mat.cell[i][j] == 0) printf(" --- "); 
-	    	if(mat.cell[i][j] == 1) {				 //Si la case contient une "Saber" Bleue
-	    		couleur("34;1");					 //On écrit en bleu et en gras
-	    		printf(" SAB ");					
-	    		couleur("0");						 //On réinitialise le système de couleur
-	    		
-	    	}
-	    	if(mat.cell[i][j] == 2) {				 //Si la case contient une "Saber" Rouge
-	    		couleur("31;1");					 //On écrit en rouge et en gras
-	    		printf(" SAB ");
-	    		couleur("0");
-	    	}
-			
-	    }
-	printf("|\n");
-    }
-        printf("\n");
-}
-
-int main(void){
-	
-	
-	
-	afficherMat(creerMat());
-	return 0;
-}
-
-
-t_map actumap(t_personnage * ordre_action, t_map map){
-   //Fontion qui actualise la map en place le perso de l'élement courant
-       	 
-    
-    if (ordre_action->ec.equipe == 1){     
-        		if (ordre_action->ec.classe.nom == "Saber") map.cell[ordre_action->ec.x][ordre_action->ec.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-        	}
-    if (ordre_action->ec.equipe == 2){
-        		if (ordre_action->ec.classe.nom == "Saber") map.cell[ordre_action->ec.x][ordre_action->ec.y] = 2;
-        	}
-    
-    return map;
-}
 
 void afficherMat (t_map mat){
     int i, j;

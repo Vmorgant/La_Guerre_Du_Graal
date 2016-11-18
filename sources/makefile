@@ -14,6 +14,18 @@ listes_ptr.o: listes_ptr.c global.h
 classes.o: classes.c global.h
 	gcc -c classes.c global.h -g -W
 
+ges_partie.o: ges_partie.c global.h
+	gcc -c ges_partie.c global.h -g -W
+
+Init_map.o: Init_map.c global.h
+	gcc -c Init_map.c global.h -g -W
+
+liste_chemin.o: liste_chemin.c global.h
+	gcc -c liste_chemin.c global.h -g -W
+	
+deplacement.o: deplacement.c global.h
+	gcc -c deplacement.c global.h -g -W
+
 clean: 
 	rm -f *.~ *.o 
 
