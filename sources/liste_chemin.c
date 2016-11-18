@@ -6,50 +6,50 @@ void init_liste_noeud(t_liste_noeud * p) {
 	p->ec = p->drapeau;
 }
 
-int liste_vide (t_liste_noeud * p) {
+int liste_vide_noeud(t_liste_noeud * p) {
 	if(p->drapeau -> pred == p->drapeau)
 		return 1;
 	else return 0;
 }
 
-int hors_liste (t_liste_noeud * p) {
+int hors_liste_noeud(t_liste_noeud * p) {
 	if(p->ec == p->drapeau)
 		return 1;
 	else return 0;
 }
 
-void en_tete (t_liste_noeud * p) {
+void en_tete_noeud(t_liste_noeud * p) {
 	p->ec = p->drapeau -> succ;
 }
 
-void en_queue (t_liste_noeud * p) {
+void en_queue_noeud(t_liste_noeud * p) {
 	p->ec = p->drapeau -> pred;
 }
 
-void suivant(t_liste_noeud * p) {
-	if (!hors_liste(p)){
+void suivant_noeud(t_liste_noeud * p) {
+	if (!hors_liste_noeud(p)){
 		p->ec = p->ec -> succ;
 	}
 }
 
-void precedent(t_liste_noeud * p) {
-	if (!hors_liste(p)){
+void precedent_noeud(t_liste_noeud * p) {
+	if (!hors_liste_noeud(p)){
 		p->ec = p->ec -> pred;
 	}
 }
 
-void valeur_elt(t_liste_noeud * p, int * v) {
-	if(!hors_liste)
+void valeur_elt_noeud(t_liste_noeud * p, t_noeud * v) {
+	if(!hors_liste_noeud(p))
 		*v = p->ec -> valeur;
 }
 
-void modif_elt(t_liste_noeud * p, int v) {
-	if(!hors_liste(p))
+void modif_elt_noeud(t_liste_noeud * p, t_noeud v) {
+	if(!hors_liste_noeud(p))
 		p->ec -> valeur = v;
 }
 
-void oter_elt(t_liste_noeud * p) {
-	if(!hors_liste(p)) {
+void oter_elt_noeud(t_liste_noeud * p) {
+	if(!hors_liste_noeud(p)) {
 		t_element_noeud * temp;
 		temp = malloc (sizeof(t_element_noeud));
 		temp = p->ec;
@@ -61,8 +61,8 @@ void oter_elt(t_liste_noeud * p) {
 	}
 }
 
-void ajout_droit(t_liste_noeud * p, int v) {
-	if (liste_vide(p) || !hors_liste(p) ) {
+void ajout_droit_noeud(t_liste_noeud * p, t_noeud v) {
+	if (liste_vide_noeud (p) || !hors_liste_noeud(p) ) {
 		t_element_noeud * nouv;
 		nouv = malloc (sizeof(t_element_noeud));
 		nouv -> valeur = v;
@@ -73,8 +73,8 @@ void ajout_droit(t_liste_noeud * p, int v) {
 	}
 }
 
-void ajout_gauche(t_liste_noeud * p, int v) {
-	if (liste_vide(p) || !hors_liste(p) ) {
+void ajout_gauche_noeud(t_liste_noeud * p, t_noeud v) {
+	if (liste_vide_noeud (p) || !hors_liste_noeud (p) ) {
 		t_element_noeud * nouv;
 		nouv = malloc (sizeof(t_element_noeud));
 		nouv -> valeur = v;
