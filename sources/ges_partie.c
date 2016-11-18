@@ -52,12 +52,12 @@ void init_partie(t_liste *equipe1,t_liste *equipe2){
 		
 }
 
-void placer(t_liste personnages equipe1,t_liste personnages equipe2,t_map carte){
+void placer(t_liste equipe1,t_liste equipe2,t_map carte){
 /**Place les personnages des deux équipes sur la carte.*/
 
 }
 
-int mort(t_liste *ordre_action,t_personnage cadavre){
+int est_mort(t_liste *ordre_action,t_personnage cadavre){
 /**Retire le cadavre de la liste ordre_action puis renvoie 0 s'il reste des joueurs dans les deux équipes et le numéro de l'équipe gagnante sinon.*/
 	int nb_equipe1;
 	int nb_equipe2;
@@ -99,7 +99,7 @@ void attaque(t_liste ordre_action,t_personnage cible, t_attaque attaque){
 		cible.PV=(cible.PV)-degats;	
 	}
 	if ((cible.PV)==0)){
-		mort(ordre_action,cible);
+		est_mort(ordre_action,cible);
 	}
 }
 
@@ -137,7 +137,7 @@ void choix_action(t_liste ordre_action){
 	}while(ordre_action->ec->personnage.PA >0);
 }
 
-void gestion_tour(t_liste ordre_action,*NbTour){
+void gestion_tour(t_liste ordre_action,int *NbTour){
 /**Joue le tour suivant*/
 	&NbTour++;
 	en_tete(ordre_action);
