@@ -66,43 +66,43 @@ void pathfinding(int x, int y,int objx,int objy){
 			
 		valeur_elt_noeud(&openlist,&q);
 		oter_elt_noeud(&openlist);
-		if (q.x == objx && q.y == objy){			/*On teste si on est arrivé*/
+		if (q->x == objx && q->y == objy){			/*On teste si on est arrivé*/
 			en_tete_noeud(&openlist);
 			while(!hors_liste_noeud(&openlist)){
-				printf("[%i,%i]\n",openlist.ec->noeud.x,openlist.ec->noeud.y);			
+				printf("[%i,%i]\n",openlist->ec->noeud.x,openlist->ec->noeud.y);			
 			}
 			
 			break ;
 		}
-		t_noeud v1 = {q.x+1,q.y,0,0};
-		t_noeud v2 = {q.x,q.y+1,0,0};
-		t_noeud v3 = {q.x-1,q.y,0,0};
-		t_noeud v4 = {q.x,q.y-1,0,0};
+		t_noeud v1 = {q->x+1,q->y,0,0};
+		t_noeud v2 = {q->x,q->y+1,0,0};
+		t_noeud v3 = {q->x-1,q->y,0,0};
+		t_noeud v4 = {q->x,q->y-1,0,0};
 		
 		if (existinf(openlist,v1)||existinf(closedlist,v1));				/*On cherche pour chaque voisin de la case si on l'a déjà testée.*/
 		else{
-			v1.cout=q.cout+1;
-			v1.heuristique = v1.cout + distance(v1.x,v1.y,objx,objy);
+			v1->cout=q->cout+1;
+			v1->heuristique = v1.cout + distance(v1->x,v1->y,objx,objy);
 			ajout_droit_noeud(&openlist,v1);
 		}
 
 		if (existinf(openlist,v2)||existinf(closedlist,v2));
 		else{
-			v2.cout=q.cout+1;
-			v2.heuristique = v2.cout + distance(v2.x,v2.y,objx,objy);
+			v2->cout=q->cout+1;
+			v2->heuristique = v2->cout + distance(v2->x,v2->y,objx,objy);
 			ajout_droit_noeud(&openlist,v2);
 		}
 
 		if (existinf(openlist,v3)||existinf(closedlist,v3));
 		else{
-			v3.cout=q.cout+1;
-			v3.heuristique = v3.cout + distance(v3.x,v3.y,objx,objy);
+			v3->cout=q->cout+1;
+			v3->heuristique = v3->cout + distance(v3->x,v3->y,objx,objy);
 			ajout_droit_noeud(&openlist,v3);
 		}
 		if (existinf(openlist,v4)||existinf(closedlist,v4));
 		else{
-			v4.cout=q.cout+1;
-			v4.heuristique = v4.cout + distance(v4.x,v4.y,objx,objy);
+			v4->cout=q->cout+1;
+			v4->heuristique = v4->cout + distance(v4->x,v4->y,objx,objy);
 			ajout_droit_noeud(&openlist,v4);
 		}
 		
