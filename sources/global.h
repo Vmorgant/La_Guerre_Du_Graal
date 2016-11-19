@@ -11,6 +11,15 @@
 *\version 1.0
 *\date 09/11/2016
 */
+
+void clearScreen();
+/**
+ * \fn clearScreen
+ * \brief Fonction permettant d'effacer l'écran
+ */
+
+
+
 typedef enum{mort,vie}t_etat; /*possibilité d'ajouts futurs*/
 /**
 *\enum t_etat
@@ -35,18 +44,11 @@ typedef struct{char nom[20]; int coutPE;int PVmax;int gainPA;int ATQ;int DEF;int
 *\brief contient les caractéristiques d'une classe de personnage
 */
 
-typedef struct{t_classe classe ; int joueur; int PA; int PV; int x; int y; t_etat etat;}t_personnage;
+typedef struct{t_classe classe ; int joueur; int pa; int pv; int x; int y; t_etat etat;}t_personnage;
 /**
 *\struct t_personnage
 *\brief contient les caractéristiques d'un personnage ainsi que son équipe
 */
-
-
-
-
-
-
-
 
 typedef struct element{t_personnage personnage; struct element* pred; struct element* succ;}t_element;
 /**
@@ -62,7 +64,7 @@ typedef struct{t_element * drapeau; t_element * ec;}t_liste;
 
 
 
-
+typedef struct{int nlignes,ncolonnes;int ** cell;}t_map;
 
 
 typedef struct{int x; int y; int cout; int heuristique;}t_noeud;

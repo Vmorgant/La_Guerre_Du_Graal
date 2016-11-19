@@ -1,3 +1,16 @@
+/**
+*\file gliste_chemin.c
+*\brief 
+*\author Martin Lebourdais
+*\version 1.0
+*\date 14/11/2016
+*/
+#include<stdio.h>
+#include<stdlib.h>
+#include "global.h"
+#include "deplacement.h"
+
+
 void init_liste_noeud(t_liste_noeud * p) {
 	p->drapeau =  malloc (sizeof(t_element_noeud));
 	p->ec =  malloc (sizeof(t_element_noeud));

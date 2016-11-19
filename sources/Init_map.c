@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "global.h"
 
 #define couleur(param) printf("\033[%sm",param)
 /*   param devant être un const char *, vide (identique à "0") ou formé
@@ -18,8 +19,6 @@
          40, 41, 42, 43, 44, 45, 46, 47 couleur du fond
          les couleurs, suivant la logique RGB, étant respectivement
          noir, rouge, vert, jaune, bleu, magenta, cyan et blanc */
-         
-typedef struct{int nlignes,ncolonnes;int ** cell;}t_map;
 
 t_map creerMat(){
 	/*Initialisation de la matrice map à 0*/
@@ -36,15 +35,15 @@ t_map creerMat(){
     return matrice;
 }
 
-t_map actumap(t_personnage * ordreaction, t_map map){
+t_map actumap(t_liste * ordre_action, t_map map){
    //Fontion qui actualise la map en place le perso de l'élement courant
        	 
     
-    if (ordreaction->ec.equipe == 1){     
-        		if (ordreaction->ec.classe.nom == "Saber") map.cell[ordreaction->ec.x][ordreaction->ec.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
+    if (ordre_action->ec->personnage.joueur == 1){     
+        		if (ordre_action->ec->personnage.classe.nom == "Saber") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
         	}
-    if (ordreaction->ec.equipe == 2){
-        		if (ordreaction->ec.classe.nom == "Saber") map.cell[ordreaction->ec.x][ordreaction->ec.y] = 2;
+    if (ordre_action->ec->personnage.joueur == 2){
+        		if (ordre_action->ec->personnage.classe.nom == "Saber") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 2;
         	}
     
     return map;
@@ -56,7 +55,7 @@ t_map actumap(t_personnage * ordreaction, t_map map){
 
 void afficherMat (t_map mat){
     int i, j;
-    clearscreen();					 //Effacer le terminal
+    clearScreen();					 //Effacer le terminal
     mat.cell[1][1]=2;
     mat.cell[1][1]=1;
     for (i=0; i < 10; i++){
