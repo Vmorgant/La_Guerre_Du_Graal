@@ -1,8 +1,16 @@
+/**
+*\file deplacement.c
+*\brief Ce fichier contient les définitions des fonctions de déplacement sur la carte.
+*\author Victor Morgant, Martin Lebourdais
+*\version 1.0
+*\date 09/11/2016
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
-
+#include "global.h"
+#include "liste_chemin.h"
+#include "Init_map.h"
 t_map creerMat(){
 	/*Initialisation de la matrice map à 0*/
     t_map matrice;
@@ -46,8 +54,8 @@ int distance(int x,int y,int objx,int objy){
 
 void pathfinding(int x, int y,int objx,int objy){
     t_noeud depart={x,y,0,0};
-    t_liste openlist;				/*Liste des noeuds à tester*/
-    t_liste closedlist;				/*Liste des noeuds testés*/
+    t_liste_noeud openlist;				/*Liste des noeuds à tester*/
+    t_liste_noeud closedlist;				/*Liste des noeuds testés*/
     init_liste_noeud(&openlist);
     init_liste_noeud(&closedlist);
     ajout_droit_noeud(&openlist,depart);
@@ -108,15 +116,17 @@ void pathfinding(int x, int y,int objx,int objy){
     
 }
 void deplacement(t_liste *ordre_action,t_map map){
+        int xobj;
+        int yobj;
 	printf("Rentrez des coordonnées séparées par une vigule\n");
 	scanf("%i,%i",xobj,yobj);
 	printf("\n");
 	
-	t_liste openlist;
-	t_liste closedlist;
-	init_list_noeud(&openlist);
-	init_list_noeud(&closedlist);
-	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,&openlist,&closedlist);     //On cherche le openlist le plus court
+	t_liste_noeud openlist;
+	t_liste_noeud closedlist;
+	init_liste_noeud(&openlist);
+	init_liste_noeud(&closedlist);
+	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj);     //On cherche le openlist le plus court
 	en_tete_noeud(&openlist);
 	while(openlist.ec->personnage.x != xobj || openlist.ec->personnage.y != yobj){
 		

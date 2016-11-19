@@ -1,5 +1,5 @@
 /**
-*\file gliste_chemin.c
+*\file liste_chemin.c
 *\brief 
 *\author Martin Lebourdais
 *\version 1.0
@@ -9,7 +9,7 @@
 #include<stdlib.h>
 #include "global.h"
 #include "deplacement.h"
-
+#include "liste_chemin.h"
 
 void init_liste_noeud(t_liste_noeud * p) {
 	p->drapeau =  malloc (sizeof(t_element_noeud));
@@ -53,12 +53,12 @@ void precedent_noeud(t_liste_noeud * p) {
 
 void valeur_elt_noeud(t_liste_noeud * p, t_noeud * v) {
 	if(!hors_liste_noeud(p))
-		*v = p->ec -> valeur;
+		*v = p->ec -> noeud;
 }
 
 void modif_elt_noeud(t_liste_noeud * p, t_noeud v) {
 	if(!hors_liste_noeud(p))
-		p->ec -> valeur = v;
+		p->ec -> noeud = v;
 }
 
 void oter_elt_noeud(t_liste_noeud * p) {
@@ -66,9 +66,9 @@ void oter_elt_noeud(t_liste_noeud * p) {
 		t_element_noeud * temp;
 		temp = malloc (sizeof(t_element_noeud));
 		temp = p->ec;
-		suivant(p);
+		suivant_noeud(p);
 		p->ec -> pred = temp -> pred;
-		precedent(p);
+		precedent_noeud(p);
 		p->ec -> succ = temp -> succ;
 		free(temp);
 	}
@@ -78,11 +78,11 @@ void ajout_droit_noeud(t_liste_noeud * p, t_noeud v) {
 	if (liste_vide_noeud (p) || !hors_liste_noeud(p) ) {
 		t_element_noeud * nouv;
 		nouv = malloc (sizeof(t_element_noeud));
-		nouv -> valeur = v;
+		nouv -> noeud = v;
 		nouv -> succ = p->ec -> succ;
 		nouv -> pred = p->ec;
 		p->ec -> succ = nouv;
-		p->(ec -> succ) -> pred = nouv;
+		p->ec -> succ -> pred = nouv;
 	}
 }
 
@@ -90,10 +90,10 @@ void ajout_gauche_noeud(t_liste_noeud * p, t_noeud v) {
 	if (liste_vide_noeud (p) || !hors_liste_noeud (p) ) {
 		t_element_noeud * nouv;
 		nouv = malloc (sizeof(t_element_noeud));
-		nouv -> valeur = v;
+		nouv -> noeud = v;
 		nouv -> succ = p->ec;
 		nouv -> pred = p->ec -> pred;
 		p->ec -> pred = nouv;
-		p->(ec -> pred) -> succ = nouv;
+		p->ec -> pred -> succ = nouv;
 	}
 }
