@@ -35,7 +35,7 @@ typedef struct{char nom[20]; int coutPE;int PVmax;int gainPA;int ATQ;int DEF;int
 *\brief contient les caractéristiques d'une classe de personnage
 */
 
-typedef struct{t_classe classe ; int joueur; int pa; int pv; int x; int y; t_etat etat;}t_personnage;
+typedef struct{t_classe classe ; int joueur; int PA; int PV; int x; int y; t_etat etat;}t_personnage;
 /**
 *\struct t_personnage
 *\brief contient les caractéristiques d'un personnage ainsi que son équipe

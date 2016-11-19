@@ -62,7 +62,7 @@ int est_mort(t_liste *ordre_action,t_personnage cadavre){
 	int nb_equipe1;
 	int nb_equipe2;
 	en_tete(ordre_action);
-	while( (ordre_action->ec->personnage.PV) >0) && (!hors_liste(ordre_action) ){
+	while( (ordre_action->ec->personnage.PV >0 ) && (!hors_liste(ordre_action)) ){
 		suivant(ordre_action);
 		if((ordre_action->ec->personnage.joueur)==1){
 			nb_equipe1++;	
@@ -77,7 +77,7 @@ int est_mort(t_liste *ordre_action,t_personnage cadavre){
 	if( (nb_equipe1 >0) && (nb_equipe2 >0) ){
 		return 0;
 	}
-	else if ( (nb_equipe1 >0) {
+	else if ( (nb_equipe1 >0) ) {
 		return 1;
 	}
 	else ( (nb_equipe2 >0) {
@@ -103,21 +103,23 @@ void attaque(t_liste ordre_action,t_personnage cible, t_attaque attaque){
 	}
 }
 
+void choix_cible(t_liste ordre_action, t_map carte, t_attaque attaque){
+}
 void choix_competence(t_liste ordre_action){
 	int choix;
-	do{	printf("\nMenu :\n");
-		printf(" 1 - %s\n",ordre_action->ec->personnage->classe->atq1->nom);
-		printf(" 2 - %s\n",ordre_action->ec->personnage->classe->atq1->nom);
-		//printf(" 3 - %s\n",ordre_action->ec->personnage->classe->spe->nom);
-		printf("Votre choix : ");
-		scanf("%d",&choix);
+	printf("\nMenu :\n");
+	printf(" 1 - %s\n",ordre_action.ec.personnage.classe.atq1.nom);
+	printf(" 2 - %s\n",ordre_action.ec.personnage.classe.atq2.nom);
+	//printf(" 3 - %s\n",ordre_action->ec->personnage->classe->spe->nom);
+	printf("Votre choix : ");
+	scanf("%d",&choix);
 
-		switch(choix){	case 1: choix_cible(ordre_action); break;
+	switch(choix){	case 1: choix_cible(ordre_action, ); break;
 			case 2: choix_cible(ordre_action); break;
 			//case 3: passer(ordre_action); break;
 			default: printf("Erreur: votre choix doit etre compris entre 1 et 2\n");
 		}
-	}while(ordre_action->ec->personnage.PA >0);
+	
 }
 
 void choix_action(t_liste ordre_action){
