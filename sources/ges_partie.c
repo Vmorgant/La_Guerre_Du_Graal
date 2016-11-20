@@ -12,6 +12,7 @@
 #include "global.h"
 #include "listes_ptr.h"
 #include "deplacement.h"
+#include "Init_map.h"
 
 /** Fonction renvoyant un nombre compris entre a et b*/
 int Rand_Int(int a, int b){
@@ -54,58 +55,60 @@ void placer(t_liste equipe1,t_liste equipe2,t_map carte){
 	/**Place les personnages des deux équipes sur la carte.*/
 	int x, y;	
 	while (!hors_liste(&equipe1) && !hors_liste(&equipe2)){
-		if (!hors_liste(&equipe1));															//Placer un personnage pour l'equipe 1
-		printf("Joueur 1, entrez les coordonnées de votre %s séparées par une virgule :\n", equipe1->ec->personnage.classe.nom);
-		scanf("%i,%i", x, y);
-		printf("\n");
-		
-		while (x > 10 || y < 5 || x < 0 || y < 0 || carte[x][y] != 0){
+		if (!hors_liste(&equipe1)){														//Placer un personnage pour l'equipe 1
+			printf("Joueur 1, entrez les coordonnées de votre Servant séparées par une virgule :\n");
+			scanf("%i,%i", &x, &y);
+			printf("\n");
+		}
+		while (x > 10 || y < 5 || x < 0 || y < 0 || carte.cell[x][y] != 0){
 			
-			if (carte[x][y] != 0){															//On teste si la case est vide
+			if (carte.cell[x][y] != 0){															//On teste si la case est vide
 				printf("La case est déjà occupée\n");
 				printf("Rentrez des coordonnées séparées par une vigule :\n");
-				scanf("%i,%i", x, y);
+				scanf("%i,%i", &x, &y);
 				printf("\n");
 			}
 			else {																			//On teste si on est pas hors map
 				printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 4\n");
 				printf("Rentrez des coordonnées séparées par une vigule :\n");
-				scanf("%i,%i", x, y);
+				scanf("%i,%i", &x, &y);
 				printf("\n");
 			}
 		}
-		equipe1->ec->personnage->x = x;
-		equipe1->ec->personnage->y = y;
-		actumap(ordre_action, map);
-		afficherMat(map);
+		equipe1.ec->personnage->x = x;
+		equipe1.ec->personnage->y = y;
+		actumap(equipe1, carte);
+		afficherMat(carte);
 		suivant(&equipe1);
 
-		if (!hors_liste(&equipe2));														//Placer un personnage pour l'equipe 2;
-		printf("Joueur 2, entrez les coordonnées de votre %s séparées par une virgule :\n", equipe2->ec->personnage.classe.nom);
-		scanf("%i,%i", x, y);
-		printf("\n");
-		while (x > 10 || y < 5 || x < 0 || y < 0 || carte[x][y] != 0){
+		if (!hors_liste(&equipe2)){													//Placer un personnage pour l'equipe 2;
+			printf("Joueur 2, entrez les coordonnées de votre Servant séparées par une virgule :\n");
+			scanf("%i,%i",&x, &y);
+			printf("\n");
+		}
+		while (x > 10 || y < 5 || x < 0 || y < 0 || carte.cell[x][y] != 0){
 
-			if (carte[x][y] != 0){
+			if (carte.cell[x][y] != 0){
 				printf("La case est déjà occupée\n");
 				printf("Rentrez des coordonnées séparées par une vigule :\n");
-				scanf("%i,%i", x, y);
+				scanf("%i,%i", &x, &y);
 				printf("\n");
 			}
 			else{
 				printf("Les coordonnées doivent-être des entiers avec un y compris entre 5 et 9\n");
 				printf("Rentrez des coordonnées séparées par une vigule :\n");
-				scanf("%i,%i", x, y);
+				scanf("%i,%i", &x, &y);
 				printf("\n");
 			}
 		}
-		equipe2->ec->personnage->x = x;
-		equipe2->ec->personnage->y = y;
-		actumap(ordre_action, map);
-		afficherMat(map);
+		equipe2.ec->personnage->x = x;
+		equipe2.ec->personnage->y = y;
+		actumap(equipe2, carte);
+		afficherMat(carte);
 		suivant(&equipe2);
 
 	}
+
 
 }
 
