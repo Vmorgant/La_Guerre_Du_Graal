@@ -118,9 +118,17 @@ void pathfinding(int x, int y,int objx,int objy){
 void deplacement(t_liste *ordre_action,t_map map){
         int xobj;
         int yobj;
-	printf("Rentrez des coordonnées séparées par une vigule\n");
+		t_noeud tampon;
+	printf("Rentrez des coordonnées séparées par une vigule :\n");
 	scanf("%i,%i",xobj,yobj);
 	printf("\n");
+	while (x > 9 || y > 9 || x < 0 || y < 0){
+		printf("Les coordonnées doivent-être des entiers compris entre 0 et 9\n");
+		printf("Rentrez des coordonnées séparées par une vigule :\n");
+		scanf("%i,%i", xobj, yobj);
+		printf("\n");
+	}
+	
 	
 	t_liste_noeud openlist;
 	t_liste_noeud closedlist;
@@ -129,7 +137,22 @@ void deplacement(t_liste *ordre_action,t_map map){
 	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj);     //On cherche le openlist le plus court
 	en_tete_noeud(&openlist);
 	while(openlist.ec->personnage.x != xobj || openlist.ec->personnage.y != yobj){
-		
+	
+		if map[openlist.ec->succ->ec->personnage.x][openlist.ec->succ->ec->personnage.y] != 0){			//Si la case n'est pas vide
+			tampon = openlist.ec->succ->ec;     //On mémorise le perso sur la case
+			openlist.ec->succ->ec = openlist.ec;
+			ordre_action->ec->personnage.x = openlist.ec->personnage.x;   //On actualise les coordonnées dans les structures des persos
+			ordre_action->ec->personnage.y = openlist.ec->personnage.y;
+			actumap(ordre_action, map);
+			afficherMat(map);
+			permuter(openlist.ec, openlist.ec->succ->ec);        //On permute avec la case suivante dans le openlist défini
+			openlist.ec->pred->ec = tampon;
+			ordre_action->ec->personnage.x = openlist.ec->personnage.x;   //On actualise les coordonnées dans les structures des persos
+			ordre_action->ec->personnage.y = openlist.ec->personnage.y;
+			actumap(ordre_action, map);
+			afficherMat(map);
+		}
+	
 	permuter(openlist.ec,openlist.ec->succ->ec);        //On permute avec la case suivante dans le openlist défini
 	ordre_action->ec->personnage.x = openlist.ec->personnage.x;   //On actualise les coordonnées dans les structures des persos
 	ordre_action->ec->personnage.y = openlist.ec->personnage.y;
