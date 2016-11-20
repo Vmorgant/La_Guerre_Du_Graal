@@ -66,43 +66,43 @@ void pathfinding(int x, int y,int objx,int objy){
 			
 		valeur_elt_noeud(&openlist,&q);
 		oter_elt_noeud(&openlist);
-		if (q->x == objx && q->y == objy){			/*On teste si on est arrivé*/
+		if (q.x == objx && q.y == objy){			/*On teste si on est arrivé*/
 			en_tete_noeud(&openlist);
 			while(!hors_liste_noeud(&openlist)){
-				printf("[%i,%i]\n",openlist->ec->noeud.x,openlist->ec->noeud.y);			
+				printf("[%i,%i]\n",openlist.ec->noeud.x,openlist.ec->noeud.y);			
 			}
 			
 			break ;
 		}
-		t_noeud v1 = {q->x+1,q->y,0,0};
-		t_noeud v2 = {q->x,q->y+1,0,0};
-		t_noeud v3 = {q->x-1,q->y,0,0};
-		t_noeud v4 = {q->x,q->y-1,0,0};
+		t_noeud v1 = {q.x+1,q.y,0,0};
+		t_noeud v2 = {q.x,q.y+1,0,0};
+		t_noeud v3 = {q.x-1,q.y,0,0};
+		t_noeud v4 = {q.x,q.y-1,0,0};
 		
 		if (existinf(openlist,v1)||existinf(closedlist,v1));				/*On cherche pour chaque voisin de la case si on l'a déjà testée.*/
 		else{
-			v1->cout=q->cout+1;
-			v1->heuristique = v1.cout + distance(v1->x,v1->y,objx,objy);
+			v1.cout=q.cout+1;
+			v1.heuristique = v1.cout + distance(v1.x,v1.y,objx,objy);
 			ajout_droit_noeud(&openlist,v1);
 		}
 
 		if (existinf(openlist,v2)||existinf(closedlist,v2));
 		else{
-			v2->cout=q->cout+1;
-			v2->heuristique = v2->cout + distance(v2->x,v2->y,objx,objy);
+			v2.cout=q.cout+1;
+			v2.heuristique = v2.cout + distance(v2.x,v2.y,objx,objy);
 			ajout_droit_noeud(&openlist,v2);
 		}
 
 		if (existinf(openlist,v3)||existinf(closedlist,v3));
 		else{
-			v3->cout=q->cout+1;
-			v3->heuristique = v3->cout + distance(v3->x,v3->y,objx,objy);
+			v3.cout=q.cout+1;
+			v3.heuristique = v3.cout + distance(v3.x,v3.y,objx,objy);
 			ajout_droit_noeud(&openlist,v3);
 		}
 		if (existinf(openlist,v4)||existinf(closedlist,v4));
 		else{
-			v4->cout=q->cout+1;
-			v4->heuristique = v4->cout + distance(v4->x,v4->y,objx,objy);
+			v4.cout=q.cout+1;
+			v4.heuristique = v4.cout + distance(v4.x,v4.y,objx,objy);
 			ajout_droit_noeud(&openlist,v4);
 		}
 		
@@ -120,12 +120,12 @@ void deplacement(t_liste *ordre_action,t_map map){
         int yobj;
 		t_noeud tampon;
 	printf("Rentrez des coordonnées séparées par une vigule :\n");
-	scanf("%i,%i",xobj,yobj);
+	scanf("%i,%i",&xobj,&yobj);
 	printf("\n");
-	while (x > 9 || y > 9 || x < 0 || y < 0){
+	while (xobj > 9 || yobj > 9 || xobj < 0 || yobj < 0){
 		printf("Les coordonnées doivent-être des entiers compris entre 0 et 9\n");
 		printf("Rentrez des coordonnées séparées par une vigule :\n");
-		scanf("%i,%i", xobj, yobj);
+		scanf("%i,%i", &xobj, &yobj);
 		printf("\n");
 	}
 	
@@ -136,27 +136,27 @@ void deplacement(t_liste *ordre_action,t_map map){
 	init_liste_noeud(&closedlist);
 	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj);     //On cherche le openlist le plus court
 	en_tete_noeud(&openlist);
-	while(openlist.ec->personnage.x != xobj || openlist.ec->personnage.y != yobj){
+	while(openlist.ec.personnage.x != xobj || openlist.ec.personnage.y != yobj){
 	
-		if map[openlist.ec->succ->ec->personnage.x][openlist.ec->succ->ec->personnage.y] != 0){			//Si la case n'est pas vide
+		if (map[openlist.ec->succ.x][openlist.ec->succ.y] != 0){			//Si la case n'est pas vide
 			tampon = openlist.ec->succ->ec;     //On mémorise le perso sur la case
-			openlist.ec->succ->ec = openlist.ec;
-			ordre_action->ec->personnage.x = openlist.ec->personnage.x;   //On actualise les coordonnées dans les structures des persos
-			ordre_action->ec->personnage.y = openlist.ec->personnage.y;
+			openlist.ec->succ = openlist.ec;
+			ordre_action->ec->personnage.x = openlist.ec->noeud.x;   //On actualise les coordonnées dans les structures des persos
+			ordre_action->ec->personnage.y = openlist.ec->noeud.y;
 			actumap(ordre_action, map);
 			afficherMat(map);
-			permuter(openlist.ec, openlist.ec->succ->ec);        //On permute avec la case suivante dans le openlist défini
-			openlist.ec->pred->ec = tampon;
-			ordre_action->ec->personnage.x = openlist.ec->personnage.x;   //On actualise les coordonnées dans les structures des persos
-			ordre_action->ec->personnage.y = openlist.ec->personnage.y;
-			actumap(ordre_action, map);
+			permuter(openlist->ec, openlist.ec->succ);        //On permute avec la case suivante dans le openlist défini
+			openlist.ec->pred = tampon;
+			ordre_action->ec->personnage.x = openlist.ec->noeud.x;   //On actualise les coordonnées dans les structures des persos
+			ordre_action->ec->personnage.y = openlist.ec->noeud.y;
+			actumap(&ordre_action, map);
 			afficherMat(map);
 		}
 	
-	permuter(openlist.ec,openlist.ec->succ->ec);        //On permute avec la case suivante dans le openlist défini
-	ordre_action->ec->personnage.x = openlist.ec->personnage.x;   //On actualise les coordonnées dans les structures des persos
-	ordre_action->ec->personnage.y = openlist.ec->personnage.y;
-	actumap(ordre_action,map);					  //On actualise la map
+	permuter(openlist->ec,openlist->succ);        //On permute avec la case suivante dans le openlist défini
+	ordre_action.ec.personnage.x = openlist.ec.noeud.x;   //On actualise les coordonnées dans les structures des persos
+	ordre_action.ec.personnage.y = openlist.ec.noeud.y;
+	actumap(&ordre_action,map);					  //On actualise la map
 	afficherMat(map);							  //On affiche la map
 	}
 }
