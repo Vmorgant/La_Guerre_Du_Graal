@@ -11,5 +11,5 @@
 
 t_map creerMat();
 void afficherMat (t_map mat);
-t_map actumap(t_personnage * ordreaction, t_map map);
+t_map actumap(t_liste * ordreaction, t_map map);
 

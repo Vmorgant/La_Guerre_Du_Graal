@@ -136,16 +136,16 @@ void deplacement(t_liste *ordre_action,t_map map){
 	init_liste_noeud(&closedlist);
 	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj);     //On cherche le openlist le plus court
 	en_tete_noeud(&openlist);
-	while(openlist.ec.personnage.x != xobj || openlist.ec.personnage.y != yobj){
+	while(openlist.ec.noeud.x != xobj || openlist.ec.noeud.y != yobj){
 	
 		if (map[openlist.ec->succ.x][openlist.ec->succ.y] != 0){			//Si la case n'est pas vide
-			tampon = openlist.ec->succ->ec;     //On mémorise le perso sur la case
+			tampon = openlist.ec->succ;     //On mémorise le perso sur la case
 			openlist.ec->succ = openlist.ec;
 			ordre_action->ec->personnage.x = openlist.ec->noeud.x;   //On actualise les coordonnées dans les structures des persos
 			ordre_action->ec->personnage.y = openlist.ec->noeud.y;
 			actumap(ordre_action, map);
 			afficherMat(map);
-			permuter(openlist->ec, openlist.ec->succ);        //On permute avec la case suivante dans le openlist défini
+			permuter(openlist.ec, openlist.ec->succ);        //On permute avec la case suivante dans le openlist défini
 			openlist.ec->pred = tampon;
 			ordre_action->ec->personnage.x = openlist.ec->noeud.x;   //On actualise les coordonnées dans les structures des persos
 			ordre_action->ec->personnage.y = openlist.ec->noeud.y;
@@ -153,7 +153,7 @@ void deplacement(t_liste *ordre_action,t_map map){
 			afficherMat(map);
 		}
 	
-	permuter(openlist->ec,openlist->succ);        //On permute avec la case suivante dans le openlist défini
+	permuter(openlist.c,openlist.succ);        //On permute avec la case suivante dans le openlist défini
 	ordre_action.ec.personnage.x = openlist.ec.noeud.x;   //On actualise les coordonnées dans les structures des persos
 	ordre_action.ec.personnage.y = openlist.ec.noeud.y;
 	actumap(&ordre_action,map);					  //On actualise la map

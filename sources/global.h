@@ -91,7 +91,7 @@ typedef struct{t_element_noeud * drapeau; t_element_noeud * ec;}t_liste_noeud;
 
 
 
-#define nb_classes 3
+#define nb_classes 7
 extern t_classe tab_classes[nb_classes];
 
 

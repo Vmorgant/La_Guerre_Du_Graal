@@ -51,11 +51,11 @@ void init_partie(t_liste *equipe1,t_liste *equipe2){
 		
 }
 
-void placer(t_liste equipe1,t_liste equipe2,t_map carte){
+void placer(t_liste *equipe1,t_liste *equipe2,t_map carte){
 	/**Place les personnages des deux équipes sur la carte.*/
 	int x, y;	
-	while (!hors_liste(&equipe1) && !hors_liste(&equipe2)){
-		if (!hors_liste(&equipe1)){														//Placer un personnage pour l'equipe 1
+	while (!hors_liste(equipe1) && !hors_liste(equipe2)){
+		if (!hors_liste(equipe1)){														//Placer un personnage pour l'equipe 1
 			printf("Joueur 1, entrez les coordonnées de votre Servant séparées par une virgule :\n");
 			scanf("%i,%i", &x, &y);
 			printf("\n");
@@ -75,13 +75,13 @@ void placer(t_liste equipe1,t_liste equipe2,t_map carte){
 				printf("\n");
 			}
 		}
-		equipe1.ec->personnage->x = x;
-		equipe1.ec->personnage->y = y;
+		equipe1->ec->personnage.x = x;
+		equipe1->ec->personnage.y = y;
 		actumap(equipe1, carte);
 		afficherMat(carte);
-		suivant(&equipe1);
+		suivant(equipe1);
 
-		if (!hors_liste(&equipe2)){													//Placer un personnage pour l'equipe 2;
+		if (!hors_liste(equipe2)){													//Placer un personnage pour l'equipe 2;
 			printf("Joueur 2, entrez les coordonnées de votre Servant séparées par une virgule :\n");
 			scanf("%i,%i",&x, &y);
 			printf("\n");
@@ -101,14 +101,13 @@ void placer(t_liste equipe1,t_liste equipe2,t_map carte){
 				printf("\n");
 			}
 		}
-		equipe2.ec->personnage->x = x;
-		equipe2.ec->personnage->y = y;
+		equipe2->ec->personnage.x = x;
+		equipe2->ec->personnage.y = y;
 		actumap(equipe2, carte);
 		afficherMat(carte);
-		suivant(&equipe2);
+		suivant(equipe2);
 
 	}
-
 
 }
 
