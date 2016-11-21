@@ -26,8 +26,8 @@ t_map creerMat(){
     return matrice;
 }
 
-void permuter(t_noeud *actuel,t_noeud *suivant){
-	t_noeud tampon;
+void permuter(t_element_noeud *actuel,t_element_noeud *suivant){
+	t_element_noeud tampon;
 	tampon = *actuel;
 	*actuel = *suivant;
 	*suivant = tampon;
@@ -69,7 +69,7 @@ void pathfinding(int x, int y,int objx,int objy){
 		if (q.x == objx && q.y == objy){			/*On teste si on est arrivé*/
 			en_tete_noeud(&openlist);
 			while(!hors_liste_noeud(&openlist)){
-				printf("[%i,%i]\n",openlist.ec->noeud.x,openlist.ec->noeud.y);			
+				printf("[%i,%i]\n",openlist.ec_noeud->noeud.x,openlist.ec_noeud->noeud.y);			
 			}
 			
 			break ;
@@ -118,7 +118,7 @@ void pathfinding(int x, int y,int objx,int objy){
 void deplacement(t_liste *ordre_action,t_map map){
         int xobj;
         int yobj;
-		t_noeud tampon;
+	t_element_noeud *tampon;
 	printf("Rentrez des coordonnées séparées par une vigule :\n");
 	scanf("%i,%i",&xobj,&yobj);
 	printf("\n");
@@ -130,33 +130,49 @@ void deplacement(t_liste *ordre_action,t_map map){
 	}
 	
 	
-	t_liste_noeud openlist;
-	t_liste_noeud closedlist;
-	init_liste_noeud(&openlist);
-	init_liste_noeud(&closedlist);
-	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj);     //On cherche le openlist le plus court
-	en_tete_noeud(&openlist);
-	while(openlist.ec.noeud.x != xobj || openlist.ec.noeud.y != yobj){
+	t_liste_noeud *openlist=NULL;
+	t_liste_noeud *closedlist=NULL;
+	init_liste_noeud(openlist);
+	init_liste_noeud(closedlist);
+	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj);
+	//On cherche le openlist le plus court
+	en_tete_noeud(openlist);
+	while(openlist->ec_noeud->noeud.x != xobj || openlist->ec_noeud->noeud.y != yobj){
 	
-		if (map[openlist.ec->succ.x][openlist.ec->succ.y] != 0){			//Si la case n'est pas vide
-			tampon = openlist.ec->succ;     //On mémorise le perso sur la case
-			openlist.ec->succ = openlist.ec;
-			ordre_action->ec->personnage.x = openlist.ec->noeud.x;   //On actualise les coordonnées dans les structures des persos
-			ordre_action->ec->personnage.y = openlist.ec->noeud.y;
+		if (map.cell[openlist->ec_noeud->succ_noeud->noeud.x][openlist->ec_noeud->succ_noeud->noeud.y] != 0){			//Si la case n'est pas vide
+			
+		
+			tampon = openlist->ec_noeud->succ_noeud;//On mémorise le perso sur la case
+     
+			
+
+			openlist->ec_noeud->succ_noeud = openlist->ec_noeud;
+			ordre_action->ec->personnage.x = openlist->ec_noeud->noeud.x;   
+			
+			//On actualise les coordonnées dans les structures des persos
+			ordre_action->ec->personnage.y = openlist->ec_noeud->noeud.y;
 			actumap(ordre_action, map);
 			afficherMat(map);
-			permuter(openlist.ec, openlist.ec->succ);        //On permute avec la case suivante dans le openlist défini
-			openlist.ec->pred = tampon;
-			ordre_action->ec->personnage.x = openlist.ec->noeud.x;   //On actualise les coordonnées dans les structures des persos
-			ordre_action->ec->personnage.y = openlist.ec->noeud.y;
-			actumap(&ordre_action, map);
+			permuter(openlist->ec_noeud, openlist->ec_noeud->succ_noeud);
+
+			//On permute avec la case suivante dans le openlist défini
+			openlist->ec_noeud->pred_noeud = tampon;
+			ordre_action->ec->personnage.x = openlist->ec_noeud->noeud.x;
+
+			//On actualise les coordonnées dans les structures des persos
+			ordre_action->ec->personnage.y = openlist->ec_noeud->noeud.y;
+			actumap(ordre_action, map);
 			afficherMat(map);
 		}
 	
-	permuter(openlist.c,openlist.succ);        //On permute avec la case suivante dans le openlist défini
-	ordre_action.ec.personnage.x = openlist.ec.noeud.x;   //On actualise les coordonnées dans les structures des persos
-	ordre_action.ec.personnage.y = openlist.ec.noeud.y;
-	actumap(&ordre_action,map);					  //On actualise la map
-	afficherMat(map);							  //On affiche la map
+	permuter(openlist->ec_noeud,openlist->ec_noeud->succ_noeud);        
+	//On permute avec la case suivante dans le openlist défini
+	ordre_action->ec->personnage.x = openlist->ec_noeud->noeud.x;  
+	//On actualise les coordonnées dans les structures des persos
+	ordre_action->ec->personnage.y = openlist->ec_noeud->noeud.y;
+	actumap(ordre_action,map);					  
+	//On actualise la map
+	afficherMat(map);							  
+	//On affiche la map
 	}
 }

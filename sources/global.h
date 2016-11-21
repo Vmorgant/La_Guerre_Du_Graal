@@ -73,13 +73,13 @@ typedef struct{int x; int y; int cout; int heuristique;}t_noeud;
 *\brief contient les coordonnées d'un noeud et son poids
 */
 
-typedef struct element_noeud{t_noeud noeud; struct element_noeud* pred; struct element_noeud* succ;}t_element_noeud;
+typedef struct element_noeud{t_noeud noeud; struct element_noeud* pred_noeud; struct element_noeud* succ_noeud;}t_element_noeud;
 /**
 *\struct t_element_noeud
 *\brief definition d'une liste de noeud
 */
 
-typedef struct{t_element_noeud * drapeau; t_element_noeud * ec;}t_liste_noeud;
+typedef struct{t_element_noeud * drapeau_noeud; t_element_noeud * ec_noeud;}t_liste_noeud;
 /**
 *\struct t_liste_noeud
 *\brief création du type liste (pour gérer simultanément plusieures listes de type t_noeud)
