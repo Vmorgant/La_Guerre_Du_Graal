@@ -14,6 +14,12 @@
 #include"listes_ptr.h"
 	
 void creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE) {
+/**
+ * \fn creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE)
+ * \brief Crée un personnage de la classe choisie.
+ * \param t_liste * equipe : la liste des personnage ,t_classe classe : la classe du personnage à ajouter,  int joueur : l'identifiant du joueur, int *PE le nombre de PE restant  .
+ */
+
 	t_personnage perso;
 	if(* PE >= classe.coutPE) {
 		perso.classe = classe;
@@ -31,6 +37,12 @@ void creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE) {
 }
 
 void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
+/**
+ * \fn ajout_equipe(t_liste * equipe, int joueur, int * PE)
+ * \brief Ajoute le personnage à l'équipe.
+ * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant.
+ */
+
 	int choix, i;
 	/* Affichage du menu et saisie d'une classe */
 	printf("Choisissez une classe : \n");
@@ -52,6 +64,11 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 void init_partie(){}
 
 void oter_equipe(t_liste * equipe, int joueur, int *PE){
+/**
+ * \fn  oter_equipe(t_liste * equipe, int joueur, int *PE)
+ * \brief Retire un personnage de la liste.
+ * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant.
+ */
 	int nb_persos = 0, i, choix;
 	t_personnage perso;
 
@@ -78,7 +95,12 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
 	}else printf("L'equipe %i est déjà vide.\n", joueur);
 }
 
-void init_equipe(t_liste * equipe, int joueur) {	
+void init_equipe(t_liste * equipe, int joueur) {
+/**
+ * \fn  init_equipe(t_liste * equipe, int joueur)
+ * \brief Menu de création d'équipe.
+ * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur.
+ */	
 	int choix;
 	int PE = 9;
 

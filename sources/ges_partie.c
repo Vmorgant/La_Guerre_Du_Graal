@@ -14,8 +14,13 @@
 #include "deplacement.h"
 #include "Init_map.h"
 
-/** Fonction renvoyant un nombre compris entre a et b*/
+
 int Rand_Int(int a, int b){
+/**
+ * \fn Rand_Int(int a, int b)
+ * \brief Fonction renvoyant un nombre compris entre a et b
+ * \param int a, int b : bornes de l'intervalles
+ */
 	int nombre_aleatoire = 0;
 	srand(time(NULL));
     nombre_aleatoire = rand()%(b-a)+a;
@@ -23,7 +28,11 @@ int Rand_Int(int a, int b){
 }
 
 void init_partie(t_liste *equipe1,t_liste *equipe2){
-/**création de  la liste ordre action avec les personnages triés par initiative*/
+/**
+ * \fn init_partie(t_liste *equipe1,t_liste *equipe2)
+ * \brief création de  la liste ordre action avec les personnages triés par initiative
+ * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2
+ */
 	t_personnage *tampon= NULL;
 	t_liste *ordre_action=NULL;
 	init_liste(ordre_action);
@@ -52,7 +61,11 @@ void init_partie(t_liste *equipe1,t_liste *equipe2){
 }
 
 void placer(t_liste *equipe1,t_liste *equipe2,t_map carte){
-	/**Place les personnages des deux équipes sur la carte.*/
+/**
+ * \fn  placer(t_liste *equipe1,t_liste *equipe2,t_map carte)
+ * \brief Place les personnages des deux équipes sur la carte.
+ * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2,t_map carte : la carte 
+ */
 	int x, y;	
 	while (!hors_liste(equipe1) && !hors_liste(equipe2)){
 		if (!hors_liste(equipe1)){														//Placer un personnage pour l'equipe 1
@@ -112,7 +125,11 @@ void placer(t_liste *equipe1,t_liste *equipe2,t_map carte){
 }
 
 int est_mort(t_liste *ordre_action,t_personnage cadavre){
-/**Retire le cadavre de la liste ordre_action puis renvoie 0 s'il reste des joueurs dans les deux équipes et le numéro de l'équipe gagnante sinon.*/
+/**
+ * \fn  est_mort(t_liste *ordre_action,t_personnage cadavre).
+ * \brief Retire le personnage mort de la liste ordre_action
+ * \param t_liste *ordre_action : la liste des personnages joués triée t_personnage cadavre : le personnage mort
+ */
 	int nb_equipe1;
 	int nb_equipe2;
 	en_tete(ordre_action);
