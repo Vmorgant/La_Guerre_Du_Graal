@@ -88,7 +88,7 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
 			en_tete(equipe);
 			for (i = 1; i < choix; i++){
 					suivant(equipe);
-			}printf("YO => La valeur de choix est %i, de i es %i\nPersonnage courrent : %s, %i\n", choix, i, equipe->ec->personnage.classe.nom, joueur);
+			}
 			* PE += equipe->ec->personnage.classe.coutPE;
 			oter_elt(equipe);
 		}else printf("Personnage non existant.\n");

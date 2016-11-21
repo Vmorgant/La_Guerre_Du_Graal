@@ -1,6 +1,6 @@
 all:LGDG
 LGDG: main.o listes_ptr.o ges_equipes.o classes.o
-	gcc -o LGDG main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o liste_chemin.o deplacement.o -lncurses
+	gcc -o LGDG main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o liste_chemin.o deplacement.o -lncurses -lm
 
 main.o: main.c global.h 
 	gcc  -c main.c global.h -lncurses -g -W  
@@ -15,7 +15,7 @@ classes.o: classes.c global.h
 	gcc -c classes.c global.h -g -W
 
 ges_partie.o: ges_partie.c global.h
-	gcc -c ges_partie.c global.h -g -W
+	gcc -c ges_partie.c global.h -g -W -lm
 
 Init_map.o: Init_map.c global.h
 	gcc -c Init_map.c global.h -g -W

@@ -1,7 +1,7 @@
 /**
 *\file gest_partie.c
 *\brief Ce fichier contient les fonctions permettant le lancement et le déroulement de la partie
-*\author Victor Morgant Martin Lebourdais
+*\author Victor Morgant Martin Lebourdais Corentin Petit
 *\version 1.0
 *\date 14/11/2016
 */
@@ -27,37 +27,47 @@ int Rand_Int(int a, int b){
 	return nombre_aleatoire;
 }
 
-void init_partie(t_liste *equipe1,t_liste *equipe2){
+void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 /**
  * \fn init_partie(t_liste *equipe1,t_liste *equipe2)
  * \brief création de  la liste ordre action avec les personnages triés par initiative
  * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2
  */
-	t_personnage *tampon=NULL;
-	t_liste *ordre_action=NULL;
-	init_liste(ordre_action);
-	en_tete(equipe1);
+	t_personnage tampon;
+
+	*ordre_action = *equipe1;
+
+	en_queue(ordre_action);
 	en_tete(equipe2);
-	int bienplace=0;
-	while(!hors_liste(equipe1) && (!hors_liste(equipe2))){
+
+	while(!hors_liste(equipe2)){
 	/**On ajoute les deux équipes dans ordre action en prenant un joueur sur */
-		valeur_elt(equipe1,tampon);
-		ajout_droit(ordre_action,*tampon);
-		valeur_elt(equipe2,tampon);
-		ajout_droit(ordre_action,*tampon);
+		valeur_elt(equipe2, &tampon);
+		ajout_droit(ordre_action,tampon);
+		suivant(equipe2);
+
 	}
-		en_queue(ordre_action);
-		while(!hors_liste(ordre_action)){
-			valeur_elt(ordre_action,tampon);
-			bienplace=( (tampon->classe.INI) >= (ordre_action->ec->pred->personnage.classe.INI) );
-			if(!bienplace && ordre_action->ec->pred != ordre_action->drapeau){
-				oter_elt(ordre_action);
-				ajout_gauche(ordre_action,*tampon);
-			}
-			else
-				suivant(ordre_action);	
-		}
-		
+	afficher(ordre_action);
+
+	en_queue(ordre_action);
+
+	while(!hors_liste(ordre_action)){
+
+		printf("yolo1\n");
+
+		valeur_elt(ordre_action,&tampon);
+
+		if( ((tampon.classe.INI) < (ordre_action->ec->pred->personnage.classe.INI)) && (ordre_action->ec->pred) != (ordre_action->drapeau)){
+
+			oter_elt(ordre_action);
+			ajout_gauche(ordre_action, tampon);
+
+		}else
+			precedent(ordre_action);	
+	}
+
+	en_tete(ordre_action);
+	afficher(ordre_action);
 }
 
 void placer(t_liste *equipe1,t_liste *equipe2,t_map carte){

@@ -7,7 +7,7 @@
 */
 
 int Rand_Int(int a, int b);
-void init_partie(t_liste *equipe1,t_liste *equipe2);
+void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste *ordre_action);
 void placer(t_liste equipe1,t_liste equipe2,t_map carte);
 int est_mort(t_liste *ordre_action,t_personnage cadavre);
 void passer(t_liste *ordre_action);
