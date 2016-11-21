@@ -52,7 +52,7 @@ int main(void) {
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
-			case 1: init_equipe(&equipe1, 1); init_equipe(&equipe2, 2);break;
+			case 1: init_equipe(&equipe1, 1); init_equipe(&equipe2, 2);init_partie(&equipe1,&equipe2);break;
 			case 2: printf("Ce mode n'est pas encore jouable "); break;
 			case 3: printf("Ce mode n'est pas encore jouable "); break;
 			case 4: printf("Jeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;

@@ -33,7 +33,7 @@ void init_partie(t_liste *equipe1,t_liste *equipe2){
  * \brief création de  la liste ordre action avec les personnages triés par initiative
  * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2
  */
-	t_personnage *tampon= NULL;
+	t_personnage *tampon=NULL;
 	t_liste *ordre_action=NULL;
 	init_liste(ordre_action);
 	en_tete(equipe1);

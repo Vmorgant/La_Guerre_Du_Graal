@@ -27,6 +27,6 @@ deplacement.o: deplacement.c global.h
 	gcc -c deplacement.c global.h -g -W
 
 clean: 
-	rm -f *.~ *.o 
+	rm -rf *.~ *.o 
 
 mrroper: clean

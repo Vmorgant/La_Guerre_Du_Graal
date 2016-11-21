@@ -11,7 +11,7 @@
 #include "global.h"
 
 void init_liste(t_liste * p) {
-	p->drapeau =  malloc (sizeof(t_element));
+	p->drapeau =  (t_element*)malloc (sizeof(t_element));
 	p->drapeau -> pred = p->drapeau;
 	p->drapeau -> succ = p->drapeau;
 	p->ec = p->drapeau;

@@ -11,20 +11,6 @@
 #include "global.h"
 #include "liste_chemin.h"
 #include "Init_map.h"
-t_map creerMat(){
-	/*Initialisation de la matrice map à 0*/
-    t_map matrice;
-    int i, j;
-    matrice.cell = (int**) malloc(10 * sizeof(int*));
-    for (i=0; i < 10; i++){
-        matrice.cell[i] = (int*) malloc(10 * sizeof(int));
-        for (j=0; j < 10; j++){    	
-        	matrice.cell[i][j] = 0;
-        }
-            
-    }
-    return matrice;
-}
 
 void permuter(t_element_noeud *actuel,t_element_noeud *suivant){
 	t_element_noeud tampon;
@@ -47,7 +33,7 @@ int existinf(t_liste_noeud liste,t_noeud valeur){
 
 int distance(int x,int y,int objx,int objy){
 	/**Calcul de la distance entre le point et l'objectif*/
-	int distance =sqrt((objx-x)*(objx-x)+(objy-y)*(objy-y));
+	int distance =(objx-x)*(objx-x)+(objy-y)*(objy-y);
 	return distance;
 }
 

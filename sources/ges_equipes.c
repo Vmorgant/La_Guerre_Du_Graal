@@ -61,7 +61,7 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 	}else printf("Classe non existante.\n");
 }
 
-void init_partie(){}
+
 
 void oter_equipe(t_liste * equipe, int joueur, int *PE){
 /**
@@ -117,8 +117,7 @@ void init_equipe(t_liste * equipe, int joueur) {
 		switch(choix) {
 			case 1: ajout_equipe(equipe, joueur, &PE);  afficher(equipe); break;
 			case 2: oter_equipe(equipe, joueur, &PE); afficher(equipe); break;
-			case 3: init_partie();
-			case 4: break;
+			case 3: break;
 			default: printf("Erreur: votre choix doit être compris entre 1 et 3\n");
 		}
 	}
