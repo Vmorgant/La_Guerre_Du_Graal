@@ -18,7 +18,11 @@ void clearScreen();
  * \brief Fonction permettant d'effacer l'écran
  */
 
-
+typedef enum{vrai = 1, faux = 0}t_bool;
+/**
+*\enum t_bool
+*\brief facilite l'identification d'un booleen
+*/
 
 typedef enum{mort,vie}t_etat; /*possibilité d'ajouts futurs*/
 /**
