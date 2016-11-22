@@ -13,6 +13,11 @@
 #include "Init_map.h"
 
 void permuter(t_element_noeud *actuel,t_element_noeud *suivant){
+/**
+ * \fn  permuter(t_element_noeud *actuel,t_element_noeud *suivant)
+ * \brief Intervertit les structures des deux cases.
+ * \param t_element_noeud *actuel : La case sur laquelle le personnage se trouve, t_element_noeud *suivant : La case ou l'on souhaite placer le personnage.
+ */
 	t_element_noeud tampon;
 	tampon = *actuel;
 	*actuel = *suivant;
@@ -20,7 +25,11 @@ void permuter(t_element_noeud *actuel,t_element_noeud *suivant){
 }
 
 int existinf(t_liste_noeud liste,t_noeud valeur){
-/**Fonction qui teste si il existe le même noeud avec un cout inferieur à la valeur entrée en paramètre dans la liste en paramètre.*/
+/**
+ * \fn  existinf(t_liste_noeud liste,t_noeud valeur)
+ * \brief Recherche s'il existe une structure noeud avec un cout inférieur au noeud en paramètre dans la liste en paramètre.
+ * \param t_liste_noeud liste : La liste dans laquelle on souhaite chercher, t_noeud valeur : Le noeud que l'on souhaite tester 
+ */
 	en_tete_noeud(&liste);
 	t_noeud vcour;
 	while(!hors_liste_noeud(&liste)){
@@ -32,13 +41,22 @@ int existinf(t_liste_noeud liste,t_noeud valeur){
 }
 
 int distance(int x,int y,int objx,int objy){
-	/**Calcul de la distance entre le point et l'objectif*/
+/**
+ * \fn  distance(int x,int y,int objx,int objy)
+ * \brief Calcule le carré de la distance entre le point de départ et l'objectif
+ * \param int x : Abscisse de départ, int y : Ordonnée de départ, int xobj : Abscisse cible; int yobj : Ordonnée cible
+ */
 	int distance =(objx-x)*(objx-x)+(objy-y)*(objy-y);
 	return distance;
 }
 
 
 void pathfinding(int x, int y,int objx,int objy){
+/**
+ * \fn  pathfinding(int x, int y,int objx,int objy)
+ * \brief Trouve le chemin le plus court entre le point de départ et l'objectif et retourne ce chemin dans une liste.
+ * \param int x : Abscisse de départ, int y : Ordonnée de départ, int xobj : Abscisse cible; int yobj : Ordonnée cible
+ */
     t_noeud depart={x,y,0,0};
     t_liste_noeud openlist;				/*Liste des noeuds à tester*/
     t_liste_noeud closedlist;				/*Liste des noeuds testés*/
@@ -70,6 +88,7 @@ void pathfinding(int x, int y,int objx,int objy){
 			v1.cout=q.cout+1;
 			v1.heuristique = v1.cout + distance(v1.x,v1.y,objx,objy);
 			ajout_droit_noeud(&openlist,v1);
+			suivant_noeud(&openlist);
 		}
 
 		if (existinf(openlist,v2)||existinf(closedlist,v2));
@@ -77,6 +96,7 @@ void pathfinding(int x, int y,int objx,int objy){
 			v2.cout=q.cout+1;
 			v2.heuristique = v2.cout + distance(v2.x,v2.y,objx,objy);
 			ajout_droit_noeud(&openlist,v2);
+			suivant_noeud(&openlist);
 		}
 
 		if (existinf(openlist,v3)||existinf(closedlist,v3));
@@ -84,16 +104,18 @@ void pathfinding(int x, int y,int objx,int objy){
 			v3.cout=q.cout+1;
 			v3.heuristique = v3.cout + distance(v3.x,v3.y,objx,objy);
 			ajout_droit_noeud(&openlist,v3);
+			suivant_noeud(&openlist);
 		}
 		if (existinf(openlist,v4)||existinf(closedlist,v4));
 		else{
 			v4.cout=q.cout+1;
 			v4.heuristique = v4.cout + distance(v4.x,v4.y,objx,objy);
 			ajout_droit_noeud(&openlist,v4);
+			suivant_noeud(&openlist);
 		}
 		
 		ajout_droit_noeud(&closedlist,q); /*On ajoute la case que l'on vient de tester à la liste*/
-	
+		suivant_noeud(&closedlist);
 	}	
 	
 	printf("Fin du programme\n");	
@@ -102,17 +124,30 @@ void pathfinding(int x, int y,int objx,int objy){
     
 }
 void deplacement(t_liste *ordre_action,t_map map){
+/**
+ * \fn  deplacement(t_liste *ordre_action,t_map map)
+ * \brief Déplace le personnage courant par permutation successives du point de départ à la cible.
+ * \param t_liste *ordre_action : ordre de jeu des personnages (util pour connaître le personnage qui se déplace),t_map map : Plateau de jeu
+ */
         int xobj;
         int yobj;
 	t_element_noeud *tampon;
 	printf("Rentrez des coordonnées séparées par une vigule :\n");
 	scanf("%i,%i",&xobj,&yobj);
 	printf("\n");
-	while (xobj > 9 || yobj > 9 || xobj < 0 || yobj < 0){
-		printf("Les coordonnées doivent-être des entiers compris entre 0 et 9\n");
-		printf("Rentrez des coordonnées séparées par une vigule :\n");
-		scanf("%i,%i", &xobj, &yobj);
-		printf("\n");
+	while (xobj > 9 || yobj > 9 || xobj < 0 || yobj < 0 || map.cell[xobj][yobj]!=0){
+	if (map.cell[xobj][yobj] != 0){															//On teste si la case est vide
+			printf("La case est déjà occupée\n");
+			printf("Rentrez des coordonnées séparées par une vigule :\n");
+			scanf("%i,%i", &xobj, &yobj);
+			printf("\n");
+		}
+		else {
+			printf("Les coordonnées doivent-être des entiers compris entre 0 et 9\n");
+			printf("Rentrez des coordonnées séparées par une vigule :\n");
+			scanf("%i,%i", &xobj, &yobj);
+			printf("\n");
+		}
 	}
 	
 	
@@ -139,6 +174,7 @@ void deplacement(t_liste *ordre_action,t_map map){
 			ordre_action->ec->personnage.y = openlist->ec_noeud->noeud.y;
 			actumap(ordre_action, map);
 			afficherMat(map);
+			suivant_noeud(openlist);
 			permuter(openlist->ec_noeud, openlist->ec_noeud->succ_noeud);
 
 			//On permute avec la case suivante dans le openlist défini
@@ -147,18 +183,21 @@ void deplacement(t_liste *ordre_action,t_map map){
 
 			//On actualise les coordonnées dans les structures des persos
 			ordre_action->ec->personnage.y = openlist->ec_noeud->noeud.y;
+			suivant_noeud(openlist);
 			actumap(ordre_action, map);
 			afficherMat(map);
 		}
-	
-	permuter(openlist->ec_noeud,openlist->ec_noeud->succ_noeud);        
-	//On permute avec la case suivante dans le openlist défini
-	ordre_action->ec->personnage.x = openlist->ec_noeud->noeud.x;  
-	//On actualise les coordonnées dans les structures des persos
-	ordre_action->ec->personnage.y = openlist->ec_noeud->noeud.y;
-	actumap(ordre_action,map);					  
-	//On actualise la map
-	afficherMat(map);							  
-	//On affiche la map
+		else{
+			permuter(openlist->ec_noeud,openlist->ec_noeud->succ_noeud);        
+			//On permute avec la case suivante dans le openlist défini
+			ordre_action->ec->personnage.x = openlist->ec_noeud->noeud.x;  
+			//On actualise les coordonnées dans les structures des persos
+			ordre_action->ec->personnage.y = openlist->ec_noeud->noeud.y;
+			suivant_noeud(openlist);
+			actumap(ordre_action,map);					  
+			//On actualise la map
+			afficherMat(map);							  
+			//On affiche la map
+		}
 	}
 }

@@ -1,9 +1,9 @@
 /**
-*\file global.h
-*\brief Ce fichier contient les définitions des primitives d'acces aux listes
-*\author Corentin Petit
+*\file deplacement.h
+*\brief Ce fichier contient les en-tête des fonctions pour le déplacement
+*\author Lebourdais Martin
 *\version 1.0
-*\date 18/11/2016
+*\date 22/11/2016
 */
 
 void permuter(t_noeud *actuel,t_noeud *suivant);
