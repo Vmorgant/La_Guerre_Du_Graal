@@ -120,8 +120,18 @@ void pathfinding(int x, int y,int objx,int objy){
 	
 	printf("Fin du programme\n");	
 		
-	
-    
+int cout_dep(t_liste * ordre_action){
+	int nb_case;
+	nb_case = 15 / ordre_action->ec->personnage->classe->poids;
+	return nb_case;
+}	
+int nb_case(t_liste_noeud *liste){
+	int i=0;
+	while(!hors_liste_noeud(liste)){
+		i++;
+		suivant_noeud(liste);
+	} 
+	return i;   
 }
 void deplacement(t_liste *ordre_action,t_map map){
 /**
@@ -132,30 +142,42 @@ void deplacement(t_liste *ordre_action,t_map map){
         int xobj;
         int yobj;
 	t_element_noeud *tampon;
-	printf("Rentrez des coordonnées séparées par une vigule :\n");
-	scanf("%i,%i",&xobj,&yobj);
-	printf("\n");
-	while (xobj > 9 || yobj > 9 || xobj < 0 || yobj < 0 || map.cell[xobj][yobj]!=0){
-	if (map.cell[xobj][yobj] != 0){															//On teste si la case est vide
-			printf("La case est déjà occupée\n");
-			printf("Rentrez des coordonnées séparées par une vigule :\n");
-			scanf("%i,%i", &xobj, &yobj);
-			printf("\n");
-		}
-		else {
-			printf("Les coordonnées doivent-être des entiers compris entre 0 et 9\n");
-			printf("Rentrez des coordonnées séparées par une vigule :\n");
-			scanf("%i,%i", &xobj, &yobj);
-			printf("\n");
-		}
-	}
-	
-	
 	t_liste_noeud *openlist=NULL;
 	t_liste_noeud *closedlist=NULL;
 	init_liste_noeud(openlist);
 	init_liste_noeud(closedlist);
+	
+	printf("Rentrez des coordonnées séparées par une vigule :\n");
+	scanf("%i,%i",&xobj,&yobj);
+	printf("\n");
 	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj);
+	
+	while (xobj > 9 || yobj > 9 || xobj < 0 || yobj < 0 || map.cell[xobj][yobj]!=0 || cout_dep(ordre_action)*nb_case(openlist) > (ordre_action->-ec->personnage->pa)){
+	if (map.cell[xobj][yobj] != 0){															//On teste si la case est vide
+			printf("La case est déjà occupée\n");
+			printf("Rentrez des coordonnées séparées par une vigule :\n");
+			scanf("%i,%i", &xobj, &yobj);
+			pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj);
+			printf("\n");
+		}
+	else if{
+		printf("Les coordonnées doivent-être des entiers compris entre 0 et 9\n");
+		printf("Rentrez des coordonnées séparées par une vigule :\n");
+		scanf("%i,%i", &xobj, &yobj);
+		printf("\n");
+	}
+	else{
+		printf("Vous n'avez pas assez de points d'action disponibles\n");
+		printf("Saisissez de nouvelles coordonnées");
+		scanf("%i,%i", &xobj, &yobj);
+		printf("\n");
+	}
+		
+	}
+	
+	
+	
+	
 	//On cherche le openlist le plus court
 	en_tete_noeud(openlist);
 	while(openlist->ec_noeud->noeud.x != xobj || openlist->ec_noeud->noeud.y != yobj){
