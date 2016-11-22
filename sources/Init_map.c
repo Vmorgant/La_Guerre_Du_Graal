@@ -46,8 +46,7 @@ t_map actumap(t_liste * ordre_action, t_map map){
         		if (ordre_action->ec->personnage.classe.nom == "Saber") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 2;
         	}
     if (ordre_action->ec->personnage.joueur == 1){     
-        		if (ordre_action->ec->personnoeud avec un cout inférieur au noeud en paramètre dans la liste en paramètre.
- * \param t_liste_noeud liste : La liste dans lnage.classe.nom == "Archer") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
+        		if (ordre_action->ec->personnage.classe.nom == "Archer") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
         	}
     if (ordre_action->ec->personnage.joueur == 2){
         		if (ordre_action->ec->personnage.classe.nom == "Archer") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 4;
@@ -92,9 +91,7 @@ t_map actumap(t_liste * ordre_action, t_map map){
 
 void afficherMat (t_map mat){
     int i, j;
-    clearScreen();					 //Effacer le terminal
-    mat.cell[1][1]=2;
-    mat.cell[1][1]=1;
+				
     for (i=0; i < 10; i++){
 	    printf("|");
 	    for (j=0; j < 10; j++){

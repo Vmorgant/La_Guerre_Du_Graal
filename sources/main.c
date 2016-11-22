@@ -34,7 +34,9 @@ void lancer1v1() {
 	t_liste equipe1;
 	t_liste equipe2;
 	t_liste ordre_action;
-	
+	t_map carte=creerMat();
+	int NbTour;
+	int gagnant=0; 
 
 	/* Initialisation des listes de personnages */
 	init_liste(&equipe1);
@@ -43,7 +45,18 @@ void lancer1v1() {
 
 	init_equipe(&equipe1, 1); init_equipe(&equipe2, 2); 
 	init_partie(&equipe1,&equipe2,&ordre_action);
-	
+
+	clearScreen();
+
+	printf("\n");
+	afficherMat(carte);
+	printf("je vais placer");
+	placer(equipe1,equipe2,carte);
+	printf("placer ok");
+	while (gagnant == 0){
+		gestion_tour(&ordre_action,&NbTour,carte,&gagnant);
+	}
+	printf("le joueur %i a gagné en %i tours",gagnant,NbTour);
 }
 
 int main(void) {

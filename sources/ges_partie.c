@@ -92,7 +92,9 @@ void placer(t_liste *equipe1,t_liste *equipe2,t_map carte){
  * \brief Place les personnages des deux équipes sur la carte.
  * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2,t_map carte : la carte 
  */
-	int x, y;	
+	int x, y;
+	en_tete(equipe1);
+	en_tete(equipe2);	
 	while (!hors_liste(equipe1) && !hors_liste(equipe2)){
 		if (!hors_liste(equipe1)){														//Placer un personnage pour l'equipe 1
 			printf("Joueur 1, entrez les coordonnées de votre Servant séparées par une virgule :\n");
@@ -150,7 +152,7 @@ void placer(t_liste *equipe1,t_liste *equipe2,t_map carte){
 
 }
 
-int est_mort(t_liste *ordre_action,t_personnage cadavre){
+int est_mort(t_liste *ordre_action,t_personnage cadavre,int *gagnant){
 /**
  * \fn  est_mort(t_liste *ordre_action,t_personnage cadavre).
  * \brief Retire le personnage mort de la liste ordre_action
@@ -186,7 +188,7 @@ void passer(t_liste *ordre_action){//passe la main au personnage suivant dans la
 }
 
 
-void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque){
+void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *gagnant){
 	/**exécute l’attaque de l’attaquant vers la cible et actualise les stats et l’état si un personnage meurt appelle la fonction mort*/	
 	int degats_max = (attaque.mul_ATQ) * (ordre_action->ec->pred->personnage.classe.ATQ);
 	int def=cible.classe.DEF;
@@ -194,12 +196,13 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque){
 	if (degats>0){
 		cible.pv=(cible.pv)-degats;	
 	}
-	if ( cible.pv==0 ){
-		est_mort(ordre_action,cible);
+	if ( cible.pv<=0 ){
+		*gagnant=est_mort(ordre_action,cible,gagnant);
 	}
+	
 }
 
-void choix_cible(t_liste *ordre_action, t_map carte, t_attaque attaque){
+void choix_cible(t_liste *ordre_action, t_map carte, t_attaque attaque,int *gagnant){
 	/**choix de la cible de l'attaque */ 
 
 	int portee = attaque.portee;
@@ -221,15 +224,15 @@ void choix_cible(t_liste *ordre_action, t_map carte, t_attaque attaque){
 	printf("Votre choix : ");
 	scanf("%d",&choix);
 
-	switch(choix){	case 1: attaquer(ordre_action,cible1,attaque); break;
-			case 2: attaquer(ordre_action,cible2,attaque); break;
-			case 3: attaquer(ordre_action,cible3,attaque); break;
-			case 4: attaquer(ordre_action,cible4,attaque); break;
+	switch(choix){	case 1: attaquer(ordre_action,cible1,attaque,gagnant); break;
+			case 2: attaquer(ordre_action,cible2,attaque,gagnant); break;
+			case 3: attaquer(ordre_action,cible3,attaque,gagnant); break;
+			case 4: attaquer(ordre_action,cible4,attaque,gagnant); break;
 			default: printf("Erreur: votre choix doit etre compris entre 1 et 4\n");
 		}
 	
 }
-void choix_competence(t_liste *ordre_action,t_map carte){
+void choix_competence(t_liste *ordre_action,t_map carte,int *gagnant){
 
 	int choix;
 	printf("\nMenu :\n");
@@ -239,15 +242,15 @@ void choix_competence(t_liste *ordre_action,t_map carte){
 	printf("Votre choix : ");
 	scanf("%d",&choix);
 
-	switch(choix){	case 1: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.atq1 ); break;
-			case 2: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.atq2); break;
+	switch(choix){	case 1: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.atq1,gagnant ); break;
+			case 2: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.atq2,gagnant); break;
 			//case 3: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.ulti); break;
 			default: printf("Erreur: votre choix doit etre compris entre 1 et 2\n");
 		}
 	
 }
 
-void choix_action(t_liste *ordre_action, t_map carte){
+void choix_action(t_liste *ordre_action, t_map carte,int *gagnant){
 	int choix;
 	do{	printf("\nMenu :\n");
 		printf(" 1 - Deplacer\n");
@@ -257,20 +260,21 @@ void choix_action(t_liste *ordre_action, t_map carte){
 		scanf("%d",&choix);
 
 		switch(choix){	case 1: deplacement(ordre_action,carte); break;
-			case 2: choix_competence(ordre_action,carte); break;
-			case 3: passer(ordre_action); break;
+			case 2: choix_competence(ordre_action,carte,gagnant); break;
+			case 3: break;
 			default: printf("Erreur: votre choix doit etre compris entre 1 et 3\n");
 		}
-	}while(ordre_action->ec->personnage.pa >0);
+	}while(choix != 3);
+	passer(ordre_action);
 }
 
-void gestion_tour(t_liste *ordre_action,int *NbTour,t_map carte){
+void gestion_tour(t_liste *ordre_action,int *NbTour,t_map carte,int *gagnant){
 /**Joue le tour suivant*/
 	NbTour++;
 	en_tete(ordre_action);
 	while(!hors_liste(ordre_action)){
-		ordre_action->ec->personnage.pa = (ordre_action->ec->personnage.pa)+ (ordre_action->ec->personnage.classe.gainPA);
-		choix_action(ordre_action,carte);
+		ordre_action->ec->personnage.pa += (ordre_action->ec->personnage.classe.gainPA);
+		choix_action(ordre_action,carte,gagnant);
 	}
 }
 
