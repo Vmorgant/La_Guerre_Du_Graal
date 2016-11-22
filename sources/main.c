@@ -19,8 +19,7 @@
 #include"ges_partie.h"
 
 void clearScreen(){
-	const char* CLEAR_SCREE_ANSI = "\e[1;1H\e[2J";
-	write(STDOUT_FILENO,CLEAR_SCREE_ANSI,12);
+	system("clear");
 }
 
 
@@ -42,17 +41,19 @@ void lancer1v1() {
 	init_liste(&equipe1);
 	init_liste(&equipe2);
 	init_liste(&ordre_action);
-
+	
 	init_equipe(&equipe1, 1); init_equipe(&equipe2, 2); 
-	init_partie(&equipe1,&equipe2,&ordre_action);
-
-	clearScreen();
 
 	printf("\n");
 	afficherMat(carte);
-	printf("je vais placer");
-	placer(equipe1,equipe2,carte);
-	printf("placer ok");
+	
+	placer(&equipe1,&equipe2,carte);
+
+	init_partie(&equipe1,&equipe2,&ordre_action);
+
+	
+
+	
 	while (gagnant == 0){
 		gestion_tour(&ordre_action,&NbTour,carte,&gagnant);
 	}
