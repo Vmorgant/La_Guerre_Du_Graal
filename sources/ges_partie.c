@@ -127,8 +127,7 @@ void placer(t_liste *equipe1,t_liste *equipe2,t_map carte){
 		}
 		while (x > 10 || y < 5 || x < 0 || y < 0 || carte.cell[x][y] != 0){
 
-			if (carte.cell[x][y] != 0){	Assassin(3PE)	Caster(2PE)	Saber(3PE)	Berserker(7PE)	
-
+			if (carte.cell[x][y] != 0){
 				printf("La case est déjà occupée\n");
 				printf("Rentrez des coordonnées séparées par une vigule :\n");
 				scanf("%i,%i", &x, &y);
@@ -169,8 +168,7 @@ int est_mort(t_liste *ordre_action,t_personnage cadavre){
 			nb_equipe2++;	
 		}
 	}
-		oter_elt(ordre_action);		Assassin(3PE)	Caster(2PE)	Saber(3PE)	Berserker(7PE)	
-
+		oter_elt(ordre_action);
 	
 	if( (nb_equipe1 >0) && (nb_equipe2 >0) ){
 		return 0;
@@ -200,10 +198,9 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque){
 		est_mort(ordre_action,cible);
 	}
 }
-	Assassin(3PE)	Caster(2PE)	Saber(3PE)	Berserker(7PE)	
 
 void choix_cible(t_liste *ordre_action, t_map carte, t_attaque attaque){
-	/**choix de la cible de l'attaque */  	Assassin(3PE)	Caster(2PE)	Saber(3PE)	Berserker(7PE)	
+	/**choix de la cible de l'attaque */ 
 
 	int portee = attaque.portee;
         int choix;
@@ -232,7 +229,7 @@ void choix_cible(t_liste *ordre_action, t_map carte, t_attaque attaque){
 		}
 	
 }
-void choix_competence(t_liste *ordre_action,t_map carte){	Assassin(3PE)	Caster(2PE)	Saber(3PE)	Berserker(7PE)	
+void choix_competence(t_liste *ordre_action,t_map carte){
 
 	int choix;
 	printf("\nMenu :\n");

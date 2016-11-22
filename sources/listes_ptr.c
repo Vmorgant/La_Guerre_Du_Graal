@@ -95,13 +95,12 @@ void ajout_gauche(t_liste * p, t_personnage v) {
 void afficher(t_liste* p) {
 	if(!liste_vide(p)){
 		en_tete(p);
-		printf("L'equipe %i est constituée de :\t",  p->ec->personnage.joueur);
 		while(!hors_liste(p)){
 				printf("%s(%iPE)\t", p->ec->personnage.classe.nom, p->ec->personnage.classe.coutPE);
 				suivant(p);
 		}
 		printf("\n");
-	}else printf("L'equipe %i est vide.\n",  p->ec->personnage.joueur);
+	}
 }
 
 void compter_elts(t_liste*p, int*v){

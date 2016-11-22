@@ -44,21 +44,32 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
  */
 
 	int choix, i;
-	/* Affichage du menu et saisie d'une classe */
-	printf("Choisissez une classe : \n");
-	for(i =1; i <= nb_classes; i++){
-		printf(" %i - %s (%iPE)\n", i, tab_classes[i-1].nom, tab_classes[i-1].coutPE);
-	}
-	
-	scanf("%d",&choix);
-	/* Traitement du choix de l'utilisateur */
-	if(choix >= 1 && choix <= nb_classes){
-		for (i = 1; i <= nb_classes; i++){
-			if(choix == i){
-				creer_perso(equipe, tab_classes[i-1], joueur, PE);
-			}
+
+	do {
+		/* Affichage du menu et saisie d'une classe */
+		printf("Choisissez une classe : \n");
+		for(i =1; i <= nb_classes; i++){
+			printf(" %i - %s (%iPE)\n", i, tab_classes[i-1].nom, tab_classes[i-1].coutPE);
 		}
-	}else printf("Classe non existante.\n");
+		printf(" %i - /!\\ quitter /!\\\n", nb_classes+1);
+	
+		scanf("%d",&choix);
+
+		/* Traitement du choix de l'utilisateur */
+		if(choix >= 1 && choix <= nb_classes){
+			for (i = 1; i <= nb_classes; i++){
+				if(choix == i){
+					creer_perso(equipe, tab_classes[i-1], joueur, PE);
+				}
+			}
+		}if (choix < 1 || choix > nb_classes+1) printf("Classe non existante.\n");
+		
+		if(!liste_vide(equipe)) {
+			printf("l'equipe %i est constituée de : ", joueur);
+			afficher(equipe);
+		}else printf("l'equipe %i est vide.", joueur);
+
+	} while (choix != nb_classes+1);
 }
 
 
@@ -102,7 +113,7 @@ void init_equipe(t_liste * equipe, int joueur) {
  * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur.
  */	
 	int choix;
-	int PE = 9;
+	int PE = 10;
 
 	do {
 		/* Affichage du menu et saisie du choix */
@@ -115,8 +126,8 @@ void init_equipe(t_liste * equipe, int joueur) {
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
-			case 1: ajout_equipe(equipe, joueur, &PE);  afficher(equipe); break;
-			case 2: oter_equipe(equipe, joueur, &PE); afficher(equipe); break;
+			case 1: ajout_equipe(equipe, joueur, &PE); break;
+			case 2: oter_equipe(equipe, joueur, &PE); break;
 			case 3: break;
 			default: printf("Erreur: votre choix doit être compris entre 1 et 3\n");
 		}
