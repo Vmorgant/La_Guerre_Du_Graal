@@ -40,48 +40,25 @@ t_map actumap(t_liste * ordre_action, t_map map){
        	 
     
     if (ordre_action->ec->personnage.joueur == 1){     
-        		if (ordre_action->ec->personnage.classe.nom == "Saber") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-        	}
+        		if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
+        		if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 5;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Berserker")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 7;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Lancer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 9;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 11;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 13;
+		}
     if (ordre_action->ec->personnage.joueur == 2){
-        		if (ordre_action->ec->personnage.classe.nom == "Saber") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 2;
+        		if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 2;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 4;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 6;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Berserker")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 8;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Lancer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 10;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 12;
+			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 14;
+
         	}
-    if (ordre_action->ec->personnage.joueur == 1){     
-        		if (ordre_action->ec->personnage.classe.nom == "Archer") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-        	}
-    if (ordre_action->ec->personnage.joueur == 2){
-        		if (ordre_action->ec->personnage.classe.nom == "Archer") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 4;
-        	}
-    if (ordre_action->ec->personnage.joueur == 1){     
-        		if (ordre_action->ec->personnage.classe.nom == "Caster") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 5; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-        	}
-    if (ordre_action->ec->personnage.joueur == 2){
-        		if (ordre_action->ec->personnage.classe.nom == "Caster") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 6;
-        	}
-    if (ordre_action->ec->personnage.joueur == 1){     
-        		if (ordre_action->ec->personnage.classe.nom == "Berserker") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 7; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-        	}
-    if (ordre_action->ec->personnage.joueur == 2){
-        		if (ordre_action->ec->personnage.classe.nom == "Berserker") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 8;
-        	}
-    if (ordre_action->ec->personnage.joueur == 1){     
-        		if (ordre_action->ec->personnage.classe.nom == "Lancer") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 9; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-        	}
-    if (ordre_action->ec->personnage.joueur == 2){
-        		if (ordre_action->ec->personnage.classe.nom == "Lancer") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 10;
-        	}
-    if (ordre_action->ec->personnage.joueur == 1){     
-        		if (ordre_action->ec->personnage.classe.nom == "Rider") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 11; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-        	}
-    if (ordre_action->ec->personnage.joueur == 2){
-        		if (ordre_action->ec->personnage.classe.nom == "Rider") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 12;
-        	}
-    
-    if (ordre_action->ec->personnage.joueur == 1){     
-        		if (ordre_action->ec->personnage.classe.nom == "Assassin") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 13; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-        	}
-    if (ordre_action->ec->personnage.joueur == 2){
-        		if (ordre_action->ec->personnage.classe.nom == "Assassin") map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 14;
-        	}
+   
     return map;
 }
 

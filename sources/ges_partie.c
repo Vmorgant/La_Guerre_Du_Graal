@@ -93,38 +93,38 @@ void placer(t_liste *ordre_action,t_map carte){
  * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2,t_map carte : la carte 
  */
 	int x, y;
-	afficherMat(carte);
-	printf("carte au démarrage de la fonction\n");
+	
+	printf("\n");
+	
 	en_tete(ordre_action);
 	while (!hors_liste(ordre_action)){
 		if((ordre_action->ec->personnage.joueur)==1){														//Placer un personnage pour l'equipe 1
 			printf("Joueur 1, entrez un x pour votre personnage entre 0 et 9 :\n");
-			scanf("%i", &x);
-			printf("\n");
-			printf("Entrez un y pour votre personnage entre 0 et 4 :\n");
 			scanf("%i", &y);
 			printf("\n");
+			printf("Entrez un y pour votre personnage entre 0 et 4 :\n");
+			scanf("%i", &x);
+			printf("\n");
 		
-			printf("%i\n",carte.cell[x][y]);
 			while (x > 10 || y > 5 || x < 0 || y < 0 || carte.cell[x][y] != 0){
 
 				if (carte.cell[x][y] != 0){															//On teste si la case est vide
 					printf("La case est déjà occupée\n");
 					printf("Joueur 1, entrez un x pour votre personnage entre 0 et 9 :\n");
-					scanf("%i", &x);
-					printf("\n");
-					printf("Entrez un y pour votre personnage entre 0 et 4 :\n");
 					scanf("%i", &y);
 					printf("\n");
-					carte=actumap(ordre_action, carte);
+					printf("Entrez un y pour votre personnage entre 0 et 4 :\n");
+					scanf("%i", &x);
+					printf("\n");
+					
 				}
 				else {																			//On teste si on est pas hors map
 					printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 4\n");
 					printf("Joueur 1, entrez un x pour votre personnage entre 0 et 9 :\n");
-					scanf("%i", &x);
+					scanf("%i", &y);
 					printf("\n");
 					printf("Entrez un y pour votre personnage entre 0 et 4 :\n");
-					scanf("%i", &y);
+					scanf("%i", &x);
 					printf("\n");
 					printf("\n");
 				}
@@ -133,15 +133,16 @@ void placer(t_liste *ordre_action,t_map carte){
 			ordre_action->ec->personnage.x = x;
 			ordre_action->ec->personnage.y = y;
 			carte=actumap(ordre_action, carte);
+			printf("Perso n°1 [%i,%i]=%i \n",x,y,carte.cell[x][y]) ;
 			afficherMat(carte);
 			suivant(ordre_action);
 		}
 		if((ordre_action->ec->personnage.joueur)==2){													//Placer un personnage pour l'equipe 2;
 			printf("Joueur 2, entrez un x pour votre personnage entre 0 et 9 :\n");
-			scanf("%i", &x);
+			scanf("%i", &y);
 			printf("\n");
 			printf("Entrez un y pour votre personnage entre 5 et 9 :\n");
-			scanf("%i", &y);
+			scanf("%i", &x);
 			printf("\n");
 		
 			while (x > 10 || y > 10 || x < 0 || y < 5 || carte.cell[x][y] != 0){
@@ -149,21 +150,20 @@ void placer(t_liste *ordre_action,t_map carte){
 				if (carte.cell[x][y] != 0){
 					printf("La case est déjà occupée\n");
 					printf("Joueur 2, entrez un x pour votre personnage entre 0 et 9 :\n");
-					scanf("%i", &x);
-					printf("\n");
-					printf("Entrez un y pour votre personnage entre 5 et 9 :\n");
 					scanf("%i", &y);
 					printf("\n");
+					printf("Entrez un y pour votre personnage entre 5 et 9 :\n");
+					scanf("%i", &x);
+					printf("\n");					
 					
-					carte=actumap(ordre_action, carte);
 				}
 				else{
 					printf("Les coordonnées doivent-être des entiers avec un y compris entre 5 et 9\n");
 					printf("Joueur 1, entrez un x pour votre personnage entre 0 et 9 :\n");
-					scanf("%i", &x);
+					scanf("%i", &y);
 					printf("\n");
 					printf("Entrez un y pour votre personnage entre 5 et 9 :\n");
-					scanf("%i", &y);
+					scanf("%i", &x);
 					printf("\n");
 				}
 			}
