@@ -30,7 +30,7 @@ void lancer1v1() {
 	t_map carte=creerMat();
 
 	int choix, erreur = faux;
-	int NbTour;
+	int NbTour=1;
 	int gagnant=0; 
 	int PE1 = 10;
 	int PE2 = 10;
