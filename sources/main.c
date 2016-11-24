@@ -46,10 +46,10 @@ void lancer1v1() {
 
 	printf("\n");
 	afficherMat(carte);
-	
-	placer(&equipe1,&equipe2,carte);
-
 	init_partie(&equipe1,&equipe2,&ordre_action);
+	placer(&ordre_action,carte);
+
+	
 
 	
 

@@ -173,3 +173,5 @@ void afficherMat (t_map mat){
     }
         printf("\n");
 }
+
+

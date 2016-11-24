@@ -93,6 +93,8 @@ void placer(t_liste *ordre_action,t_map carte){
  * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2,t_map carte : la carte 
  */
 	int x, y;
+	afficherMat(carte);
+	printf("carte au démarrage de la fonction\n");
 	en_tete(ordre_action);
 	while (!hors_liste(ordre_action)){
 		if((ordre_action->ec->personnage.joueur)==1){														//Placer un personnage pour l'equipe 1
