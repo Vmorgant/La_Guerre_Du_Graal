@@ -12,6 +12,11 @@
 #include "liste_chemin.h"
 
 void init_liste_noeud(t_liste_noeud * p) {
+/**
+ * \fn init_liste_noeud(t_liste_noeud * p)
+ * \brief initialisation de la liste de noeud.
+ * \param t_liste_noeud * p pointeur sur la liste
+ */
 	p->drapeau_noeud =  malloc (sizeof(t_element_noeud));
 	p->ec_noeud =  malloc (sizeof(t_element_noeud));
 	p->drapeau_noeud -> pred_noeud = p->drapeau_noeud;
@@ -20,18 +25,35 @@ void init_liste_noeud(t_liste_noeud * p) {
 }
 
 int liste_vide_noeud(t_liste_noeud * p) {
+/**
+ * \fn liste_vide_noeud(t_liste_noeud * p)
+ * \brief vérifie si la liste de noeud est vide
+ * \param t_liste_noeud * p pointeur sur  la liste
+ * \return 1 si la liste est vide 
+ */
 	if(p->drapeau_noeud -> pred_noeud == p->drapeau_noeud)
 		return 1;
 	else return 0;
 }
 
 int hors_liste_noeud(t_liste_noeud * p) {
+/**
+ * \fn hors_liste_noeud(t_liste_noeud * p)
+ * \brief vérifie si on se trouve en dehors de la liste
+ * \param t_liste_noeud * p pointeur sur la liste
+ * \return 1 si on se trouve en dehors de la liste
+ */
 	if(p->ec_noeud == p->drapeau_noeud)
 		return 1;
 	else return 0;
 }
 
 void en_tete_noeud(t_liste_noeud * p) {
+/**
+ * \fn en_tete_noeud(t_liste_noeud * p)
+ * \brief vérifie si on se trouve en tete de la liste
+ * \param t_liste_noeud * p pointeur sur la liste
+ */
 	p->ec_noeud = p->drapeau_noeud -> succ_noeud;
 }
 

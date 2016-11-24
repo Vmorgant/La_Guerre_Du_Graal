@@ -39,9 +39,9 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 		}
 	}
 	
-	ordre_action->ec->personnage.x = x;
-	ordre_action->ec->personnage.y = y;
-	carte=actumap(ordre_action, carte);
-	printf("Perso n°1 [%i,%i]=%i \n",x,y,carte.cell[x][y]) ;
-	afficherMat(carte);
+	ordre_action->ec->personnage.x = xobj;
+	ordre_action->ec->personnage.y = yobj;
+	map=actumap(ordre_action, map);
+	printf("Perso n°1 [%i,%i]=%i \n",xobj,yobj,map.cell[xobj][yobj]) ;
+	afficherMat(map);
 }

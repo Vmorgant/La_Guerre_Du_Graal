@@ -11,7 +11,7 @@
 #include <math.h>
 #include "global.h"
 #include "listes_ptr.h"
-#include "deplacement.h"
+#include "deplacement_simp.h"
 #include "Init_map.h"
 
 
@@ -232,51 +232,71 @@ void choix_cible(t_liste *ordre_action, t_map carte, t_attaque attaque,int *gagn
 	/**choix de la cible de l'attaque */ 
 
 	int portee = attaque.portee;
-	int i=1;
+	int i=0;
+	int j;
         int choix;
-        t_personnage cible [5];
-	cible[0]=ordre_action->ec->personnage;
-	suivant(ordre_action);
+        t_personnage cible [4];
+	t_element * tampon = ordre_action->ec;
+	en_tete(ordre_action);
 
-	while( (ordre_action->ec->personnage.x != cible[0].x) && ((ordre_action->ec->personnage.y) != cible[0].y) ){
-		if ( ordre_action->ec->personnage.joueur != cible[i].joueur ){
-			if( ( ordre_action->ec->personnage.x >= cible[i].x-portee ) && ( ordre_action->ec->personnage.x <= cible[i].x+portee ) ){
-				if( ( ordre_action->ec->personnage.y >= cible[i].y-portee ) && ( ordre_action->ec->personnage.x <= cible[i].y+portee ) ){
-					cible[i]=ordre_action->ec->personnage;
-					printf("%i - %s PV :%i DEF : %i \n",i,cible[i].classe.nom,cible[i].pv,cible[i].classe.DEF);
-					i++;
+	while(!hors_liste(ordre_action)){
+		//if ( ordre_action -> ec -> personnage.x != tampon->personnage.x || ordre_action -> ec -> personnage.y != tampon->personnage.y ){
+			if ( ordre_action->ec->personnage.joueur != cible[i].joueur ){
+				printf("ICI");
+				if( ( ordre_action->ec->personnage.x >= cible[i].x-portee ) && ( ordre_action->ec->personnage.x <= cible[i].x+portee ) ){
+				printf("ICI");
+					if( ( ordre_action->ec->personnage.y >= cible[i].y-portee ) && ( ordre_action->ec->personnage.x <= cible[i].y+portee ) ){
+						printf("ICI");
+						cible[i]=ordre_action->ec->personnage;
+						printf("%i - %s PV :%i DEF : %i \n",i+1,cible[i].classe.nom,cible[i].pv,cible[i].classe.DEF);
+						i++;
 					
+					}
 				}
 			}
-		}
-			
-			suivant(ordre_action);
-	
+		//}
+		suivant(ordre_action);
 	}
+	printf("%i Annuler \n",i+1);
 
+	ordre_action->ec = tampon;
+	
 	printf("Votre choix : ");
 	scanf("%d",&choix);
-
-	switch(choix){	case 1: attaquer(ordre_action,cible[1],attaque,gagnant); break;
-			case 2: attaquer(ordre_action,cible[2],attaque,gagnant); break;
-			case 3: attaquer(ordre_action,cible[3],attaque,gagnant); break;
-			case 4: attaquer(ordre_action,cible[4],attaque,gagnant); break;
-			default: printf("Erreur: votre choix doit etre compris entre 1 et 4\n");
+	if (choix >= 0 && choix <=i){
+		for(j=0;j<=i;j++){
+			if(choix==j) {
+				attaquer(ordre_action,cible[j],attaque,gagnant);
+				ordre_action->ec->personnage.pa -= attaque.coutPA;
+			}
 		}
-	
+	}
+	if (choix > i+1){
+		printf("Choix indisponible\n");
+
+	}
 }
+
 void choix_competence(t_liste *ordre_action,t_map carte,int *gagnant){
 
 	int choix;
+	printf("%s %i (%iPA)\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur,ordre_action->ec->personnage.pa);
 	printf("\nMenu :\n");
-	printf(" 1 - %s\n",ordre_action->ec->personnage.classe.atq1.nom);
-	printf(" 2 - %s\n",ordre_action->ec->personnage.classe.atq2.nom);
+	printf(" 1 - %s (%iPA)\n",ordre_action->ec->personnage.classe.atq1.nom,ordre_action->ec->personnage.classe.atq1.coutPA);
+	printf(" 2 - %s (%iPA)\n",ordre_action->ec->personnage.classe.atq2.nom,ordre_action->ec->personnage.classe.atq2.coutPA);
 	//printf(" 3 - %s\n",ordre_action->ec->personnage->classe->spe->nom);
 	printf("Votre choix : ");
 	scanf("%d",&choix);
-
-	switch(choix){	case 1: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.atq1,gagnant ); break;
-			case 2: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.atq2,gagnant); break;
+	switch(choix){	case 1:
+				if(ordre_action->ec->personnage.pa >= ordre_action->ec->personnage.classe.atq1.coutPA) {
+					choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.atq1,gagnant );
+				} else printf("vous zavez po le PAs\n");
+				break;
+			case 2: 
+				if(ordre_action->ec->personnage.pa >= ordre_action->ec->personnage.classe.atq2.coutPA) {
+					choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.atq2,gagnant );
+				} else printf("vous zavez po le PAs\n");
+				break;
 			//case 3: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.ulti); break;
 			default: printf("Erreur: votre choix doit etre compris entre 1 et 2\n");
 		}
@@ -285,14 +305,16 @@ void choix_competence(t_liste *ordre_action,t_map carte,int *gagnant){
 
 void choix_action(t_liste *ordre_action, t_map carte,int *gagnant){
 	int choix;
-	do{	printf("\nMenu :\n");
+	do{	
+		printf("%s %i (%iPA)\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur,ordre_action->ec->personnage.pa);		
+		printf("\nMenu :\n");
 		printf(" 1 - Deplacer\n");
 		printf(" 2 - Attaquer\n");
 		printf(" 3 - Passer\n");
 		printf("Votre choix : ");
 		scanf("%d",&choix);
 
-		switch(choix){	case 1: deplacement(ordre_action,carte); break;
+		switch(choix){	case 1: deplacement_simp(ordre_action,carte); break;
 			case 2: choix_competence(ordre_action,carte,gagnant); break;
 			case 3: break;
 			default: printf("Erreur: votre choix doit etre compris entre 1 et 3\n");
