@@ -112,11 +112,3 @@ void compter_elts(t_liste*p, int*v){
 		}
 	}
 }
-
-void vider_liste(t_liste*p){
-	if(!liste_vide(p)){
-		en_queue(p);
-		while(!liste_vide(p))
-			oter_elt(p);
-	}
-}

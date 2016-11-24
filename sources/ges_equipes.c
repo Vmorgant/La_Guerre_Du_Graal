@@ -43,13 +43,14 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
  * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant.
  */
 
-	int choix, i;
+	int choix, i, erreur= faux;
 
 	do {
 		clearScreen();
 		/* Affichage du menu et saisie d'une classe */
 		printf("Choisissez une classe : \n\n");
-
+		if(erreur) printf("Erreur: votre choix doit être compris entre  et %i\n", nb_classes+1);
+		erreur = faux;
 		if(!liste_vide(equipe)) {
 			printf("l'equipe %i est constituée de : ", joueur);
 			afficher(equipe);
@@ -73,7 +74,7 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 					creer_perso(equipe, tab_classes[i-1], joueur, PE);
 				}
 			}
-		} else if (choix < 1 || choix > nb_classes+1) printf("Classe non existante.\n");
+		} else if (choix < 1 || choix > nb_classes+1) erreur = vrai;
 
 	} while (choix != nb_classes+1);
 }
@@ -122,13 +123,14 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
  * \brief Menu de création d'équipe.
  * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur.
  */	
-	int choix;
+	int choix, erreur= faux;
 
 	do {
 		clearScreen();
 		/* Affichage du menu et saisie du choix */
 		printf("Menu :\n");
-
+		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et 4\n");
+		erreur = faux;
 		if(!liste_vide(equipe)) {
 			printf("l'equipe %i est constituée de : ", joueur);
 			afficher(equipe);
@@ -150,9 +152,9 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
 			case 1: ajout_equipe(equipe, joueur, PE); break;
 			case 2: oter_equipe(equipe, joueur, PE); break;
 			case 3: break;
-			case 4: vider_liste(equipe); /*free(equipe->drapeau);*/ break;
-			default: printf("Erreur: votre choix doit être compris entre 1 et 3\n");
+			case 4: break;
+			default: erreur = vrai;
 		}
 	}
-	while(choix!=3 && choix != 4);
+	while(choix!=4 && choix!=3);
 }

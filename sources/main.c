@@ -22,12 +22,6 @@ void clearScreen(){
 	system("clear");
 }
 
-
-
-
-
-
-
 void lancer1v1() {
 
 	t_liste equipe1;
@@ -35,7 +29,7 @@ void lancer1v1() {
 	t_liste ordre_action;
 	t_map carte=creerMat();
 
-	int choix;
+	int choix, erreur = faux;
 	int NbTour;
 	int gagnant=0; 
 	int PE1 = 10;
@@ -48,7 +42,9 @@ void lancer1v1() {
 	
 	/* Affichage du menu et saisie du choix */
 	do  {
-		
+		clearScreen();
+		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et 4\n");
+		erreur = faux;
 		printf(" 1- Editer equipe 1.\n\t");
 		if(!liste_vide(&equipe1)) {
 			printf("l'equipe 1 est constituée de : ");
@@ -90,20 +86,24 @@ void lancer1v1() {
 					
 				break;
 			case 4: break;
-			default: printf("Erreur: votre choix doit être compris entre 1 et 4\n");
+			default: erreur = vrai;
 		}
-	clearScreen();
+	
 	}while(choix!=4);
 }
 
 int main(void) {
-	int choix;
+	int choix, erreur = faux;
 	//initscr();
 	
 	do {		
-			
-		/* Affichage du menu et saisie du choix */
+		clearScreen();	
+	
 		printf("Menu :\n");
+		if(erreur) printf("Erreur: votre choix doit etre compris entre 1 et 5\n");
+		erreur = faux;
+		/* Affichage du menu et saisie du choix */
+		
 		printf(" 1 - Mode Duel\n");
 		printf(" 2 - Mode Arcade\n");
 		printf(" 3 - Mode Histoire\n");
@@ -119,9 +119,9 @@ int main(void) {
 			case 3: printf("Ce mode n'est pas encore jouable "); break;
 			case 4: printf("Jeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
 			case 5: break;
-			default: printf("Erreur: votre choix doit etre compris entre 1 et 5\n");
+			default: erreur = vrai;
 		}
-	clearScreen();
+	
 	}
 	while(choix!=5);
 
