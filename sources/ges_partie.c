@@ -120,7 +120,7 @@ void placer(t_liste *ordre_action,t_map carte){
 			printf("%i\n",carte.cell[x][y]);
 			ordre_action->ec->personnage.x = x;
 			ordre_action->ec->personnage.y = y;
-			carte=actumap(equipe1, carte);
+			carte=actumap(ordre_action, carte);
 			afficherMat(carte);
 			suivant(ordre_action);
 		}
