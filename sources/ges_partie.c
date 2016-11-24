@@ -86,68 +86,72 @@ void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 	afficher(ordre_action);
 }
 
-void placer(t_liste *equipe1,t_liste *equipe2,t_map carte){
+void placer(t_liste *ordre_action,t_map carte){
 /**
  * \fn  placer(t_liste *equipe1,t_liste *equipe2,t_map carte)
  * \brief Place les personnages des deux équipes sur la carte.
  * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2,t_map carte : la carte 
  */
 	int x, y;
-	en_tete(equipe1);
-	en_tete(equipe2);	
-	while (!hors_liste(equipe1) && !hors_liste(equipe2)){
-		if (!hors_liste(equipe1)){														//Placer un personnage pour l'equipe 1
+	en_tete(ordre_action);
+	while (!hors_liste(ordre_action)){
+		if((ordre_action->ec->personnage.joueur)==1){														//Placer un personnage pour l'equipe 1
 			printf("Joueur 1, entrez les coordonnées de votre Servant séparées par un slash :\n");
 			scanf("%i/%i", &x, &y);
 			printf("\n");
-		}
-		while (x > 10 || y > 5 || x < 0 || y < 0 || carte.cell[x][y] != 0){
-			
-			if (carte.cell[x][y] != 0){															//On teste si la case est vide
-				printf("La case est déjà occupée\n");
-				printf("Rentrez des coordonnées séparées par un slash :\n");
-				scanf("%i/%i", &x, &y);
-				printf("\n");
-			}
-			else {																			//On teste si on est pas hors map
-				printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 4\n");
-				printf("Rentrez des coordonnées séparées par un slash :\n");
-				scanf("%i/%i", &x, &y);
-				printf("\n");
-			}
-		}
-		equipe1->ec->personnage.x = x;
-		equipe1->ec->personnage.y = y;
-		carte=actumap(equipe1, carte);
-		afficherMat(carte);
-		suivant(equipe1);
+		
+			printf("%i\n",carte.cell[x][y]);
+			while (x > 10 || y > 5 || x < 0 || y < 0 || carte.cell[x][y] != 0){
 
-		if (!hors_liste(equipe2)){													//Placer un personnage pour l'equipe 2;
+				if (carte.cell[x][y] != 0){															//On teste si la case est vide
+					printf("La case est déjà occupée\n");
+					printf("Rentrez des coordonnées séparées par un slash :\n");
+					scanf("%i/%i", &x, &y);
+					printf("\n");
+					carte=actumap(ordre_action, carte);
+				}
+				else {																			//On teste si on est pas hors map
+					printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 4\n");
+					printf("Rentrez des coordonnées séparées par un slash :\n");
+					scanf("%i/%i", &x, &y);
+					printf("\n");
+				}
+			}
+			printf("%i\n",carte.cell[x][y]);
+			ordre_action->ec->personnage.x = x;
+			ordre_action->ec->personnage.y = y;
+			carte=actumap(equipe1, carte);
+			afficherMat(carte);
+			suivant(ordre_action);
+		}
+		if((ordre_action->ec->personnage.joueur)==2){													//Placer un personnage pour l'equipe 2;
 			printf("Joueur 2, entrez les coordonnées de votre Servant séparées par un slash :\n");
 			scanf("%i/%i",&x, &y);
 			printf("\n");
-		}
-		while (x > 10 || y > 10 || x < 0 || y < 5 || carte.cell[x][y] != 0){
+		
+			while (x > 10 || y > 10 || x < 0 || y < 5 || carte.cell[x][y] != 0){
 
-			if (carte.cell[x][y] != 0){
-				printf("La case est déjà occupée\n");
-				printf("Rentrez des coordonnées séparées par un slash :\n");
-				scanf("%i/%i", &x, &y);
-				printf("\n");
+				if (carte.cell[x][y] != 0){
+					printf("La case est déjà occupée\n");
+					printf("Rentrez des coordonnées séparées par un slash :\n");
+					scanf("%i/%i", &x, &y);
+					printf("\n");
+					carte=actumap(ordre_action, carte);
+				}
+				else{
+					printf("Les coordonnées doivent-être des entiers avec un y compris entre 5 et 9\n");
+					printf("Rentrez des coordonnées séparées par un slash :\n");
+					scanf("%i/%i", &x, &y);
+					printf("\n");
+				}
 			}
-			else{
-				printf("Les coordonnées doivent-être des entiers avec un y compris entre 5 et 9\n");
-				printf("Rentrez des coordonnées séparées par un slash :\n");
-				scanf("%i/%i", &x, &y);
-				printf("\n");
-			}
+		
+			ordre_action->ec->personnage.x = x;
+			ordre_action->ec->personnage.y = y;
+			carte=actumap(ordre_action, carte);
+			afficherMat(carte);
+			suivant(ordre_action);
 		}
-		equipe2->ec->personnage.x = x;
-		equipe2->ec->personnage.y = y;
-		carte=actumap(equipe2, carte);
-		afficherMat(carte);
-		suivant(equipe2);
-
 	}
 
 }
