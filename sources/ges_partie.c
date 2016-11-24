@@ -230,28 +230,35 @@ void choix_cible(t_liste *ordre_action, t_map carte, t_attaque attaque,int *gagn
 	/**choix de la cible de l'attaque */ 
 
 	int portee = attaque.portee;
+	int i=1;
         int choix;
-        t_personnage cible1;
-        t_personnage cible2;
-        t_personnage cible3;
-        t_personnage cible4;
+        t_personnage cible [5];
+	cible[0]=ordre_action->ec->personnage;
+	suivant(ordre_action);
+
+	while( (ordre_action->ec->personnage.x != cible[0].x) && ((ordre_action->ec->personnage.y) != cible[0].y) ){
+		if ( ordre_action->ec->personnage.joueur != cible[i].joueur ){
+			if( ( ordre_action->ec->personnage.x >= cible[i].x-portee ) && ( ordre_action->ec->personnage.x <= cible[i].x+portee ) ){
+				if( ( ordre_action->ec->personnage.y >= cible[i].y-portee ) && ( ordre_action->ec->personnage.x <= cible[i].y+portee ) ){
+					cible[i]=ordre_action->ec->personnage;
+					printf("%i - %s PV :%i DEF : %i \n",i,cible[i].classe.nom,cible[i].pv,cible[i].classe.DEF);
+					i++;
+					
+				}
+			}
+		}
+			
+			suivant(ordre_action);
 	
-	/** A completer */
-	
-	
-	
-	printf("\nMenu :\n");
-	printf(" 1 -\n");
-	printf(" 2 -\n");
-	printf(" 3 -\n");
-	printf(" 4 -\n");
+	}
+
 	printf("Votre choix : ");
 	scanf("%d",&choix);
 
-	switch(choix){	case 1: attaquer(ordre_action,cible1,attaque,gagnant); break;
-			case 2: attaquer(ordre_action,cible2,attaque,gagnant); break;
-			case 3: attaquer(ordre_action,cible3,attaque,gagnant); break;
-			case 4: attaquer(ordre_action,cible4,attaque,gagnant); break;
+	switch(choix){	case 1: attaquer(ordre_action,cible[1],attaque,gagnant); break;
+			case 2: attaquer(ordre_action,cible[2],attaque,gagnant); break;
+			case 3: attaquer(ordre_action,cible[3],attaque,gagnant); break;
+			case 4: attaquer(ordre_action,cible[4],attaque,gagnant); break;
 			default: printf("Erreur: votre choix doit etre compris entre 1 et 4\n");
 		}
 	
