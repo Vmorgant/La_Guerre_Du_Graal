@@ -34,42 +34,76 @@ void lancer1v1() {
 	t_liste equipe2;
 	t_liste ordre_action;
 	t_map carte=creerMat();
+
+	int choix;
 	int NbTour;
 	int gagnant=0; 
+	int PE1 = 10;
+	int PE2 = 10;
 
 	/* Initialisation des listes de personnages */
 	init_liste(&equipe1);
 	init_liste(&equipe2);
 	init_liste(&ordre_action);
 	
-	init_equipe(&equipe1, 1); init_equipe(&equipe2, 2); 
+	/* Affichage du menu et saisie du choix */
+	do  {
+		
+		printf(" 1- Editer equipe 1.\n\t");
+		if(!liste_vide(&equipe1)) {
+			printf("l'equipe 1 est constituée de : ");
+			afficher(&equipe1);
+			printf("(%iPE restant)\n", PE1);
+		}else {
+			printf("l'equipe 1 est vide.");		
+			printf("(%iPE restant)\n", PE1);
+		}
 
-	printf("\n");
-	afficherMat(carte);
-	init_partie(&equipe1,&equipe2,&ordre_action);
-	placer(&ordre_action,carte);
+		printf(" 2- Editer equipe 2.\n\t");
+		if(!liste_vide(&equipe2)) {
+			printf("l'equipe 2 est constituée de : ");
+			afficher(&equipe2);
+			printf("(%iPE restant)\n", PE2);
+		}else {
+			printf("l'equipe 2 est vide.");		
+			printf("(%iPE restant)\n", PE2);
+		}
 
-	
+		printf(" 3- Lancer Partie.\n");
+		printf(" 4- /!\\Retour /!\\.\n");
+		printf("Votre choix : ");
+		scanf("%d", &choix);
 
-	
-
-	
-	while (gagnant == 0){
-		gestion_tour(&ordre_action,&NbTour,carte,&gagnant);
-	}
-	printf("le joueur %i a gagné en %i tours",gagnant,NbTour);
+		/* Traitement du choix de l'utilisateur */
+		switch(choix) {
+			case 1: init_equipe(&equipe1, 1, &PE1); break;
+			case 2: init_equipe(&equipe2, 2, &PE2);  break;
+			case 3: 
+				afficherMat(carte);
+				init_partie(&equipe1,&equipe2,&ordre_action);
+				placer(&ordre_action,carte);
+			
+				while (gagnant == 0){
+					gestion_tour(&ordre_action,&NbTour,carte,&gagnant);
+				}
+					printf("le joueur %i a gagné en %i tours\n",gagnant,NbTour);
+					
+				break;
+			case 4: break;
+			default: printf("Erreur: votre choix doit être compris entre 1 et 4\n");
+		}
+	clearScreen();
+	}while(choix!=4);
 }
 
 int main(void) {
 	int choix;
-	
-
 	//initscr();
 	
 	do {		
-	
+			
 		/* Affichage du menu et saisie du choix */
-		printf("\nMenu :\n");
+		printf("Menu :\n");
 		printf(" 1 - Mode Duel\n");
 		printf(" 2 - Mode Arcade\n");
 		printf(" 3 - Mode Histoire\n");
@@ -87,6 +121,7 @@ int main(void) {
 			case 5: break;
 			default: printf("Erreur: votre choix doit etre compris entre 1 et 5\n");
 		}
+	clearScreen();
 	}
 	while(choix!=5);
 

@@ -9,4 +9,4 @@
 void creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE);
 void ajout_equipe(t_liste * equipe, int joueur, int * PE);
 void oter_equipe(t_liste * equipe, int joueur, int* PE);
-void init_equipe(t_liste * equipe, int joueur);
+void init_equipe(t_liste * equipe, int joueur, int * PE);

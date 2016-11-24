@@ -99,7 +99,6 @@ void afficher(t_liste* p) {
 				printf("%s(%iPE)\t", p->ec->personnage.classe.nom, p->ec->personnage.classe.coutPE);
 				suivant(p);
 		}
-		printf("\n");
 	}
 }
 
@@ -111,5 +110,13 @@ void compter_elts(t_liste*p, int*v){
 			(*v)++;
 			suivant(p);
 		}
+	}
+}
+
+void vider_liste(t_liste*p){
+	if(!liste_vide(p)){
+		en_queue(p);
+		while(!liste_vide(p))
+			oter_elt(p);
 	}
 }
