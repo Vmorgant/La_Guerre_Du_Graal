@@ -68,10 +68,16 @@ t_map actumap(t_liste * ordre_action, t_map map){
 
 void afficherMat (t_map mat){
     int i, j;
-				
+	printf("  ");
+    for (j=0;j<10;j++){
+	 printf("  %i  ",j);
+    }	
+    printf("\n");			
     for (i=0; i < 10; i++){
-	    printf("|");
+	    printf("%i|",i);
+	    
 	    for (j=0; j < 10; j++){
+		
 	    	if(mat.cell[i][j] == 0) printf(" --- "); 
 	    	if(mat.cell[i][j] == 1) {				 //Si la case contient une "Saber" Bleue
 	    		couleur("34;1");					 //On écrit en bleu et en gras
