@@ -28,17 +28,17 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 	if (map.cell[xobj][yobj] != 0){															//On teste si la case est vide
 			printf("La case est déjà occupée\n");
 			printf("Rentrez des coordonnées séparées par une vigule :\n");
-			scanf("%i,%i", &xobj, &yobj);
+			scanf("%i,%i", &yobj, &xobj);
 			printf("\n");
 		}
 		else {
 			printf("Les coordonnées doivent-être des entiers compris entre 0 et 9\n");
 			printf("Rentrez des coordonnées séparées par une vigule :\n");
-			scanf("%i,%i", &xobj, &yobj);
+			scanf("%i,%i", &yobj, &xobj);
 			printf("\n");
 		}
 	}
-	
+	map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 0;
 	ordre_action->ec->personnage.x = xobj;
 	ordre_action->ec->personnage.y = yobj;
 	map=actumap(ordre_action, map);
