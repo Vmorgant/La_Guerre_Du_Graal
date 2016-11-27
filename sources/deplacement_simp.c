@@ -59,66 +59,71 @@ void pathfinding(int x, int y,int objx,int objy,t_liste_noeud *openlist,t_map ma
  */
 
 t_noeud depart = {x,y,0,0};
+t_noeud tampon;
 t_noeud v1 = {x+1,y,0,0};
 t_noeud v2 = {x,y+1,0,0};
 t_noeud v3 = {x-1,y,0,0};
 t_noeud v4 = {x,y-1,0,0};
-while (depart.x != objx || depart.y !=objy){
+while (depart.x != objx || depart.y != objy){
 	if (map.cell[v1.x][v1.y] == 0 && distance(v1.x,v1.y,objx,objy)<distance(depart.x,depart.y,objx,objy)){	
 			ajout_droit_noeud(openlist,v1);
 			suivant_noeud(openlist);
-			depart = v1;
-			v1.x = depart.x+1;
-			v1.y = depart.y;
-			v2.x = depart.x;
-			v2.y = depart.y+1;
-			v3.x = depart.x-1;
-			v3.y = depart.y;
-			v4.x = depart.x;
-			v4.y = depart.x-1;
+			tampon = v1;
+			v1.x = tampon.x+1;
+			v1.y = tampon.y;
+			v2.x = tampon.x;
+			v2.y = tampon.y+1;
+			v3.x = tampon.x-1;
+			v3.y = tampon.y;
+			v4.x = tampon.x;
+			v4.y = tampon.x-1;
+			depart = tampon;
 			printf("v1\n ");
 			
 	}
 	else if (map.cell[v1.x][v1.y] == 0 && distance(v2.x,v2.y,objx,objy)<distance(depart.x,depart.y,objx,objy)){	
 			ajout_droit_noeud(openlist,v2);
 			suivant_noeud(openlist);
-			depart = v2;
-			v1.x = depart.x+1;
-			v1.y = depart.y;
-			v2.x = depart.x;
-			v2.y = depart.y+1;
-			v3.x = depart.x-1;
-			v3.y = depart.y;
-			v4.x = depart.x;
-			v4.y = depart.x-1;
+			tampon = v2;
+			v1.x = tampon.x+1;
+			v1.y = tampon.y;
+			v2.x = tampon.x;
+			v2.y = tampon.y+1;
+			v3.x = tampon.x-1;
+			v3.y = tampon.y;
+			v4.x = tampon.x;
+			v4.y = tampon.x-1;
+			depart = tampon;
 			printf("v2\n ");
 	}
 	else if (map.cell[v1.x][v1.y] == 0 && distance(v3.x,v3.y,objx,objy)<distance(depart.x,depart.y,objx,objy)){	
 			ajout_droit_noeud(openlist,v3);
 			suivant_noeud(openlist);
-			depart = v3;
-			v1.x = depart.x+1;
-			v1.y = depart.y;
-			v2.x = depart.x;
-			v2.y = depart.y+1;
-			v3.x = depart.x-1;
-			v3.y = depart.y;
-			v4.x = depart.x;
-			v4.y = depart.x-1;
+			tampon = v3;
+			v1.x = tampon.x+1;
+			v1.y = tampon.y;
+			v2.x = tampon.x;
+			v2.y = tampon.y+1;
+			v3.x = tampon.x-1;
+			v3.y = tampon.y;
+			v4.x = tampon.x;
+			v4.y = tampon.x-1;
+			depart = tampon;
 			printf("v3\n ");
 	}
 	else if (map.cell[v1.x][v1.y] == 0 && distance(v4.x,v4.y,objx,objy)<distance(depart.x,depart.y,objx,objy)){	
 			ajout_droit_noeud(openlist,v4);
 			suivant_noeud(openlist);
-			depart = v4;
-			v1.x = depart.x+1;
-			v1.y = depart.y;
-			v2.x = depart.x;
-			v2.y = depart.y+1;
-			v3.x = depart.x-1;
-			v3.y = depart.y;
-			v4.x = depart.x;
-			v4.y = depart.x-1;
+			tampon = v4;
+			v1.x = tampon.x+1;
+			v1.y = tampon.y;
+			v2.x = tampon.x;
+			v2.y = tampon.y+1;
+			v3.x = tampon.x-1;
+			v3.y = tampon.y;
+			v4.x = tampon.x;
+			v4.y = tampon.x-1;
+			depart = tampon;
 			printf("v4\n ");
 	}
 }
