@@ -83,6 +83,7 @@ void lancer1v1() {
 					gestion_tour(&ordre_action,&NbTour,carte,&gagnant);
 				}
 					printf("le joueur %i a gagné en %i tours\n",gagnant,NbTour);
+                                        sleep(3);
 					
 				break;
 			case 4: break;

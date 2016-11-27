@@ -3,7 +3,7 @@
 #define GLOBAL_H
 
 #include<stdio.h>
-
+#include <unistd.h>
 /**
 *\file global.h
 *\brief Ce fichier contient les définitions de chaque structure globales utilisées dans le projet
