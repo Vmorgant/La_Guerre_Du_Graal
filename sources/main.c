@@ -21,7 +21,6 @@
 void clearScreen(){
 	system("clear");
 }
-
 void lancer1v1() {
 
 	t_liste equipe1;
@@ -67,11 +66,7 @@ void lancer1v1() {
 
 		printf(" 3- Lancer Partie.\n");
 		printf("\n 4- /!\\Retour /!\\.\n");
-<<<<<<< HEAD
 		printf("\nVotre choix : ");
-=======
-		printf("Votre choix : ");
->>>>>>> 62ac1709a8dca1cf7a52026eaf9a77263f18ebb9
 		scanf("%d", &choix);
 
 		/* Traitement du choix de l'utilisateur */
