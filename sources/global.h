@@ -87,6 +87,16 @@ typedef struct{t_element * drapeau; t_element * ec;}t_liste;
 typedef struct{int nlignes,ncolonnes;int ** cell;}t_map;
 
 
+
+
+
+
+
+
+
+
+
+
 typedef struct{int x; int y; int cout; int heuristique;}t_noeud;
 /**
 *\struct t_noeud 

@@ -45,7 +45,7 @@ void lancer1v1() {
 		clearScreen();
 		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et 4\n");
 		erreur = faux;
-		printf(" 1- Editer equipe 1.\n\t");
+		printf(" 1- Editer equipe 1.\t\t");
 		if(!liste_vide(&equipe1)) {
 			printf("l'equipe 1 est constituée de : ");
 			afficher(&equipe1);
@@ -55,7 +55,7 @@ void lancer1v1() {
 			printf("(%iPE restant)\n", PE1);
 		}
 
-		printf(" 2- Editer equipe 2.\n\t");
+		printf(" 2- Editer equipe 2.\t\t");
 		if(!liste_vide(&equipe2)) {
 			printf("l'equipe 2 est constituée de : ");
 			afficher(&equipe2);
@@ -66,8 +66,8 @@ void lancer1v1() {
 		}
 
 		printf(" 3- Lancer Partie.\n");
-		printf(" 4- /!\\Retour /!\\.\n");
-		printf("Votre choix : ");
+		printf("\n 4- /!\\Retour /!\\.\n");
+		printf("\nVotre choix : ");
 		scanf("%d", &choix);
 
 		/* Traitement du choix de l'utilisateur */
