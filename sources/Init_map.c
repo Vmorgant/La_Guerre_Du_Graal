@@ -2,7 +2,7 @@
 *\file Init_map.c
 *\brief Création de la map
 *\version 1.0
-*\author Victor Morgant  Martin Lebourdais
+*\author Victor Morgant  Martin Lebourdais Corentin Petit
 *\date 14/11/2016
 */
 #include <stdio.h>
@@ -37,8 +37,6 @@ t_map creerMat(){
 
 t_map actumap(t_liste * ordre_action, t_map map){
    //Fontion qui actualise la map en place le perso de l'élement courant
-       	 
-    
     if (ordre_action->ec->personnage.joueur == 1){     
         		if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
         		if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3;

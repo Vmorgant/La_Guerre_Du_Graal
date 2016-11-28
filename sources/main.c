@@ -66,7 +66,7 @@ void lancer1v1() {
 		}
 
 		printf(" 3- Lancer Partie.\n");
-		printf(" 4- /!\\Retour /!\\.\n");
+		printf("\n 4- /!\\Retour /!\\.\n");
 		printf("Votre choix : ");
 		scanf("%d", &choix);
 
@@ -80,7 +80,7 @@ void lancer1v1() {
 				placer(&ordre_action,carte);
 			
 				while (gagnant == 0){
-					gestion_tour(&ordre_action,&NbTour,carte,&gagnant);
+					gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
 				}
 					printf("le joueur %i a gagné en %i tours\n",gagnant,NbTour);
                                         sleep(3);
