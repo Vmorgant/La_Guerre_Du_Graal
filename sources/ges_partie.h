@@ -6,7 +6,8 @@
 *\date 18/11/2016
 */
 
-int Rand_Int(int a, int b);
+int Rand_atq(int degat);
+int Rand_def(int defense );
 void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste *ordre_action);
 void placer(t_liste *ordre_action,t_map carte);
 int est_mort(t_liste *ordre_action,int *gagnant, t_map * carte);

@@ -14,26 +14,26 @@
 #include "Init_map.h"
 
 
-int Rand_Int(int degat){
+float Rand_atq(){
 /**
- * \fn Rand_Int(int a, int b)
- * \brief Fonction renvoyant un nombre compris entre a et b
- * \param int a, int b : bornes de l'intervalles
+ * \fn Rand_Int(int degat)
+ * \brief Fonction renvoyant un nombre aléatoire de degats
+ * \param int degat : degat moyen de l'attaque
+ * \return valeur aleatoire de degat
  */
 	float nombre_aleatoire;
 	srand(time(NULL));
 	int a;
 	nombre_aleatoire = rand()%50;
-	nombre_aleatoire =((75 + nombre_aleatoire )/100) * degat;
-	a = nombre_aleatoire;
-	return a;
+	nombre_aleatoire =((75 + nombre_aleatoire )/100);
+	return nombre_aleatoire;
 }
 
 void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 /**
- * \fn init_partie(t_liste *equipe1,t_liste *equipe2)
- * \brief création de  la liste ordre action avec les personnages triés par initiative
- * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2
+ * \fn init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action)
+ * \brief concaténation des listes des deux équipes et tri par initiative
+ * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2 t_liste * ordre_action : la liste triée par ordre de jeu.
  */
 	t_personnage tampon;
 	int nb_persos, bien_place = faux;
@@ -90,9 +90,9 @@ void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 
 void placer(t_liste *ordre_action,t_map carte){
 /**
- * \fn  placer(t_liste *equipe1,t_liste *equipe2,t_map carte)
+ * \fn  placer(t_liste *ordre_action,t_map carte)
  * \brief Place les personnages des deux équipes sur la carte.
- * \param t_liste *equipe1 : la liste des joueurs de l'équipe 1, t_liste *equipe2 : la liste des joueurs de l'équipe 2,t_map carte : la carte 
+ * \param t_liste * ordre_action : la liste triés par ordre de jeu, t_map carte : la carte 
  */
 	int x, y;
 	
@@ -182,9 +182,10 @@ void placer(t_liste *ordre_action,t_map carte){
 
 int est_mort(t_liste *ordre_action, t_map * carte){
 /**
- * \fn  est_mort(t_liste *ordre_action).
- * \brief Retire le personnage mort de la liste ordre_action
- * \param t_liste *ordre_action : la liste des personnages joués triée 
+ * \fn  est_mort(t_liste *ordre_action,t_map * carte).
+ * \brief Retire le personnage mort de la liste ordre_action, et de la carte.
+ * \param t_liste *ordre_action : la liste des personnages triés par ordre de jeu t_map * carte : la carte.
+ * \return le numéro de l'équipe qui a gagnée.
  */
 	int nbrePerso;
 	int i=0;
@@ -215,11 +216,16 @@ int est_mort(t_liste *ordre_action, t_map * carte){
 		return 1;
 	} else if ( (nb_equipe1 ==0) ){
 		return 2;
-	} return 0;
+	}else return 0;
 	ordre_action->ec = tampon;
 }
 
-void passer(t_liste *ordre_action,int *NbTour,t_map * carte){//passe la main au personnage suivant dans la liste ordre action
+void passer(t_liste *ordre_action,int *NbTour,t_map * carte){
+/**
+ * \fn  passer(t_liste *ordre_action,int *NbTour,t_map * carte)
+ * \brief Passe la main au joueur suivant
+ * \param t_liste *ordre_action : la liste des personnages joués triée int *NbTour le nombre ,t_map * carte
+ */
     if(ordre_action->ec->succ!=ordre_action->drapeau)
 	suivant(ordre_action);
       
@@ -233,66 +239,98 @@ void passer(t_liste *ordre_action,int *NbTour,t_map * carte){//passe la main au 
 
 
 void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *gagnant,t_map * carte){
-	/**exécute l’attaque de l’attaquant vers la cible et actualise les stats et l’état si un personnage meurt appelle la fonction mort*/
-	
+/**
+ * \fn  attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *gagnant,t_map * carte)
+ * \brief exécute l’attaque de l’attaquant vers la cible et actualise les stats et l’état si un personnage meurt appelle la fonction mort
+ * \param t_liste *ordre_action : la liste des personnages triés int *NbTour le nombre de tour de jeu ,t_map * carte
+ */
+	t_element * tampon;
 	int degats = (attaque.mul_ATQ) * (ordre_action->ec->personnage.classe.ATQ);
 	int def=cible.classe.DEF;
-	degats=Rand_Int(degats)-def;
-        if(degats <0){
-         degats=0;   
-        }
-	t_element * tampon = ordre_action->ec;
-	en_tete(ordre_action);
-	while( ordre_action->ec->personnage.x != cible.x || ordre_action->ec->personnage.y != cible.y){
-		suivant(ordre_action);
-        }
-  	printf("%s %i (%iPA) coords : %i %i \n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur,ordre_action->ec->personnage.pa,ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);
-    ordre_action->ec->personnage.pv = (ordre_action->ec->personnage.pv) - degats;
-    printf("Le personnage %s perd %i points de vie !\n",ordre_action->ec->personnage.classe.nom,degats);
-    sleep(0.5);
-	if ( ordre_action->ec->personnage.pv<=0 ){
-		*gagnant=est_mort(ordre_action, carte);
+	float stock, blocage, pare = faux;
+	
+	stock = Rand_atq();
+
+	/*calcul des degats */
+	if(stock <= 0.78)
+		blocage = 0.35;
+	else if(stock > 0.78 && stock < 1.15){
+		blocage = 0.08 * ((100 + def*10)/ 100);
+	}else if(stock >= 1.15)
+		blocage = 0;
+	
+	pare = (blocage*100) + (rand()%100);
+
+	if(pare >= 100)
+		printf("L'Attaque a ete bloquee !\n");
+	else {
+		tampon = ordre_action->ec;
+		en_tete(ordre_action);
+		while( ordre_action->ec->personnage.x != cible.x || ordre_action->ec->personnage.y != cible.y){
+			suivant(ordre_action);
+		}
+		degats = stock*degats -def;
+		ordre_action->ec->personnage.pv = (ordre_action->ec->personnage.pv) - degats;
+
+  		printf("%s %i coords : %i %i \n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur,ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);
+ 	 	printf("Le personnage %s perd %i points de vie !\n",ordre_action->ec->personnage.classe.nom,degats);
+
+		if ( ordre_action->ec->personnage.pv<=0 ){
+			*gagnant=est_mort(ordre_action, carte);
+		}
+		ordre_action->ec= tampon;  
 	}
-	ordre_action->ec= tampon;  
+
+   	sleep(0.5);
 }
 
 int test_obstacle(t_personnage attaquant,t_personnage cible,int portee, t_map * carte){
+/**
+ * \fn  test_obstacle(t_personnage attaquant,t_personnage cible,int portee, t_map * carte)
+ * \brief vérifie s'il y a un obstacle entre l'attaquant et la cible
+ * \param t_liste *ordre_action : la liste des personnages triés int *NbTour le nombre de tour de jeu ,t_map * carte
+ * \return vrai s'il y a un obstacle
+ */
 	int j;
 	if(portee >1){
 		if(attaquant.x == cible.x){
 			if(cible.y > attaquant.y){
 				for(j=1+attaquant.y; j < cible.y; j++){
 					if(carte->cell[attaquant.x][j]!=0)
-						return faux;		
+						return vrai;		
 				}
-				return vrai;
+				return faux;
 			}else if(cible.y < attaquant.y){
 				for(j=cible.y+1; j < attaquant.y; j++){
 					if(carte->cell[attaquant.x][j]!=0)
-						return faux;		
+						return vrai;		
 				}
-				return vrai;
+				return faux;
 			}
 		} else if (attaquant.y == cible.y){
 			if(cible.x > attaquant.x){
 				for(j=1+attaquant.x; j < cible.x; j++){
 					if(carte->cell[j][attaquant.y]!=0)
-						return faux;		
+						return vrai;		
 				}
-				return vrai;
+				return faux;
 			}else if(cible.x < attaquant.x){
 				for(j=cible.x+1; j < attaquant.x; j++){
 					if(carte->cell[j][attaquant.y]!=0)
-						return faux;		
+						return vrai;		
 				}
-				return vrai;
+				return faux;
 			}
 		}		
-	}else if (portee ==1) return vrai;
+	}else if (portee ==1) return faux;
 }
 
 void choix_cible(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map * carte){
-	/**choix de la cible de l'attaque */ 
+/**
+ * \fn choix_cible(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map * carte)
+ * \brief donne la liste des cible qui sont a porté de l'attaquant
+ * \param t_liste *ordre_action : la liste des personnages triés int *NbTour le nombre de tour de jeu ,t_map * carte
+ */ 
 	
 	int portee = attaque.portee;
 	int i=0;
@@ -307,7 +345,7 @@ void choix_cible(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map * 
 			if (tampon->personnage.joueur != ordre_action -> ec -> personnage.joueur ){
 				if( ( (tampon->personnage.x+portee >= ordre_action->ec->personnage.x && tampon->personnage.x-portee <= ordre_action->ec->personnage.x ) &&  tampon->personnage.y == ordre_action->ec->personnage.y) 
 					||( (tampon->personnage.y+portee >= ordre_action->ec->personnage.y && tampon->personnage.y-portee <= ordre_action->ec->personnage.y) && tampon->personnage.x == ordre_action->ec->personnage.x) ){
-					if(test_obstacle(tampon->personnage,ordre_action->ec->personnage,portee,carte)){
+					if(!test_obstacle(tampon->personnage,ordre_action->ec->personnage,portee,carte)){
 						i++;
 						cible[i]= ordre_action->ec->personnage;
 						printf("%i - %s PV : %i DEF : %i \t x : %i y : %i\n",i,cible[i].classe.nom,cible[i].pv,cible[i].classe.DEF,cible[i].x,cible[i].y);
