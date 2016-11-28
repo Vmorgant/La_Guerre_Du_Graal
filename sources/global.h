@@ -110,7 +110,6 @@ typedef struct{t_element_noeud * drapeau_noeud; t_element_noeud * ec_noeud;}t_li
 
 
 
-
 #define nb_classes 7
 extern t_classe tab_classes[nb_classes];
 

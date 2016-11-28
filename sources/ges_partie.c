@@ -20,10 +20,13 @@ int Rand_Int(int degat){
  * \brief Fonction renvoyant un nombre compris entre a et b
  * \param int a, int b : bornes de l'intervalles
  */
-	int nombre_aleatoire;
+	float nombre_aleatoire;
 	srand(time(NULL));
-    nombre_aleatoire = degat * ( (75 + (rand()%50)) / 100 );
-	return nombre_aleatoire;
+	int a;
+	nombre_aleatoire = rand()%50;
+	nombre_aleatoire =((75 + nombre_aleatoire )/100) * degat;
+	a = nombre_aleatoire;
+	return a;
 }
 
 void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
