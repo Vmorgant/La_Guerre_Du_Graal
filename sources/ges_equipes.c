@@ -63,8 +63,8 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 		for(i =1; i <= nb_classes; i++){
 			printf(" %i - %s (%iPE)\n", i, tab_classes[i-1].nom, tab_classes[i-1].coutPE);
 		}
-		printf(" %i - /!\\ Retour /!\\\n", nb_classes+1);
-		printf("Votre choix : ");
+		printf("\n %i - /!\\ Retour /!\\\n", nb_classes+1);
+		printf("\nVotre choix : ");
 		scanf("%d",&choix);
 
 		/* Traitement du choix de l'utilisateur */
@@ -100,7 +100,8 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
 			printf(" %i - Enlever %s de l'equipe %i\n", i, perso.classe.nom, joueur);
 			suivant(equipe);
 		}
-		printf("Votre choix : ");
+		printf("\n %i - /!\\ Retour /!\\\n", nb_persos+1);
+		printf("\nVotre choix : ");
 		scanf("%d", &choix);
 		/* Traitement du choix de l'utilisateur */
 		if(choix >= 1 && choix <= nb_persos){
@@ -110,7 +111,7 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
 			}
 			* PE += equipe->ec->personnage.classe.coutPE;
 			oter_elt(equipe);
-		}else printf("Personnage non existant.\n");
+		}else if (choix == nb_persos+1) printf("Personnage non existant.\n");
 	}else printf("L'equipe %i est déjà vide.\n", joueur);
 	printf("l'equipe %i est constituée de : ", joueur);
 	afficher(equipe);
@@ -143,8 +144,8 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
 		printf(" 1 - Ajouter un personnage dans l'equipe %i\n", joueur);
 		printf(" 2 - Supprimer un personnage de l'equipe %i\n", joueur);
 		printf(" 3 - Valider l'équipe %i\n", joueur);
-		printf(" 4 - /!\\ Annuler /!\\\n");
-		printf("Votre choix : ");
+		printf("\n 4 - /!\\ Annuler /!\\\n");
+		printf("\nVotre choix : ");
 		scanf("%d",&choix);
 
 		/* Traitement du choix de l'utilisateur */
