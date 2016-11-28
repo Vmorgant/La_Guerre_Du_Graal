@@ -42,6 +42,7 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 	t_noeud v4 = {x,y-1,0,0};
 	int tete,queue,nb_valeurs;
 	
+	
 	while (depart.x != objx){
 		
 		if (map.cell[v1.x][v1.y] == 0 && (distance(v1.x,v1.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
@@ -120,7 +121,7 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 				*taille = (*taille) + 1;
 			
 		}
-		else if (map.cell[v4.x][v4.y] == 0 && (distance(v4.x,v4.y,objx,objy)<distance(depart.x,depart.y,objx,objy))){	
+		else if (map.cell[v4.x][v4.y] == 0 && (distance(v4.x,v4.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
 				
 				tampon = v4;
 				if (v4.x != 9) {
@@ -178,7 +179,7 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 			
 			
 		}
-		else if (map.cell[v2.x][v2.y] == 0 && (distance(v2.x,v2.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
+		else if (map.cell[v2.x][v2.y] == 0 && (distance(v2.x,v2.y,objx,objy)< distance(depart.x,depart.y,objx,objy))){	
 				
 				
 				
@@ -233,7 +234,7 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 				*taille = (*taille) + 1;
 			
 		}
-		else if (map.cell[v4.x][v4.y] == 0 && (distance(v4.x,v4.y,objx,objy)<distance(depart.x,depart.y,objx,objy))){	
+		else if (map.cell[v4.x][v4.y] == 0 && (distance(v4.x,v4.y,objx,objy)< distance(depart.x,depart.y,objx,objy))){	
 				
 				tampon = v4;
 				if (v4.x != 9) {
@@ -258,7 +259,38 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 				*taille = (*taille) + 1;
 			
 		}
-		if (depart.x == objx && depart.y == objy) break;
+		else{
+			depart = v1;
+			if (map.cell[v1.x][v1.y] != 0){
+				depart = v2;
+				if (map.cell[v2.x][v2.y] != 0){
+					depart = v3;
+					if (map.cell[v3.x][v3.y] != 0){						
+							depart = v4;
+						}
+					}
+				}
+			ajouter(depart);
+			*taille = (*taille) + 1;
+			if (v4.x != 9) {
+				v1.x = tampon.x+1;
+				v1.y = tampon.y;
+			}
+			if (v4.y != 9) {
+				v2.x = tampon.x;
+				v2.y = tampon.y+1;
+			}
+			if (v4.x != 0) {
+				v3.x = tampon.x-1;
+				v3.y = tampon.y;
+			}
+			if (v4.y != 0){
+				v4.x = tampon.x;
+				v4.y = tampon.y-1;
+			}	
+		}
+
+
 		
 	}
 	
@@ -295,7 +327,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 	scanf("%i",&yobj);
 	printf("\n");
 	printf("%i,%i\n",xobj,yobj);
-	
+	map=actumap(ordre_action, map);
 	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);
 		
 	int cout = taille;
@@ -310,6 +342,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						printf("Rentrez un y pour le déplacement :\n");
 						scanf("%i",&yobj);
 						printf("\n");
+						map=actumap(ordre_action, map);
 						pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);
 						cout = taille;
 					}
@@ -320,6 +353,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						printf("Rentrez un y pour le déplacement :\n");
 						scanf("%i",&yobj);
 						printf("\n");
+						map=actumap(ordre_action, map);
 						pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);
 						cout = taille;
 					}
@@ -336,6 +370,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 								printf("Rentrez un y pour le déplacement :\n");
 								scanf("%i",&yobj);
 								printf("\n");
+								map=actumap(ordre_action, map);
 								pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);	
 								cout = taille;
 								printf("%i PA\n", cout);
@@ -352,6 +387,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 				ordre_action->ec->personnage.y = cell.y;
 				map=actumap(ordre_action, map);
 				ordre_action->ec->personnage.pa = ordre_action->ec->personnage.pa - cout;
+				clearScreen();
 				afficherMat(map);
 				sleep(1);
 			}
