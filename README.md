@@ -7,3 +7,15 @@ Règle du jeu : 2 équipes composées de différents personnages combattent (le
 La partie se termine lorsque l’une des équipes est éliminée(tous les personnages sont morts).
 Les personnage sont basés sur l’anime  et le jeu Fate Stay Night.
 
+Installation :
+
+Sous Linux : 
+
+git clone  https://github.com/Vmorgant/Projet_Algo
+
+Pour la SDL : 
+
+cd SDL2
+./configure
+make
+make install
