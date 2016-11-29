@@ -44,13 +44,15 @@ void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 	en_tete(equipe2);
 
 	while(!hors_liste(equipe2)){
-	/**On ajoute les deux équipes dans ordre action en prenant un joueur sur */
+	/**On ajoute les deux équipes dans ordre action en alternant les equipes */
 		valeur_elt(equipe2, &tampon);
 		ajout_droit(ordre_action,tampon);
 		suivant(equipe2);
 
 		suivant(ordre_action);
 		suivant(ordre_action);
+		if(ordre_action->ec == ordre_action->drapeau)
+			en_queue(ordre_action);
 
 	}
 
@@ -200,6 +202,9 @@ int est_mort(t_liste *ordre_action, t_map * carte){
 	
 	(*carte).cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 0;
         oter_elt(ordre_action);
+	
+ 	clearScreen();
+ 	afficherMat(*carte);
 
         en_tete(ordre_action);
 
@@ -436,7 +441,7 @@ void gestion_tour(t_liste *ordre_action,int *NbTour,t_map * carte,int *gagnant){
 	en_tete(ordre_action);
 	while(*gagnant ==0){
                 printf("Tour %i \n",*NbTour);
-                if ((*NbTour) >1){
+                if ((*NbTour) >1 && ordre_action->ec->personnage.pa < 20){
                 	ordre_action->ec->personnage.pa += (ordre_action->ec->personnage.classe.gainPA);
                 }
 		choix_action(ordre_action,carte,gagnant,NbTour);
