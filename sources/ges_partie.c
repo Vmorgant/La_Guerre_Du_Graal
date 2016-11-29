@@ -44,13 +44,15 @@ void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 	en_tete(equipe2);
 
 	while(!hors_liste(equipe2)){
-	/**On ajoute les deux équipes dans ordre action en prenant un joueur sur */
+	/**On ajoute les deux équipes dans ordre action en alternant les equipes */
 		valeur_elt(equipe2, &tampon);
 		ajout_droit(ordre_action,tampon);
 		suivant(equipe2);
 
 		suivant(ordre_action);
 		suivant(ordre_action);
+		if(ordre_action->ec == ordre_action->drapeau)
+			en_queue(ordre_action);
 
 	}
 
