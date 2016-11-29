@@ -146,7 +146,312 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 				*taille = (*taille) + 1;
 			
 		}
-		if (depart.x == objx && depart.y == objy) break;
+		else{
+			if (map.cell[v1.x][v1.y] != 0){
+				if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+					tampon = v2;
+					if (v2.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v2.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v2.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v2.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				
+				}
+				
+				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+					tampon = v4;
+					if (v4.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v4.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v4.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v4.y != 0){
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+					
+					tampon = v3;
+					if (v3.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v3.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v3.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v3.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				else printf("Déplacement impossible \n");
+			}
+			
+			if (map.cell[v2.x][v2.y] != 0){
+
+				if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+					tampon = v1;
+					if (v1.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v1.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v1.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v1.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+					tampon = v3;
+					if (v3.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v3.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v3.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v3.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+					tampon = v4;
+					if (v4.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v4.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v4.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v4.y != 0){
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				else printf("Déplacement impossible \n");
+			}
+
+			if (map.cell[v3.x][v3.y] != 0){
+				if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+					tampon = v2;
+					if (v2.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v2.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v2.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v2.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+					tampon = v4;
+					if (v4.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v4.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v4.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v4.y != 0){
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+					tampon = v1;
+					if (v1.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v1.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v1.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v1.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				else printf("Déplacement impossible \n");
+			}
+
+			if (map.cell[v4.x][v4.y] != 0){
+				if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+					tampon = v1;
+					if (v1.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v1.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v1.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v1.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+					tampon = v3;
+					if (v3.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v3.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v3.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v3.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+					tampon = v2;
+					if (v2.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v2.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v2.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v2.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				else printf("Déplacement impossible \n");
+
+			}
+
+		}
 	
 	}
 	while (depart.y != objy){
@@ -260,37 +565,313 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 			
 		}
 		else{
-			depart = v1;
 			if (map.cell[v1.x][v1.y] != 0){
-				depart = v2;
-				if (map.cell[v2.x][v2.y] != 0){
-					depart = v3;
-					if (map.cell[v3.x][v3.y] != 0){						
-							depart = v4;
-						}
+				if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+					tampon = v2;
+					if (v2.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
 					}
+					if (v2.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v2.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v2.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				
 				}
-			ajouter(depart);
-			*taille = (*taille) + 1;
-			if (v4.x != 9) {
-				v1.x = tampon.x+1;
-				v1.y = tampon.y;
+				
+				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+					tampon = v4;
+					if (v4.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v4.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v4.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v4.y != 0){
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+					
+					tampon = v3;
+					if (v3.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v3.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v3.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v3.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				else printf("Déplacement impossible \n");
 			}
-			if (v4.y != 9) {
-				v2.x = tampon.x;
-				v2.y = tampon.y+1;
+			
+			if (map.cell[v2.x][v2.y] != 0){
+
+				if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+					tampon = v1;
+					if (v1.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v1.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v1.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v1.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+					tampon = v3;
+					if (v3.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v3.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v3.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v3.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+					tampon = v4;
+					if (v4.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v4.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v4.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v4.y != 0){
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				else printf("Déplacement impossible \n");
 			}
-			if (v4.x != 0) {
-				v3.x = tampon.x-1;
-				v3.y = tampon.y;
+
+			if (map.cell[v3.x][v3.y] != 0){
+				if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+					tampon = v2;
+					if (v2.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v2.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v2.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v2.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+					tampon = v4;
+					if (v4.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v4.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v4.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v4.y != 0){
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+					tampon = v1;
+					if (v1.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v1.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v1.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v1.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				else printf("Déplacement impossible \n");
 			}
-			if (v4.y != 0){
-				v4.x = tampon.x;
-				v4.y = tampon.y-1;
-			}	
+
+			if (map.cell[v4.x][v4.y] != 0){
+				if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+					tampon = v3;
+					if (v3.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v3.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v3.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v3.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+					
+					
+					tampon = v1;
+					if (v1.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v1.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v1.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v1.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				
+				else if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+					tampon = v2;
+					if (v2.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v2.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v2.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v2.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+					printf("%i,%i\n",depart.x,depart.y);
+					ajouter(depart);
+					*taille = (*taille) + 1;
+				}
+				else printf("Déplacement impossible \n");
+
+			}
+
 		}
-
-
 		
 	}
 	
