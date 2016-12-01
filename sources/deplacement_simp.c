@@ -44,111 +44,36 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 	
 	
 	while (depart.x != objx){
+		if (depart.x != 0 && depart.y != 0 && depart.x !=9 && depart.y != 9){
 		
-		if (map.cell[v1.x][v1.y] == 0 && (distance(v1.x,v1.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
+			if (map.cell[v1.x][v1.y] == 0 && (distance(v1.x,v1.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
 				
-				tampon = v1;
-				if (v1.x != 9) {
-					v1.x = tampon.x+1;
-					v1.y = tampon.y;
-				}
-				if (v1.y != 9) {
-					v2.x = tampon.x;
-					v2.y = tampon.y+1;
-				}
-				if (v1.x != 0) {
-					v3.x = tampon.x-1;
-					v3.y = tampon.y;
-				}
-				if (v1.y != 0) {
-					v4.x = tampon.x;
-					v4.y = tampon.y-1;
-				}
-				depart = tampon;
-				printf("%i,%i\n",depart.x,depart.y);
-				ajouter(depart);
-				*taille = (*taille) + 1;
+					tampon = v1;
+					if (v1.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v1.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v1.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v1.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+				
+					ajouter(depart);
+					*taille = (*taille) + 1;
 				
 			
-		}
-		else if (map.cell[v2.x][v2.y] == 0 && (distance(v2.x,v2.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
+			}
+			else if (map.cell[v2.x][v2.y] == 0 && (distance(v2.x,v2.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
 				
-				tampon = v2;
-				if (v2.x != 9) {
-					v1.x = tampon.x+1;
-					v1.y = tampon.y;
-				}
-				if (v2.y != 9) {
-					v2.x = tampon.x;
-					v2.y = tampon.y+1;
-				}
-				if (v2.x != 0) {
-					v3.x = tampon.x-1;
-					v3.y = tampon.y;
-				}
-				if (v2.y != 0) {
-					v4.x = tampon.x;
-					v4.y = tampon.y-1;
-				}
-				depart = tampon;
-				printf("%i,%i\n",depart.x,depart.y);
-				ajouter(depart);
-				*taille = (*taille) + 1;
-			
-		}
-		else if (map.cell[v3.x][v3.y] == 0 && (distance(v3.x,v3.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
-				
-				tampon = v3;
-				if (v3.x != 9) {
-					v1.x = tampon.x+1;
-					v1.y = tampon.y;
-				}
-				if (v3.y != 9) {
-					v2.x = tampon.x;
-					v2.y = tampon.y+1;
-				}
-				if (v3.x != 0) {
-					v3.x = tampon.x-1;
-					v3.y = tampon.y;
-				}
-				if (v3.y != 0) {
-					v4.x = tampon.x;
-					v4.y = tampon.y-1;
-				}
-				depart = tampon;
-				printf("%i,%i\n",depart.x,depart.y);
-				ajouter(depart);
-				*taille = (*taille) + 1;
-			
-		}
-		else if (map.cell[v4.x][v4.y] == 0 && (distance(v4.x,v4.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
-				
-				tampon = v4;
-				if (v4.x != 9) {
-					v1.x = tampon.x+1;
-					v1.y = tampon.y;
-				}
-				if (v4.y != 9) {
-					v2.x = tampon.x;
-					v2.y = tampon.y+1;
-				}
-				if (v4.x != 0) {
-					v3.x = tampon.x-1;
-					v3.y = tampon.y;
-				}
-				if (v4.y != 0){
-					v4.x = tampon.x;
-					v4.y = tampon.y-1;
-				}
-				depart = tampon;
-				printf("%i,%i\n",depart.x,depart.y);
-				ajouter(depart);
-				*taille = (*taille) + 1;
-			
-		}
-		else{
-			if (map.cell[v1.x][v1.y] != 0){
-				if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
 					tampon = v2;
 					if (v2.x != 9) {
 						v1.x = tampon.x+1;
@@ -167,13 +92,38 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 						v4.y = tampon.y-1;
 					}
 					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
+				
 					ajouter(depart);
 					*taille = (*taille) + 1;
+			
+			}
+			else if (map.cell[v3.x][v3.y] == 0 && (distance(v3.x,v3.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
 				
-				}
+					tampon = v3;
+					if (v3.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v3.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v3.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v3.y != 0) {
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
 				
-				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+					ajouter(depart);
+					*taille = (*taille) + 1;
+			
+			}
+			else if (map.cell[v4.x][v4.y] == 0 && (distance(v4.x,v4.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
+				
 					tampon = v4;
 					if (v4.x != 9) {
 						v1.x = tampon.x+1;
@@ -192,459 +142,345 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 						v4.y = tampon.y-1;
 					}
 					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
+				
 					ajouter(depart);
 					*taille = (*taille) + 1;
-				}
-				
-				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+			
+			}
+			else{
+				if (map.cell[v1.x][v1.y] != 0){
+					if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+						tampon = v2;
+						if (v2.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v2.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v2.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v2.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
 					
-					tampon = v3;
-					if (v3.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
+						ajouter(depart);
+						*taille = (*taille) + 1;
+				
 					}
-					if (v3.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
+				
+					else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+						tampon = v4;
+						if (v4.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v4.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v4.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v4.y != 0){
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
 					}
-					if (v3.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
+				
+					else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+					
+						tampon = v3;
+						if (v3.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v3.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v3.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v3.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
 					}
-					if (v3.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
+					else{
+						printf("Déplacement impossible \n");
+						break;
 					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
 				}
-				else printf("Déplacement impossible \n");
-			}
 			
-			if (map.cell[v2.x][v2.y] != 0){
+				if (map.cell[v2.x][v2.y] != 0){
 
-				if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
-					tampon = v1;
-					if (v1.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
+					if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+						tampon = v1;
+						if (v1.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v1.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v1.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v1.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
 					}
-					if (v1.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
+				
+					else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+						tampon = v3;
+						if (v3.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v3.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v3.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v3.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+				
+						ajouter(depart);
+						*taille = (*taille) + 1;
 					}
-					if (v1.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
+				
+					else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+						tampon = v4;
+						if (v4.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v4.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v4.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v4.y != 0){
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
 					}
-					if (v1.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
+					else{
+						printf("Déplacement impossible \n");
+						break;
 					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
+				}
+
+				if (map.cell[v3.x][v3.y] != 0){
+					if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+						tampon = v2;
+						if (v2.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v2.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v2.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v2.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+						tampon = v4;
+						if (v4.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v4.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v4.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v4.y != 0){
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+						tampon = v1;
+						if (v1.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v1.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v1.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v1.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+					else{
+						printf("Déplacement impossible \n");
+						break;
+					}
+				}
+
+				if (map.cell[v4.x][v4.y] != 0){
+					if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+						tampon = v1;
+						if (v1.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v1.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v1.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v1.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+						tampon = v3;
+						if (v3.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v3.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v3.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v3.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+						tampon = v2;
+						if (v2.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v2.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v2.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v2.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+					else{
+						printf("Déplacement impossible \n");
+						break;
+					}
+
 				}
 				
-				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
-					tampon = v3;
-					if (v3.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v3.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v3.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v3.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				
-				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
-					tampon = v4;
-					if (v4.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v4.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v4.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v4.y != 0){
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				else printf("Déplacement impossible \n");
 			}
-
-			if (map.cell[v3.x][v3.y] != 0){
-				if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
-					tampon = v2;
-					if (v2.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v2.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v2.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v2.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				
-				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
-					tampon = v4;
-					if (v4.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v4.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v4.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v4.y != 0){
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				
-				else if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
-					tampon = v1;
-					if (v1.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v1.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v1.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v1.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				else printf("Déplacement impossible \n");
-			}
-
-			if (map.cell[v4.x][v4.y] != 0){
-				if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
-					tampon = v1;
-					if (v1.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v1.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v1.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v1.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				
-				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
-					tampon = v3;
-					if (v3.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v3.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v3.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v3.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				
-				else if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
-					tampon = v2;
-					if (v2.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v2.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v2.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v2.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				else printf("Déplacement impossible \n");
-
-			}
-
 		}
+		else{ depart.x = objx;
+		  depart.y = objy;
+		  ajouter(depart);
+		  *taille = (*taille) + 5;
+		}
+			
 	
 	}
 	while (depart.y != objy){
 		
 		
-		if (map.cell[v1.x][v1.y] == 0 && (distance(v1.x,v1.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
-				
-				tampon = v1;
-				if (v1.x != 9) {
-					v1.x = tampon.x+1;
-					v1.y = tampon.y;
-				}
-				if (v1.y != 9) {
-					v2.x = tampon.x;
-					v2.y = tampon.y+1;
-				}
-				if (v1.x != 0) {
-					v3.x = tampon.x-1;
-					v3.y = tampon.y;
-				}
-				if (v1.y != 0) {
-					v4.x = tampon.x;
-					v4.y = tampon.y-1;
-				}
-				depart = tampon;
-				printf("%i,%i\n",depart.x,depart.y);
-				ajouter(depart);
-				*taille = (*taille) + 1;
-			
-			
-			
-		}
-		else if (map.cell[v2.x][v2.y] == 0 && (distance(v2.x,v2.y,objx,objy)< distance(depart.x,depart.y,objx,objy))){	
-				
-				
-				
-				tampon = v2;
-				if (v2.x != 9) {
-					v1.x = tampon.x+1;
-					v1.y = tampon.y;
-				}
-				if (v2.y != 9) {
-					v2.x = tampon.x;
-					v2.y = tampon.y+1;
-				}
-				if (v2.x != 0) {
-					v3.x = tampon.x-1;
-					v3.y = tampon.y;
-				}
-				if (v2.y != 0) {
-					v4.x = tampon.x;
-					v4.y = tampon.y-1;
-				}
-				depart = tampon;
-				printf("%i,%i\n",depart.x,depart.y);
-				ajouter(depart);
-				*taille = (*taille) + 1;
-			
-		}
-		else if (map.cell[v3.x][v3.y] == 0 && (distance(v3.x,v3.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
-				
-				
-				
-				tampon = v3;
-				if (v3.x != 9) {
-					v1.x = tampon.x+1;
-					v1.y = tampon.y;
-				}
-				if (v3.y != 9) {
-					v2.x = tampon.x;
-					v2.y = tampon.y+1;
-				}
-				if (v3.x != 0) {
-					v3.x = tampon.x-1;
-					v3.y = tampon.y;
-				}
-				if (v3.y != 0) {
-				
-					v4.x = tampon.x;
-					v4.y = tampon.y-1;
-				}
-				depart = tampon;
-				printf("%i,%i\n",depart.x,depart.y);
-				ajouter(depart);
-				*taille = (*taille) + 1;
-			
-		}
-		else if (map.cell[v4.x][v4.y] == 0 && (distance(v4.x,v4.y,objx,objy)< distance(depart.x,depart.y,objx,objy))){	
-				
-				tampon = v4;
-				if (v4.x != 9) {
-					v1.x = tampon.x+1;
-					v1.y = tampon.y;
-				}
-				if (v4.y != 9) {
-					v2.x = tampon.x;
-					v2.y = tampon.y+1;
-				}
-				if (v4.x != 0) {
-					v3.x = tampon.x-1;
-					v3.y = tampon.y;
-				}
-				if (v4.y != 0){
-					v4.x = tampon.x;
-					v4.y = tampon.y-1;
-				}
-				depart = tampon;
-				printf("%i,%i\n",depart.x,depart.y);
-				ajouter(depart);
-				*taille = (*taille) + 1;
-			
-		}
-		else{
-			if (map.cell[v1.x][v1.y] != 0){
-				if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
-					tampon = v2;
-					if (v2.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v2.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v2.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v2.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				
-				}
-				
-				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
-					tampon = v4;
-					if (v4.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v4.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v4.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v4.y != 0){
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				
-				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
-					
-					tampon = v3;
-					if (v3.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v3.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v3.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v3.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				else printf("Déplacement impossible \n");
-			}
-			
-			if (map.cell[v2.x][v2.y] != 0){
+		if (depart.x != 0 && depart.y != 0 && depart.x !=9 && depart.y != 9){
 
-				if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+			if (map.cell[v1.x][v1.y] == 0 && (distance(v1.x,v1.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
+				
 					tampon = v1;
 					if (v1.x != 9) {
 						v1.x = tampon.x+1;
@@ -663,63 +499,17 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 						v4.y = tampon.y-1;
 					}
 					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
 				
-				else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
-					tampon = v3;
-					if (v3.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v3.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v3.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v3.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
 					ajouter(depart);
 					*taille = (*taille) + 1;
-				}
-				
-				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
-					tampon = v4;
-					if (v4.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v4.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v4.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v4.y != 0){
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
-				else printf("Déplacement impossible \n");
+			
+			
+			
 			}
-
-			if (map.cell[v3.x][v3.y] != 0){
-				if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+			else if (map.cell[v2.x][v2.y] == 0 && (distance(v2.x,v2.y,objx,objy)< distance(depart.x,depart.y,objx,objy))){	
+				
+				
+				
 					tampon = v2;
 					if (v2.x != 9) {
 						v1.x = tampon.x+1;
@@ -738,12 +528,41 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 						v4.y = tampon.y-1;
 					}
 					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
+				
 					ajouter(depart);
 					*taille = (*taille) + 1;
-				}
+			
+			}
+			else if (map.cell[v3.x][v3.y] == 0 && (distance(v3.x,v3.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
 				
-				else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+				
+				
+					tampon = v3;
+					if (v3.x != 9) {
+						v1.x = tampon.x+1;
+						v1.y = tampon.y;
+					}
+					if (v3.y != 9) {
+						v2.x = tampon.x;
+						v2.y = tampon.y+1;
+					}
+					if (v3.x != 0) {
+						v3.x = tampon.x-1;
+						v3.y = tampon.y;
+					}
+					if (v3.y != 0) {
+				
+						v4.x = tampon.x;
+						v4.y = tampon.y-1;
+					}
+					depart = tampon;
+				
+					ajouter(depart);
+					*taille = (*taille) + 1;
+			
+			}
+			else if (map.cell[v4.x][v4.y] == 0 && (distance(v4.x,v4.y,objx,objy)< distance(depart.x,depart.y,objx,objy))){	
+				
 					tampon = v4;
 					if (v4.x != 9) {
 						v1.x = tampon.x+1;
@@ -762,123 +581,345 @@ void pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,
 						v4.y = tampon.y-1;
 					}
 					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
 				
-				else if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
-					tampon = v1;
-					if (v1.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v1.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v1.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v1.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
 					ajouter(depart);
 					*taille = (*taille) + 1;
-				}
-				else printf("Déplacement impossible \n");
+			
 			}
-
-			if (map.cell[v4.x][v4.y] != 0){
-				if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
-					tampon = v3;
-					if (v3.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
-					}
-					if (v3.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v3.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v3.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
+			else{
+				if (map.cell[v1.x][v1.y] != 0){
+					if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+						tampon = v2;
+						if (v2.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v2.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v2.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v2.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+					
+						ajouter(depart);
+						*taille = (*taille) + 1;
 				
-				else if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+					}
+				
+					else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+						tampon = v4;
+						if (v4.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v4.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v4.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v4.y != 0){
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+					
+						tampon = v3;
+						if (v3.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v3.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v3.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v3.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+					else{
+						printf("Déplacement impossible \n");
+						break;
+					}
+				}
+			
+				if (map.cell[v2.x][v2.y] != 0){
+
+					if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+						tampon = v1;
+						if (v1.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v1.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v1.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v1.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+						tampon = v3;
+						if (v3.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v3.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v3.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v3.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+						tampon = v4;
+						if (v4.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v4.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v4.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v4.y != 0){
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+					else{
+						printf("Déplacement impossible \n");
+						break;
+					}
+				}
+
+				if (map.cell[v3.x][v3.y] != 0){
+					if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+						tampon = v2;
+						if (v2.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v2.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v2.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v2.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v4.x][v4.y] == 0 && depart.y != 0){
+						tampon = v4;
+						if (v4.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v4.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v4.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v4.y != 0){
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
+						tampon = v1;
+						if (v1.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v1.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v1.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v1.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+					else{
+						printf("Déplacement impossible \n");
+						break;
+					}
+				}
+
+				if (map.cell[v4.x][v4.y] != 0){
+					if(map.cell[v3.x][v3.y] == 0 && depart.x != 0){
+						tampon = v3;
+						if (v3.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v3.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v3.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v3.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
+					}
+				
+					else if(map.cell[v1.x][v1.y] == 0 && depart.x != 9){
 					
 					
-					tampon = v1;
-					if (v1.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
+						tampon = v1;
+						if (v1.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v1.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v1.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v1.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
 					}
-					if (v1.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
-					}
-					if (v1.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v1.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
-				}
 				
-				else if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
-					tampon = v2;
-					if (v2.x != 9) {
-						v1.x = tampon.x+1;
-						v1.y = tampon.y;
+					else if(map.cell[v2.x][v2.y] == 0 && depart.y != 9){
+						tampon = v2;
+						if (v2.x != 9) {
+							v1.x = tampon.x+1;
+							v1.y = tampon.y;
+						}
+						if (v2.y != 9) {
+							v2.x = tampon.x;
+							v2.y = tampon.y+1;
+						}
+						if (v2.x != 0) {
+							v3.x = tampon.x-1;
+							v3.y = tampon.y;
+						}
+						if (v2.y != 0) {
+							v4.x = tampon.x;
+							v4.y = tampon.y-1;
+						}
+						depart = tampon;
+						
+						ajouter(depart);
+						*taille = (*taille) + 1;
 					}
-					if (v2.y != 9) {
-						v2.x = tampon.x;
-						v2.y = tampon.y+1;
+					else{
+						printf("Déplacement impossible \n");
+						break;
 					}
-					if (v2.x != 0) {
-						v3.x = tampon.x-1;
-						v3.y = tampon.y;
-					}
-					if (v2.y != 0) {
-						v4.x = tampon.x;
-						v4.y = tampon.y-1;
-					}
-					depart = tampon;
-					printf("%i,%i\n",depart.x,depart.y);
-					ajouter(depart);
-					*taille = (*taille) + 1;
+
 				}
-				else printf("Déplacement impossible \n");
 
 			}
 
+		}else { depart.x = objx;
+			depart.y = objy;
+			ajouter(depart);
+			*taille = (*taille) + 5;
 		}
 		
-	}
+	    }	
 	
 	
-	
+}	
+   
 
-}
+
 
 int cout_dep(t_liste * ordre_action){
 	int cout;
@@ -886,7 +927,7 @@ int cout_dep(t_liste * ordre_action){
 	return cout;
 }
 
-void deplacement_simp(t_liste *ordre_action,t_map map){
+int deplacement_simp(t_liste *ordre_action,t_map map){
 /**
  * \fn  deplacement_simp(t_liste *ordre_action,t_map map)
  * \brief Version simplifiée de la fonction déplacement.
@@ -894,7 +935,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
  */
     int xobj;
     int yobj;
-    int sortie;
+    int sortie=0;
     char choix;
     int taille = 0;
     t_noeud chemin[50];
@@ -907,15 +948,15 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 	printf("Rentrez un y pour le déplacement :\n");
 	scanf("%i",&yobj);
 	printf("\n");
-	printf("%i,%i\n",xobj,yobj);
+	
 	map=actumap(ordre_action, map);
 	pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);
 		
-	int cout = taille;
+	int cout = taille /* * cout_dep(ordre_action)*/;
 	printf("%i PA\n", taille);
 	
 	
-			while (xobj > 9 || yobj > 9 || xobj < 0 || yobj < 0 || map.cell[xobj][yobj]!=0 || cout > ordre_action->ec->personnage.pa || sortie == 1){
+			while ((xobj > 9 || yobj > 9 || xobj < 0 || yobj < 0 || map.cell[xobj][yobj]!=0 || cout > ordre_action->ec->personnage.pa) && sortie == 0){
 				if (map.cell[xobj][yobj] != 0){															//On teste si la case est vide
 						printf("La case est déjà occupée\n");
 						printf("Rentrez un x pour le déplacement :\n");
@@ -924,10 +965,12 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						scanf("%i",&yobj);
 						printf("\n");
 						map=actumap(ordre_action, map);
+						taille = 0;
+						initfile();
 						pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);
-						cout = taille;
+						cout = taille/* * cout_dep(ordre_action)*/;
 					}
-				if (xobj > 9 || yobj > 9 || xobj < 0 || yobj < 0){
+				else if (xobj > 9 || yobj > 9 || xobj < 0 || yobj < 0){
 						printf("Les coordonnées doivent-être des entiers compris entre 0 et 9\n");
 						printf("Rentrez un x pour le déplacement :\n");
 						scanf("%i",&xobj);
@@ -935,10 +978,13 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						scanf("%i",&yobj);
 						printf("\n");
 						map=actumap(ordre_action, map);
+						taille = 0;
+						initfile();
 						pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);
-						cout = taille;
+						cout = taille/* * cout_dep(ordre_action)*/;
 					}
-				else{
+				else if (cout > ordre_action->ec->personnage.pa){
+						
 						printf("Vous n'avez pas assez de PA\n");
 						printf("Voulez vous toujours vous déplacer\n");
 						printf("o/n : ");
@@ -946,18 +992,20 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						printf("\n");
 						switch (choix){
 							case 'o':
+								taille = 0;
 								printf("Rentrez un x pour le déplacement :\n");
 								scanf("%i",&xobj);
 								printf("Rentrez un y pour le déplacement :\n");
 								scanf("%i",&yobj);
 								printf("\n");
 								map=actumap(ordre_action, map);
+								initfile();
 								pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);	
-								cout = taille;
+								cout = taille/* * cout_dep(ordre_action)*/;
 								printf("%i PA\n", cout);
 								break ;
-							case 'n' : sortie = 1 ;break;
-						}
+							case 'n' : return 0; ;break;
+						};
 						
 				}
 			}
@@ -967,11 +1015,11 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 				ordre_action->ec->personnage.x = cell.x;
 				ordre_action->ec->personnage.y = cell.y;
 				map=actumap(ordre_action, map);
-				ordre_action->ec->personnage.pa = ordre_action->ec->personnage.pa - cout;
 				clearScreen();
 				afficherMat(map);
 				sleep(1);
 			}
+			ordre_action->ec->personnage.pa = ordre_action->ec->personnage.pa - cout;
 		
 
 }
