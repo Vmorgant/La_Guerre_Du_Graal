@@ -392,11 +392,11 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
  */ 
 	
 	int portee = attaque.portee;
-	int i = 0, j, k;
+	int i, j, k = 0;
 	int choix;
 
-	t_personnage  cible[4][portee];
-	int nbcibles[4] = {0, 0, 0, 0,};
+	t_personnage  cible[4][portee], tabchoix[4][portee];
+	int nbcibles[4] = {0, 0, 0, 0,}, nbchoix[4] = {0, 0, 0, 0,};
     
 	t_element * tampon = ordre_action->ec;
 
@@ -406,7 +406,7 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 			while( (ordre_action->ec->personnage.x != tampon->personnage.x || ordre_action->ec->personnage.y != tampon->personnage.y + i) && !hors_liste(ordre_action) ){
 				suivant(ordre_action);
 			}
-			if(!hors_liste(ordre_action)) {
+			if(!hors_liste(ordre_action) && (ordre_action->ec->personnage.joueur != tampon->personnage.joueur) ) {
 				cible[0][nbcibles[0]]= ordre_action->ec->personnage;
 				nbcibles[0]++;
 			}
@@ -416,7 +416,7 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 			while( (ordre_action->ec->personnage.x != tampon->personnage.x || ordre_action->ec->personnage.y != tampon->personnage.y - i) && !hors_liste(ordre_action) ){
 				suivant(ordre_action);
 			}
-			if(!hors_liste(ordre_action)) {
+			if(!hors_liste(ordre_action) && (ordre_action->ec->personnage.joueur != tampon->personnage.joueur) ) {
 				cible[1][nbcibles[1]]= ordre_action->ec->personnage;
 				nbcibles[1]++;
 			}
@@ -426,7 +426,7 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 			while( (ordre_action->ec->personnage.x != tampon->personnage.x + i || ordre_action->ec->personnage.y != tampon->personnage.y) && !hors_liste(ordre_action) ){
 				suivant(ordre_action);
 			}
-			if(!hors_liste(ordre_action)) {
+			if(!hors_liste(ordre_action) && (ordre_action->ec->personnage.joueur != tampon->personnage.joueur) ) {
 				cible[2][nbcibles[2]]= ordre_action->ec->personnage;
 				nbcibles[2]++;
 			}
@@ -436,22 +436,24 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 			while( (ordre_action->ec->personnage.x != tampon->personnage.x - i || ordre_action->ec->personnage.y != tampon->personnage.y) && !hors_liste(ordre_action) ){
 				suivant(ordre_action);
 			}
-			if(!hors_liste(ordre_action)) {
+			if(!hors_liste(ordre_action) && (ordre_action->ec->personnage.joueur != tampon->personnage.joueur) ) {
 				cible[3][nbcibles[3]]= ordre_action->ec->personnage;
 				nbcibles[3]++;
 			}
 		}
 	}
 
-	k=0;
-	for(i = 0; i < 4; i++) {		
-		//if(nbcibles[i] > 0) {
+	for(i = 0; i < 4; i++) {	
+		if(nbcibles[i] > 0) {
 			k++;
+			nbchoix[k-1] = nbcibles[i];
 			printf("%i - ", k);
-			for(j = 0; j < nbcibles[i]; j++)
-				printf("%s, %i PV x : %i y : %i //\t", cible[i][j].classe.nom, cible[i][j].pv,  cible[i][j].x, cible[i][j].y );
+			for(j = 0; j < nbcibles[i]; j++){
+				printf("%s, %i PV x : %i y : %i ||\t", cible[i][j].classe.nom, cible[i][j].pv,  cible[i][j].x, cible[i][j].y );
+				tabchoix[k-1][j] = cible[i][j];
+			}
 			printf("\n");
-		//}
+		}
 	}
 
 	printf("\n%i - Annuler \n",  k+1);
@@ -460,9 +462,9 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 	
 	printf("Votre choix : ");
 	scanf("%d",&choix);
-	if(choix < k+1 && choix > 0){
-		for( i = 0; i < nbcibles[choix-1]; i++ ){
-			attaquer(ordre_action,cible[choix-1][i], attaque, gagnant, carte);	
+	if(choix > 0 && choix < k+1) {
+		for( j = 0; j < nbchoix[choix-1]; j++ ){
+			attaquer(ordre_action, tabchoix[choix-1][j], attaque, gagnant, carte);
 		}
 		ordre_action->ec->personnage.pa -= attaque.coutPA;
 	}
