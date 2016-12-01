@@ -46,21 +46,21 @@ void lancer1v1() {
 		erreur = faux;
 		printf(" 1- Editer equipe 1.\t\t");
 		if(!liste_vide(&equipe1)) {
-			printf("l'equipe 1 est constituée de : ");
+			printf("L'equipe 1 est constituée de : ");
 			afficher(&equipe1);
 			printf("(%iPE restant)\n", PE1);
 		}else {
-			printf("l'equipe 1 est vide.");		
+			printf("L'equipe 1 est vide.");		
 			printf("(%iPE restant)\n", PE1);
 		}
 
 		printf(" 2- Editer equipe 2.\t\t");
 		if(!liste_vide(&equipe2)) {
-			printf("l'equipe 2 est constituée de : ");
+			printf("L'equipe 2 est constituée de : ");
 			afficher(&equipe2);
 			printf("(%iPE restant)\n", PE2);
 		}else {
-			printf("l'equipe 2 est vide.");		
+			printf("L'equipe 2 est vide.");		
 			printf("(%iPE restant)\n", PE2);
 		}
 
@@ -74,25 +74,49 @@ void lancer1v1() {
 			case 1: init_equipe(&equipe1, 1, &PE1); break;
 			case 2: init_equipe(&equipe2, 2, &PE2);  break;
 			case 3: if(liste_vide(&equipe2) || liste_vide(&equipe2) ){
-					printf("Erreur les deux equipes ne doivent pas etre vide\n");
+					printf("Erreur les deux equipes ne doivent pas etre vides\n");
+					sleep(1);
 					break;
 				}
 				else{
 					afficherMat(carte);
 					init_partie(&equipe1,&equipe2,&ordre_action);
 					placer(&ordre_action,carte);
-			
 					while (gagnant == 0){
 						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
 					}
-					printf("le joueur %i a gagné en %i tours\n",gagnant,NbTour);
-                                        sleep(3);
+					printf("Le joueur %i a gagné en %i tours\n",gagnant,NbTour);
+                                        sleep(1);
+
+					en_queue(&ordre_action);
+					en_queue(&equipe1);
+					en_queue(&equipe2);
+					while(!liste_vide(&ordre_action)){
+						oter_elt(&ordre_action);
+					}
+					if(!liste_vide(&equipe1)){
+						while(!liste_vide(&equipe1)){
+							oter_elt(&equipe1);
+						}
+					}
+					else if(!liste_vide(&equipe2)){
+						while(!liste_vide(&equipe2)){
+							oter_elt(&equipe2);
+						}
+					}
+					carte=creerMat();
+					PE1=10;
+					PE2=10;
+					NbTour=1;
+					gagnant=0;
+					break;
 				}
 			default: erreur = vrai;
 		}
 	
 	}while(choix!=4);
 }
+
 
 int main(void) {
 	int choix, erreur = faux;
