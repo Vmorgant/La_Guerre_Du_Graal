@@ -7,15 +7,25 @@ Règle du jeu : 2 équipes composées de différents personnages combattent (le
 La partie se termine lorsque l’une des équipes est éliminée(tous les personnages sont morts).
 Les personnage sont basés sur l’anime  et le jeu Fate Stay Night.
 
-Installation :
+#Installation de la SDL : 
 
-Sous Linux : 
+*Télécharger les sources sur le site de la SDL http://libsdl.org/download-2.0.php et les extraire.
 
-git clone  https://github.com/Vmorgant/Projet_Algo
+*Ouvrir un terminal.
 
-Pour la SDL : 
+*Entrez la commande "cd" pour vous placer à la racine puis "mkdir SDL" pour créer le dossier de la SDL.
 
-cd SDL2
-./configure
-make
-make install
+*Déplacer vers le dossier où vous avez extrait l'archive.
+
+*Entrez la commande : 
+
+-"./configure " si vous êtes super-utilisateur
+-"./configure --prefix=$HOME/SDL" sinon 
+
+*Entrez la commande "make"
+
+*Entrez la commande :
+
+-"sudo make install" si vous êtes super-utilisateur
+-"make install" sinon
+
