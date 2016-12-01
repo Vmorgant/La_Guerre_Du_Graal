@@ -69,11 +69,7 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 
 		/* Traitement du choix de l'utilisateur */
 		if(choix >= 1 && choix <= nb_classes){
-			for (i = 1; i <= nb_classes; i++){
-				if(choix == i){
-					creer_perso(equipe, tab_classes[i-1], joueur, PE);
-				}
-			}
+			creer_perso(equipe, tab_classes[choix-1], joueur, PE);
 		} else if (choix < 1 || choix > nb_classes+1) erreur = vrai;
 
 	} while (choix != nb_classes+1);
@@ -88,7 +84,6 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
  * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant.
  */
 	int nb_persos = 0, i, choix;
-	t_personnage perso;
 
 	compter_elts(equipe, &nb_persos);
 	
@@ -96,8 +91,7 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
 		en_tete(equipe);
 		/* Affichage du menu et saisie du choix */
 		for (i =1; i <= nb_persos; i++){
-			valeur_elt(equipe, &perso);
-			printf(" %i - Enlever %s de l'equipe %i\n", i, perso.classe.nom, joueur);
+			printf(" %i - Enlever %s de l'equipe %i\n", i, equipe->ec->personnage.classe.nom, joueur);
 			suivant(equipe);
 		}
 		printf("\n %i - /!\\ Retour /!\\\n", nb_persos+1);
