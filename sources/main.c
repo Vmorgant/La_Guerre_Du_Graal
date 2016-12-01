@@ -73,7 +73,7 @@ void lancer1v1() {
 		switch(choix) {
 			case 1: init_equipe(&equipe1, 1, &PE1); break;
 			case 2: init_equipe(&equipe2, 2, &PE2);  break;
-			case 3: if(liste_vide(&equipe2) || liste_vide(&equipe2) ){
+			case 3: if(liste_vide(&equipe1) || liste_vide(&equipe2) ){
 					printf("Erreur les deux equipes ne doivent pas etre vides\n");
 					sleep(1);
 					break;
@@ -87,28 +87,7 @@ void lancer1v1() {
 					}
 					printf("Le joueur %i a gagné en %i tours\n",gagnant,NbTour);
                                         sleep(1);
-
-					en_queue(&ordre_action);
-					en_queue(&equipe1);
-					en_queue(&equipe2);
-					while(!liste_vide(&ordre_action)){
-						oter_elt(&ordre_action);
-					}
-					if(!liste_vide(&equipe1)){
-						while(!liste_vide(&equipe1)){
-							oter_elt(&equipe1);
-						}
-					}
-					else if(!liste_vide(&equipe2)){
-						while(!liste_vide(&equipe2)){
-							oter_elt(&equipe2);
-						}
-					}
-					carte=creerMat();
-					PE1=10;
-					PE2=10;
-					NbTour=1;
-					gagnant=0;
+					choix = 4;
 					break;
 				}
 			default: erreur = vrai;
