@@ -73,18 +73,29 @@ void lancer1v1() {
 		switch(choix) {
 			case 1: init_equipe(&equipe1, 1, &PE1); break;
 			case 2: init_equipe(&equipe2, 2, &PE2);  break;
-			case 3: 
-				afficherMat(carte);
-				init_partie(&equipe1,&equipe2,&ordre_action);
-				placer(&ordre_action,carte);
-			
-				while (gagnant == 0){
-					gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
+			case 3: if(liste_vide(&equipe2) || liste_vide(&equipe2) ){
+					printf("Erreur les deux equipes ne doivent pas etre vide\n");
+					break;
 				}
+				else{
+					afficherMat(carte);
+					init_partie(&equipe1,&equipe2,&ordre_action);
+					placer(&ordre_action,carte);
+			
+					while (gagnant == 0){
+						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
+					}
 					printf("le joueur %i a gagné en %i tours\n",gagnant,NbTour);
                                         sleep(3);
-					
-				break;
+					free(carte);
+					while(!liste_vide(ordre_action){
+						en_queue(ordre_action);
+						oter_elt(ordre_action);
+					}
+					NbTour=1;
+					gagnant=0;
+					break;
+				};
 			case 4: break;
 			default: erreur = vrai;
 		}
