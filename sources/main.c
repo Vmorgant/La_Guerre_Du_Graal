@@ -87,16 +87,7 @@ void lancer1v1() {
 					}
 					printf("le joueur %i a gagné en %i tours\n",gagnant,NbTour);
                                         sleep(3);
-					free(carte);
-					while(!liste_vide(ordre_action){
-						en_queue(ordre_action);
-						oter_elt(ordre_action);
-					}
-					NbTour=1;
-					gagnant=0;
-					break;
-				};
-			case 4: break;
+				}
 			default: erreur = vrai;
 		}
 	
