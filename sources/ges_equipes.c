@@ -33,7 +33,11 @@ void creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE) {
 		en_queue(equipe);
 		ajout_droit(equipe, perso);
 		
-	} else printf("Vous n'avez pas les PE requis pour ajouter ce personnage !\n");
+	}	
+	else {
+	printf("Vous n'avez pas les PE requis pour ajouter ce personnage !\n");
+	sleep(1);
+	}
 }
 
 void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
