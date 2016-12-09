@@ -12,6 +12,7 @@
 #include "listes_ptr.h"
 #include "deplacement_simp.h"
 #include "Init_map.h"
+#include "save.h"
 
 
 float Rand_atq(){
@@ -134,8 +135,6 @@ void placer(t_liste *ordre_action,t_map carte){
 			}
 			ordre_action->ec->personnage.x = x;
 			ordre_action->ec->personnage.y = y;
-			carte=actumap(ordre_action, carte);
-			afficherMat(carte);
 			suivant(ordre_action);
 		}
 		if((ordre_action->ec->personnage.joueur)==2){													//Placer un personnage pour l'equipe 2;
@@ -171,12 +170,9 @@ void placer(t_liste *ordre_action,t_map carte){
 		
 			ordre_action->ec->personnage.x = x;
 			ordre_action->ec->personnage.y = y;
-			carte=actumap(ordre_action, carte);
-			afficherMat(carte);
 			suivant(ordre_action);
 		}
 	}
-
 }
 
 int est_mort(t_liste *ordre_action, t_map * carte){
@@ -197,15 +193,15 @@ int est_mort(t_liste *ordre_action, t_map * carte){
 		suivant(ordre_action);
         }	
 	
-	(*carte).cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 0;
         oter_elt(ordre_action);
 	
  	clearScreen();
+
+	*carte = actumap(ordre_action, *carte);
  	afficherMat(*carte);
 	sleep(1);
 
         en_tete(ordre_action);
-
         while (!hors_liste(ordre_action)){
                 if((ordre_action->ec->personnage.joueur)==1){
 			nb_equipe1++;	
@@ -215,12 +211,14 @@ int est_mort(t_liste *ordre_action, t_map * carte){
 		}
 		suivant(ordre_action);
 	}
-	if ( (nb_equipe2 ==0) ) {
-		return 1;
-	} else if ( (nb_equipe1 ==0) ){
-		return 2;
-	}else return 0;
 	ordre_action->ec = tampon;
+	if ( (nb_equipe2 == 0) ) {
+		return 1;
+	}
+	if ( (nb_equipe1 == 0) ){
+		return 2;
+	}
+	return 0;
 }
 
 void passer(t_liste *ordre_action,int *NbTour,t_map * carte){
@@ -279,7 +277,7 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
  	 	printf("Le personnage %s perd %i points de vie !\n",ordre_action->ec->personnage.classe.nom,degats);
 
 		if ( ordre_action->ec->personnage.pv<=0 ){
-			*gagnant=est_mort(ordre_action, carte);
+			*gagnant = est_mort(ordre_action, carte);
 		}
 		ordre_action->ec= tampon;  
 	}
@@ -504,18 +502,20 @@ void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte){
 
 void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour){
 	int choix;
-	do{	
+	do{
 		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);		
 		printf("\nMenu :\n");
 		printf(" 1 - Deplacer\n");
 		printf(" 2 - Attaquer\n");
 		printf(" 3 - Passer\n");
+		printf(" 4 - Sauvegarder et quitter\n");
 		printf("\nVotre choix : ");
 		scanf("%d",&choix);
 		switch(choix){	
 			case 1: deplacement_simp(ordre_action,*carte); break;
 			case 2: choix_competence(ordre_action,gagnant,carte); break;
 			case 3: break;
+			case 4: quitter_partie(ordre_action, *NbTour); break;
 			default: printf("Erreur: votre choix doit etre compris entre 1 et 3\n");
 		}
 	} while((choix != 3) && *gagnant == 0);

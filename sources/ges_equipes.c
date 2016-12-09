@@ -53,7 +53,7 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 		clearScreen();
 		/* Affichage du menu et saisie d'une classe */
 		printf("Choisissez une classe : \n\n");
-		if(erreur) printf("Erreur: votre choix doit être compris entre  et %i\n", nb_classes+1);
+		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et %i\n", nb_classes+1);
 		erreur = faux;
 		if(!liste_vide(equipe)) {
 			printf("l'equipe %i est constituée de : ", joueur);
