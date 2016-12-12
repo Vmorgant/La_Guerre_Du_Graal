@@ -531,16 +531,16 @@ int deplacement_simp(t_liste *ordre_action,t_map map, char** mretour){
 
 			
 			if(xobj > map.nlignes-1 || yobj > map.ncolonnes-1 || xobj < 0 || yobj < 0){
-				strcpy(*mretour,"Coordonnées hors map\n");
+				strcpy(*mretour,"\tCoordonnées hors map\n");
 				return 0;
 			}
 			if (map.cell[xobj][yobj] != 0){		//On teste si la case est vide
-				strcpy(*mretour,"La case est déjà occupée\n");
+				strcpy(*mretour,"\tLa case est déjà occupée\n");
 				return 0;
 			}
 		
 			if (cout > ordre_action->ec->personnage.pa && erreur == 2){
-				strcpy(*mretour,"Vous n'avez pas assez de PA\n");
+				strcpy(*mretour,"\tVous n'avez pas assez de PA\n");
 				return 0;
 			}
 						
@@ -564,14 +564,14 @@ int deplacement_simp(t_liste *ordre_action,t_map map, char** mretour){
 					clearScreen();
 					afficherMat(map);
 					usleep(300000);
-					strcpy(*mretour,"Déplacement réussi\n");
+					strcpy(*mretour,"\tDéplacement réussi\n");
 					return 1;
 					break ;
 				case 1 : 
 					map=actumap(ordre_action, map);
 					clearScreen();
 					afficherMat(map);				
-					strcpy(*mretour,"Déplacement impossible, vous êtes encerclés\n");
+					strcpy(*mretour,"\tDéplacement impossible, vous êtes encerclés\n");
 					usleep(300000);
 					return 0;
 					break ;
@@ -589,7 +589,7 @@ int deplacement_simp(t_liste *ordre_action,t_map map, char** mretour){
 					ordre_action->ec->personnage.pa = ordre_action->ec->personnage.pa - cout;
 					assert(ordre_action->ec->personnage.x == xobj);
 					assert(ordre_action->ec->personnage.y == yobj);
-					strcpy(*mretour,"Déplacement réussi\n");
+					strcpy(*mretour,"\tDéplacement réussi\n");
 					return 1;
 					break;
 
