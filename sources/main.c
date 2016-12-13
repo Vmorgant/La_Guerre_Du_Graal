@@ -6,7 +6,7 @@
 *\date 11/11/2016
 */
 #include<stdio.h>
-#include<stdlib.h> 
+#include<stdlib.h>
 #include <unistd.h>
 #include "global.h"
 #include"ges_equipes.h"
@@ -29,7 +29,7 @@ void lancer1v1() {
 
 	int choix, erreur = faux;
 	int NbTour=1;
-	int gagnant=0; 
+	int gagnant=0;
 	int PE1 = 10;
 	int PE2 = 10;
 
@@ -37,7 +37,7 @@ void lancer1v1() {
 	init_liste(&equipe1);
 	init_liste(&equipe2);
 	init_liste(&ordre_action);
-	
+
 	/* Affichage du menu et saisie du choix */
 	do  {
 		clearScreen();
@@ -54,7 +54,7 @@ void lancer1v1() {
 			afficher(&equipe1);
 			printf("(%iPE restant)\n", PE1);
 		}else {
-			printf("L'equipe 1 est vide.");		
+			printf("L'equipe 1 est vide.");
 			printf("(%iPE restant)\n", PE1);
 		}
 
@@ -64,7 +64,7 @@ void lancer1v1() {
 			afficher(&equipe2);
 			printf("(%iPE restant)\n", PE2);
 		}else {
-			printf("L'equipe 2 est vide.");		
+			printf("L'equipe 2 est vide.");
 			printf("(%iPE restant)\n", PE2);
 		}
 
@@ -80,16 +80,16 @@ void lancer1v1() {
 			case 2: init_equipe(&equipe2, 2, &PE2);  break;
 			case 3: if(choix_save(&ordre_action, &NbTour)) {
 					carte = actumap(&ordre_action,carte);
-					afficherMat(carte, &ordre_action);
+					afficherMat(carte);
 					while (gagnant == 0){
 						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
 					}
 					printf("Le joueur %i a gagné en %i tours\n",gagnant,NbTour);
 		                               sleep(1);
 					choix = 5;
-				} else { 
-					printf("erreur : Cette sauvegarde est vide\n"); 
-					sleep(1); 
+				} else {
+					printf("erreur : Cette sauvegarde est vide\n");
+					sleep(1);
 				}
 				break;
 			case 4: if(liste_vide(&equipe1) || liste_vide(&equipe2) ){
@@ -97,11 +97,11 @@ void lancer1v1() {
 					sleep(1);
 					break;
 				}
-				else{			
+				else{
 					init_partie(&equipe1,&equipe2,&ordre_action);
 					placer(&ordre_action,carte);
 					carte=actumap(&ordre_action, carte);
-					afficherMat(carte, &ordre_action);
+					afficherMat(carte);
 					while (gagnant == 0){
 						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
 					}
@@ -112,17 +112,17 @@ void lancer1v1() {
 				}
 			default: erreur = vrai;
 		}
-	
+
 	}while(choix!=5);
 }
 
 
 int main(void) {
 	int choix, erreur = faux;
-	
-	do {		
-		clearScreen();	
-	
+
+	do {
+		clearScreen();
+
 		printf("Menu :\n");
 		if(erreur) {
 			couleur("31");
@@ -131,7 +131,7 @@ int main(void) {
 		} else printf("\n");
 		erreur = faux;
 		/* Affichage du menu et saisie du choix */
-		
+
 		printf(" 1 - Mode Duel\n");
 		printf(" 2 - Credits\n");
 		printf(" 3 - Quitter\n");
@@ -145,7 +145,7 @@ int main(void) {
 			case 3: break;
 			default: erreur = vrai;
 		}
-	
+
 	}
 	while(choix!=3);
 
