@@ -12,4 +12,4 @@
 #include "liste_chemin.h"
 #include "Init_map.h"
 
-int deplacement_simp(t_liste *ordre_action,t_map map, char** mretour);
+void deplacement_simp(t_liste *ordre_action,t_map map);

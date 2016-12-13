@@ -41,7 +41,12 @@ void lancer1v1() {
 	/* Affichage du menu et saisie du choix */
 	do  {
 		clearScreen();
-		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et 4\n");
+		printf("Menu :\n");
+		if(erreur) {
+			couleur("31");
+			printf("\tErreur: votre choix doit être compris entre 1 et 4\n");
+			couleur("0");
+		}else printf("\n");
 		erreur = faux;
 		printf(" 1- Editer equipe 1.\t\t");
 		if(!liste_vide(&equipe1)) {
@@ -65,7 +70,7 @@ void lancer1v1() {
 
 		printf(" 3- Charger une sauvegarde.\n");
 		printf(" 4- Lancer Partie.\n");
-		printf("\n 5- /!\\Retour /!\\.\n");
+		printf("\n 5- Retour.\n");
 		printf("\nVotre choix : ");
 		scanf("%d", &choix);
 
@@ -75,7 +80,7 @@ void lancer1v1() {
 			case 2: init_equipe(&equipe2, 2, &PE2);  break;
 			case 3: if(choix_save(&ordre_action, &NbTour)) {
 					carte = actumap(&ordre_action,carte);
-					afficherMat(carte);
+					afficherMat(carte, &ordre_action);
 					while (gagnant == 0){
 						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
 					}
@@ -96,7 +101,7 @@ void lancer1v1() {
 					init_partie(&equipe1,&equipe2,&ordre_action);
 					placer(&ordre_action,carte);
 					carte=actumap(&ordre_action, carte);
-					afficherMat(carte);
+					afficherMat(carte, &ordre_action);
 					while (gagnant == 0){
 						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
 					}
@@ -119,31 +124,33 @@ int main(void) {
 		clearScreen();	
 	
 		printf("Menu :\n");
-		if(erreur) printf("Erreur: votre choix doit etre compris entre 1 et 5\n");
+		if(erreur) {
+			couleur("31");
+			printf("\tErreur: votre choix doit etre compris entre 1 et 3\n");
+			couleur("0");
+		} else printf("\n");
 		erreur = faux;
 		/* Affichage du menu et saisie du choix */
 		
 		printf(" 1 - Mode Duel\n");
-		printf(" 2 - Mode Arcade\n");
-		printf(" 3 - Mode Histoire\n");
-		printf(" 4 - Credits\n");
-		printf(" 5 - Quitter\n");
-		printf("Votre choix : ");
+		printf(" 2 - Credits\n");
+		printf(" 3 - Quitter\n");
+		printf("\nVotre choix : ");
 		scanf("%d",&choix);
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
 			case 1: lancer1v1(); break;
-			case 2: printf("Ce mode n'est pas encore jouable "); break;
-			case 3: printf("Ce mode n'est pas encore jouable "); break;
-			case 4: printf("Jeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
-			case 5: break;
+			case 2: printf("\nJeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
+			case 3: break;
 			default: erreur = vrai;
 		}
 	
 	}
-	while(choix!=5);
+	while(choix!=3);
 
 	printf("Au revoir !\n");
+	sleep(2);
+	clearScreen();
 	return EXIT_SUCCESS;
 }
