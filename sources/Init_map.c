@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "global.h"
+#include "listes_ptr.h"
 
 #define couleur(param) printf("\033[%sm",param)
 /*   param devant être un const char *, vide (identique à "0") ou formé
@@ -24,10 +25,13 @@ t_map creerMat(){
 	/*Initialisation de la matrice map à 0*/
     t_map matrice;
     int i, j;
-    matrice.cell = (int**) malloc(10 * sizeof(int*));
-    for (i=0; i < 10; i++){
-        matrice.cell[i] = (int*) malloc(10 * sizeof(int));
-        for (j=0; j < 10; j++){    	
+    matrice.nlignes = 10;
+    matrice.ncolonnes = 10;
+
+    matrice.cell = (int**) malloc( matrice.nlignes * sizeof(int*));
+    for (i=0; i < matrice.nlignes; i++){
+        matrice.cell[i] = (int*) malloc(matrice.ncolonnes * sizeof(int));
+        for (j=0; j < matrice.ncolonnes; j++){    	
         	matrice.cell[i][j] = 0;
         }
             
@@ -36,26 +40,40 @@ t_map creerMat(){
 }
 
 t_map actumap(t_liste * ordre_action, t_map map){
-   //Fontion qui actualise la map en place le perso de l'élement courant
-    if (ordre_action->ec->personnage.joueur == 1){     
-        		if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-        		if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 5;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Berserker")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 7;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Lancer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 9;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 11;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 13;
-		}
-    if (ordre_action->ec->personnage.joueur == 2){
-        		if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 2;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 4;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 6;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Berserker")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 8;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Lancer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 10;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 12;
-			if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 14;
+   //Fontion qui actualise la map
+   t_element * tampon = ordre_action->ec;
+   int i, j;
 
-        	}
+   for (i=0; i < map.nlignes; i++){
+        for (j=0; j < map.ncolonnes; j++)  	
+        	map.cell[i][j] = 0;
+   }
+
+   en_tete(ordre_action);
+   while(!hors_liste(ordre_action)){
+	    if (ordre_action->ec->personnage.joueur == 1){     
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 5;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Berserker")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 7;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Lancer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 9;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 11;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 13;
+	    }
+	    if (ordre_action->ec->personnage.joueur == 2){
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 2;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 4;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 6;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Berserker")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 8;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Lancer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 10;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 12;
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 14;
+
+	     }
+	     suivant(ordre_action);
+    }
+
+    ordre_action->ec = tampon;
    
     return map;
 }

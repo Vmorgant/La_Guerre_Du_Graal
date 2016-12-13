@@ -1,6 +1,6 @@
 all:LGDG.out
-LGDG.out: main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o file_chemin.o deplacement_simp.o
-	gcc -o LGDG.out main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o file_chemin.o deplacement_simp.o -lncurses -lm
+LGDG.out: main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o file_chemin.o deplacement_simp.o save.o
+	gcc -o LGDG.out main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o file_chemin.o deplacement_simp.o save.o -lm
 
 main.o: main.c global.h 
 	gcc  -c main.c global.h -lncurses -g -W  
@@ -25,6 +25,9 @@ file_chemin.o: file_chemin.c global.h
 	
 deplacement_simp.o: deplacement_simp.c global.h 
 	gcc -c deplacement_simp.c global.h  -g -W -lm
+
+save.o: save.c global.h 
+	gcc -c save.c global.h  -g -W
 
 clean: 
 	rm -rf *.~ *.o 

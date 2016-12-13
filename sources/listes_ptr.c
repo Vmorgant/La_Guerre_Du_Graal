@@ -12,6 +12,7 @@
 
 void init_liste(t_liste * p) {
 	p->drapeau =  (t_element*)malloc (sizeof(t_element));
+	p->ec =  (t_element*)malloc (sizeof(t_element));
 	p->drapeau -> pred = p->drapeau;
 	p->drapeau -> succ = p->drapeau;
 	p->ec = p->drapeau;
@@ -58,12 +59,10 @@ void modif_elt(t_liste * p, t_personnage v) {
 void oter_elt(t_liste * p) {
 	if(!hors_liste(p)) {
 		t_element * temp;
-		temp = malloc (sizeof(t_element));
+		(p->ec->succ)->pred = p->ec->pred;
+		(p->ec->pred)->succ = p->ec->succ;
 		temp = p->ec;
-		suivant(p);
-		p->ec->pred = temp -> pred;
-		precedent(p);
-		p->ec->succ = temp -> succ;
+		p->ec = p->ec->pred;
 		free(temp);
 	}
 }

@@ -84,7 +84,7 @@ typedef struct{t_element * drapeau; t_element * ec;}t_liste;
 
 
 
-typedef struct{int nlignes,ncolonnes;int ** cell;}t_map;
+typedef struct{int nlignes; int ncolonnes;int ** cell;}t_map;
 
 
 typedef struct{int x; int y; int cout; int heuristique;}t_noeud;
@@ -107,7 +107,11 @@ typedef struct{t_element_noeud * drapeau_noeud; t_element_noeud * ec_noeud;}t_li
 
 
 
-
+typedef struct{t_personnage tab_action[10]; int nbpersos; int nbtours;}t_save;
+/**
+*\struct t_save
+*\brief contient les données d'une sauvegarde
+*/
 
 
 #define nb_classes 7

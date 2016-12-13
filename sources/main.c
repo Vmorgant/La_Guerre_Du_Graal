@@ -8,8 +8,6 @@
 #include<stdio.h>
 #include<stdlib.h> 
 #include <unistd.h>
-#include <curses.h>
-#include <string.h>
 #include "global.h"
 #include"ges_equipes.h"
 #include"listes_ptr.h"
@@ -17,6 +15,7 @@
 #include"Init_map.h"
 #include"deplacement.h"
 #include"ges_partie.h"
+#include "save.h"
 
 void clearScreen(){
 	system("clear");
@@ -64,8 +63,9 @@ void lancer1v1() {
 			printf("(%iPE restant)\n", PE2);
 		}
 
-		printf(" 3- Lancer Partie.\n");
-		printf("\n 4- /!\\Retour /!\\.\n");
+		printf(" 3- Charger une sauvegarde.\n");
+		printf(" 4- Lancer Partie.\n");
+		printf("\n 5- /!\\Retour /!\\.\n");
 		printf("\nVotre choix : ");
 		scanf("%d", &choix);
 
@@ -73,33 +73,47 @@ void lancer1v1() {
 		switch(choix) {
 			case 1: init_equipe(&equipe1, 1, &PE1); break;
 			case 2: init_equipe(&equipe2, 2, &PE2);  break;
-			case 3: if(liste_vide(&equipe1) || liste_vide(&equipe2) ){
+			case 3: if(choix_save(&ordre_action, &NbTour)) {
+					carte = actumap(&ordre_action,carte);
+					afficherMat(carte);
+					while (gagnant == 0){
+						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
+					}
+					printf("Le joueur %i a gagné en %i tours\n",gagnant,NbTour);
+		                               sleep(1);
+					choix = 5;
+				} else { 
+					printf("erreur : Cette sauvegarde est vide\n"); 
+					sleep(1); 
+				}
+				break;
+			case 4: if(liste_vide(&equipe1) || liste_vide(&equipe2) ){
 					printf("Erreur les deux equipes ne doivent pas etre vides\n");
 					sleep(1);
 					break;
 				}
-				else{
-					afficherMat(carte);
+				else{			
 					init_partie(&equipe1,&equipe2,&ordre_action);
 					placer(&ordre_action,carte);
+					carte=actumap(&ordre_action, carte);
+					afficherMat(carte);
 					while (gagnant == 0){
 						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
 					}
 					printf("Le joueur %i a gagné en %i tours\n",gagnant,NbTour);
                                         sleep(1);
-					choix = 4;
+					choix = 5;
 					break;
 				}
 			default: erreur = vrai;
 		}
 	
-	}while(choix!=4);
+	}while(choix!=5);
 }
 
 
 int main(void) {
 	int choix, erreur = faux;
-	//initscr();
 	
 	do {		
 		clearScreen();	
@@ -131,6 +145,5 @@ int main(void) {
 	while(choix!=5);
 
 	printf("Au revoir !\n");
-	//endwin();
 	return EXIT_SUCCESS;
 }
