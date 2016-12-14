@@ -8,6 +8,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "global.h"
 #include "listes_ptr.h"
 #include "deplacement_simp.h"
@@ -88,6 +89,7 @@ void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 	}	
 
 	afficher(ordre_action);
+	printf("\n");
 }
 
 void placer(t_liste *ordre_action,t_map carte){
@@ -198,8 +200,6 @@ int est_mort(t_liste *ordre_action, t_map * carte){
  	clearScreen();
 
 	*carte = actumap(ordre_action, *carte);
- 	afficherMat(*carte);
-	sleep(1);
 
         en_tete(ordre_action);
         while (!hors_liste(ordre_action)){
@@ -228,18 +228,15 @@ void passer(t_liste *ordre_action,int *NbTour,t_map * carte){
  * \param t_liste *ordre_action : la liste des personnages joués triée int *NbTour le nombre ,t_map * carte
  */
     if(ordre_action->ec->succ!=ordre_action->drapeau)
-	suivant(ordre_action);
-      
+	suivant(ordre_action);     
     else{
         en_tete(ordre_action);
         (*NbTour)++;
     }
-    clearScreen();
-    afficherMat(*carte);
 }
 
 
-void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *gagnant,t_map * carte){
+void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *gagnant,t_map * carte, char mretour[100]){
 /**
  * \fn  attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *gagnant,t_map * carte)
  * \brief exécute l’attaque de l’attaquant vers la cible et actualise les stats et l’état si un personnage meurt appelle la fonction mort
@@ -262,9 +259,9 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
 	
 	pare = (blocage*100) + (rand()%100);
 
-	if(pare >= 100)
-		printf("L'Attaque a ete bloquee !\n");
-	else {
+	if(pare >= 100) {
+		sprintf(mretour, "\tL'Attaque a ete bloquee !\n");
+	} else {
 		tampon = ordre_action->ec;
 		en_tete(ordre_action);
 		while( ordre_action->ec->personnage.x != cible.x || ordre_action->ec->personnage.y != cible.y){
@@ -273,16 +270,16 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
 		degats = (stock*degats) -def;
 		ordre_action->ec->personnage.pv = (ordre_action->ec->personnage.pv) - degats;
 
-  		printf("%s %i coords : %i %i \n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur,ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);
- 	 	printf("Le personnage %s perd %i points de vie !\n",ordre_action->ec->personnage.classe.nom,degats);
-
 		if ( ordre_action->ec->personnage.pv<=0 ){
+			sprintf(mretour, "\tLe personnage %s a été vaincu !\n", ordre_action->ec->personnage.classe.nom);
 			*gagnant = est_mort(ordre_action, carte);
+		} else {
+			sprintf(mretour, "\tLe personnage %s perd %i points de vie !\n", ordre_action->ec->personnage.classe.nom, degats);
 		}
+
+
 		ordre_action->ec= tampon;  
 	}
-
-   	sleep(0.5);
 }
 
 int test_obstacle(t_personnage attaquant,t_personnage cible,int portee, t_map * carte){
@@ -326,7 +323,7 @@ int test_obstacle(t_personnage attaquant,t_personnage cible,int portee, t_map * 
 	}else if (portee ==1) return faux;
 }
 
-void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map * carte){
+void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map * carte, char mretour[100]){
 /**
  * \fn choix_cible(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map * carte)
  * \brief donne la liste des cibles qui sont a portée de l'attaquant
@@ -336,8 +333,9 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 	int portee = attaque.portee;
 	int i=0;
 	int j;
-    int choix;
-    t_personnage  cible[4];
+  	int choix, erreur = faux;
+	strcpy(mretour,"\n");
+   	t_personnage  cible[4];
     
 	t_element * tampon = ordre_action->ec;
 	en_tete(ordre_action);
@@ -352,7 +350,6 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 
 					if(!test_obstacle(tampon->personnage,ordre_action->ec->personnage,portee,carte)){
 						cible[i]= ordre_action->ec->personnage;
-						printf("%i - %s PV : %i  x : %i y : %i\n",i+1,cible[i].classe.nom,cible[i].pv,cible[i].x,cible[i].y);
 						i++;
 					}
 				}
@@ -361,26 +358,55 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 		
 		suivant(ordre_action);
 	}
-	printf("%i - Annuler \n",i+1);
-
+	
 	ordre_action->ec = tampon;
 	
-	printf("Votre choix : ");
-	scanf("%d",&choix);
-	
-	if (choix >= 1 && choix <i+1){
-		attaquer(ordre_action,cible[choix-1],attaque,gagnant, carte);
-		ordre_action->ec->personnage.pa -= attaque.coutPA;
-	}
-	if (choix > i+1){
-		printf("Choix indisponible\n");
+	do{
+		clearScreen();
+		afficherMat(*carte);
 
-	}
+		if(ordre_action->ec->personnage.joueur == 1)
+			couleur("34;1");
+		else couleur("31;1");
+		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);
+		
+		couleur("0");
+
+		printf("\nChoix de la cible :\n");
+
+		if(erreur) {
+				couleur("31");
+				printf("\t%s",mretour);
+				couleur("0");
+			} else {
+				couleur("32");
+				printf("\t%s",mretour);
+				couleur("0");
+			}
+			erreur = faux;
+			strcpy(mretour,"\n");
+
+
+		for( j = 0; j < i; j++)
+			printf("%i - %s PV : %i  x : %i y : %i\n",i,cible[j].classe.nom,cible[j].pv,cible[j].x,cible[j].y);
+
+		printf("\n%i - Retour \n",i+1);
 	
+		printf("\nVotre choix : ");
+		scanf("%d",&choix);
 	
+		if (choix >= 1 && choix <i+1){
+			attaquer(ordre_action,cible[choix-1],attaque,gagnant, carte, mretour);
+			ordre_action->ec->personnage.pa -= attaque.coutPA;
+			choix = i+1;
+		} else if (choix > i+1){
+			strcpy(mretour, "Choix indisponible\n");
+			erreur = vrai;
+		}
+	} while(choix != i+1);
 }
 
-void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map * carte){
+void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map * carte, char mretour[100]){
 /**
  * \fn choix_cible(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map * carte)
  * \brief donne la liste des cibles qui sont a portée de l'attaquant
@@ -389,7 +415,8 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 	
 	int portee = attaque.portee;
 	int i, j, k = 0;
-	int choix;
+	int choix, erreur = faux;
+	strcpy(mretour,"\n");
 
 	t_personnage  cible[4][portee], tabchoix[4][portee];
 	int nbcibles[4] = {0, 0, 0, 0,}, nbchoix[4] = {0, 0, 0, 0,};
@@ -439,72 +466,159 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 		}
 	}
 
-	for(i = 0; i < 4; i++) {	
-		if(nbcibles[i] > 0) {
-			k++;
-			nbchoix[k-1] = nbcibles[i];
-			printf("%i - ", k);
-			for(j = 0; j < nbcibles[i]; j++){
-				printf("%s, %i PV x : %i y : %i ||\t", cible[i][j].classe.nom, cible[i][j].pv,  cible[i][j].x, cible[i][j].y );
-				tabchoix[k-1][j] = cible[i][j];
-			}
-			printf("\n");
-		}
-	}
-
-	printf("\n%i - Annuler \n",  k+1);
-
 	ordre_action->ec = tampon;
-	
-	printf("Votre choix : ");
-	scanf("%d",&choix);
-	if(choix > 0 && choix < k+1) {
-		for( j = 0; j < nbchoix[choix-1]; j++ ){
-			attaquer(ordre_action, tabchoix[choix-1][j], attaque, gagnant, carte);
+
+	do{
+		clearScreen();
+		afficherMat(*carte);
+
+		if(ordre_action->ec->personnage.joueur == 1)
+			couleur("34;1");
+		else couleur("31;1");
+		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);
+		
+		couleur("0");
+
+		printf("\nChoix de la cible :\n");
+
+		if(erreur) {
+				couleur("31");
+				printf("\t%s",mretour);
+				couleur("0");
+			} else {
+				couleur("32");
+				printf("\t%s",mretour);
+				couleur("0");
+			}
+			erreur = faux;
+			strcpy(mretour,"\n");
+
+		k = 0;
+		for(i = 0; i < 4; i++) {	
+			if(nbcibles[i] > 0) {
+				k++;
+				nbchoix[k-1] = nbcibles[i];
+				printf("%i - ", k);
+				for(j = 0; j < nbcibles[i]; j++){
+					printf("%s, %i PV x : %i y : %i ||\t", cible[i][j].classe.nom, cible[i][j].pv,  cible[i][j].x, cible[i][j].y );
+					tabchoix[k-1][j] = cible[i][j];
+				}
+				printf("\n");
+			}
 		}
-		ordre_action->ec->personnage.pa -= attaque.coutPA;
-	}
+
+		printf("\n%i - Retour \n",  k+1);
+
+		printf("\nVotre choix : ");
+		scanf("%d",&choix);
+
+		if(choix > 0 && choix < k+1) {
+			for( j = 0; j < nbchoix[choix-1]; j++ ){
+				attaquer(ordre_action, tabchoix[choix-1][j], attaque, gagnant, carte, mretour);
+			}
+			ordre_action->ec->personnage.pa -= attaque.coutPA;
+			choix = k+1;
+		} else if (choix > k+1) {
+			strcpy(mretour, "\tChoix indisponible\n");
+			erreur = vrai;
+		}
+	} while(choix != k+1);
+
 }
 
-void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte){
+void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
 
-	int choix;
-	printf("%s %i (%iPA) coords : %i %i \n",ordre_action->ec->personnage.classe.nom, ordre_action->ec->personnage.joueur,ordre_action->ec->personnage.pa,ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);
-	printf("\nMenu :\n");
-	printf(" 1 - %s (%iPA)\n",ordre_action->ec->personnage.classe.atq1.nom,ordre_action->ec->personnage.classe.atq1.coutPA);
-	printf(" 2 - %s (%iPA)\n",ordre_action->ec->personnage.classe.atq2.nom,ordre_action->ec->personnage.classe.atq2.coutPA);
-	//printf(" 3 - %s\n",ordre_action->ec->personnage->classe->spe->nom);
-	printf("\n 4 - Annuler\n");
-	printf("\nVotre choix : ");
-	scanf("%d",&choix);
-	switch(choix){	
+	int choix, erreur = faux;
+	char mretour[100] = "\n";
 
-			case 1:
-				if(ordre_action->ec->personnage.pa >= ordre_action->ec->personnage.classe.atq1.coutPA) {
-					if(ordre_action,ordre_action->ec->personnage.classe.atq1.type == 1)
-						choix_cible1(ordre_action,ordre_action->ec->personnage.classe.atq1,gagnant,carte );
-					else choix_cible2(ordre_action,ordre_action->ec->personnage.classe.atq1,gagnant,carte );
-				} else printf("Vous n'avez pas assez de PA\n");
-				break;
-			case 2: 
-				if(ordre_action->ec->personnage.pa >= ordre_action->ec->personnage.classe.atq2.coutPA) {
-					if(ordre_action,ordre_action->ec->personnage.classe.atq2.type == 1)
-						choix_cible1(ordre_action,ordre_action->ec->personnage.classe.atq2,gagnant,carte );
-					else choix_cible2(ordre_action,ordre_action->ec->personnage.classe.atq2,gagnant,carte );
-				} else printf("Vous n'avez pas assez de PA\n");
-				break;
-			//case 3: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.ulti); break;
-			case 4 : break;
-			default: printf("Erreur: votre choix doit etre compris entre 1 et 2\n");
-		}
-	
+	do{
+		clearScreen();
+		afficherMat(*carte);
+
+		if(ordre_action->ec->personnage.joueur == 1)
+			couleur("34;1");
+		else couleur("31;1");
+		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);
+		
+		couleur("0");
+
+		printf("\nChoix de la compétence :\n");
+
+		if(erreur) {
+				couleur("31");
+				printf("%s",mretour);
+				couleur("0");
+			} else {
+				couleur("32");
+				printf("%s",mretour);
+				couleur("0");
+			}
+			erreur = faux;
+			strcpy(mretour,"\n");
+
+		printf(" 1 - %s (%iPA)\n",ordre_action->ec->personnage.classe.atq1.nom,ordre_action->ec->personnage.classe.atq1.coutPA);
+		printf(" 2 - %s (%iPA)\n",ordre_action->ec->personnage.classe.atq2.nom,ordre_action->ec->personnage.classe.atq2.coutPA);
+		//printf(" 3 - %s\n",ordre_action->ec->personnage->classe->spe->nom);
+		printf("\n 4 - Retour\n");
+		printf("\nVotre choix : ");
+		scanf("%d",&choix);
+		switch(choix){	
+
+				case 1:
+					if(ordre_action->ec->personnage.pa >= ordre_action->ec->personnage.classe.atq1.coutPA) {
+						if(ordre_action,ordre_action->ec->personnage.classe.atq1.type == 1)
+							choix_cible1(ordre_action,ordre_action->ec->personnage.classe.atq1,gagnant,carte, mretour);
+						else choix_cible2(ordre_action,ordre_action->ec->personnage.classe.atq1,gagnant,carte, mretour);
+					} else {
+						strcpy(mretour, "\tVous n'avez pas assez de PA\n");
+						erreur = vrai;
+					}
+					break;
+				case 2: 
+					if(ordre_action->ec->personnage.pa >= ordre_action->ec->personnage.classe.atq2.coutPA) {
+						if(ordre_action,ordre_action->ec->personnage.classe.atq2.type == 1)
+							choix_cible1(ordre_action,ordre_action->ec->personnage.classe.atq2,gagnant,carte, mretour);
+						else choix_cible2(ordre_action,ordre_action->ec->personnage.classe.atq2,gagnant,carte, mretour);
+					} else {
+						strcpy(mretour, "\tVous n'avez pas assez de PA\n");
+						erreur = vrai;
+					}
+					break;
+				//case 3: choix_cible(ordre_action,carte,ordre_action->ec->personnage.classe.ulti); break;
+				case 4 : break;
+				default: strcpy(mretour,"\tVotre choix doit etre compris entre 1 et 4\n"); erreur = vrai;
+			}
+	} while(choix != 4 && *gagnant == 0);	
 }
 
 void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour){
-	int choix;
+	int choix, erreur = faux;
+	char mretour[100] = "\n";
 	do{
-		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);		
-		printf("\nMenu :\n");
+		clearScreen();
+		afficherMat(*carte);
+
+		if(ordre_action->ec->personnage.joueur == 1)
+			couleur("34;1");
+		else couleur("31;1");
+		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);
+		
+		couleur("0");
+
+		printf("\nChoix de l'action :\n");
+
+		if(erreur) {
+			couleur("31");
+			printf("%s",mretour);
+			couleur("0");
+		} else {
+			couleur("32");
+			printf("%s",mretour);
+			couleur("0");
+		}
+		erreur = faux;
+		strcpy(mretour,"\n");
+
 		printf(" 1 - Deplacer\n");
 		printf(" 2 - Attaquer\n");
 		printf(" 3 - Passer\n");
@@ -516,7 +630,7 @@ void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour)
 			case 2: choix_competence(ordre_action,gagnant,carte); break;
 			case 3: break;
 			case 4: quitter_partie(ordre_action, *NbTour); break;
-			default: printf("Erreur: votre choix doit etre compris entre 1 et 3\n");
+			default: strcpy(mretour,"\tVotre choix doit etre compris entre 1 et 4\n"); erreur = vrai;
 		}
 	} while((choix != 3) && *gagnant == 0);
 	passer(ordre_action,NbTour,carte);
@@ -524,11 +638,9 @@ void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour)
 
 void gestion_tour(t_liste *ordre_action,int *NbTour,t_map * carte,int *gagnant){
 /**Joue le tour suivant*/
-	
-       
+
 	en_tete(ordre_action);
 	while(*gagnant ==0){
-                printf("Tour %i \n",*NbTour);
                 if ((*NbTour) >1 && ordre_action->ec->personnage.pa < 20){
                 	ordre_action->ec->personnage.pa += (ordre_action->ec->personnage.classe.gainPA);
                 }

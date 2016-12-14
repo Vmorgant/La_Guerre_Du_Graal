@@ -6,7 +6,7 @@
 *\date 11/11/2016
 */
 #include<stdio.h>
-#include<stdlib.h> 
+#include<stdlib.h>
 #include <unistd.h>
 #include "global.h"
 #include"ges_equipes.h"
@@ -29,7 +29,7 @@ void lancer1v1() {
 
 	int choix, erreur = faux;
 	int NbTour=1;
-	int gagnant=0; 
+	int gagnant=0;
 	int PE1 = 10;
 	int PE2 = 10;
 
@@ -37,11 +37,16 @@ void lancer1v1() {
 	init_liste(&equipe1);
 	init_liste(&equipe2);
 	init_liste(&ordre_action);
-	
+
 	/* Affichage du menu et saisie du choix */
 	do  {
 		clearScreen();
-		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et 4\n");
+		printf("Menu :\n");
+		if(erreur) {
+			couleur("31");
+			printf("\tErreur: votre choix doit être compris entre 1 et 4\n");
+			couleur("0");
+		}else printf("\n");
 		erreur = faux;
 		printf(" 1- Editer equipe 1.\t\t");
 		if(!liste_vide(&equipe1)) {
@@ -49,7 +54,7 @@ void lancer1v1() {
 			afficher(&equipe1);
 			printf("(%iPE restant)\n", PE1);
 		}else {
-			printf("L'equipe 1 est vide.");		
+			printf("L'equipe 1 est vide.");
 			printf("(%iPE restant)\n", PE1);
 		}
 
@@ -59,13 +64,13 @@ void lancer1v1() {
 			afficher(&equipe2);
 			printf("(%iPE restant)\n", PE2);
 		}else {
-			printf("L'equipe 2 est vide.");		
+			printf("L'equipe 2 est vide.");
 			printf("(%iPE restant)\n", PE2);
 		}
 
 		printf(" 3- Charger une sauvegarde.\n");
 		printf(" 4- Lancer Partie.\n");
-		printf("\n 5- /!\\Retour /!\\.\n");
+		printf("\n 5- Retour.\n");
 		printf("\nVotre choix : ");
 		scanf("%d", &choix);
 
@@ -82,9 +87,9 @@ void lancer1v1() {
 					printf("Le joueur %i a gagné en %i tours\n",gagnant,NbTour);
 		                               sleep(1);
 					choix = 5;
-				} else { 
-					printf("erreur : Cette sauvegarde est vide\n"); 
-					sleep(1); 
+				} else {
+					printf("erreur : Cette sauvegarde est vide\n");
+					sleep(1);
 				}
 				break;
 			case 4: if(liste_vide(&equipe1) || liste_vide(&equipe2) ){
@@ -92,7 +97,7 @@ void lancer1v1() {
 					sleep(1);
 					break;
 				}
-				else{			
+				else{
 					init_partie(&equipe1,&equipe2,&ordre_action);
 					placer(&ordre_action,carte);
 					carte=actumap(&ordre_action, carte);
@@ -107,43 +112,45 @@ void lancer1v1() {
 				}
 			default: erreur = vrai;
 		}
-	
+
 	}while(choix!=5);
 }
 
 
 int main(void) {
 	int choix, erreur = faux;
-	
-	do {		
-		clearScreen();	
-	
+
+	do {
+		clearScreen();
+
 		printf("Menu :\n");
-		if(erreur) printf("Erreur: votre choix doit etre compris entre 1 et 5\n");
+		if(erreur) {
+			couleur("31");
+			printf("\tErreur: votre choix doit etre compris entre 1 et 3\n");
+			couleur("0");
+		} else printf("\n");
 		erreur = faux;
 		/* Affichage du menu et saisie du choix */
-		
+
 		printf(" 1 - Mode Duel\n");
-		printf(" 2 - Mode Arcade\n");
-		printf(" 3 - Mode Histoire\n");
-		printf(" 4 - Credits\n");
-		printf(" 5 - Quitter\n");
-		printf("Votre choix : ");
+		printf(" 2 - Credits\n");
+		printf(" 3 - Quitter\n");
+		printf("\nVotre choix : ");
 		scanf("%d",&choix);
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
 			case 1: lancer1v1(); break;
-			case 2: printf("Ce mode n'est pas encore jouable "); break;
-			case 3: printf("Ce mode n'est pas encore jouable "); break;
-			case 4: printf("Jeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
-			case 5: break;
+			case 2: printf("\nJeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
+			case 3: break;
 			default: erreur = vrai;
 		}
-	
+
 	}
-	while(choix!=5);
+	while(choix!=3);
 
 	printf("Au revoir !\n");
+	sleep(2);
+	clearScreen();
 	return EXIT_SUCCESS;
 }

@@ -11,16 +11,6 @@
 #include "global.h"
 #include "listes_ptr.h"
 
-#define couleur(param) printf("\033[%sm",param)
-/*   param devant être un const char *, vide (identique à "0") ou formé
-     d'une où plusieurs valeurs séparées par des ; parmi
-         0  réinitialisation         1  haute intensité (des caractères)
-         5  clignotement             7  video inversé
-         30, 31, 32, 33, 34, 35, 36, 37 couleur des caractères
-         40, 41, 42, 43, 44, 45, 46, 47 couleur du fond
-         les couleurs, suivant la logique RGB, étant respectivement
-         noir, rouge, vert, jaune, bleu, magenta, cyan et blanc */
-
 t_map creerMat(){
 	/*Initialisation de la matrice map à 0*/
     t_map matrice;
@@ -84,89 +74,89 @@ t_map actumap(t_liste * ordre_action, t_map map){
 
 void afficherMat (t_map mat){
     int i, j;
-	printf("  ");
+	printf("x\\y");
     for (j=0;j<10;j++){
-	 printf("  %i  ",j);
+	 printf(" %i   ",j);
     }	
     printf("\n");			
     for (i=0; i < 10; i++){
 	    printf("%i|",i);
 	    
 	    for (j=0; j < 10; j++){
-		
-	    	if(mat.cell[i][j] == 0) printf(" --- "); 
+		printf(" ");
+	    	if(mat.cell[i][j] == 0) printf("---"); 
 	    	if(mat.cell[i][j] == 1) {				 //Si la case contient une "Saber" Bleue
 	    		couleur("34;1");					 //On écrit en bleu et en gras
-	    		printf(" SAB ");					
+	    		printf("SAB");					
 	    		couleur("0");						 //On réinitialise le système de couleur
 	    		
 	    	}
 	    	if(mat.cell[i][j] == 2) {				 //Si la case contient une "Saber" Rouge
 	    		couleur("31;1");					 //On écrit en rouge et en gras
-	    		printf(" SAB ");
+	    		printf("SAB");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 4) {				 //Si la case contient une "Archer" Rouge
 	    		couleur("31;1");					 //On écrit en rouge et en gras
-	    		printf(" ARC ");
+	    		printf("ARC");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 3) {				 //Si la case contient un "Archer" Bleu
 	    		couleur("34;1");					 //On écrit en bleu et en gras
-	    		printf(" ARC ");
+	    		printf("ARC");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 5) {				 //Si la case contient un "Caster" Bleu
 	    		couleur("34;1");					 //On écrit en bleu et en gras
-	    		printf(" CAS ");
+	    		printf("CAS");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 6) {				 //Si la case contient un "Caster" Rouge
 	    		couleur("31;1");					 //On écrit en rouge et en gras
-	    		printf(" CAS ");
+	    		printf("CAS");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 7) {				 //Si la case contient un "Berzerker" Bleu
 	    		couleur("34;1");					 //On écrit en bleu et en gras
-	    		printf(" BER ");
+	    		printf("BER");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 8) {				 //Si la case contient un "Berzerker" Rouge
 	    		couleur("31;1");					 //On écrit en Rouge et en gras
-	    		printf(" BER ");
+	    		printf("BER");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 9) {				 //Si la case contient un "Lancer" Bleu
 	    		couleur("34;1");					 //On écrit en bleu et en gras
-	    		printf(" LAN ");
+	    		printf("LAN");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 10) {				 //Si la case contient un "Lancer" Rouge
 	    		couleur("31;1");					 //On écrit en Rouge et en gras
-	    		printf(" LAN ");
+	    		printf("LAN");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 11) {				 //Si la case contient un "Rider" Bleu
 	    		couleur("34;1");					 //On écrit en bleu et en gras
-	    		printf(" RID ");
+	    		printf("RID");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 12) {				 //Si la case contient un "Rider" Rouge
 	    		couleur("31;1");					 //On écrit en Rouge et en gras
-	    		printf(" RID ");
+	    		printf("RID");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 13) {				 //Si la case contient un "Assassin" Bleu
 	    		couleur("34;1");					 //On écrit en bleu et en gras
-	    		printf(" ASS ");
+	    		printf("ASS");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 14) {				 //Si la case contient un "Assassin" Rouge
 	    		couleur("31;1");					 //On écrit en Rouge et en gras
-	    		printf(" ASS ");
+	    		printf("ASS");
 	    		couleur("0");
 	    	}
-			
+		printf(" ");	
 	    }
 	printf("|\n");
     }
