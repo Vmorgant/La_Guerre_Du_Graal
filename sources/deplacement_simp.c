@@ -515,7 +515,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
     int erreur = 0;
     char mretour[100] = "\n";
     int tete,queue,nb_valeurs;
-    int cout = taille * cout_dep(ordre_action);	//cout du déplacement	
+    int cout = taille /* cout_dep(ordre_action);*/	//cout du déplacement	
     initfile();
 
 	do{

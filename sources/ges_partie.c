@@ -65,7 +65,7 @@ void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 	for(i=0; i < nb_persos; i++){
 		bien_place = faux;
 
-		/** on se place au i ième element de la liste */
+		/** on se place à l'élément i de la liste */
 		en_tete(ordre_action);
 		for (j = 0; j < i; j++) {
 			suivant(ordre_action);
@@ -104,7 +104,8 @@ void placer(t_liste *ordre_action,t_map * carte){
 	
 	en_tete(ordre_action);
 	while (!hors_liste(ordre_action)){
-		if((ordre_action->ec->personnage.joueur)==1){														//Placer un personnage pour l'equipe 1
+		if((ordre_action->ec->personnage.joueur)==1){														
+		//Placer un personnage pour l'equipe 1
 			printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", ordre_action->ec->personnage.classe.nom);
 			scanf("%i", &x);
 			printf("\n");
@@ -114,7 +115,8 @@ void placer(t_liste *ordre_action,t_map * carte){
 		
 			while (x > 9 || y > 2 || x < 0 || y < 0 || carte->cell[x][y] != 0){
 
-				if (carte->cell[x][y] != 0){															//On teste si la case est vide
+				if (carte->cell[x][y] != 0){
+				//On teste si la case est vide
 					printf("La case est déjà occupée\n");
 					printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", ordre_action->ec->personnage.classe.nom);
 					scanf("%i", &x);
@@ -124,7 +126,8 @@ void placer(t_liste *ordre_action,t_map * carte){
 					printf("\n");
 					
 				}
-				else {																			//On teste si on est pas hors map
+				else{
+				//On teste si on est pas hors map
 					printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 4\n");
 					printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", ordre_action->ec->personnage.classe.nom);
 					scanf("%i", &x);
@@ -137,7 +140,8 @@ void placer(t_liste *ordre_action,t_map * carte){
 			}
 			
 			
-		} else if((ordre_action->ec->personnage.joueur)==2){													//Placer un personnage pour l'equipe 2;
+		} else if((ordre_action->ec->personnage.joueur)==2){													
+		//Placer un personnage pour l'equipe 2;
 			printf("Joueur 2, entrez un x pour votre %s entre 0 et 9 :\n", ordre_action->ec->personnage.classe.nom);
 			scanf("%i", &x);
 			printf("\n");

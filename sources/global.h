@@ -48,15 +48,6 @@ typedef struct{char nom[20]; int coutPE;int PVmax;int gainPA;int ATQ;int DEF;int
 *\brief contient les caractéristiques d'une classe de personnage
 */
 
-
-
-
-
-
-
-
-
-
 typedef struct{t_classe classe ; int joueur; int pa; int pv; int x; int y; t_etat etat;}t_personnage;
 /**
 *\struct t_personnage
@@ -75,15 +66,6 @@ typedef struct{t_element * drapeau; t_element * ec;}t_liste;
 *\brief création du type liste (pour gérer simultanément plusieures listes de type t_personnage
 */
 
-
-
-
-
-
-
-
-
-
 typedef struct{int nlignes; int ncolonnes;int ** cell;}t_map;
 /**
 *\struct t_map
@@ -95,9 +77,6 @@ typedef struct{int x; int y;}t_noeud;
 *\struct t_noeud 
 *\brief contient les coordonnées d'un noeud
 */
-
-
-
 
 typedef struct{t_personnage tab_action[10]; int nbpersos; int nbtours;}t_save;
 /**
