@@ -53,21 +53,32 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 		clearScreen();
 		/* Affichage du menu et saisie d'une classe */
 		printf("Choisissez une classe : \n\n");
-		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et %i\n", nb_classes+1);
-		erreur = faux;
+		if(erreur) {
+			couleur("31");
+			printf("Erreur: votre choix doit être compris entre 1 et %i\n", nb_classes+1);
+			couleur("0");
+		} else printf("\n");
+	
+		erreur = faux;		
+
 		if(!liste_vide(equipe)) {
 			printf("l'equipe %i est constituée de : ", joueur);
+			if(joueur == 1)
+				couleur("34;1");
+			else couleur("31;1");
 			afficher(equipe);
+			couleur("0");
 			printf("(%iPE restant)\n\n", *PE);
 		}else {
 			printf("l'equipe %i est vide.", joueur);		
 			printf("(%iPE restant)\n\n", *PE);
 		}
-
+		
+		
 		for(i =1; i <= nb_classes; i++){
 			printf(" %i - %s (%iPE)\n", i, tab_classes[i-1].nom, tab_classes[i-1].coutPE);
 		}
-		printf("\n %i - /!\\ Retour /!\\\n", nb_classes+1);
+		printf("\n %i - Retour\n", nb_classes+1);
 		printf("\nVotre choix : ");
 		scanf("%d",&choix);
 
@@ -98,7 +109,7 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
 			printf(" %i - Enlever %s de l'equipe %i\n", i, equipe->ec->personnage.classe.nom, joueur);
 			suivant(equipe);
 		}
-		printf("\n %i - /!\\ Retour /!\\\n", nb_persos+1);
+		printf("\n %i - Retour\n", nb_persos+1);
 		printf("\nVotre choix : ");
 		scanf("%d", &choix);
 		/* Traitement du choix de l'utilisateur */
@@ -127,12 +138,21 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
 	do {
 		clearScreen();
 		/* Affichage du menu et saisie du choix */
-		printf("Menu :\n");
-		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et 4\n");
+		printf("Edition de l'équipe %i :\n", joueur);
+		if(erreur) {
+			couleur("31");
+			printf("\tVotre choix doit être compris entre 1 et 4\n");
+			couleur("0");
+		} else printf("\n");
 		erreur = faux;
+
 		if(!liste_vide(equipe)) {
 			printf("l'equipe %i est constituée de : ", joueur);
+			if(joueur == 1)
+				couleur("34;1");
+			else couleur("31;1");
 			afficher(equipe);
+			couleur("0");
 			printf("(%iPE restant)\n\n", *PE);
 		}else {
 			printf("l'equipe %i est vide.", joueur);		
@@ -141,8 +161,10 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
 
 		printf(" 1 - Ajouter un personnage dans l'equipe %i\n", joueur);
 		printf(" 2 - Supprimer un personnage de l'equipe %i\n", joueur);
+		couleur("32");
 		printf(" 3 - Valider l'équipe %i\n", joueur);
-		printf("\n 4 - /!\\ Annuler /!\\\n");
+		couleur("0");
+		printf("\n 4 - Annuler\n");
 		printf("\nVotre choix : ");
 		scanf("%d",&choix);
 
