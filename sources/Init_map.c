@@ -41,6 +41,7 @@ t_map actumap(t_liste * ordre_action, t_map map){
 
    en_tete(ordre_action);
    while(!hors_liste(ordre_action)){
+	if( (ordre_action->ec->personnage.x != -1) && (ordre_action->ec->personnage.y != -1) ) {
 	    if (ordre_action->ec->personnage.joueur == 1){     
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3;
@@ -49,8 +50,7 @@ t_map actumap(t_liste * ordre_action, t_map map){
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Lancer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 9;
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 11;
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 13;
-	    }
-	    if (ordre_action->ec->personnage.joueur == 2){
+	    } else if (ordre_action->ec->personnage.joueur == 2){
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 2;
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 4;
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 6;
@@ -59,8 +59,10 @@ t_map actumap(t_liste * ordre_action, t_map map){
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 12;
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 14;
 
-	     }
-	     suivant(ordre_action);
+	    }
+	}
+
+	    suivant(ordre_action);
     }
 
     ordre_action->ec = tampon;
