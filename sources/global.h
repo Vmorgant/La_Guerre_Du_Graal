@@ -85,7 +85,10 @@ typedef struct{t_element * drapeau; t_element * ec;}t_liste;
 
 
 typedef struct{int nlignes; int ncolonnes;int ** cell;}t_map;
-
+/**
+*\struct t_map
+*\brief défini la carte par son nombre de lignes/colonnes et une matrice.
+*/
 
 typedef struct{int x; int y;}t_noeud;
 /**

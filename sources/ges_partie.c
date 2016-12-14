@@ -532,6 +532,11 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 }
 
 void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
+/**
+ * \fn  choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte)
+ * \brief Permet de choisir son attaque
+ * \param t_liste *ordre_action : la liste des personnages joués triée int *gagnant numero de l'équipe gagnante, t_map * carte
+ */
 
 	int choix, erreur = faux;
 	char mretour[100] = "\n";
@@ -597,6 +602,11 @@ void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
 }
 
 void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour){
+/**
+ * \fn choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour)
+ * \brief Permet de choisir son action
+ * \param t_liste *ordre_action : la liste des personnages joués triée, t_map * carte matrice représentant la carte, int *gagnant numero de l'équipe gagnante,int *NbTour nombre de tour actuel.
+ */
 	int choix, erreur = faux;
 	char mretour[100] = "\n";
 	do{
@@ -642,7 +652,11 @@ void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour)
 }
 
 void gestion_tour(t_liste *ordre_action,int *NbTour,t_map * carte,int *gagnant){
-/**Joue le tour suivant*/
+/**
+ * \fn  gestion_tour(t_liste *ordre_action,int *NbTour,t_map * carte,int *gagnant)
+ * \brief Joue le tour
+ * \param t_liste *ordre_action : la liste des personnages joués triée int *gagnant numero de l'équipe gagnante, t_map * carte
+ */
 
 	en_tete(ordre_action);
 	while(*gagnant ==0){
