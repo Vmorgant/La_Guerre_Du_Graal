@@ -92,7 +92,7 @@ void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 	printf("\n");
 }
 
-void placer(t_liste *ordre_action,t_map carte){
+void placer(t_liste *ordre_action,t_map * carte){
 /**
  * \fn  placer(t_liste *ordre_action,t_map carte)
  * \brief Place les personnages des deux équipes sur la carte.
@@ -112,9 +112,9 @@ void placer(t_liste *ordre_action,t_map carte){
 			scanf("%i", &y);
 			printf("\n");
 		
-			while (x > 9 || y > 2 || x < 0 || y < 0 || carte.cell[x][y] != 0){
+			while (x > 9 || y > 2 || x < 0 || y < 0 || carte->cell[x][y] != 0){
 
-				if (carte.cell[x][y] != 0){															//On teste si la case est vide
+				if (carte->cell[x][y] != 0){															//On teste si la case est vide
 					printf("La case est déjà occupée\n");
 					printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", ordre_action->ec->personnage.classe.nom);
 					scanf("%i", &x);
@@ -135,11 +135,9 @@ void placer(t_liste *ordre_action,t_map carte){
 					printf("\n");
 				}
 			}
-			ordre_action->ec->personnage.x = x;
-			ordre_action->ec->personnage.y = y;
-			suivant(ordre_action);
-		}
-		if((ordre_action->ec->personnage.joueur)==2){													//Placer un personnage pour l'equipe 2;
+			
+			
+		} else if((ordre_action->ec->personnage.joueur)==2){													//Placer un personnage pour l'equipe 2;
 			printf("Joueur 2, entrez un x pour votre %s entre 0 et 9 :\n", ordre_action->ec->personnage.classe.nom);
 			scanf("%i", &x);
 			printf("\n");
@@ -147,9 +145,9 @@ void placer(t_liste *ordre_action,t_map carte){
 			scanf("%i", &y);
 			printf("\n");
 		
-			while (x > 10 || y > 10 || x < 0 || y < 7 || carte.cell[x][y] != 0){
+			while (x > 10 || y > 10 || x < 0 || y < 7 || carte->cell[x][y] != 0){
 
-				if (carte.cell[x][y] != 0){
+				if (carte->cell[x][y] != 0){
 					printf("La case est déjà occupée\n");
 					printf("Joueur 2, entrez un x pour votre %s entre 0 et 9 :\n", ordre_action->ec->personnage.classe.nom);
 					scanf("%i", &x);
@@ -170,10 +168,15 @@ void placer(t_liste *ordre_action,t_map carte){
 				}
 			}
 		
-			ordre_action->ec->personnage.x = x;
-			ordre_action->ec->personnage.y = y;
-			suivant(ordre_action);
 		}
+
+		ordre_action->ec->personnage.x = x;
+		ordre_action->ec->personnage.y = y;
+
+		* carte = actumap(ordre_action, * carte);
+		clearScreen();
+		afficherMat( * carte);
+		suivant(ordre_action);
 	}
 }
 
@@ -246,7 +249,8 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
 	int degats = (attaque.mul_ATQ) * (ordre_action->ec->personnage.classe.ATQ);
 	int def=cible.classe.DEF;
 	float stock, blocage, pare = faux;
-	
+	char message_tampon[100] = "";
+
 	stock = Rand_atq();
 
 	/*calcul des degats */
@@ -260,7 +264,7 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
 	pare = (blocage*100) + (rand()%100);
 
 	if(pare >= 100) {
-		sprintf(mretour, "\tL'Attaque a ete bloquee !\n");
+		sprintf(message_tampon, "\tL'Attaque a ete bloquee !\n");
 	} else {
 		tampon = ordre_action->ec;
 		en_tete(ordre_action);
@@ -271,15 +275,16 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
 		ordre_action->ec->personnage.pv = (ordre_action->ec->personnage.pv) - degats;
 
 		if ( ordre_action->ec->personnage.pv<=0 ){
-			sprintf(mretour, "\tLe personnage %s a été vaincu !\n", ordre_action->ec->personnage.classe.nom);
+			sprintf(message_tampon, "\tLe personnage %s a été vaincu !\n", ordre_action->ec->personnage.classe.nom);
 			*gagnant = est_mort(ordre_action, carte);
 		} else {
-			sprintf(mretour, "\tLe personnage %s perd %i points de vie !\n", ordre_action->ec->personnage.classe.nom, degats);
+			sprintf(message_tampon, "\tLe personnage %s perd %i points de vie !\n", ordre_action->ec->personnage.classe.nom, degats);
 		}
 
 
 		ordre_action->ec= tampon;  
 	}
+	strcat(mretour,message_tampon);
 }
 
 int test_obstacle(t_personnage attaquant,t_personnage cible,int portee, t_map * carte){
