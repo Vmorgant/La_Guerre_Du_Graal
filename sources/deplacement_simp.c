@@ -42,10 +42,10 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 	t_noeud v1 = {x,y};
 	t_noeud v2 = {x,y};
 	t_noeud v4 = {x,y};
-	int dep = 0;
+	
 	t_noeud tampon;
 	if (depart.x != 0)
-		v3.x = x-1;
+		v3.x = x-1;//Initialisation des noeud en faisant attention aux bords
 	if (depart.x != map.nlignes-1)	
 		v1.x = x+1;
 	if (depart.y != map.ncolonnes-1)
@@ -53,21 +53,21 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 	if (depart.y != 0)
 		v4.y = y-1;
 	
-	
+	int dep = 0; // Nombre d'itération dans le pathfinding (Sécurité pour la boucle infini)
 	int tete,queue,nb_valeurs;
 	
 	
-	while ((depart.x != objx || depart.y != objy) && dep < 50){
+	while ((depart.x != objx || depart.y != objy) && dep < 50){ // Tant qu'on est pas arrivé ou qu'on est pas en boucle infini
 		
-		
-			if (map.cell[v1.x][v1.y] == 0 && (distance(v1.x,v1.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
+			// Test sur la case vide et la distance la plus courte à l'objectif
+			if (map.cell[v1.x][v1.y] == 0 && (distance(v1.x,v1.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){
 				
 					tampon = v1;
 					if (v1.x != map.nlignes-1) {
 						v1.x = tampon.x+1;
 						v1.y = tampon.y;
 					}
-					if (v1.y != map.ncolonnes-1) {
+					if (v1.y != map.ncolonnes-1) { //Sécurités pour éviter la sortie de matrice
 						v2.x = tampon.x;
 						v2.y = tampon.y+1;
 					}
@@ -82,10 +82,11 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 					depart = tampon;
 					dep++;
 					ajouter(depart);
-					*taille = (*taille) + 1;
+					*taille = (*taille) + 1; 
 				
 			
 			}
+			// Test sur la case vide et la distance la plus courte à l'objectif
 			else if (map.cell[v2.x][v2.y] == 0 && (distance(v2.x,v2.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
 				
 					tampon = v2;
@@ -93,7 +94,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 						v1.x = tampon.x+1;
 						v1.y = tampon.y;
 					}
-					if (v2.y != map.ncolonnes-1) {
+					if (v2.y != map.ncolonnes-1) { //Sécurités pour éviter la sortie de matrice
 						v2.x = tampon.x;
 						v2.y = tampon.y+1;
 					}
@@ -111,6 +112,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 					*taille = (*taille) + 1;
 			
 			}
+			// Test sur la case vide et la distance la plus courte à l'objectif
 			else if (map.cell[v3.x][v3.y] == 0 && (distance(v3.x,v3.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
 				
 					tampon = v3;
@@ -118,7 +120,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 						v1.x = tampon.x+1;
 						v1.y = tampon.y;
 					}
-					if (v3.y != map.ncolonnes-1) {
+					if (v3.y != map.ncolonnes-1) { //Sécurités pour éviter la sortie de matrice
 						v2.x = tampon.x;
 						v2.y = tampon.y+1;
 					}
@@ -136,6 +138,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 					*taille = (*taille) + 1;
 			
 			}
+			// Test sur la case vide et la distance la plus courte à l'objectif
 			else if (map.cell[v4.x][v4.y] == 0 && (distance(v4.x,v4.y,objx,objy) < distance(depart.x,depart.y,objx,objy))){	
 				
 					tampon = v4;
@@ -143,7 +146,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 						v1.x = tampon.x+1;
 						v1.y = tampon.y;
 					}
-					if (v4.y != map.ncolonnes-1) {
+					if (v4.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 						v2.x = tampon.x;
 						v2.y = tampon.y+1;
 					}
@@ -161,15 +164,15 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 					*taille = (*taille) + 1;
 			
 			}
-			else{
-				if (map.cell[v1.x][v1.y] != 0){
+			else{ // On considère qu'il y a un obstacle sur le chemin
+				if (map.cell[v1.x][v1.y] != 0){ //Avec ce niveau de if on cherche quel chemin est occupé
 					if(map.cell[v2.x][v2.y] == 0 && depart.y != map.ncolonnes-1){
 						tampon = v2;
 						if (v2.x != map.nlignes-1) {
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v2.y != map.ncolonnes-1) {
+						if (v2.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -194,7 +197,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v4.y != map.ncolonnes-1) {
+						if (v4.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -219,7 +222,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v3.y != map.ncolonnes-1) {
+						if (v3.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -237,7 +240,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 						*taille = (*taille) + 1;
 					}
 					else{
-						return 1;
+						return 1;// Retour d'erreur 'Encerclé'
 					}
 				}
 			
@@ -249,7 +252,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v1.y != map.ncolonnes-1) {
+						if (v1.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -273,7 +276,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v3.y != map.ncolonnes-1) {
+						if (v3.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -297,7 +300,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v4.y != map.ncolonnes-1) {
+						if (v4.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -315,7 +318,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 						*taille = (*taille) + 1;
 					}
 					else{
-						return 1;
+						return 1;// Retour d'erreur 'Encerclé'
 					}
 				}
 
@@ -326,7 +329,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v2.y != map.ncolonnes-1) {
+						if (v2.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -350,7 +353,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v4.y != map.ncolonnes-1) {
+						if (v4.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -374,7 +377,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v1.y != map.ncolonnes-1) {
+						if (v1.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -392,7 +395,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 						*taille = (*taille) + 1;
 					}
 					else{						
-						return 1;
+						return 1;//Retour d'erreur 'Encerclé'
 						
 					}
 				}
@@ -404,7 +407,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v1.y != map.ncolonnes-1) {
+						if (v1.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -428,7 +431,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v3.y != map.ncolonnes-1) {
+						if (v3.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -452,7 +455,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 							v1.x = tampon.x+1;
 							v1.y = tampon.y;
 						}
-						if (v2.y != map.ncolonnes-1) {
+						if (v2.y != map.ncolonnes-1) {//Sécurités pour éviter la sortie de matrice
 							v2.x = tampon.x;
 							v2.y = tampon.y+1;
 						}
@@ -470,36 +473,30 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 						*taille = (*taille) + 1;
 					}
 					else{
-						return 1;
+						return 1;// Retour d'erreur 'Encerclé
 					}
 
 				}
 				
 			}
-		
-		/*else{ depart.x = objx;
-		  depart.y = objy;
-		  ajouter(depart);
-		  *taille = (*taille) + 5;
-		}*/
 			
 	
 	}
-	if (dep >= 50){		
-		return -1;
+	if (dep >= 50){	//Boucle infini	
+		return -1;//passage à la téléportation pour aller à l'objectif.
 	}
 
-	return 2;
+	return 2;// Le déplacement s'est bien déroulé.
 }	
    
 
 
 
-float cout_dep(t_liste * ordre_action){
+/*float cout_dep(t_liste * ordre_action){
 	float cout;
 	cout = 0.1 * ordre_action->ec->personnage.classe.poids + 1;
 	return cout;
-}
+}*/
 
 void deplacement_simp(t_liste *ordre_action,t_map map){
 /**
@@ -512,27 +509,27 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
     int sortie=0;
     char choix;
     int taille = 0;
-    t_noeud chemin[50];
+    t_noeud chemin[50];//file dans laquelle est contenue le chemin
     t_noeud cell;
-    int dep_erreur = 0;	
+    int dep_erreur = 0;	// Variables pour l'affichage des erreurs 
     int erreur = 0;
     char mretour[100] = "\n";
     int tete,queue,nb_valeurs;
-    int cout = taille * cout_dep(ordre_action);		
+    int cout = taille * cout_dep(ordre_action);	//cout du déplacement	
     initfile();
 
 	do{
 		clearScreen();
 		afficherMat(map);
-		if (ordre_action->ec->personnage.joueur == 1) couleur("34;1");
-		else couleur("31;1");
+		if (ordre_action->ec->personnage.joueur == 1) couleur("34;1"); //Ecriture en bleu
+		else couleur("31;1");//En rouge
 		
 
 		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);	
 		couleur("0");	
 		printf("\nChoix des coordonnées :\n");
 
-		if(erreur) {
+		if(erreur) {					// Affichage de l'erreur
 				couleur("31");
 				printf("\t%s",mretour);
 				couleur("0");
@@ -544,7 +541,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 		erreur = faux;
 		strcpy(mretour,"\n");
 
-		printf("Rentrez un x pour le déplacement (-1 pour annuler) : ");
+		printf("Rentrez un x pour le déplacement (-1 pour annuler) : ");	// Entrée des coordonnées objectifs
 		scanf("%i",&xobj);
 
 		if(xobj != -1) {
@@ -553,15 +550,15 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 				printf("\n");
 			if(yobj != -1){
 			
-				if(xobj > map.nlignes-1 || yobj > map.ncolonnes-1 || xobj < 0 || yobj < 0){
+				if(xobj > map.nlignes-1 || yobj > map.ncolonnes-1 || xobj < 0 || yobj < 0){ //Test du Hors map
 					dep_erreur = 4;
 				} else if (map.cell[xobj][yobj] != 0){		//On teste si la case est vide
 					dep_erreur = 3;
-				} else if (xobj < map.nlignes && yobj < map.nlignes && xobj >= 0 && yobj >= 0){
+				} else if (xobj < map.nlignes && yobj < map.nlignes && xobj >= 0 && yobj >= 0){ // Déroulement normal
 					dep_erreur = pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);
 					cout = taille;
 					
-					if (cout > ordre_action->ec->personnage.pa && dep_erreur == 2){
+					if (cout > ordre_action->ec->personnage.pa && dep_erreur == 2){ // Test du cout en PA
 						dep_erreur = 0;
 						
 					}
@@ -574,7 +571,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 			
 	
 				switch (dep_erreur){
-					case -1 :
+					case -1 : // Cas d'erreur boucle infini
 						map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 0;
 						ordre_action->ec->personnage.x = xobj;
 						ordre_action->ec->personnage.y = yobj;
@@ -587,7 +584,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						strcpy(mretour,"\tDéplacement réussi\n");
 						
 						break ;
-					case 0 :
+					case 0 : // Cas d'erreur manque de PA
 						map=actumap(ordre_action, map);
 						clearScreen();
 						afficherMat(map);				
@@ -595,7 +592,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						erreur = 1;
 						usleep(300000);
 						break ;
-					case 1 : 
+					case 1 : // Cas d'erreur encerclement
 						map=actumap(ordre_action, map);
 						clearScreen();
 						afficherMat(map);				
@@ -603,7 +600,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						usleep(300000);
 						erreur = 1;
 						break ;
-					case 2 : 
+					case 2 : // Aucune erreur
 						while (!filevide()){
 							retirer(&cell);
 							map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 0;
@@ -616,7 +613,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 							erreur = 1;
 						}			
 						ordre_action->ec->personnage.pa = ordre_action->ec->personnage.pa - cout;
-						assert(ordre_action->ec->personnage.x == xobj);
+						assert(ordre_action->ec->personnage.x == xobj); 
 						assert(ordre_action->ec->personnage.y == yobj);
 						strcpy(mretour,"\tDéplacement réussi\n");
 						erreur = 0;
