@@ -1,6 +1,6 @@
 /**
-*\file global.h
-*\brief Ce fichier contient les définitions des primitives d'acces aux listes
+*\file ges_equipes.c
+*\brief Ce fichier contient les fonctions permettant de modifier les équipes.
 *\author Corentin Petit
 *\version 1.0
 *\date 16/11/2016
@@ -131,7 +131,7 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
 /**
  * \fn  init_equipe(t_liste * equipe, int joueur)
  * \brief Menu de création d'équipe.
- * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur.
+ * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur,int *PE le nombre de PE restant.
  */	
 	int choix, erreur= faux;
 
