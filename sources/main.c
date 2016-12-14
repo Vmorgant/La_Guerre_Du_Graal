@@ -12,9 +12,9 @@
 #include "global.h"
 #include"ges_equipes.h"
 #include"listes_ptr.h"
-#include"liste_chemin.h"
+#include"file_chemin.h"
 #include"Init_map.h"
-#include"deplacement.h"
+#include"deplacement_simp.h"
 #include"ges_partie.h"
 #include "save.h"
 

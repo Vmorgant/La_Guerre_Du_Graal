@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "global.h"
-#include "liste_chemin.h"
+#include "file_chemin.h"
 #include "Init_map.h"
 
 void deplacement_simp(t_liste *ordre_action,t_map map);
