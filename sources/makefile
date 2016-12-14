@@ -20,7 +20,7 @@ ges_partie.o: ges_partie.c global.h
 Init_map.o: Init_map.c global.h
 	gcc -c Init_map.c global.h  -W
 
-file_chemin.o: liste_chemin.c global.h
+file_chemin.o: file_chemin.c global.h
 	gcc -c file_chemin.c global.h  -g -W
 	
 deplacement_simp.o: deplacement_simp.c global.h 

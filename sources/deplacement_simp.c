@@ -37,11 +37,11 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
  * \param int x : Abscisse de départ, int y : Ordonnée de départ, int xobj : Abscisse cible; int yobj : Ordonnée cible
  */
 
-	t_noeud depart = {x,y,0,0};
-	t_noeud v3 = {x,y,0,0};
-	t_noeud v1 = {x,y,0,0};
-	t_noeud v2 = {x,y,0,0};
-	t_noeud v4 = {x,y,0,0};
+	t_noeud depart = {x,y};
+	t_noeud v3 = {x,y};
+	t_noeud v1 = {x,y};
+	t_noeud v2 = {x,y};
+	t_noeud v4 = {x,y};
 	int dep = 0;
 	t_noeud tampon;
 	if (depart.x != 0)
@@ -495,8 +495,8 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 
 
 
-int cout_dep(t_liste * ordre_action){
-	int cout;
+float cout_dep(t_liste * ordre_action){
+	float cout;
 	cout = 0.1 * ordre_action->ec->personnage.classe.poids + 1;
 	return cout;
 }
@@ -518,7 +518,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
     int erreur = 0;
     char mretour[100] = "\n";
     int tete,queue,nb_valeurs;
-    int cout = taille /* * cout_dep(ordre_action)*/;		
+    int cout = taille * cout_dep(ordre_action);		
     initfile();
 
 	do{
