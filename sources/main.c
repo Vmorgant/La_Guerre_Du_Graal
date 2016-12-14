@@ -8,6 +8,7 @@
 #include<stdio.h>
 #include<stdlib.h> 
 #include <unistd.h>
+#include <string.h>
 #include "global.h"
 #include"ges_equipes.h"
 #include"listes_ptr.h"
@@ -32,6 +33,7 @@ void lancer1v1() {
 	int gagnant=0; 
 	int PE1 = 10;
 	int PE2 = 10;
+	char mretour[100] = "\n";
 
 	/* Initialisation des listes de personnages */
 	init_liste(&equipe1);
@@ -44,7 +46,7 @@ void lancer1v1() {
 		printf("Menu :\n");
 		if(erreur) {
 			couleur("31");
-			printf("\tErreur: votre choix doit être compris entre 1 et 4\n");
+			printf("%s", mretour);
 			couleur("0");
 		}else printf("\n");
 		erreur = faux;
@@ -97,13 +99,13 @@ void lancer1v1() {
 				}
 				break;
 			case 4: if(liste_vide(&equipe1) || liste_vide(&equipe2) ){
-					printf("Les deux equipes ne doivent pas etre vides\n");
-					sleep(1);
+					strcpy(mretour, "\tLes deux equipes ne doivent pas etre vides\n");
+					erreur = vrai;
 					break;
 				}
 				else{			
 					init_partie(&equipe1,&equipe2,&ordre_action);
-					placer(&ordre_action,carte);
+					placer(&ordre_action, &carte);
 					carte=actumap(&ordre_action, carte);
 					afficherMat(carte);
 					while (gagnant == 0){
@@ -114,7 +116,7 @@ void lancer1v1() {
 					choix = 5;
 					break;
 				}
-			default: erreur = vrai;
+			default: strcpy(mretour, "\tVotre choix doit être compris entre 1 et 4\n"); erreur = vrai;
 		}
 	
 	}while(choix!=5);

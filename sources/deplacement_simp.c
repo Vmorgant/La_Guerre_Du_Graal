@@ -515,19 +515,24 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
     t_noeud chemin[50];
     t_noeud cell;
     int dep_erreur = 0;	
-    int erreur = faux;
+    int erreur = 0;
     char mretour[100] = "\n";
-    int tete,queue,nb_valeurs;		
+    int tete,queue,nb_valeurs;
+    int cout = taille /* * cout_dep(ordre_action)*/;		
     initfile();
 
 	do{
 		clearScreen();
 		afficherMat(map);
+		if (ordre_action->ec->personnage.joueur == 1) couleur("34;1");
+		else couleur("31;1");
+		
 
-		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);		
+		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);	
+		couleur("0");	
 		printf("\nChoix des coordonnées :\n");
 
-		if(erreur ) {
+		if(erreur) {
 				couleur("31");
 				printf("\t%s",mretour);
 				couleur("0");
@@ -549,17 +554,21 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 			if(yobj != -1){
 			
 				if(xobj > map.nlignes-1 || yobj > map.ncolonnes-1 || xobj < 0 || yobj < 0){
-					strcpy(mretour,"\tCoordonnées hors map\n");
+					dep_erreur = 4;
 				} else if (map.cell[xobj][yobj] != 0){		//On teste si la case est vide
-					strcpy(mretour,"\tLa case est déjà occupée\n");
+					dep_erreur = 3;
 				} else if (xobj < map.nlignes && yobj < map.nlignes && xobj >= 0 && yobj >= 0){
 					dep_erreur = pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);
-		
+					cout = taille;
+					
+					if (cout > ordre_action->ec->personnage.pa && dep_erreur == 2){
+						dep_erreur = 0;
+						
+					}
+					
 				}
-				int cout = taille /* * cout_dep(ordre_action)*/;
-				if (cout > ordre_action->ec->personnage.pa && dep_erreur == 2){
-					strcpy(mretour,"\tVous n'avez pas assez de PA\n");
-				}
+				
+				
 
 				map=actumap(ordre_action, map);
 			
@@ -576,6 +585,15 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						afficherMat(map);
 						usleep(300000);
 						strcpy(mretour,"\tDéplacement réussi\n");
+						
+						break ;
+					case 0 :
+						map=actumap(ordre_action, map);
+						clearScreen();
+						afficherMat(map);				
+						strcpy(mretour,"\tVous manquez de PA\n");
+						erreur = 1;
+						usleep(300000);
 						break ;
 					case 1 : 
 						map=actumap(ordre_action, map);
@@ -583,6 +601,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						afficherMat(map);				
 						strcpy(mretour,"\tDéplacement impossible, vous êtes encerclés\n");
 						usleep(300000);
+						erreur = 1;
 						break ;
 					case 2 : 
 						while (!filevide()){
@@ -594,6 +613,7 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 							clearScreen();
 							afficherMat(map);
 							usleep(300000);
+							erreur = 1;
 						}			
 						ordre_action->ec->personnage.pa = ordre_action->ec->personnage.pa - cout;
 						assert(ordre_action->ec->personnage.x == xobj);
@@ -601,9 +621,24 @@ void deplacement_simp(t_liste *ordre_action,t_map map){
 						strcpy(mretour,"\tDéplacement réussi\n");
 						erreur = 0;
 						break;
-
+					case 3 :
+						map=actumap(ordre_action, map);
+						clearScreen();
+						afficherMat(map);				
+						strcpy(mretour,"\tLa case est déjà occupée\n");
+						erreur = 1;
+						usleep(300000);
+						break ;
+					case 4:
+						map=actumap(ordre_action, map);
+						clearScreen();
+						afficherMat(map);				
+						strcpy(mretour,"\tLes coordonnées sont hors map\n");
+						erreur = 1;
+						usleep(300000);
+						break ;
 				}
 			}
 		}
-	} while(erreur);
+	} while(erreur == 1);
 }
