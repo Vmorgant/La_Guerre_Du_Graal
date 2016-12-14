@@ -121,9 +121,10 @@ void lancer1v1() {
 	
 	}while(choix!=5);
 	
-	/*supprimer(&equipe1);
+	supprimer(&equipe1);
 	supprimer(&equipe2);
-	supprimer(&ordre_action);*/
+	supprimer(&ordre_action);
+	free_map(carte);
 }
 
 

@@ -12,4 +12,4 @@
 t_map creerMat();
 void afficherMat (t_map mat);
 t_map actumap(t_liste * ordreaction, t_map map);
-
+void free_map(t_map map);

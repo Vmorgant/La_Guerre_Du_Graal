@@ -12,7 +12,6 @@
 
 void init_liste(t_liste * p) {
 	p->drapeau =  (t_element*)malloc (sizeof(t_element));
-	p->ec =  (t_element*)malloc (sizeof(t_element));
 	p->drapeau -> pred = p->drapeau;
 	p->drapeau -> succ = p->drapeau;
 	p->ec = p->drapeau;
@@ -110,4 +109,18 @@ void compter_elts(t_liste*p, int*v){
 			suivant(p);
 		}
 	}
+}
+
+void vider(t_liste* p) {
+	if(!liste_vide(p)){
+		en_queue(p);
+		while(!liste_vide(p)){
+				oter_elt(p);
+		}
+	}
+}
+
+void supprimer(t_liste* p) {
+	vider(p);
+	free(p->drapeau);
 }

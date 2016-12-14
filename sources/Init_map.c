@@ -166,3 +166,9 @@ void afficherMat (t_map mat){
 }
 
 
+void free_map(t_map map){
+	int i, j;
+	for (i=0; i < map.nlignes; i++){
+		free(map.cell[i]);
+  	}
+}
