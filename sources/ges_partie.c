@@ -1,5 +1,5 @@
 /**
-*\file gest_partie.c
+*\file ges_partie.c
 *\brief Ce fichier contient les fonctions permettant le lancement et le déroulement de la partie
 *\author Victor Morgant Martin Lebourdais Corentin Petit
 *\version 1.0
@@ -250,6 +250,8 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
 	int def=cible.classe.DEF;
 	float stock, blocage, pare = faux;
 	char message_tampon[100] = "";
+
+	strcpy(mretour,"");
 
 	stock = Rand_atq();
 
