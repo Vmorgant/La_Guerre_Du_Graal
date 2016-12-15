@@ -6,7 +6,7 @@
 *\date 16/11/2016
 */
 
-void creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE);
+int creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE, char mretour[100]);
 /**
  * \fn creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE)
  * \brief Crée un personnage de la classe choisie.

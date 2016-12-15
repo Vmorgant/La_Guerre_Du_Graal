@@ -8,12 +8,13 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include <unistd.h>
 #include "global.h"
 #include "ges_equipes.h"
 #include"listes_ptr.h"
 	
-void creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE) {
+int creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE, char mretour[100]) {
 /**
  * \fn creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE)
  * \brief Crée un personnage de la classe choisie.
@@ -35,8 +36,7 @@ void creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE) {
 		
 	}	
 	else {
-	printf("Vous n'avez pas les PE requis pour ajouter ce personnage !\n");
-	sleep(1);
+	strcpy(mretour, "\tVous n'avez pas les PE requis pour ajouter ce personnage !\n");
 	}
 }
 
@@ -48,17 +48,22 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
  */
 
 	int choix, i, erreur= faux;
+	char mretour[100] = "\n";
 
 	do {
 		clearScreen();
 		/* Affichage du menu et saisie d'une classe */
-		printf("Choisissez une classe : \n\n");
+		printf("Choisissez une classe : \n");
 		if(erreur) {
 			couleur("31");
-			printf("Erreur: votre choix doit être compris entre 1 et %i\n", nb_classes+1);
+			printf("%s", mretour);
 			couleur("0");
-		} else printf("\n");
-	
+		} else {
+			couleur("32");
+			printf("%s", mretour);
+			couleur("0");
+		}
+		strcpy(mretour, "\n");	
 		erreur = faux;		
 
 		if(!liste_vide(equipe)) {
@@ -84,9 +89,11 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 
 		/* Traitement du choix de l'utilisateur */
 		if(choix >= 1 && choix <= nb_classes){
-			creer_perso(equipe, tab_classes[choix-1], joueur, PE);
-		} else if (choix < 1 || choix > nb_classes+1) erreur = vrai;
-
+			erreur = creer_perso(equipe, tab_classes[choix-1], joueur, PE, mretour);
+		} else if (choix < 1 || choix > nb_classes+1) {
+			sprintf(mretour, "\tVotre choix doit être compris entre 1 et %i\n", nb_classes+1);
+			erreur = vrai;			
+		}
 	} while (choix != nb_classes+1);
 }
 

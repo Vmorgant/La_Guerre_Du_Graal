@@ -84,7 +84,7 @@ int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours) {
 	} else return vrai;
 }
 
-void charger_partie() {
+void charger_partie(char mbilan[100]) {
 /**
  * \fn charger_partie()
  * \brief demande au joueur si il souhaite vraiment charger une asuvegarde puis la lui fait choisir
@@ -154,7 +154,8 @@ void charger_partie() {
 					while (gagnant == 0){
 						gestion_tour(&ordre_action,&Nb_tours, &carte,&gagnant);
 					}
-					sprintf(mretour, "Le joueur %i a gagné en %i tours\n",gagnant,Nb_tours);
+					if(gagnant == -1) sprintf(mbilan, "\tLa partie a bien été enregistrée.\n");
+					else sprintf(mbilan, "\tLe joueur %i a gagné en %i tours\n",gagnant,Nb_tours);
 					choix = nb_saves+1;
 				}
 
@@ -170,11 +171,10 @@ void charger_partie() {
 	} while(choix != nb_saves+1);
 
 	supprimer(&ordre_action);
-
 	free_map(carte);
 }
 
-void nouvelle_partie() {
+void nouvelle_partie(char mbilan[100]) {
 
 	t_liste equipe1;
 	t_liste equipe2;
@@ -250,7 +250,8 @@ void nouvelle_partie() {
 					while (gagnant == 0){
 						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
 					}
-					sprintf(mretour, "Le joueur %i a gagné en %i tours\n",gagnant,NbTour);
+					if(gagnant == -1) sprintf(mbilan, "\tLa partie a été enregistrée.\n");
+					else sprintf(mbilan, "\tLe joueur %i a gagné en %i tours\n", gagnant, NbTour);
 					choix = 4;
 					break;
 				}
@@ -259,9 +260,8 @@ void nouvelle_partie() {
 	
 	}while(choix!=4);
 	
-	supprimer(&equipe1);
+	supprimer(&equipe1); /* comme ordre_action = equipe 1, pas besoin de free ordre_action */
 	supprimer(&equipe2);
-	supprimer(&ordre_action);
 	free_map(carte);
 }
 

@@ -24,6 +24,7 @@ void clearScreen(){
 
 int main(void) {
 	int choix, erreur = faux;
+	char mretour[100];
 	
 	do {		
 		clearScreen();	
@@ -31,9 +32,14 @@ int main(void) {
 		printf("Menu :\n");
 		if(erreur) {
 			couleur("31");
-			printf("\tErreur: votre choix doit etre compris entre 1 et 3\n");
+			printf("%s", mretour);
 			couleur("0");
-		} else printf("\n");
+		} else {
+			couleur("32");
+			printf("%s", mretour);
+			couleur("0");
+		}
+		strcpy(mretour, "\n");
 		erreur = faux;
 		/* Affichage du menu et saisie du choix */
 		
@@ -46,11 +52,11 @@ int main(void) {
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
-			case 1: nouvelle_partie(); break;
-			case 2: charger_partie(); break;
-			case 3: printf("\nJeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
+			case 1: nouvelle_partie(mretour); break;
+			case 2: charger_partie(mretour); break;
+			case 3: strcpy(mretour, "\tJeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
 			case 4: break;
-			default: erreur = vrai;
+			default: strcpy(mretour, "\tErreur: votre choix doit etre compris entre 1 et 3\n"); erreur = vrai;
 		}
 	
 	}
