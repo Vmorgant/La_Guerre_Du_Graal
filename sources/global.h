@@ -63,6 +63,7 @@
 
 #include<stdio.h>
 #include <unistd.h>
+#include <assert.h>
 /**
 *\file global.h
 *\brief Ce fichier contient les définitions de chaque structure globales utilisées dans le projet

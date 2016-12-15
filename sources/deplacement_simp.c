@@ -12,7 +12,6 @@
 #include "file_chemin.h"
 #include "Init_map.h"
 #include <time.h>
-#include <assert.h>
 #include <string.h>
 
 
