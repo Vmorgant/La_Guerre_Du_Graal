@@ -7,7 +7,8 @@
 */
 
 
-int charger_partie( char  nomsave[10], t_liste * ordre_action, int * Nb_tours);
-int sauver_partie( char  nomsave[10], t_liste * ordre_action, int Nb_tours);
-int choix_save(t_liste * ordre_action, int * Nb_tours);
-void quitter_partie(t_liste * ordre_action, int Nb_tours);
+int charger_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours);
+int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours);
+void charger_partie();
+void nouvelle_partie();
+void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant);

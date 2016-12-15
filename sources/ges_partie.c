@@ -650,7 +650,7 @@ void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour)
 			case 1: deplacement_simp(ordre_action,*carte); break;
 			case 2: choix_competence(ordre_action,gagnant,carte); break;
 			case 3: break;
-			case 4: quitter_partie(ordre_action, *NbTour); break;
+			case 4: quitter_partie(ordre_action, *NbTour, gagnant); break;
 			default: strcpy(mretour,"\tVotre choix doit etre compris entre 1 et 4\n"); erreur = vrai;
 		}
 	} while((choix != 3) && *gagnant == 0);
