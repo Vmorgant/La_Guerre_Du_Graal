@@ -27,9 +27,11 @@ t_map creerMat(){
         matrice.cell[i] = (int*) malloc(matrice.ncolonnes * sizeof(int));
         for (j=0; j < matrice.ncolonnes; j++){    	
         	matrice.cell[i][j] = 0;
+		assert(matrice.cell[i][j] == 0); 
         }
             
     }
+	
     return matrice;
 }
 
@@ -106,44 +108,53 @@ void afficherMat (t_map mat){
 	    		couleur("34;1");					 //On écrit en bleu et en gras
 	    		printf("SAB");					
 	    		couleur("0");						 //On réinitialise le système de couleur
+		 
 	    		
 	    	}
 	    	if(mat.cell[i][j] == 2) {				 //Si la case contient une "Saber" Rouge
 	    		couleur("31;1");					 //On écrit en rouge et en gras
 	    		printf("SAB");
 	    		couleur("0");
+		
 	    	}
 		if(mat.cell[i][j] == 4) {				 //Si la case contient une "Archer" Rouge
+			
 	    		couleur("31;1");					 //On écrit en rouge et en gras
 	    		printf("ARC");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 3) {				 //Si la case contient un "Archer" Bleu
+			 
 	    		couleur("34;1");					 //On écrit en bleu et en gras
 	    		printf("ARC");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 5) {				 //Si la case contient un "Caster" Bleu
+			 
 	    		couleur("34;1");					 //On écrit en bleu et en gras
 	    		printf("CAS");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 6) {				 //Si la case contient un "Caster" Rouge
+			
 	    		couleur("31;1");					 //On écrit en rouge et en gras
 	    		printf("CAS");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 7) {				 //Si la case contient un "Berzerker" Bleu
+			 
 	    		couleur("34;1");					 //On écrit en bleu et en gras
 	    		printf("BER");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 8) {				 //Si la case contient un "Berzerker" Rouge
+			
 	    		couleur("31;1");					 //On écrit en Rouge et en gras
 	    		printf("BER");
 	    		couleur("0");
 	    	}
 		if(mat.cell[i][j] == 9) {				 //Si la case contient un "Lancer" Bleu
+			
 	    		couleur("34;1");					 //On écrit en bleu et en gras
 	    		printf("LAN");
 	    		couleur("0");
