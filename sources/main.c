@@ -147,14 +147,13 @@ int main(void) {
 	int choix, erreur = faux,sdl = 0,i;
 
 	sdl=init_SDL();
-	if (sdl == 1){
 		SDL_Event event;
 		SDL_DisplayMode current;
 		const Uint8 *keystates = SDL_GetKeyboardState(NULL);/*stockage de l'état des touches du clavier*/
 		SDL_Surface* Fond =SDL_LoadBMP("../Ressources/images/menu_principal.bmp");// chargement de l'image du menu principal
 		TTF_Font *police=NULL; //stockage de la police
 		police = TTF_OpenFont("../Ressources/police/angelina.ttf", 63);
-		SDL_Color textColor = {255,255,255};//blanc
+		SDL_Color textColor = {255,255,255,255};//blanc
 		SDL_Surface *message, *message2= NULL; 
 
 		/*Chargement de la résolution courante de l'écran*/
@@ -197,8 +196,7 @@ int main(void) {
 		SDL_BlitSurface(message,NULL,SDL_GetWindowSurface(Fenetre),&C);
 		SDL_UpdateWindowSurface(Fenetre);
 		
-           
-	}
+
 	
 	do {		
 		clearScreen();	
