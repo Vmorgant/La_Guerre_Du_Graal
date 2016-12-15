@@ -176,6 +176,7 @@ void placer(t_liste *ordre_action,t_map * carte){
 
 		persoc.x = x;
 		persoc.y = y;
+		modif_elt(ordre_action, persoc);
 		assert(persoc.x == x); //on vérifie que les coordonnées du personnages sont bien celle entrée par le joueur
 		assert(persoc.y == y);
 
@@ -593,7 +594,7 @@ void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
 		switch(choix){	
 
 				case 1:
-					if(persoc.pa >= persoc.classe.atq1.coutPA) {//On vérifie si le personnage peu lancer l'attaque.
+					if(persoc.pa >= persoc.classe.atq1.coutPA) {/*On vérifie si le personnage peu lancer l'attaque.*/
 						if(persoc.classe.atq1.type == 1)
 							choix_cible1(ordre_action,persoc.classe.atq1,gagnant,carte, mretour);
 						else choix_cible2(ordre_action,persoc.classe.atq1,gagnant,carte, mretour);
@@ -612,7 +613,7 @@ void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
 						erreur = vrai;
 					}
 					break;
-				//case 3: choix_cible(ordre_action,carte,persoc.classe.ulti); break;// Préparation de l'implantation des ulti dans une prochaine version.
+				//case 3: choix_cible(ordre_action,carte,persoc.classe.ulti); break; Préparation de l'implantation des ulti dans une prochaine version.
 				case 4 : break;
 				default: strcpy(mretour,"\tVotre choix doit etre compris entre 1 et 4\n"); erreur = vrai;
 			}
@@ -677,7 +678,6 @@ void gestion_tour(t_liste *ordre_action,int *NbTour,t_map * carte,int *gagnant){
  * \param t_liste *ordre_action : la liste des personnages joués triée int *gagnant numero de l'équipe gagnante, t_map * carte
  */
 
-	en_tete(ordre_action);
 	t_personnage persoc;
 	valeur_elt(ordre_action, &persoc);
 	while(*gagnant ==0){

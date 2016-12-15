@@ -26,6 +26,7 @@ int charger_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours) {
 	int i;
 	FILE * fic = NULL;
 	char  dirsave[100];
+	t_personnage persoc;
 	t_save save;
 
 	sprintf(dirsave, "../Saves/%s", nomsave);
@@ -41,8 +42,13 @@ int charger_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours) {
 			ajout_droit(ordre_action, save.tab_action[i]);
 		}
 		*Nb_tours = save.nbtours;
+
 		en_tete(ordre_action);
-		
+		valeur_elt(ordre_action, &persoc);
+		while( (persoc.x != save.persoc.x) || (persoc.y != save.persoc.y) ){
+			suivant(ordre_action);
+			valeur_elt(ordre_action, &persoc);
+		}
 		fclose(fic);
 		return faux;
 	} else return vrai;
@@ -64,12 +70,14 @@ int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours) {
 	fic = fopen( dirsave,"w" );
 
 	if( fic != NULL ) {
+		valeur_elt(ordre_action, &persoc);
+		save.persoc = persoc;
 
 		compter_elts(ordre_action, &nbpersos);
-
 		t_personnage tab_action[nbpersos];
 
 		en_tete(ordre_action);
+
 		for(i = 0; i < nbpersos; i++) {
 			valeur_elt(ordre_action, &persoc);
 			save.tab_action[i] = persoc;
@@ -155,7 +163,7 @@ void charger_partie(char mbilan[100]) {
 						gestion_tour(&ordre_action,&Nb_tours, &carte,&gagnant);
 					}
 					if(gagnant == -1) sprintf(mbilan, "\tLa partie a bien été enregistrée.\n");
-					else sprintf(mbilan, "\tLe joueur %i a gagné en %i tours\n",gagnant,Nb_tours);
+					else if(gagnant != -2) sprintf(mbilan, "\tLe joueur %i a gagné en %i tours\n",gagnant,Nb_tours);
 					choix = nb_saves+1;
 				}
 
@@ -247,11 +255,12 @@ void nouvelle_partie(char mbilan[100]) {
 					placer(&ordre_action, &carte);
 					carte=actumap(&ordre_action, carte);
 					afficherMat(carte);
+					en_tete(&ordre_action);
 					while (gagnant == 0){
 						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
 					}
-					if(gagnant == -1) sprintf(mbilan, "\tLa partie a été enregistrée.\n");
-					else sprintf(mbilan, "\tLe joueur %i a gagné en %i tours\n", gagnant, NbTour);
+					if(gagnant == -1) sprintf(mbilan, "\tLa partie bien a été enregistrée.\n");
+					else if(gagnant != -2) sprintf(mbilan, "\tLe joueur %i a gagné en %i tours\n", gagnant, NbTour);
 					choix = 4;
 					break;
 				}
@@ -355,13 +364,14 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 							printf("Entrez le nom de votre sauvegarde (30 caractères max) :\n\t");
 
 							while(c = getchar() != '\n'); /* vide le buffer */
-							if(c = fgets(new_save, 30, stdin) != NULL){}; /* recupère la chaine */
-							while ((c = getchar()) != '\n' && c != EOF){} /* revide le buffer au cas ou il y ai plus de 30 caractères */
-							p = strchr(new_save, '\n'); /* trouve le '\n' à la fin */
+							if(c = fgets(new_save, 31, stdin) != NULL){}; /* recupère la chaine */
+							if(strchr(new_save, '\n') == NULL){
+								while ((c = getchar()) != '\n' &&  c != EOF){} /* revide le buffer au cas ou il y ai plus de 30 caractères */
+							}
+							p = strchr(new_save, '\n'); /* cherche le '\n' à la fin */
 							if (p) *p = 0; /* enleve le '\n' à la fin */
-						
+							
 							strcat(new_save,".bin");
-
 							erreur = enregistrer_save(new_save, ordre_action, Nb_tours);
 
 							if(erreur) {
@@ -380,7 +390,7 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 				} while(choix != nb_saves+2);
 				choix = 3;
 				break;
-			case 2:  *gagnant = -1; choix = 3; break;
+			case 2:  *gagnant = -2; choix = 3; break;
 			case 3:  break;
 			default: strcpy(mretour, "\tVotre choix doit être compris entre 1 et 3\n"); erreur = vrai;
 		}

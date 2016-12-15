@@ -138,7 +138,7 @@ typedef struct{int x; int y;}t_noeud;
 *\brief contient les coordonnées d'un noeud
 */
 
-typedef struct{t_personnage tab_action[10]; int nbpersos; int nbtours;}t_save;
+typedef struct{t_personnage tab_action[10]; int nbpersos; int nbtours; t_personnage persoc;}t_save;
 /**
 *\struct t_save
 *\brief contient les données d'une sauvegarde
