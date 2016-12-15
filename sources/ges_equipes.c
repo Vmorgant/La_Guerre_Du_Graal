@@ -106,14 +106,15 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
  * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant.
  */
 	int nb_persos = 0, i, choix;
-
+	t_personnage persoc;
 	compter_elts(equipe, &nb_persos);
 	
 	if(!liste_vide(equipe)){
 		en_tete(equipe);
 		/* Affichage du menu et saisie du choix */
 		for (i =1; i <= nb_persos; i++){
-			printf(" %i - Enlever %s de l'equipe %i\n", i, equipe->ec->personnage.classe.nom, joueur);
+			valeur_elt(equipe, &persoc);
+			printf(" %i - Enlever %s de l'equipe %i\n", i, persoc.classe.nom, joueur);
 			suivant(equipe);
 		}
 		printf("\n %i - Retour\n", nb_persos+1);
@@ -125,7 +126,8 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
 			for (i = 1; i < choix; i++){
 					suivant(equipe);
 			}
-			* PE += equipe->ec->personnage.classe.coutPE;
+			valeur_elt(equipe, &persoc);
+			* PE += persoc.classe.coutPE;
 			oter_elt(equipe);
 		}else if (choix == nb_persos+1) printf("Personnage non existant.\n");
 	}else printf("L'equipe %i est déjà vide.\n", joueur);

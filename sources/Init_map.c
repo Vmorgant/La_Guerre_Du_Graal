@@ -43,6 +43,7 @@ t_map actumap(t_liste * ordre_action, t_map map){
  * \return une matrice d'entier avec les indices des personnages à leurs coordonnées
  */
    t_element * tampon = ordre_action->ec;
+   t_personnage persoc;
    int i, j;
 
    for (i=0; i < map.nlignes; i++){
@@ -52,24 +53,24 @@ t_map actumap(t_liste * ordre_action, t_map map){
 
    en_tete(ordre_action);
    while(!hors_liste(ordre_action)){
-	if( (ordre_action->ec->personnage.x != -1) && (ordre_action->ec->personnage.y != -1) ) {
-	    if (ordre_action->ec->personnage.joueur == 1){     
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1;
-				// On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 5;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Berserker")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 7;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Lancer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 9;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 11;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 13;
-	    } else if (ordre_action->ec->personnage.joueur == 2){
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 2;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 4;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 6;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Berserker")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 8;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Lancer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 10;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Rider")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 12;
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Assassin")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 14;
+	valeur_elt(ordre_action, &persoc);
+	if( (persoc.x != -1) && (persoc.y != -1) ) {
+	    if (persoc.joueur == 1){     
+				if (!strcmp(persoc.classe.nom ,"Saber")) map.cell[persoc.x][persoc.y] = 1;
+				else if (!strcmp(persoc.classe.nom ,"Archer")) map.cell[persoc.x][persoc.y] = 3;
+				else if (!strcmp(persoc.classe.nom ,"Caster")) map.cell[persoc.x][persoc.y] = 5;
+				else if (!strcmp(persoc.classe.nom ,"Berserker")) map.cell[persoc.x][persoc.y] = 7;
+				else if (!strcmp(persoc.classe.nom ,"Lancer")) map.cell[persoc.x][persoc.y] = 9;
+				else if (!strcmp(persoc.classe.nom ,"Rider")) map.cell[persoc.x][persoc.y] = 11;
+				else if (!strcmp(persoc.classe.nom ,"Assassin")) map.cell[persoc.x][persoc.y] = 13;
+	    } else if (persoc.joueur == 2){
+				if (!strcmp(persoc.classe.nom ,"Saber")) map.cell[persoc.x][persoc.y] = 2;
+				else if (!strcmp(persoc.classe.nom ,"Archer")) map.cell[persoc.x][persoc.y] = 4;
+				else if (!strcmp(persoc.classe.nom ,"Caster")) map.cell[persoc.x][persoc.y] = 6;
+				else if (!strcmp(persoc.classe.nom ,"Berserker")) map.cell[persoc.x][persoc.y] = 8;
+				else if (!strcmp(persoc.classe.nom ,"Lancer")) map.cell[persoc.x][persoc.y] = 10;
+				else if (!strcmp(persoc.classe.nom ,"Rider")) map.cell[persoc.x][persoc.y] = 12;
+				else if (!strcmp(persoc.classe.nom ,"Assassin")) map.cell[persoc.x][persoc.y] = 14;
 
 	    }
 	}
