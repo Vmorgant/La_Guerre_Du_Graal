@@ -396,3 +396,126 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 		}
 	} while (choix != 3);
 }
+
+void gerer_save(char mbilan[100]) {
+	int choix = -1, erreur= faux, nb_saves=0;
+	char mretour[100] = "\n", new_name[34], new_dir[34];
+	char  dirsave[100];
+	char *p, c;
+	int i =0;
+
+	FILE * fic = NULL;
+	struct dirent * ent;
+
+	do{
+		clearScreen();
+		/* Traitement du choix de l'utilisateur */
+		printf("Gestion des sauvegardes :\n");
+		printf("Choisissez une sauvegarde : \n");
+
+		nb_saves = 0;
+
+		if(erreur) {
+			couleur("31");
+			printf("%s",mretour);
+			couleur("0");
+		} else {
+			couleur("32");
+			printf("%s",mretour);
+			couleur("0");
+		}
+		erreur = faux;
+		strcpy(mretour,"\n");
+			DIR * rep = opendir("../Saves/");
+		     
+		if (rep != NULL) {
+			while ((ent = readdir(rep)) != NULL) {
+				if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
+		 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
+					nb_saves++;
+					printf(" %i- %s\n", nb_saves, ent->d_name);
+				}
+			}
+			printf("\n %i- Annuler\n", nb_saves+1);
+			printf("\nVotre choix : ");
+			scanf("%i", &choix);
+
+			if(choix > 0 && choix < nb_saves +1) {
+				seekdir(rep,choix + 1);
+				ent = readdir(rep);
+				
+				sprintf(dirsave, "../Saves/%s", ent->d_name);
+
+				printf("%s\n", ent->d_name);
+					
+				if( (fic = fopen(dirsave, "r")) == NULL) {
+					strcpy(mretour, "\tCette sauvegarde n'existe pas.\n");
+				} else {
+				
+					do {
+						clearScreen();
+						/* Traitement du choix de l'utilisateur */
+						printf("Gestion des sauvegardes :\n");
+						printf("Que souhaitez vous faire ?\n");
+
+
+						if(erreur) {
+							couleur("31");
+							printf("%s",mretour);
+							couleur("0");
+						} else {
+							couleur("32");
+							printf("%s",mretour);
+							couleur("0");
+						}
+						erreur = faux;
+						strcpy(mretour,"\n");				
+
+						printf(" 1- Renommer sauvegarde.\n");
+						printf(" 2- Supprimer sauvegarde.\n");
+						printf(" 3- Retour.\n");
+						
+						printf("\nVotre choix : ");
+						scanf("%i", &choix);
+						
+						switch(choix) {
+							case 1:
+								clearScreen();
+								printf("Entrez le nom de votre sauvegarde (30 caractères max) :\n\t");
+
+								while(c = getchar() != '\n'); /* vide le buffer */
+								if(c = fgets(new_name, 31, stdin) != NULL){}; /* recupère la chaine */
+								if(strchr(new_name, '\n') == NULL){
+									while ((c = getchar()) != '\n' &&  c != EOF){} /* revide le buffer au cas ou il y ai plus de 30 caractères */
+								}
+								p = strchr(new_name, '\n'); /* cherche le '\n' à la fin */
+								if (p) *p = 0; /* enleve le '\n' à la fin */
+							
+								strcat(new_name,".bin");
+								sprintf(new_dir, "../Saves/%s", new_name);
+
+								printf("%s\n", new_dir);
+
+								rename(dirsave, new_dir);
+								choix = 3;
+								break;
+							case 2: remove(dirsave); choix = 3; break;
+							case 3:break;
+							default : strcpy(mretour, "\tVotre choix doit être compris entre  1 et 3.\n"); erreur = vrai;
+						}
+					} while (choix != 3);
+					fclose(fic);
+					closedir(rep);
+					choix = -1;
+				}
+			} else if (choix > nb_saves+1 || choix < 1) {
+				sprintf(mretour, "\tVotre choix doit être compris entre  1 et %i.\n", nb_saves+2);
+				erreur = vrai;
+			}
+		} else {
+			strcpy(mretour, "\tLe dossier de sauvegardes n'existe pas.\n");
+			erreur = vrai;
+			break;
+		}
+	} while(choix != nb_saves+1);
+}

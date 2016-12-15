@@ -45,8 +45,9 @@ int main(void) {
 		
 		printf(" 1 - Nouvelle Partie\n");
 		printf(" 2 - Charger une partie\n");
-		printf(" 3 - Credits\n");
-		printf(" 4 - Quitter\n");
+		printf(" 3 - Gestion des sauvegardes\n");
+		printf(" 4 - Credits\n");
+		printf(" 5 - Quitter\n");
 		printf("\nVotre choix : ");
 		scanf("%d",&choix);
 
@@ -54,8 +55,9 @@ int main(void) {
 		switch(choix) {
 			case 1: nouvelle_partie(mretour); break;
 			case 2: charger_partie(mretour); break;
-			case 3: strcpy(mretour, "\tJeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
-			case 4: break;
+			case 3: gerer_save(mretour); break;
+			case 4: strcpy(mretour, "\tJeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
+			case 5: break;
 			default: strcpy(mretour, "\tErreur: votre choix doit etre compris entre 1 et 3\n"); erreur = vrai;
 		}
 	
