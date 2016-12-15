@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>La Guerre du Graal: Référence du fichier save.c</title>
+<title>La Guerre du Graal: Référence du fichier main.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,6 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">La Guerre du Graal
    </div>
-   <div id="projectbrief">Projet L2 SPI Martin Lebourdais Corentin Petit Victor Morgant</div>
   </td>
  </tr>
  </tbody>
@@ -81,28 +80,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
-<div class="title">Référence du fichier save.c</div>  </div>
+<div class="title">Référence du fichier main.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Ce fichier contient les définitions des fonctions permattant de sauvegarder et charger une partie.  
+<p>Menu principal et lancement de la partie.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00020_source.html">global.h</a>&quot;</code><br />
-<code>#include &quot;listes_ptr.h&quot;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00021_source.html">global.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00018_source.html">ges_equipes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00025_source.html">listes_ptr.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00016_source.html">file_chemin.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00023_source.html">Init_map.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00014_source.html">deplacement_simp.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00020_source.html">ges_partie.h</a>&quot;</code><br />
+<code>#include &quot;save.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Graphe des dépendances par inclusion de save.c:</div>
+Graphe des dépendances par inclusion de main.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00044.png" border="0" usemap="#save_8c" alt=""/></div>
+<div class="center"><img src="a00047.png" border="0" usemap="#main_8c" alt=""/></div>
 <!-- MAP 0 -->
 </div>
-</div><a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p>Ce fichier contient les définitions des fonctions permattant de sauvegarder et charger une partie. </p>
-<dl class="section author"><dt>Auteur</dt><dd>Corentin Petit </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>05/12/2016 </dd></dl>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a9d7e8af417b6d543da691e9c0e2f6f9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d7e8af417b6d543da691e9c0e2f6f9f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00026.html#a9d7e8af417b6d543da691e9c0e2f6f9f">clearScreen</a> ()</td></tr>
+<tr class="memdesc:a9d7e8af417b6d543da691e9c0e2f6f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction permettant d'effacer l'écran. <br /></td></tr>
+<tr class="separator:a9d7e8af417b6d543da691e9c0e2f6f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb6688570eade5bbce60e9f6e124de44"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb6688570eade5bbce60e9f6e124de44"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>lancer1v1</b> ()</td></tr>
+<tr class="separator:adb6688570eade5bbce60e9f6e124de44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a840291bc02cba5474a4cb46a9b9566fe"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (void)</td></tr>
+<tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Menu principal et lancement de la partie. </p>
+<dl class="section version"><dt>Version</dt><dd>1.0  Corentin Petit </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>11/11/2016 </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

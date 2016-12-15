@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>La Guerre du Graal: Référence du fichier Init_map.h</title>
+<title>La Guerre du Graal: Référence du fichier Init_map.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,6 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">La Guerre du Graal
    </div>
-   <div id="projectbrief">Projet L2 SPI Martin Lebourdais Corentin Petit Victor Morgant</div>
   </td>
  </tr>
  </tbody>
@@ -81,51 +80,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
-<div class="title">Référence du fichier Init_map.h</div>  </div>
+<div class="title">Référence du fichier Init_map.c</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Création de la map.  
+<p>Ce fichier contient les fonctions permettant la création de la map.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><div class="dynheader">
-Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00021_source.html">global.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00025_source.html">listes_ptr.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de Init_map.c:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00042.png" border="0" usemap="#Init__map_8hdep" alt=""/></div>
+<div class="center"><img src="a00043.png" border="0" usemap="#Init__map_8c" alt=""/></div>
 <!-- MAP 0 -->
 </div>
-</div>
-<p><a href="a00022_source.html">Aller au code source de ce fichier.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:aabcb2d6536b6c0ab41f99493c911489b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aabcb2d6536b6c0ab41f99493c911489b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>couleur</b>(param)&#160;&#160;&#160;printf(&quot;\033[%sm&quot;,param)</td></tr>
-<tr class="separator:aabcb2d6536b6c0ab41f99493c911489b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Fonctions</h2></td></tr>
-<tr class="memitem:aabb31eb0a9fed7b9013e4a396d92d8ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aabb31eb0a9fed7b9013e4a396d92d8ae"></a>
-<a class="el" href="a00006.html">t_map</a>&#160;</td><td class="memItemRight" valign="bottom"><b>creerMat</b> ()</td></tr>
-<tr class="separator:aabb31eb0a9fed7b9013e4a396d92d8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1280978369430f0c5e9696d4ef52517c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1280978369430f0c5e9696d4ef52517c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficherMat</b> (<a class="el" href="a00006.html">t_map</a> mat)</td></tr>
-<tr class="separator:a1280978369430f0c5e9696d4ef52517c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e1244b48997edd4275c613db97c6496"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e1244b48997edd4275c613db97c6496"></a>
-<a class="el" href="a00006.html">t_map</a>&#160;</td><td class="memItemRight" valign="bottom"><b>actumap</b> (<a class="el" href="a00005.html">t_liste</a> *ordreaction, <a class="el" href="a00006.html">t_map</a> map)</td></tr>
-<tr class="separator:a3e1244b48997edd4275c613db97c6496"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37963b5f2d2efb0fa80a11ac2999be5c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a37963b5f2d2efb0fa80a11ac2999be5c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>free_map</b> (<a class="el" href="a00006.html">t_map</a> map)</td></tr>
-<tr class="separator:a37963b5f2d2efb0fa80a11ac2999be5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p>Création de la map. </p>
+</div><a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Ce fichier contient les fonctions permettant la création de la map. </p>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section author"><dt>Auteur</dt><dd>Martin Lebourdais </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>18/11/2016 </dd></dl>
+<dl class="section author"><dt>Auteur</dt><dd>Victor Morgant Martin Lebourdais Corentin Petit </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>14/11/2016 </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

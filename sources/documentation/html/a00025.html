@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>La Guerre du Graal: Référence du fichier main.c</title>
+<title>La Guerre du Graal: Référence du fichier listes_ptr.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,6 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">La Guerre du Graal
    </div>
-   <div id="projectbrief">Projet L2 SPI Martin Lebourdais Corentin Petit Victor Morgant</div>
   </td>
  </tr>
  </tbody>
@@ -84,48 +83,77 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   <div class="summary">
 <a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
-<div class="title">Référence du fichier main.c</div>  </div>
+<div class="title">Référence du fichier listes_ptr.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Menu principal et lancement de la partie.  
+<p>Ce fichier contient les définitions des primitives d'acces aux listes.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00020_source.html">global.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00017_source.html">ges_equipes.h</a>&quot;</code><br />
-<code>#include &quot;listes_ptr.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00015_source.html">file_chemin.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00022_source.html">Init_map.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00013_source.html">deplacement_simp.h</a>&quot;</code><br />
-<code>#include &quot;ges_partie.h&quot;</code><br />
-<code>#include &quot;save.h&quot;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Graphe des dépendances par inclusion de main.c:</div>
+<div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
 <div class="dyncontent">
-<div class="center"><img src="a00043.png" border="0" usemap="#main_8c" alt=""/></div>
+<div class="center"><img src="a00046.png" border="0" usemap="#listes__ptr_8hdep" alt=""/></div>
 <!-- MAP 0 -->
 </div>
-</div><table class="memberdecls">
+</div>
+<p><a href="a00025_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a9d7e8af417b6d543da691e9c0e2f6f9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d7e8af417b6d543da691e9c0e2f6f9f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00025.html#a9d7e8af417b6d543da691e9c0e2f6f9f">clearScreen</a> ()</td></tr>
-<tr class="memdesc:a9d7e8af417b6d543da691e9c0e2f6f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction permettant d'effacer l'écran. <br /></td></tr>
-<tr class="separator:a9d7e8af417b6d543da691e9c0e2f6f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb6688570eade5bbce60e9f6e124de44"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb6688570eade5bbce60e9f6e124de44"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>lancer1v1</b> ()</td></tr>
-<tr class="separator:adb6688570eade5bbce60e9f6e124de44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a840291bc02cba5474a4cb46a9b9566fe"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (void)</td></tr>
-<tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b7627ef2c1e9cb96d38a17a29577f5a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b7627ef2c1e9cb96d38a17a29577f5a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_liste</b> (<a class="el" href="a00006.html">t_liste</a> *)</td></tr>
+<tr class="separator:a0b7627ef2c1e9cb96d38a17a29577f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65c75ddf120e39fbe7a609133d6381eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65c75ddf120e39fbe7a609133d6381eb"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>liste_vide</b> (<a class="el" href="a00006.html">t_liste</a> *)</td></tr>
+<tr class="separator:a65c75ddf120e39fbe7a609133d6381eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0752564ea5cc0cdedb92ab6c2c1a4fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0752564ea5cc0cdedb92ab6c2c1a4fe"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hors_liste</b> (<a class="el" href="a00006.html">t_liste</a> *)</td></tr>
+<tr class="separator:ab0752564ea5cc0cdedb92ab6c2c1a4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4859153f0b34828b3c94a9fa49e5d395"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4859153f0b34828b3c94a9fa49e5d395"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>en_tete</b> (<a class="el" href="a00006.html">t_liste</a> *)</td></tr>
+<tr class="separator:a4859153f0b34828b3c94a9fa49e5d395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3046dd762463c20f50c9340b336e3cd8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3046dd762463c20f50c9340b336e3cd8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>en_queue</b> (<a class="el" href="a00006.html">t_liste</a> *)</td></tr>
+<tr class="separator:a3046dd762463c20f50c9340b336e3cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad7a7dd66733adc89aef2d28cb189a74"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad7a7dd66733adc89aef2d28cb189a74"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>precedent</b> (<a class="el" href="a00006.html">t_liste</a> *)</td></tr>
+<tr class="separator:aad7a7dd66733adc89aef2d28cb189a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cb38086c4d55c7d8e8e82f74ca85eae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2cb38086c4d55c7d8e8e82f74ca85eae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>suivant</b> (<a class="el" href="a00006.html">t_liste</a> *)</td></tr>
+<tr class="separator:a2cb38086c4d55c7d8e8e82f74ca85eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa016faa5e2ea12e04177251d111df07a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa016faa5e2ea12e04177251d111df07a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>valeur_elt</b> (<a class="el" href="a00006.html">t_liste</a> *, <a class="el" href="a00009.html">t_personnage</a> *)</td></tr>
+<tr class="separator:aa016faa5e2ea12e04177251d111df07a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af48029077e382e3f7ff227c1ce8be5d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af48029077e382e3f7ff227c1ce8be5d9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>modif_elt</b> (<a class="el" href="a00006.html">t_liste</a> *, <a class="el" href="a00009.html">t_personnage</a>)</td></tr>
+<tr class="separator:af48029077e382e3f7ff227c1ce8be5d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89973d73d0150915530a583a62599968"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89973d73d0150915530a583a62599968"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>oter_elt</b> (<a class="el" href="a00006.html">t_liste</a> *)</td></tr>
+<tr class="separator:a89973d73d0150915530a583a62599968"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8276e5c2a79bb28b7452184678a551fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8276e5c2a79bb28b7452184678a551fe"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ajout_droit</b> (<a class="el" href="a00006.html">t_liste</a> *, <a class="el" href="a00009.html">t_personnage</a>)</td></tr>
+<tr class="separator:a8276e5c2a79bb28b7452184678a551fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62451ec33d49a154efb6332bbc0ee413"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62451ec33d49a154efb6332bbc0ee413"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ajout_gauche</b> (<a class="el" href="a00006.html">t_liste</a> *, <a class="el" href="a00009.html">t_personnage</a>)</td></tr>
+<tr class="separator:a62451ec33d49a154efb6332bbc0ee413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1495faff01bebb63f22d610d32d1aab4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1495faff01bebb63f22d610d32d1aab4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher</b> (<a class="el" href="a00006.html">t_liste</a> *)</td></tr>
+<tr class="separator:a1495faff01bebb63f22d610d32d1aab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9679aebb698baa75a24ccd47b870a772"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9679aebb698baa75a24ccd47b870a772"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>compter_elts</b> (<a class="el" href="a00006.html">t_liste</a> *, int *)</td></tr>
+<tr class="separator:a9679aebb698baa75a24ccd47b870a772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ecbb44530688750d47fa00a96d6add8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ecbb44530688750d47fa00a96d6add8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>vider</b> (<a class="el" href="a00006.html">t_liste</a> *p)</td></tr>
+<tr class="separator:a7ecbb44530688750d47fa00a96d6add8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab08b37ee056b9411e2265637fb3af1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab08b37ee056b9411e2265637fb3af1c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>supprimer</b> (<a class="el" href="a00006.html">t_liste</a> *p)</td></tr>
+<tr class="separator:aab08b37ee056b9411e2265637fb3af1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p>Menu principal et lancement de la partie. </p>
-<dl class="section version"><dt>Version</dt><dd>1.0  Corentin Petit </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>11/11/2016 </dd></dl>
+<div class="textblock"><p>Ce fichier contient les définitions des primitives d'acces aux listes. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Corentin Petit </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>09/11/2016 </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

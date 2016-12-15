@@ -1,6 +1,6 @@
 /**
 *\file Init_map.c
-*\brief Création de la map
+*\brief Ce fichier contient les fonctions permettant la création de la map
 *\version 1.0
 *\author Victor Morgant  Martin Lebourdais Corentin Petit
 *\date 14/11/2016
@@ -12,7 +12,11 @@
 #include "listes_ptr.h"
 
 t_map creerMat(){
-	/*Initialisation de la matrice map à 0*/
+/**
+ * \fn creerMat()
+ * \brief Fonction initialisant la matrice 10/10
+ * \return une matrice d'entier remplie de 0
+ */
     t_map matrice;
     int i, j;
     matrice.nlignes = 10;
@@ -30,7 +34,12 @@ t_map creerMat(){
 }
 
 t_map actumap(t_liste * ordre_action, t_map map){
-   //Fontion qui actualise la map
+/**
+ * \fn actumap(t_liste * ordre_action, t_map map)
+ * \brief  Fontion qui actualise la map en placant les indices des personnages aux bonnes coordonnées de la matrice
+* \param t_liste * ordre_action la liste des personnages triée t_map map une matrice d'entier .
+ * \return une matrice d'entier avec les indices des personnages à leurs coordonnées
+ */
    t_element * tampon = ordre_action->ec;
    int i, j;
 
@@ -43,7 +52,8 @@ t_map actumap(t_liste * ordre_action, t_map map){
    while(!hors_liste(ordre_action)){
 	if( (ordre_action->ec->personnage.x != -1) && (ordre_action->ec->personnage.y != -1) ) {
 	    if (ordre_action->ec->personnage.joueur == 1){     
-				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1; // On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
+				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Saber")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 1;
+				// On place le personnage de la classe indiquée dans l'élément courant à ses coordonées dans la matrice.
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Archer")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 3;
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Caster")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 5;
 				if (!strcmp(ordre_action->ec->personnage.classe.nom ,"Berserker")) map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 7;
@@ -75,6 +85,11 @@ t_map actumap(t_liste * ordre_action, t_map map){
 
 
 void afficherMat (t_map mat){
+/**
+ * \fn afficherMat (t_map mat)
+ * \brief  Fontion qui affiche la carte dans le terminal en placant les trois premières lettre du nom de la classe à la case contenant l'indice correspondant
+* \param t_liste * ordre_action la liste des personnages triée t_map map une matrice d'entier .
+ */
     int i, j;
 	printf("x\\y");
     for (j=0;j<10;j++){
@@ -167,6 +182,11 @@ void afficherMat (t_map mat){
 
 
 void free_map(t_map map){
+/**
+ * \fn free_map(t_map map)
+ * \brief  Fontion qui libère la mémoire utilisée par la carte.
+* \param t_map map une matrice d'entier .
+ */
 	int i, j;
 	for (i=0; i < map.nlignes; i++){
 		free(map.cell[i]);

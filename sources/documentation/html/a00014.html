@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>La Guerre du Graal: Référence du fichier file_chemin.c</title>
+<title>La Guerre du Graal: Référence du fichier deplacement_simp.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,6 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">La Guerre du Graal
    </div>
-   <div id="projectbrief">Projet L2 SPI Martin Lebourdais Corentin Petit Victor Morgant</div>
   </td>
  </tr>
  </tbody>
@@ -82,62 +81,207 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Fonctions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
-<div class="title">Référence du fichier file_chemin.c</div>  </div>
+<div class="title">Référence du fichier deplacement_simp.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Ce fichier contient les primitives d'acces aux files de noeuds.  
+<p>Ce fichier contient les en-tête de la version simplifiée des fonctions de déplacement sur la carte.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00020_source.html">global.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00015_source.html">file_chemin.h</a>&quot;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00021_source.html">global.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00016_source.html">file_chemin.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00023_source.html">Init_map.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Graphe des dépendances par inclusion de file_chemin.c:</div>
+Graphe des dépendances par inclusion de deplacement_simp.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00033.png" border="0" usemap="#file__chemin_8c" alt=""/></div>
+<div class="center"><img src="a00032.png" border="0" usemap="#deplacement__simp_8h" alt=""/></div>
 <!-- MAP 0 -->
 </div>
-</div><table class="memberdecls">
+</div><div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dyncontent">
+<div class="center"><img src="a00033.png" border="0" usemap="#deplacement__simp_8hdep" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+</div>
+<p><a href="a00014_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:aaf4be56c084d19f107f0da19c7c17216"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf4be56c084d19f107f0da19c7c17216"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initfile</b> ()</td></tr>
-<tr class="separator:aaf4be56c084d19f107f0da19c7c17216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a102c68ec4d3006b943c1e63ad7bcd563"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a102c68ec4d3006b943c1e63ad7bcd563"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ajouter</b> (<a class="el" href="a00007.html">t_noeud</a> i)</td></tr>
-<tr class="separator:a102c68ec4d3006b943c1e63ad7bcd563"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04ee1626a03e6867490802212829ccc5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04ee1626a03e6867490802212829ccc5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>retirer</b> (<a class="el" href="a00007.html">t_noeud</a> *i)</td></tr>
-<tr class="separator:a04ee1626a03e6867490802212829ccc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dfabfa7163dc55b1cfa0f9317ee5bc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1dfabfa7163dc55b1cfa0f9317ee5bc8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>filevide</b> ()</td></tr>
-<tr class="separator:a1dfabfa7163dc55b1cfa0f9317ee5bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a7a7f6a8c2aff18cc12cd5a8784bb3608"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a7f6a8c2aff18cc12cd5a8784bb3608"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>tete</b></td></tr>
-<tr class="separator:a7a7f6a8c2aff18cc12cd5a8784bb3608"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a404442353660d7effc914ba8220ebf7f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a404442353660d7effc914ba8220ebf7f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>queue</b></td></tr>
-<tr class="separator:a404442353660d7effc914ba8220ebf7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7a2a8030675ff6e2da045bba2c12fe3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7a2a8030675ff6e2da045bba2c12fe3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>nb_valeurs</b></td></tr>
-<tr class="separator:ac7a2a8030675ff6e2da045bba2c12fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac75c08b6079dedf8a7811acd95354446"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac75c08b6079dedf8a7811acd95354446"></a>
-<a class="el" href="a00007.html">t_noeud</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tab</b> [50]</td></tr>
-<tr class="separator:ac75c08b6079dedf8a7811acd95354446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80925ed5707102e43bea03e23ea9ad8b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a80925ed5707102e43bea03e23ea9ad8b">distance</a> (int x, int y, int objx, int objy)</td></tr>
+<tr class="memdesc:a80925ed5707102e43bea03e23ea9ad8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcule le carré de la distance entre le point de départ et l'objectif.  <a href="#a80925ed5707102e43bea03e23ea9ad8b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a80925ed5707102e43bea03e23ea9ad8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b683d97d1725e260c204a6f76777c29"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a2b683d97d1725e260c204a6f76777c29">pathfinding</a> (int x, int y, int objx, int objy, <a class="el" href="a00008.html">t_noeud</a> chemin[50], int *taille, <a class="el" href="a00007.html">t_map</a> map)</td></tr>
+<tr class="separator:a2b683d97d1725e260c204a6f76777c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d333438042f9b24b4a5f00823d41ad5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a1d333438042f9b24b4a5f00823d41ad5">deplacement_simp</a> (<a class="el" href="a00006.html">t_liste</a> *ordre_action, <a class="el" href="a00007.html">t_map</a> map)</td></tr>
+<tr class="memdesc:a1d333438042f9b24b4a5f00823d41ad5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Version simplifiée de la fonction déplacement.  <a href="#a1d333438042f9b24b4a5f00823d41ad5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1d333438042f9b24b4a5f00823d41ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p>Ce fichier contient les primitives d'acces aux files de noeuds. </p>
+<div class="textblock"><p>Ce fichier contient les en-tête de la version simplifiée des fonctions de déplacement sur la carte. </p>
 <dl class="section author"><dt>Auteur</dt><dd>Martin Lebourdais </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>2.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>01/12/2016 </dd></dl>
-</div></div><!-- contents -->
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>22/11/2016 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a1d333438042f9b24b4a5f00823d41ad5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">deplacement_simp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00006.html">t_liste</a> *&#160;</td>
+          <td class="paramname"><em>ordre_action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00007.html">t_map</a>&#160;</td>
+          <td class="paramname"><em>map</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Version simplifiée de la fonction déplacement. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a00006.html" title="création du type liste (pour gérer simultanément plusieures listes de type t_personnage ...">t_liste</a></td><td>*ordre_action : ordre de jeu des personnages (util pour connaître le personnage qui se déplace),<a class="el" href="a00007.html" title="défini la carte par son nombre de lignes/colonnes et une matrice. ">t_map</a> map : Plateau de jeu </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Version simplifiée de la fonction déplacement. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a00006.html" title="création du type liste (pour gérer simultanément plusieures listes de type t_personnage ...">t_liste</a></td><td>*ordre_action : ordre de jeu des personnages (util pour connaître le personnage qui se déplace),<a class="el" href="a00007.html" title="défini la carte par son nombre de lignes/colonnes et une matrice. ">t_map</a> map : Plateau de jeu</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a80925ed5707102e43bea03e23ea9ad8b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">distance </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>objx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>objy</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calcule le carré de la distance entre le point de départ et l'objectif. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>x : Abscisse de départ, int y : Ordonnée de départ, int xobj : Abscisse cible; int yobj : Ordonnée cible </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Calcule le carré de la distance entre le point de départ et l'objectif </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>x : Abscisse de départ, int y : Ordonnée de départ, int xobj : Abscisse cible; int yobj : Ordonnée cible</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a2b683d97d1725e260c204a6f76777c29"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pathfinding </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>objx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>objy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00008.html">t_noeud</a>&#160;</td>
+          <td class="paramname"><em>chemin</em>[50], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>taille</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00007.html">t_map</a>&#160;</td>
+          <td class="paramname"><em>map</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Trouve le chemin le plus court entre le point de départ et l'objectif et retourne ce chemin dans une file. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>x : Abscisse de départ, int y : Ordonnée de départ, int xobj : Abscisse cible; int yobj : Ordonnée cible</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Généré par &#160;<a href="http://www.doxygen.org/index.html">

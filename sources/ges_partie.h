@@ -1,6 +1,6 @@
 /**
-*\file global.h
-*\brief Ce fichier contient les définitions des primitives d'acces aux listes
+*\file ges_partie.h
+*\brief Ce fichier contient les définitions des primitives de gestion de la parie.
 *\author Corentin Petit
 *\version 1.0
 *\date 18/11/2016

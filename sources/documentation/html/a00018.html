@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>La Guerre du Graal: Référence du fichier ges_partie.c</title>
+<title>La Guerre du Graal: Référence du fichier ges_equipes.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,6 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">La Guerre du Graal
    </div>
-   <div id="projectbrief">Projet L2 SPI Martin Lebourdais Corentin Petit Victor Morgant</div>
   </td>
  </tr>
  </tbody>
@@ -81,34 +80,227 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
-<div class="title">Référence du fichier ges_partie.c</div>  </div>
+<div class="title">Référence du fichier ges_equipes.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Ce fichier contient les fonctions permettant le lancement et le déroulement de la partie.  
+<p>Ce fichier contient les définitions des fonctions permettant de modifier les équipes.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;time.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00020_source.html">global.h</a>&quot;</code><br />
-<code>#include &quot;listes_ptr.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00013_source.html">deplacement_simp.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00022_source.html">Init_map.h</a>&quot;</code><br />
-<code>#include &quot;save.h&quot;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Graphe des dépendances par inclusion de ges_partie.c:</div>
+<div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
 <div class="dyncontent">
-<div class="center"><img src="a00038.png" border="0" usemap="#ges__partie_8c" alt=""/></div>
+<div class="center"><img src="a00038.png" border="0" usemap="#ges__equipes_8hdep" alt=""/></div>
 <!-- MAP 0 -->
 </div>
-</div><a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p>Ce fichier contient les fonctions permettant le lancement et le déroulement de la partie. </p>
-<dl class="section author"><dt>Auteur</dt><dd>Victor Morgant Martin Lebourdais Corentin Petit </dd></dl>
+</div>
+<p><a href="a00018_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a81881c560de70e7f41649ddefb5efd12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00018.html#a81881c560de70e7f41649ddefb5efd12">creer_perso</a> (<a class="el" href="a00006.html">t_liste</a> *equipe, <a class="el" href="a00004.html">t_classe</a> classe, int joueur, int *PE)</td></tr>
+<tr class="memdesc:a81881c560de70e7f41649ddefb5efd12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée un personnage de la classe choisie.  <a href="#a81881c560de70e7f41649ddefb5efd12">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a81881c560de70e7f41649ddefb5efd12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a994d5645dd5285703f220c21eb38c849"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00018.html#a994d5645dd5285703f220c21eb38c849">ajout_equipe</a> (<a class="el" href="a00006.html">t_liste</a> *equipe, int joueur, int *PE)</td></tr>
+<tr class="memdesc:a994d5645dd5285703f220c21eb38c849"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute le personnage à l'équipe.  <a href="#a994d5645dd5285703f220c21eb38c849">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a994d5645dd5285703f220c21eb38c849"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fc9764c1f5a4c86bc574439f9092689"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00018.html#a3fc9764c1f5a4c86bc574439f9092689">oter_equipe</a> (<a class="el" href="a00006.html">t_liste</a> *equipe, int joueur, int *PE)</td></tr>
+<tr class="memdesc:a3fc9764c1f5a4c86bc574439f9092689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retire un personnage de la liste.  <a href="#a3fc9764c1f5a4c86bc574439f9092689">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3fc9764c1f5a4c86bc574439f9092689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13288c98091fa36fe74b412dee64918f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00018.html#a13288c98091fa36fe74b412dee64918f">init_equipe</a> (<a class="el" href="a00006.html">t_liste</a> *equipe, int joueur, int *PE)</td></tr>
+<tr class="separator:a13288c98091fa36fe74b412dee64918f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Ce fichier contient les définitions des fonctions permettant de modifier les équipes. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Corentin Petit </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>14/11/2016 </dd></dl>
-</div></div><!-- contents -->
+<dl class="section date"><dt>Date</dt><dd>16/11/2016 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a994d5645dd5285703f220c21eb38c849"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ajout_equipe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00006.html">t_liste</a> *&#160;</td>
+          <td class="paramname"><em>equipe</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>joueur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>PE</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ajoute le personnage à l'équipe. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a00006.html" title="création du type liste (pour gérer simultanément plusieures listes de type t_personnage ...">t_liste</a></td><td>* equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant. </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Ajoute le personnage à l'équipe. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a00006.html" title="création du type liste (pour gérer simultanément plusieures listes de type t_personnage ...">t_liste</a></td><td>* equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a81881c560de70e7f41649ddefb5efd12"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">creer_perso </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00006.html">t_liste</a> *&#160;</td>
+          <td class="paramname"><em>equipe</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00004.html">t_classe</a>&#160;</td>
+          <td class="paramname"><em>classe</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>joueur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>PE</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée un personnage de la classe choisie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a00006.html" title="création du type liste (pour gérer simultanément plusieures listes de type t_personnage ...">t_liste</a></td><td>* equipe : la liste des personnage ,<a class="el" href="a00004.html" title="Définition des différentes classes de personnages. ">t_classe</a> classe : la classe du personnage à ajouter, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant . </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Crée un personnage de la classe choisie. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a00006.html" title="création du type liste (pour gérer simultanément plusieures listes de type t_personnage ...">t_liste</a></td><td>* equipe : la liste des personnage ,<a class="el" href="a00004.html" title="Définition des différentes classes de personnages. ">t_classe</a> classe : la classe du personnage à ajouter, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant .</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a13288c98091fa36fe74b412dee64918f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_equipe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00006.html">t_liste</a> *&#160;</td>
+          <td class="paramname"><em>equipe</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>joueur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>PE</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Menu de création d'équipe. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a00006.html" title="création du type liste (pour gérer simultanément plusieures listes de type t_personnage ...">t_liste</a></td><td>* equipe : la liste des personnage, int joueur : l'identifiant du joueur,int *PE le nombre de PE restant.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3fc9764c1f5a4c86bc574439f9092689"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">oter_equipe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00006.html">t_liste</a> *&#160;</td>
+          <td class="paramname"><em>equipe</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>joueur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>PE</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retire un personnage de la liste. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a00006.html" title="création du type liste (pour gérer simultanément plusieures listes de type t_personnage ...">t_liste</a></td><td>* equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant. </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Retire un personnage de la liste. </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="a00006.html" title="création du type liste (pour gérer simultanément plusieures listes de type t_personnage ...">t_liste</a></td><td>* equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Généré par &#160;<a href="http://www.doxygen.org/index.html">
