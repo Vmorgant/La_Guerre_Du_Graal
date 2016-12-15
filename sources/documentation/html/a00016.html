@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>La Guerre du Graal: Référence du fichier ges_equipes.c</title>
+<title>La Guerre du Graal: Référence du fichier file_chemin.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,6 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">La Guerre du Graal
    </div>
-   <div id="projectbrief">Projet L2 SPI Martin Lebourdais Corentin Petit Victor Morgant</div>
   </td>
  </tr>
  </tbody>
@@ -81,30 +80,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
-<div class="title">Référence du fichier ges_equipes.c</div>  </div>
+<div class="title">Référence du fichier file_chemin.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Ce fichier contient les fonctions permettant de modifier les équipes.  
+<p>Ce fichier contient les définitions des primitives d'acces aux files de noeuds.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00020_source.html">global.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00017_source.html">ges_equipes.h</a>&quot;</code><br />
-<code>#include &quot;listes_ptr.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00021_source.html">global.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Graphe des dépendances par inclusion de ges_equipes.c:</div>
+Graphe des dépendances par inclusion de file_chemin.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00036.png" border="0" usemap="#ges__equipes_8c" alt=""/></div>
+<div class="center"><img src="a00035.png" border="0" usemap="#file__chemin_8h" alt=""/></div>
 <!-- MAP 0 -->
 </div>
-</div><a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p>Ce fichier contient les fonctions permettant de modifier les équipes. </p>
-<dl class="section author"><dt>Auteur</dt><dd>Corentin Petit </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>16/11/2016 </dd></dl>
+</div><div class="textblock"><div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dyncontent">
+<div class="center"><img src="a00036.png" border="0" usemap="#file__chemin_8hdep" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+</div>
+<p><a href="a00016_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:aaf4be56c084d19f107f0da19c7c17216"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf4be56c084d19f107f0da19c7c17216"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initfile</b> ()</td></tr>
+<tr class="separator:aaf4be56c084d19f107f0da19c7c17216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a102c68ec4d3006b943c1e63ad7bcd563"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a102c68ec4d3006b943c1e63ad7bcd563"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ajouter</b> (<a class="el" href="a00008.html">t_noeud</a> i)</td></tr>
+<tr class="separator:a102c68ec4d3006b943c1e63ad7bcd563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04ee1626a03e6867490802212829ccc5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04ee1626a03e6867490802212829ccc5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>retirer</b> (<a class="el" href="a00008.html">t_noeud</a> *i)</td></tr>
+<tr class="separator:a04ee1626a03e6867490802212829ccc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dfabfa7163dc55b1cfa0f9317ee5bc8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1dfabfa7163dc55b1cfa0f9317ee5bc8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>filevide</b> ()</td></tr>
+<tr class="separator:a1dfabfa7163dc55b1cfa0f9317ee5bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Ce fichier contient les définitions des primitives d'acces aux files de noeuds. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Martin Lebourdais </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>2.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>01/12/2016 </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

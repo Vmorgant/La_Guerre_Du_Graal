@@ -1,27 +1,44 @@
-\hypertarget{a00026}{}\section{Référence du fichier save.\+c}
-\label{a00026}\index{save.\+c@{save.\+c}}
+\hypertarget{a00026}{}\section{Référence du fichier main.\+c}
+\label{a00026}\index{main.\+c@{main.\+c}}
 
 
-Ce fichier contient les définitions des fonctions permattant de sauvegarder et charger une partie.  
+Menu principal et lancement de la partie.  
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}global.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ges\+\_\+equipes.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}listes\+\_\+ptr.\+h\char`\"{}}\\*
-Graphe des dépendances par inclusion de save.\+c\+:
+{\ttfamily \#include \char`\"{}file\+\_\+chemin.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Init\+\_\+map.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}deplacement\+\_\+simp.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ges\+\_\+partie.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}save.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de main.\+c\+:
 % FIG 0
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{a00026_a9d7e8af417b6d543da691e9c0e2f6f9f}{clear\+Screen} ()\hypertarget{a00026_a9d7e8af417b6d543da691e9c0e2f6f9f}{}\label{a00026_a9d7e8af417b6d543da691e9c0e2f6f9f}
+
+\begin{DoxyCompactList}\small\item\em Fonction permettant d\textquotesingle{}effacer l\textquotesingle{}écran. \end{DoxyCompactList}\item 
+void {\bfseries lancer1v1} ()\hypertarget{a00026_adb6688570eade5bbce60e9f6e124de44}{}\label{a00026_adb6688570eade5bbce60e9f6e124de44}
+
+\item 
+int {\bfseries main} (void)\hypertarget{a00026_a840291bc02cba5474a4cb46a9b9566fe}{}\label{a00026_a840291bc02cba5474a4cb46a9b9566fe}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
-Ce fichier contient les définitions des fonctions permattant de sauvegarder et charger une partie. 
+Menu principal et lancement de la partie. 
 
-\begin{DoxyAuthor}{Auteur}
-Corentin Petit 
-\end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
-1.\+0 
+1.\+0  Corentin Petit 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-05/12/2016 
+11/11/2016 
 \end{DoxyDate}

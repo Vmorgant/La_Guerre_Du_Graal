@@ -1,17 +1,16 @@
-digraph "save.c"
+digraph "Init_map.h"
 {
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="save.c",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="stdio.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="stdlib.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="global.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00020.html",tooltip="Ce fichier contient les définitions des primitives d&#39;acces aux listes. "];
-  Node4 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="unistd.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
-  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node6 [label="listes_ptr.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00024_source.html"];
+  Node1 [label="Init_map.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="deplacement_simp.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00013.html",tooltip="Ce fichier contient les fonctions de déplacement sur la carte. "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="deplacement_simp.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00014.html",tooltip="Ce fichier contient les en-tête de la version simplifiée des fonctions de déplacement sur la carte..."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="ges_partie.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00019.html",tooltip="Ce fichier contient les fonctions permettant le lancement et le déroulement de la partie..."];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="main.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00026.html",tooltip="Menu principal et lancement de la partie. "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
 }

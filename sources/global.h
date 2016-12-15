@@ -1,9 +1,69 @@
+/*! \mainpage Projet L2 SPI Martin Lebourdais Corentin Petit Victor Morgant
+ *
+ * \section intro_sec Présentation du jeu
+ * 
+ * Ce jeu a été réalisé dans le cadre du projet d’algorithmique de deuxième année de licence SPI. 2 équipes de composées de différents personnage s'affrontent dans un combat à mort.
+ * Chaque classe de personnage possède ses forces et faiblesses, ces classes s'inspirent du jeu et de l'animé Fate Stay Night.\n
+ * Vous devez utiliser un système unix pour pouvoir utiliser ce programme.
+ *
+ * \section install_sec Installation
+ *
+ * \subsection step1 Etape 1 : Téléchargement
+ 	Télécharger les sources du jeu https://github.com/Vmorgant/Projet_Algo.git\n\n
+ 	Télécharger les sources de la SDL 2.0 (nécessaire pour la version 2.0) http://libsdl.org/download-2.0.php\n\n
+ 	Télécharger les sources de la SDL_ttf2 (nécessaire pour la version 2.0)  https://www.libsdl.org/projects/SDL_ttf/\n\n
+	Ouvrir un terminal(pour les étapes suivantes).\n\n
+ * \subsection step2 Etape 2 : Installation de la SDL 2.0 et sdl 2.ttf (seulement pour la version 2.0)
+	Extraire les archives obtenues lors du téléchargement.\n\n
+	Entrez la commande "cd" pour vous placer à la racine puis "mkdir SDL" pour créer le dossier de la SDL.\n\n
+	Déplacez vous dans le dossier où vous avez extrait l'archive de la SDL2.\n\n
+	Entrez la commande :\n
+		-"./configure " si vous êtes super-utilisateur \n
+		-"./configure --prefix=$HOME/SDL" sinon\n\n
+	Entrez la commande "make"\n\n
+	Entrez la commande :\n
+	-"sudo make install" si vous êtes super-utilisateur \n
+	-"make install" sinon\n\n
+	Déplacez vous dans le dossier où vous avez extrait l'archive de la SDL_ttf.\n\n
+	Entrez la commande :\n
+		-"./configure " si vous êtes super-utilisateur 
+		-"./configure --prefix=$HOME/SDL" sinon
+	Entrez la commande "make"\n\n
+	Entrez la commande :\n
+	-"sudo make install" si vous êtes super-utilisateur \n
+	-"make install" sinon\n\n
+\subsection step3 Etape 3 : Installation de la SDL 2.0 et sdl 2.ttf (seulement pour la version 2.0)
+	Extraire les archives obtenues lors du téléchargement.\n\n
+	Ouvrir un terminal.\n\n
+	Entrez la commande "cd" pour vous placer à la racine puis "mkdir SDL" pour créer le dossier de la SDL.\n\n
+	Déplacez vous dans le dossier où vous avez extrait l'archive de la SDL2.\n\n
+	Entrez la commande :\n
+		-"./configure " si vous êtes super-utilisateur\n 
+		-"./configure --prefix=$HOME/SDL" sinon\n\n
+	Entrez la commande "make"\n\n
+	Entrez la commande :\n
+	-"sudo make install" si vous êtes super-utilisateur \n
+	-"make install" sinon\n\n
+	Déplacez vous dans le dossier où vous avez extrait l'archive de la SDL_ttf.\n\n
+	Entrez la commande :\n
+		-"./configure " si vous êtes super-utilisateur \n
+		-"./configure --prefix=$HOME/SDL" sinon\n\n
+	Entrez la commande "make"\n\n
+	Entrez la commande :\n
+	-"sudo make install" si vous êtes super-utilisateur \n
+	-"make install" sinon\n\n
+* \subsection step4 Etape 4 : Installation du jeu
+	Déplacez vous dans le dossier où vous avez extrait l'archive du jeu.\n\n
+	Utilisez la commande make.\n\n
+	Lancez l'exécutable LGDG.out\n\n
+ */
 #ifndef GLOBAL_H
 
 #define GLOBAL_H
 
 #include<stdio.h>
 #include <unistd.h>
+#include <assert.h>
 /**
 *\file global.h
 *\brief Ce fichier contient les définitions de chaque structure globales utilisées dans le projet

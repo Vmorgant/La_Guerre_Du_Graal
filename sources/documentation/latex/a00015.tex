@@ -1,36 +1,50 @@
-\hypertarget{a00015}{}\section{Référence du fichier file\+\_\+chemin.\+h}
-\label{a00015}\index{file\+\_\+chemin.\+h@{file\+\_\+chemin.\+h}}
+\hypertarget{a00015}{}\section{Référence du fichier file\+\_\+chemin.\+c}
+\label{a00015}\index{file\+\_\+chemin.\+c@{file\+\_\+chemin.\+c}}
 
 
-Ce fichier contient les définitions des primitives d\textquotesingle{}acces aux files de noeuds.  
+Ce fichier contient les primitives d\textquotesingle{}acces aux files de noeuds.  
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\\*
 {\ttfamily \#include $<$stdlib.\+h$>$}\\*
 {\ttfamily \#include \char`\"{}global.\+h\char`\"{}}\\*
-Graphe des dépendances par inclusion de file\+\_\+chemin.\+h\+:
+{\ttfamily \#include \char`\"{}file\+\_\+chemin.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de file\+\_\+chemin.\+c\+:
 % FIG 0
-Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
-% FIG 1
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
 void {\bfseries initfile} ()\hypertarget{a00015_aaf4be56c084d19f107f0da19c7c17216}{}\label{a00015_aaf4be56c084d19f107f0da19c7c17216}
 
 \item 
-void {\bfseries ajouter} (\hyperlink{a00007}{t\+\_\+noeud} i)\hypertarget{a00015_a102c68ec4d3006b943c1e63ad7bcd563}{}\label{a00015_a102c68ec4d3006b943c1e63ad7bcd563}
+void {\bfseries ajouter} (\hyperlink{a00008}{t\+\_\+noeud} i)\hypertarget{a00015_a102c68ec4d3006b943c1e63ad7bcd563}{}\label{a00015_a102c68ec4d3006b943c1e63ad7bcd563}
 
 \item 
-void {\bfseries retirer} (\hyperlink{a00007}{t\+\_\+noeud} $\ast$i)\hypertarget{a00015_a04ee1626a03e6867490802212829ccc5}{}\label{a00015_a04ee1626a03e6867490802212829ccc5}
+void {\bfseries retirer} (\hyperlink{a00008}{t\+\_\+noeud} $\ast$i)\hypertarget{a00015_a04ee1626a03e6867490802212829ccc5}{}\label{a00015_a04ee1626a03e6867490802212829ccc5}
 
 \item 
 int {\bfseries filevide} ()\hypertarget{a00015_a1dfabfa7163dc55b1cfa0f9317ee5bc8}{}\label{a00015_a1dfabfa7163dc55b1cfa0f9317ee5bc8}
 
 \end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries tete}\hypertarget{a00015_a7a7f6a8c2aff18cc12cd5a8784bb3608}{}\label{a00015_a7a7f6a8c2aff18cc12cd5a8784bb3608}
+
+\item 
+int {\bfseries queue}\hypertarget{a00015_a404442353660d7effc914ba8220ebf7f}{}\label{a00015_a404442353660d7effc914ba8220ebf7f}
+
+\item 
+int {\bfseries nb\+\_\+valeurs}\hypertarget{a00015_ac7a2a8030675ff6e2da045bba2c12fe3}{}\label{a00015_ac7a2a8030675ff6e2da045bba2c12fe3}
+
+\item 
+\hyperlink{a00008}{t\+\_\+noeud} {\bfseries tab} \mbox{[}50\mbox{]}\hypertarget{a00015_ac75c08b6079dedf8a7811acd95354446}{}\label{a00015_ac75c08b6079dedf8a7811acd95354446}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
-Ce fichier contient les définitions des primitives d\textquotesingle{}acces aux files de noeuds. 
+Ce fichier contient les primitives d\textquotesingle{}acces aux files de noeuds. 
 
 \begin{DoxyAuthor}{Auteur}
 Martin Lebourdais 

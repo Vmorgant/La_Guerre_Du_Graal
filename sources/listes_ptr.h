@@ -1,5 +1,5 @@
 /**
-*\file global.h
+*\file listes_ptr.h
 *\brief Ce fichier contient les définitions des primitives d'acces aux listes
 *\author Corentin Petit
 *\version 1.0
