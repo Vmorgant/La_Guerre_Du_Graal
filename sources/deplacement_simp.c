@@ -497,10 +497,10 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
 	return cout;
 }*/
 
-void deplacement_simp(t_liste *ordre_action,t_map map){
+void deplacement(t_liste *ordre_action,t_map map){
 /**
- * \fn  deplacement_simp(t_liste *ordre_action,t_map map)
- * \brief Version simplifiée de la fonction déplacement.
+ * \fn  deplacement(t_liste *ordre_action,t_map map)
+ * \brief Fonction permettant de déplacer le personnage.
  * \param t_liste *ordre_action : ordre de jeu des personnages (util pour connaître le personnage qui se déplace),t_map map : Plateau de jeu
  */
     int xobj;

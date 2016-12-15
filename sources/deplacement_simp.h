@@ -24,7 +24,7 @@ int pathfinding(int x, int y,int objx,int objy,t_noeud chemin[50],int * taille,t
  * \brief Trouve le chemin le plus court entre le point de départ et l'objectif et retourne ce chemin dans une file.
  * \param int x : Abscisse de départ, int y : Ordonnée de départ, int xobj : Abscisse cible; int yobj : Ordonnée cible
  */
-void deplacement_simp(t_liste *ordre_action,t_map map);
+void deplacement(t_liste *ordre_action,t_map map);
 /**
  * \fn  deplacement_simp(t_liste *ordre_action,t_map map)
  * \brief Version simplifiée de la fonction déplacement.

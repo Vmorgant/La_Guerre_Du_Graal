@@ -15,8 +15,7 @@ Les personnage sont basés sur l’anime  et le jeu Fate Stay Night.
 
 *Entrez la commande "cd" pour vous placer à la racine puis "mkdir SDL" pour créer le dossier de la SDL.
 
-*Déplacer vers le dossier où vous avez extrait l'archive.
-
+*Déplacer vous vers le dossier où vous avez extrait l'archive de la SDL2.
 *Entrez la commande : 
 
 -"./configure " si vous êtes super-utilisateur
