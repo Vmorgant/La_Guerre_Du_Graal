@@ -176,6 +176,8 @@ void placer(t_liste *ordre_action,t_map * carte){
 
 		ordre_action->ec->personnage.x = x;
 		ordre_action->ec->personnage.y = y;
+		assert(ordre_action->ec->personnage.x == x); 
+		assert(ordre_action->ec->personnage.y == y);
 
 		* carte = actumap(ordre_action, * carte);
 		clearScreen();
@@ -220,9 +222,11 @@ int est_mort(t_liste *ordre_action, t_map * carte){
 	}
 	ordre_action->ec = tampon;
 	if ( (nb_equipe2 == 0) ) {
+		assert(nb_equipe2 == 0); 
 		return 1;
 	}
 	if ( (nb_equipe1 == 0) ){
+		assert(nb_equipe1 == 0); 
 		return 2;
 	}
 	return 0;
