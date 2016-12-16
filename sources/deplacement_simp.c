@@ -600,7 +600,7 @@ void deplacement(t_liste *ordre_action,t_map map){
 						map=actumap(ordre_action, map);
 						clearScreen();
 						afficherMat(map);				
-						strcpy(mretour,"\tDéplacement impossible, vous êtes encerclés\n");
+						strcpy(mretour,"\tDéplacement impossible, vous êtes encerclé(e)\n");
 						usleep(300000);
 						erreur = 1;
 						break ;
