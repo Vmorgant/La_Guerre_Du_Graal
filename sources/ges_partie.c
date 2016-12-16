@@ -98,6 +98,9 @@ void placer(t_liste *ordre_action,t_map * carte){
  * \param t_liste * ordre_action : la liste triés par ordre de jeu, t_map carte : la carte 
  */
 	int x, y;
+	char chaine[30];
+	char* fin = NULL;
+
 	t_personnage persoc;//Permet de stocker les informations du personnage
 	printf("\n");
 	
@@ -119,10 +122,12 @@ void placer(t_liste *ordre_action,t_map * carte){
 				//On teste si la case est vide
 					printf("La case est déjà occupée\n");
 					printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", persoc.classe.nom);
-					scanf("%i", &x);
+					scanclav(chaine, 30);
+					x = strtol(chaine, &fin, 10);
 					printf("\n");
 					printf("Entrez un y pour votre %s entre 0 et 2 :\n", persoc.classe.nom);
-					scanf("%i", &y);
+					scanclav(chaine, 30);
+					y = strtol(chaine, &fin, 10);
 					printf("\n");
 					
 				}
@@ -130,10 +135,12 @@ void placer(t_liste *ordre_action,t_map * carte){
 				//On teste si on est pas hors map
 					printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 4\n");
 					printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", persoc.classe.nom);
-					scanf("%i", &x);
+					scanclav(chaine, 30);
+					x = strtol(chaine, &fin, 10);
 					printf("\n");
 					printf("Entrez un y pour votre personnage entre 0 et 2 :\n");
-					scanf("%i", &y);
+					scanclav(chaine, 30);
+					y = strtol(chaine, &fin, 10);
 					printf("\n");
 					printf("\n");
 				}
@@ -154,20 +161,24 @@ void placer(t_liste *ordre_action,t_map * carte){
 				if (carte->cell[x][y] != 0){
 					printf("La case est déjà occupée\n");
 					printf("Joueur 2, entrez un x pour votre %s entre 0 et 9 :\n", persoc.classe.nom);
-					scanf("%i", &x);
+					scanclav(chaine, 30);
+					x = strtol(chaine, &fin, 10);
 					printf("\n");
 					printf("Entrez un y pour votre %s entre 7 et 9 :\n", persoc.classe.nom);
-					scanf("%i", &y);
+					scanclav(chaine, 30);
+					y = strtol(chaine, &fin, 10);
 					printf("\n");					
 					
 				}
 				else{
 					printf("Les coordonnées doivent-être des entiers avec un y compris entre 7 et 9\n");
 					printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", persoc.classe.nom);
-					scanf("%i", &x);
+					scanclav(chaine, 30);
+					x = strtol(chaine, &fin, 10);
 					printf("\n");
 					printf("Entrez un y pour votre %s entre 7 et 9 :\n", persoc.classe.nom);
-					scanf("%i", &y);
+					scanclav(chaine, 30);
+					y = strtol(chaine, &fin, 10);
 					printf("\n");
 				}
 			}
@@ -354,6 +365,10 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 	int i=0;
 	int j;
   	int choix, erreur = faux;
+
+	char chaine[30];
+	char* fin = NULL;
+
 	strcpy(mretour,"\n");
    	t_personnage  cible[4];
     	t_personnage persoc;
@@ -410,7 +425,8 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 		printf("\n%i - Retour \n",i+1);
 	
 		printf("\nVotre choix : ");
-		scanf("%d",&choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 	
 		if (choix >= 1 && choix <i+1){
 			attaquer(ordre_action,cible[choix-1],attaque,gagnant, carte, mretour);
@@ -434,6 +450,10 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 	int portee = attaque.portee;
 	int i, j, k = 0;
 	int choix, erreur = faux;
+	
+	char chaine[30];
+	char* fin = NULL;
+
 	strcpy(mretour,"\n");
 	t_personnage persoc;
 	t_personnage  cible[4][portee], tabchoix[4][portee];
@@ -536,7 +556,8 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 		printf("\n%i - Retour \n",  k+1);
 
 		printf("\nVotre choix : ");
-		scanf("%d",&choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 
 		if(choix > 0 && choix < k+1) {
 			for( j = 0; j < nbchoix[choix-1]; j++ ){
@@ -561,6 +582,10 @@ void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
  */
 
 	int choix, erreur = faux;
+
+	char chaine[30];
+	char* fin = NULL;
+
 	char mretour[100] = "\n";
 	t_personnage persoc;
 	do{
@@ -593,7 +618,8 @@ void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
 		//printf(" 3 - %s\n",ordre_action->ec->personnage->classe->spe->nom);
 		printf("\n 4 - Retour\n");
 		printf("\nVotre choix : ");
-		scanf("%d",&choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 		switch(choix){	
 
 				case 1:
@@ -630,6 +656,10 @@ void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour)
  * \param t_liste *ordre_action : la liste des personnages joués triée, t_map * carte matrice représentant la carte, int *gagnant numero de l'équipe gagnante,int *NbTour nombre de tour actuel.
  */
 	int choix, erreur = faux;
+
+	char chaine[30];
+	char* fin = NULL;
+
 	t_personnage persoc;
 	char mretour[100] = "\n";
 	do{
@@ -662,7 +692,8 @@ void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour)
 		printf(" 3 - Passer\n");
 		printf(" 4 - Sauvegarder et quitter\n");
 		printf("\nVotre choix : ");
-		scanf("%d",&choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 		switch(choix){	
 			case 1: deplacement(ordre_action,*carte); break;
 			case 2: choix_competence(ordre_action,gagnant,carte); break;

@@ -19,6 +19,18 @@
 #include "save.h"
 
 
+void scanclav(char chaine[200], int i){
+
+	char *p, c;
+
+	if(c = fgets(chaine, i+1, stdin) != NULL){}; /* recupère la chaine */
+	if(strchr(chaine, '\n') == NULL){
+		while ((c = getchar()) != '\n' &&  c != EOF){} /* revide le buffer au cas ou il y ai plus de 30 caractères */
+	}
+	p = strchr(chaine, '\n'); /* cherche le '\n' à la fin */
+	if (p) *p = 0; /* enleve le '\n' à la fin */
+}
+
 void clearScreen(){
 	system("clear");
 }
@@ -28,6 +40,8 @@ int main(void) {
 	int choix, erreur = faux;
 	
 	char mretour[100]="\n";
+	char chaine[30];
+	char* fin = NULL;
 	char temp[50];
 clearScreen();
 couleur("33");
@@ -42,7 +56,7 @@ printf("\n\n\n\n\n\n\n\n\n\n");
 couleur("5");
 printf("\t\t\t\t\t\t\t\t\t Appuyez sur Entrée pour continuer\n\n\n\n\n\n");
 printf("\n\n\n\n\n\n\n\n\n\n");
-getchar();
+scanclav(mretour, 0);
 couleur("0");
 
 
@@ -70,7 +84,8 @@ couleur("0");
 		printf(" 4 - Credits\n");
 		printf(" 5 - Quitter\n");
 		printf("\nVotre choix : ");
-		scanf("%d",&choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {

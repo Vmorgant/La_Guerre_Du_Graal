@@ -104,6 +104,9 @@ void charger_partie(char mbilan[100]) {
 	int gagnant=0; 
 	char mretour[100] = "\n";
 
+	char chaine[30];
+	char* fin = NULL;
+
 	t_liste equipe1;
 	t_liste equipe2;
 	t_liste ordre_action;
@@ -146,7 +149,8 @@ void charger_partie(char mbilan[100]) {
 			}
 			printf("\n %i- Annuler\n", nb_saves+1);
 			printf("\nVotre choix : ");
-			scanf("%i", &choix);
+			scanclav(chaine, 30);
+			choix = strtol(chaine, &fin, 10);
 
 			if(choix > 0 && choix < nb_saves+1) {
 				seekdir(rep,choix + 1);
@@ -196,6 +200,9 @@ void nouvelle_partie(char mbilan[100]) {
 	int PE2 = 10;
 	char mretour[100] = "\n";
 
+	char chaine[30];
+	char* fin = NULL;
+
 	/* Initialisation des listes de personnages */
 	init_liste(&equipe1);
 	init_liste(&equipe2);
@@ -239,7 +246,8 @@ void nouvelle_partie(char mbilan[100]) {
 		printf(" 3- Lancer Partie.\n");
 		printf("\n 4- Retour.\n");
 		printf("\nVotre choix : ");
-		scanf("%d", &choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
@@ -283,8 +291,10 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 
 	int choix = -1, erreur= faux, nb_saves=0;
 	char mretour[100] = "\n", new_save[34];
-	char *p, c;
 	int i =0;
+
+	char chaine[30];
+	char* fin = NULL;
 
 	FILE * fic = NULL;
 	struct dirent * ent;
@@ -304,7 +314,8 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 		printf(" 2- Quitter sans sauvegarder.\n");
 		printf("\n 3- Annuler.\n"); 
 		printf("\nVotre choix : ");
-		scanf("%d", &choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
@@ -340,7 +351,8 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 						printf(" %i- Nouvelle Sauvegarde.\n", nb_saves+1);
 						printf("\n %i- Annuler\n", nb_saves+2);
 						printf("\nVotre choix : ");
-						scanf("%i", &choix);
+						scanclav(chaine, 30);
+						choix = strtol(chaine, &fin, 10);
 
 						if(choix > 0 && choix < nb_saves+1) {
 							seekdir(rep,choix + 1);
@@ -363,13 +375,7 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 
 							printf("Entrez le nom de votre sauvegarde (30 caractères max) :\n\t");
 
-							while(c = getchar() != '\n'); /* vide le buffer */
-							if(c = fgets(new_save, 31, stdin) != NULL){}; /* recupère la chaine */
-							if(strchr(new_save, '\n') == NULL){
-								while ((c = getchar()) != '\n' &&  c != EOF){} /* revide le buffer au cas ou il y ai plus de 30 caractères */
-							}
-							p = strchr(new_save, '\n'); /* cherche le '\n' à la fin */
-							if (p) *p = 0; /* enleve le '\n' à la fin */
+							scanclav(new_save, 30);
 							
 							strcat(new_save,".bin");
 							erreur = enregistrer_save(new_save, ordre_action, Nb_tours);
@@ -398,11 +404,13 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 }
 
 void gerer_save(char mbilan[100]) {
+
 	int choix = -1, erreur= faux, nb_saves=0;
 	char mretour[100] = "\n", new_name[34], new_dir[34];
 	char  dirsave[100];
-	char *p, c;
 	int i =0;
+	char chaine[30];
+	char* fin = NULL;
 
 	FILE * fic = NULL;
 	struct dirent * ent;
@@ -438,7 +446,8 @@ void gerer_save(char mbilan[100]) {
 			}
 			printf("\n %i- Annuler\n", nb_saves+1);
 			printf("\nVotre choix : ");
-			scanf("%i", &choix);
+			scanclav(chaine, 30);
+			choix = strtol(chaine, &fin, 10);
 
 			if(choix > 0 && choix < nb_saves +1) {
 				seekdir(rep,choix + 1);
@@ -476,20 +485,15 @@ void gerer_save(char mbilan[100]) {
 						printf(" 3- Retour.\n");
 						
 						printf("\nVotre choix : ");
-						scanf("%i", &choix);
-						
+						scanclav(chaine, 30);
+						choix = strtol(chaine, &fin, 10);
+							
 						switch(choix) {
 							case 1:
 								clearScreen();
 								printf("Entrez le nom de votre sauvegarde (30 caractères max) :\n\t");
 
-								while(c = getchar() != '\n'); /* vide le buffer */
-								if(c = fgets(new_name, 31, stdin) != NULL){}; /* recupère la chaine */
-								if(strchr(new_name, '\n') == NULL){
-									while ((c = getchar()) != '\n' &&  c != EOF){} /* revide le buffer au cas ou il y ai plus de 30 caractères */
-								}
-								p = strchr(new_name, '\n'); /* cherche le '\n' à la fin */
-								if (p) *p = 0; /* enleve le '\n' à la fin */
+								scanclav(new_name, 30);
 							
 								strcat(new_name,".bin");
 								sprintf(new_dir, "../Saves/%s", new_name);

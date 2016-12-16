@@ -78,6 +78,8 @@ void clearScreen();
  * \brief Fonction permettant d'effacer l'écran
  */
 
+void scanclav(char chaine[200], int i);
+
 typedef enum{vrai = 1, faux = 0}t_bool;
 /**
 *\enum t_bool

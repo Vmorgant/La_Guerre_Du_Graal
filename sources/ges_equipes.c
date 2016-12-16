@@ -49,6 +49,8 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 
 	int choix, i, erreur= faux;
 	char mretour[100] = "\n";
+	char chaine[30];
+	char* fin = NULL;
 
 	do {
 		clearScreen();
@@ -85,7 +87,8 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 		}
 		printf("\n %i - Retour\n", nb_classes+1);
 		printf("\nVotre choix : ");
-		scanf("%d",&choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 
 		/* Traitement du choix de l'utilisateur */
 		if(choix >= 1 && choix <= nb_classes){
@@ -105,35 +108,63 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
  * \brief Retire un personnage de la liste.
  * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant.
  */
-	int nb_persos = 0, i, choix;
+	int nb_persos = 0, i, choix, erreur = faux;
+	char chaine[30];
+	char mretour[100] = "\n";
+	char* fin = NULL;
 	t_personnage persoc;
-	compter_elts(equipe, &nb_persos);
-	
-	if(!liste_vide(equipe)){
-		en_tete(equipe);
+
+	do {
+		clearScreen();
+
+		compter_elts(equipe, &nb_persos);
+
 		/* Affichage du menu et saisie du choix */
-		for (i =1; i <= nb_persos; i++){
-			valeur_elt(equipe, &persoc);
-			printf(" %i - Enlever %s de l'equipe %i\n", i, persoc.classe.nom, joueur);
-			suivant(equipe);
+		printf("Edition de l'équipe %i :\n", joueur);
+		if(erreur) {
+			couleur("31");
+			printf("%s", mretour);
+			couleur("0");
+		} else {
+			couleur("32");
+			printf("%s", mretour);
+			couleur("0");
 		}
-		printf("\n %i - Retour\n", nb_persos+1);
-		printf("\nVotre choix : ");
-		scanf("%d", &choix);
-		/* Traitement du choix de l'utilisateur */
-		if(choix >= 1 && choix <= nb_persos){
+		erreur = faux;
+		strcpy(mretour, "\n");
+
+		if(!liste_vide(equipe)){
 			en_tete(equipe);
-			for (i = 1; i < choix; i++){
-					suivant(equipe);
+			/* Affichage du menu et saisie du choix */
+			for (i =1; i <= nb_persos; i++){
+				valeur_elt(equipe, &persoc);
+				printf(" %i - Enlever %s de l'equipe %i\n", i, persoc.classe.nom, joueur);
+				suivant(equipe);
 			}
-			valeur_elt(equipe, &persoc);
-			* PE += persoc.classe.coutPE;
-			oter_elt(equipe);
-		}else if (choix == nb_persos+1) printf("Personnage non existant.\n");
-	}else printf("L'equipe %i est déjà vide.\n", joueur);
-	printf("l'equipe %i est constituée de : ", joueur);
-	afficher(equipe);
-	printf("(%iPE restant)\n", *PE);
+			printf("\n %i - Retour\n", nb_persos+1);
+			printf("\nVotre choix : ");
+			scanclav(chaine, 30);
+			choix = strtol(chaine, &fin, 10);
+
+			/* Traitement du choix de l'utilisateur */
+			if(choix >= 1 && choix <= nb_persos){
+				en_tete(equipe);
+				for (i = 1; i < choix; i++){
+						suivant(equipe);
+				}
+				valeur_elt(equipe, &persoc);
+				* PE += persoc.classe.coutPE;
+				sprintf(mretour, "\t%s a été retiré de l'equipe.\n", persoc.classe.nom);
+				oter_elt(equipe);
+			}else if(choix > nb_persos+1) { 
+				strcpy(mretour, "\tPersonnage non existant.\n");
+				erreur = vrai;
+			}
+		} else break;
+		printf("l'equipe %i est constituée de : ", joueur);
+		afficher(equipe);
+		printf("(%iPE restant)\n", *PE);
+	} while (choix != nb_persos+1);
 }
 
 void init_equipe(t_liste * equipe, int joueur, int * PE) {
@@ -143,6 +174,9 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
  * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur,int *PE le nombre de PE restant.
  */	
 	int choix, erreur= faux;
+	char mretour[100] = "\n";
+	char chaine[30];
+	char* fin = NULL;
 
 	do {
 		clearScreen();
@@ -150,10 +184,15 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
 		printf("Edition de l'équipe %i :\n", joueur);
 		if(erreur) {
 			couleur("31");
-			printf("\tVotre choix doit être compris entre 1 et 4\n");
+			printf("%s", mretour);
 			couleur("0");
-		} else printf("\n");
+		} else {
+			couleur("32");
+			printf("%s", mretour);
+			couleur("0");
+		}
 		erreur = faux;
+		strcpy(mretour, "\n");
 
 		if(!liste_vide(equipe)) {
 			printf("l'equipe %i est constituée de : ", joueur);
@@ -174,17 +213,18 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
 		printf(" 3 - Valider l'équipe %i\n", joueur);
 		couleur("0");
 		printf("\n 4 - Annuler\n");
+
 		printf("\nVotre choix : ");
-		scanf("%d",&choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
 			case 1: ajout_equipe(equipe, joueur, PE); break;
 			case 2: oter_equipe(equipe, joueur, PE); break;
 			case 3: break;
-			case 4: break;
-			default: erreur = vrai;
+			case 4: vider(equipe); *PE = 10; choix = 3; break;
+			default: strcpy(mretour, "\tVotre choix doit être un entier compris entre 1 et 4\n"); erreur = vrai;
 		}
-	}
-	while(choix!=4 && choix!=3);
+	} while(choix!=3);
 }
