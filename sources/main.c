@@ -151,10 +151,14 @@ int main(void) {
 		SDL_DisplayMode current;
 		const Uint8 *keystates = SDL_GetKeyboardState(NULL);/*stockage de l'état des touches du clavier*/
 		SDL_Surface* Fond =SDL_LoadBMP("../Ressources/images/menu_principal.bmp");// chargement de l'image du menu principal
+		if (Fond==NULL)
+			printf("erreur fond");
 		TTF_Font *police=NULL; //stockage de la police
 		police = TTF_OpenFont("../Ressources/police/angelina.ttf", 63);
+		if (police==NULL)
+			printf("erreur police");
 		SDL_Color textColor = {255,255,255,255};//blanc
-		SDL_Surface *message, *message2= NULL; 
+		SDL_Surface *message=NULL, *message2= NULL; 
 
 		/*Chargement de la résolution courante de l'écran*/
 		for(i = 0; i < SDL_GetNumVideoDisplays(); ++i){
@@ -164,38 +168,52 @@ int main(void) {
 			SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz.", i, current.w, current.h, current.refresh_rate);
 
   		}
-
+		printf("toto");
       		/* Création de la fenêtre a la résolution actuelle de l'écran  */
         	SDL_Window* Fenetre = NULL;
-       		Fenetre = SDL_CreateWindow
-("LGDG",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,current.w,current.h,SDL_WINDOW_SHOWN);
-		message = TTF_RenderText_Solid( police, "La Guerre Du Graal", textColor ); 
-		message2 = TTF_RenderText_Solid( police, "Appuyez sur espace pour continuer ou echap pour quitter", textColor );
-                SDL_Rect HG = {0,0,0,0};// Coin haut gauche du sprite en haut à gauche de la fenêtre
-		SDL_Rect C = {(current.w)/2-message->w/2,(current.h)/2-message->h/2,0,0};// centrage du texte
-                SDL_BlitSurface(Fond,NULL,SDL_GetWindowSurface(Fenetre),&HG);
-		SDL_BlitSurface(message,NULL,SDL_GetWindowSurface(Fenetre),&C);
-		/*copie dans la fenetre parametre : source,région de la source à copier(NULL si toute la source,surface de destination,emplacement */
-                SDL_UpdateWindowSurface(Fenetre);
-		/*mise à jour de la fenêtre*/
-		while ( SDL_PollEvent(&event) ){
-			if(keystates[SDL_SCANCODE_ESCAPE] ||event.window.event == SDL_WINDOWEVENT_CLOSE){
-				printf(" Au revoir\n");
-					
-                    	}
-			else if (keystates[SDL_SCANCODE_SPACE]) { 
-                       		Fond =SDL_LoadBMP("./images/menu2.bmp");
-				SDL_BlitSurface(Fond,NULL,SDL_GetWindowSurface(Fenetre),&HG);
-				SDL_UpdateWindowSurface(Fenetre);
-                    	}
-                }
-		SDL_Rect cligno = {0,(current.h)/2-message->h/2 + 50,0,0};
-		SDL_BlitSurface(message2,NULL,SDL_GetWindowSurface(Fenetre),&cligno);
-		SDL_UpdateWindowSurface(Fenetre);
-		SDL_BlitSurface(Fond,NULL,SDL_GetWindowSurface(Fenetre),&HG);
-		SDL_BlitSurface(message,NULL,SDL_GetWindowSurface(Fenetre),&C);
-		SDL_UpdateWindowSurface(Fenetre);
+       		Fenetre = SDL_CreateWindow("LGDG",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,current.w,current.h,SDL_WINDOW_SHOWN);
 		
+		if( Fenetre ){
+			printf("fenetre ok");
+			if (Fond){
+				message = TTF_RenderText_Solid( police, "La Guerre Du Graal", textColor ); 
+				printf("msg1 ok");
+				message2 = TTF_RenderText_Solid( police, "Appuyez sur espace pour continuer ou echap pour quitter", textColor );
+				printf("msg2 ok");
+                		SDL_Rect HG = {0,0,0,0};// Coin haut gauche du sprite en haut à gauche de la fenêtre
+				SDL_Rect C = {(current.w)/2-message->w/2,(current.h)/2-message->h/2,0,0};// centrage du texte
+                		SDL_BlitSurface(Fond,NULL,SDL_GetWindowSurface(Fenetre),&HG);
+				SDL_BlitSurface(message,NULL,SDL_GetWindowSurface(Fenetre),&C);
+				/*copie dans la fenetre parametre : source,région de la source à copier(NULL si toute la source,surface de 					destination,emplacement */
+                		SDL_UpdateWindowSurface(Fenetre);
+				printf("maj ok");
+				/*mise à jour de la fenêtre*/
+				while ( SDL_PollEvent(&event) ){
+					if(keystates[SDL_SCANCODE_ESCAPE] ||event.window.event == SDL_WINDOWEVENT_CLOSE){
+						printf(" Au revoir\n");
+					
+                    			}
+					else if (keystates[SDL_SCANCODE_SPACE]) { 
+                       				Fond =SDL_LoadBMP("./images/menu2.bmp");
+						SDL_BlitSurface(Fond,NULL,SDL_GetWindowSurface(Fenetre),&HG);
+						SDL_UpdateWindowSurface(Fenetre);
+                    			}
+                		}	
+				SDL_Rect cligno = {0,(current.h)/2-message->h/2 + 50,0,0};
+				SDL_BlitSurface(message2,NULL,SDL_GetWindowSurface(Fenetre),&cligno);
+				SDL_UpdateWindowSurface(Fenetre);
+				SDL_BlitSurface(Fond,NULL,SDL_GetWindowSurface(Fenetre),&HG);
+				SDL_BlitSurface(message,NULL,SDL_GetWindowSurface(Fenetre),&C);
+				SDL_UpdateWindowSurface(Fenetre);
+				printf("maj ok");
+			}
+			else
+				printf("erreur fond");
+		}
+		else
+			printf("erreur fenetre");
+			
+
 
 	
 	do {		
