@@ -11,6 +11,7 @@
 #include "global.h"
 #include "file_chemin.h"
 #include "Init_map.h"
+#include "listes_ptr.h"
 
 float distance(int x,int y,int objx,int objy);
 /**

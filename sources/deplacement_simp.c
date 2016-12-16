@@ -13,6 +13,7 @@
 #include "Init_map.h"
 #include <time.h>
 #include <string.h>
+#include "listes_ptr.h"
 
 
 
@@ -516,17 +517,19 @@ void deplacement(t_liste *ordre_action,t_map map){
     char chaine[30];
     char * fin =NULL;
     int tete,queue,nb_valeurs;
-    int cout = taille; /* cout_dep(ordre_action);*/	//cout du déplacement	
+    int cout = taille; /* cout_dep(ordre_action);*/	//cout du déplacement
+    t_personnage persoc;
+    valeur_elt(ordre_action,&persoc);	
     initfile();
 
 	do{
 		clearScreen();
 		afficherMat(map);
-		if (ordre_action->ec->personnage.joueur == 1) couleur("34;1"); //Ecriture en bleu
+		if (persoc.joueur == 1) couleur("34;1"); //Ecriture en bleu
 		else couleur("31;1");//En rouge
 		
 
-		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",ordre_action->ec->personnage.classe.nom,ordre_action->ec->personnage.joueur, ordre_action->ec->personnage.pv, ordre_action->ec->personnage.classe.PVmax,ordre_action->ec->personnage.pa, ordre_action->ec->personnage.x,ordre_action->ec->personnage.y);	
+		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",persoc.classe.nom,persoc.joueur, persoc.pv, persoc.classe.PVmax,persoc.pa, persoc.x,persoc.y);	
 		couleur("0");	
 		printf("\nChoix des coordonnées :\n");
 
@@ -559,10 +562,10 @@ void deplacement(t_liste *ordre_action,t_map map){
 				} else if (map.cell[xobj][yobj] != 0){		//On teste si la case est vide
 					dep_erreur = 3;
 				} else if (xobj < map.nlignes && yobj < map.nlignes && xobj >= 0 && yobj >= 0){ // Déroulement normal
-					dep_erreur = pathfinding(ordre_action->ec->personnage.x,ordre_action->ec->personnage.y,xobj,yobj,chemin,&taille,map);
+					dep_erreur = pathfinding(persoc.x,persoc.y,xobj,yobj,chemin,&taille,map);
 					cout = taille;
 					
-					if (cout > ordre_action->ec->personnage.pa && dep_erreur == 2){ // Test du cout en PA
+					if (cout > persoc.pa && dep_erreur == 2){ // Test du cout en PA
 						dep_erreur = 0;
 						
 					}
@@ -576,11 +579,14 @@ void deplacement(t_liste *ordre_action,t_map map){
 	
 				switch (dep_erreur){
 					case -1 : // Cas d'erreur boucle infini
-						map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 0;
-						ordre_action->ec->personnage.x = xobj;
-						ordre_action->ec->personnage.y = yobj;
+						map.cell[persoc.x][persoc.y] = 0;
+						
+						persoc.x = xobj;
+						persoc.y = yobj;
+						
 					
-						ordre_action->ec->personnage.pa = ordre_action->ec->personnage.pa - 5;
+						persoc.pa = persoc.pa - 5;
+						modif_elt(ordre_action,persoc);
 						map=actumap(ordre_action, map);
 						clearScreen();
 						afficherMat(map);
@@ -607,18 +613,20 @@ void deplacement(t_liste *ordre_action,t_map map){
 					case 2 : // Aucune erreur
 						while (!filevide()){
 							retirer(&cell);
-							map.cell[ordre_action->ec->personnage.x][ordre_action->ec->personnage.y] = 0;
-							ordre_action->ec->personnage.x = cell.x;
-							ordre_action->ec->personnage.y = cell.y;
+							map.cell[persoc.x][persoc.y] = 0;
+							persoc.x = cell.x;
+							persoc.y = cell.y;
+							modif_elt(ordre_action,persoc);
 							map=actumap(ordre_action, map);
 							clearScreen();
 							afficherMat(map);
 							usleep(300000);
 							erreur = 1;
 						}			
-						ordre_action->ec->personnage.pa = ordre_action->ec->personnage.pa - cout;
-						assert(ordre_action->ec->personnage.x == xobj); 
-						assert(ordre_action->ec->personnage.y == yobj);
+						persoc.pa = persoc.pa - cout;
+						modif_elt(ordre_action,persoc);
+						assert(persoc.x == xobj); 
+						assert(persoc.y == yobj);
 						strcpy(mretour,"\tDéplacement réussi\n");
 						erreur = 0;
 						break;
