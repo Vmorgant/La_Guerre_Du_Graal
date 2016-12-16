@@ -57,11 +57,11 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 		/* Affichage du menu et saisie d'une classe */
 		printf("Choisissez une classe : \n");
 		if(erreur) {
-			couleur("31");
+			couleur("31");				//Ecris en rouge
 			printf("%s", mretour);
 			couleur("0");
 		} else {
-			couleur("32");
+			couleur("32");				//Ecris en vert
 			printf("%s", mretour);
 			couleur("0");
 		}
@@ -87,8 +87,8 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 		}
 		printf("\n %i - Retour\n", nb_classes+1);
 		printf("\nVotre choix : ");
-		scanclav(chaine, 30);
-		choix = strtol(chaine, &fin, 10);
+		scanclav(chaine, 30);				//Scanf sécurisé pour éviter les erreurs de frappes
+		choix = strtol(chaine, &fin, 10);		//Conversion de la chaine de caractère en int
 
 		/* Traitement du choix de l'utilisateur */
 		if(choix >= 1 && choix <= nb_classes){
@@ -150,7 +150,7 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
 			if(choix >= 1 && choix <= nb_persos){
 				en_tete(equipe);
 				for (i = 1; i < choix; i++){
-						suivant(equipe);
+					suivant(equipe);
 				}
 				valeur_elt(equipe, &persoc);
 				* PE += persoc.classe.coutPE;
@@ -161,6 +161,7 @@ void oter_equipe(t_liste * equipe, int joueur, int *PE){
 				erreur = vrai;
 			}
 		} else break;
+		/*Affichage de l'équipe après modification*/
 		printf("l'equipe %i est constituée de : ", joueur);
 		afficher(equipe);
 		printf("(%iPE restant)\n", *PE);
@@ -206,7 +207,7 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
 			printf("l'equipe %i est vide.", joueur);		
 			printf("(%iPE restant)\n\n", *PE);
 		}
-
+		/*Menu*/
 		printf(" 1 - Ajouter un personnage dans l'equipe %i\n", joueur);
 		printf(" 2 - Supprimer un personnage de l'equipe %i\n", joueur);
 		couleur("32");
@@ -224,7 +225,7 @@ void init_equipe(t_liste * equipe, int joueur, int * PE) {
 			case 2: oter_equipe(equipe, joueur, PE); break;
 			case 3: break;
 			case 4: vider(equipe); *PE = 10; choix = 3; break;
-			default: strcpy(mretour, "\tVotre choix doit être un entier compris entre 1 et 4\n"); erreur = vrai;
+			default: strcpy(mretour, "\tVotre choix doit être un entier compris entre 1 et 4\n"); erreur = vrai;// On garde le message d'erreur affiché
 		}
-	} while(choix!=3);
+	} while(choix!=3);/*Validation de l'équipe*/
 }
