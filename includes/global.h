@@ -79,6 +79,12 @@ void clearScreen();
  * \fn clearScreen
  * \brief Fonction permettant d'effacer l'écran
  */
+
+void scanclav(char chaine[200], int i);
+/**
+ * \fn clearScreen
+ * \brief Fonction pour recupérer une saisie clavier
+ */
 int init_SDL();
 /**
  * \fn init_SDL
@@ -144,7 +150,7 @@ typedef struct{int x; int y;}t_noeud;
 *\brief contient les coordonnées d'un noeud
 */
 
-typedef struct{t_personnage tab_action[10]; int nbpersos; int nbtours;}t_save;
+typedef struct{t_personnage tab_action[10]; int nbpersos; int nbtours; t_personnage persoc;}t_save;
 /**
 *\struct t_save
 *\brief contient les données d'une sauvegarde

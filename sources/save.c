@@ -1,7 +1,13 @@
 #include<stdio.h>
-#include<stdlib.h>
-#include "global.h"
-#include "listes_ptr.h"
+#include<stdlib.h> 
+#include <unistd.h>
+#include <string.h>
+#include "../includes/global.h"
+#include "../includes/ges_equipes.h"
+#include "../includes/listes_ptr.h"
+#include "../includes/Init_map.h"
+#include "../includes/ges_partie.h"
+#include <dirent.h>
 
 /**
 *\file save.c
@@ -11,49 +17,72 @@
 *\date 05/12/2016
 */
 
-int charger_partie( char  nomsave[10], t_liste * ordre_action, int * Nb_tours) {
+int charger_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours) {
 /**
  * \fn  charger_partie( char  nomsave[10])
- * \brief Charge les données d'une sauvegarde passée en paramètre
+ * \brief Charge les données d'une sauvegarde passée en paramètre  et retourne vrai si erreur
  * \param char nomsave[10] : le ,nom de la sauvegarde, t_liste * ordre_action : la liste triés des personnages par ordre de jeu
  */
 	int i;
-	FILE * nomfic = NULL;
+	FILE * fic = NULL;
+	char  dirsave[100];
+	t_personnage persoc;
 	t_save save;
-	nomfic = fopen( nomsave,"r" );
-	if( nomfic != NULL ) {
-		fread(&save, sizeof(save) , 1 , nomfic );
-		
+
+	sprintf(dirsave, "../Saves/%s", nomsave);
+	/*ouverture de la sauvegarde */
+	fic = fopen( dirsave,"r" );
+
+	if( fic != NULL ) {
+		/*lecture des données de la sauvegarde */
+		fread(&save, sizeof(save) , 1 , fic);
+
+		/*récupération des données de la sauvegarde */
+		vider(ordre_action);
 		for(i = 0; i < save.nbpersos; i++){
 			en_queue(ordre_action);
 			ajout_droit(ordre_action, save.tab_action[i]);
 		}
 		*Nb_tours = save.nbtours;
+
 		en_tete(ordre_action);
-		
-		fclose(nomfic);
-		return 1;
-	} else return 0;
+		valeur_elt(ordre_action, &persoc);
+		while( (persoc.x != save.persoc.x) || (persoc.y != save.persoc.y) ){
+			suivant(ordre_action);
+			valeur_elt(ordre_action, &persoc);
+		}
+
+		fclose(fic);
+		return faux;
+	} else return vrai;
 }
 
-int sauver_partie( char  nomsave[10], t_liste * ordre_action, int Nb_tours) {
+int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours) {
 /**
  * \fn  sauver_partie( char  nomsave[10])
  * \brief Sauvegarde les données d'une parite dans un fichier dont le nom passée en paramètre
  * \param char nomsave[10] : le ,nom de la sauvegarde, t_liste * ordre_action : la liste triés des personnages par ordre de jeu
  */
-	FILE * nomfic = NULL;
+	FILE * fic = NULL;
+	char  dirsave[100];
 	int nbpersos, i, j;
 	t_personnage persoc;
 	t_save save;
-	nomfic = fopen( nomsave,"w" );
-	if( nomfic != NULL ) {
+
+	sprintf(dirsave, "../Saves/%s", nomsave);
+	/*ouverture de la sauvegarde */
+	fic = fopen( dirsave,"w" );
+
+	if( fic != NULL ) {
+		/*enregistrement des données de la sauvegarde */
+		valeur_elt(ordre_action, &persoc);
+		save.persoc = persoc;
 
 		compter_elts(ordre_action, &nbpersos);
-
 		t_personnage tab_action[nbpersos];
 
 		en_tete(ordre_action);
+
 		for(i = 0; i < nbpersos; i++) {
 			valeur_elt(ordre_action, &persoc);
 			save.tab_action[i] = persoc;
@@ -61,86 +90,504 @@ int sauver_partie( char  nomsave[10], t_liste * ordre_action, int Nb_tours) {
 		}
 		save.nbpersos = nbpersos;
 		save.nbtours = Nb_tours;
-		fwrite(&save , sizeof(save) , 1 , nomfic);
 
-		fclose(nomfic);
-		return 1;
-	} else return 0;
+		/*écriture des données de la sauvegarde */
+		fwrite(&save , sizeof(save) , 1 , fic);
+
+		fclose(fic);
+		return faux;
+	} else return vrai;
 }
 
-int choix_save(t_liste * ordre_action, int * Nb_tours) {
+void charger_partie(char mbilan[100]) {
 /**
- * \fn  choix_save(t_liste * ordre_action, int Nb_tours)
+ * \fn charger_partie()
  * \brief demande au joueur si il souhaite vraiment charger une asuvegarde puis la lui fait choisir
  * \param t_liste * ordre_action : la liste triés des personnages par ordre de jeu, int Nb_tours, le nombre de tours actuel de la sauvegarde
  */
 
-	int choix, i, res, erreur= faux;
+	int choix = -1, nb_saves, erreur = faux;
+	int Nb_tours=1;
+	int gagnant=0; 
+	char mretour[100] = "\n";
+
+	char chaine[30];
+	char* fin = NULL;
+
+	t_liste equipe1;
+	t_liste equipe2;
+	t_liste ordre_action;
+
+	init_liste(&ordre_action);
+
+	t_map carte=creerMat();
+	
+	FILE * fic = NULL;
+	
+	struct dirent * ent;
 
 	do {
 		clearScreen();
-		/* Affichage du menu et saisie d'une classe */
-		printf("Choisissez une sauvegarde : \n\n");
-		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et 6\n");
-		erreur = faux;
 
-		printf(" 1- Save1.\n");
-		printf(" 2- Save2.\n");
-		printf(" 3- Save3.\n");
-		printf(" 4- Save4.\n");
-		printf(" 5- Save5.\n");
-		printf("\n 6- /!\\Annuler /!\\.\n");
-		printf("\nVotre choix : ");
-		scanf("%d", &choix);
+		nb_saves = 0;
 
-		/* Traitement du choix de l'utilisateur */
-		switch(choix) {
-			case 1: res = charger_partie( "Save1.bin", ordre_action, Nb_tours); choix = 6; break;
-			case 2: res = charger_partie( "Save2.bin", ordre_action, Nb_tours); choix = 6; break;
-			case 3: res = charger_partie( "Save3.bin", ordre_action, Nb_tours); choix = 6; break;
-			case 4: res = charger_partie( "Save4.bin", ordre_action, Nb_tours); choix = 6; break;
-			case 5: res = charger_partie( "Save5.bin", ordre_action, Nb_tours); choix = 6; break;
-			case 6: break;
-			default: erreur = vrai;
+		printf("Choisissez une sauvegarde : \n");
+		if(erreur) {
+			couleur("31");
+			printf("%s",mretour);
+			couleur("0");
+		} else {
+			couleur("32");
+			printf("%s",mretour);
+			couleur("0");
 		}
-	} while (choix != 6);
-	return res;
+		erreur = faux;
+		strcpy(mretour,"\n");
+
+		DIR * rep = opendir("../Saves/");
+	     
+		if (rep != NULL) {
+			while ((ent = readdir(rep)) != NULL) {
+				if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
+		 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
+					nb_saves++;
+					printf(" %i- %s\n", nb_saves, ent->d_name);
+				}
+			}
+			printf("\n %i- Annuler\n", nb_saves+1);
+			printf("\nVotre choix : ");
+			scanclav(chaine, 30);
+			choix = strtol(chaine, &fin, 10);
+
+			/*Traitement du choix de l'utilisateur */
+			if(choix > 0 && choix < nb_saves+1) {
+				seekdir(rep,choix + 1);
+				ent = readdir(rep);
+				closedir(rep);
+				if(ent == NULL) {
+					strcpy(mretour, "\tCette sauvegarde n'existe pas.\n");
+					erreur = vrai;
+				} else {
+					erreur = charger_save(ent->d_name, &ordre_action, &Nb_tours);
+					carte=actumap(&ordre_action, carte);
+					afficherMat(carte);
+					while (gagnant == 0){
+						gestion_tour(&ordre_action,&Nb_tours, &carte,&gagnant);
+					}
+					if(gagnant == -1) sprintf(mbilan, "\tLa partie a bien été enregistrée.\n");
+					else if(gagnant != -2) sprintf(mbilan, "\tLe joueur %i a gagné en %i tours\n",gagnant,Nb_tours);
+					choix = nb_saves+1;
+				}
+
+			} else if (choix > nb_saves+1 || choix < 1) {
+				sprintf(mretour, "\tVotre choix doit être compris entre  1 et %i.\n", nb_saves+1);
+				erreur = vrai;
+			}
+		} else {
+			strcpy(mretour, "\tLe dossier de sauvegardes n'existe pas.\n");
+			erreur = vrai;
+			break;
+		}
+	} while(choix != nb_saves+1);
+
+	supprimer(&ordre_action);
+	free_map(carte);
 }
 
-void quitter_partie(t_liste * ordre_action, int Nb_tours) {
+void nouvelle_partie(char mbilan[100],SDL_Window* Fenetre,SDL_Surface* Fond,TTF_Font *police,SDL_Surface *message,SDL_Surface *message2,SDL_Surface *message3,SDL_Surface *message4,int sdl,SDL_DisplayMode current,int num_menu) {
+
+	t_liste equipe1;
+	t_liste equipe2;
+	t_liste ordre_action;
+	t_map carte=creerMat();
+
+	int choix=0, erreur = faux;
+	int NbTour=1;
+	int gagnant=0; 
+	int PE1 = 10;
+	int PE2 = 10;
+	char mretour[100] = "\n";
+
+	char chaine[30];
+	char* fin = NULL;
+
+	police = TTF_OpenFont("./Ressources/police/angelina.ttf", 63);
+	SDL_Color textColor = {255,255,255,255};//blanc
+	SDL_Event event2;
+	const Uint8 *keystates = SDL_GetKeyboardState(NULL);/*stockage de l'état des touches du clavier*/
+	
+
+	/* Initialisation des listes de personnages */
+	init_liste(&equipe1);
+	init_liste(&equipe2);
+	init_liste(&ordre_action);
+	
+	/* Affichage du menu et saisie du choix */
+	do  {
+		gagnant=0;
+		if(sdl==1){
+			if (num_menu ==2){
+				SDL_Rect HG = {0,0,0,0};/* Coin haut gauche du sprite en haut à gauche de la fenêtre*/
+       				SDL_BlitSurface(Fond,NULL,SDL_GetWindowSurface(Fenetre),&HG);
+
+				message = TTF_RenderText_Solid( police, "1- Editer equipe 1", textColor ); 
+				SDL_Rect C = {(current.w)/2-message->w/2,(current.h)/2-message->h/2,0,0};
+				SDL_BlitSurface(message,NULL,SDL_GetWindowSurface(Fenetre),&C);
+
+				message2 = TTF_RenderText_Solid( police, "2- Editer equipe 2 ", textColor );
+				SDL_Rect msg_2= {(current.w)/2-message->w/2,(current.h)/2-message2->h/2 + 50,0,0};
+				SDL_BlitSurface(message2,NULL,SDL_GetWindowSurface(Fenetre),&msg_2);
+
+				message3 = TTF_RenderText_Solid( police, "3- Lancer Partie.", textColor ); 
+				SDL_Rect msg_3= {(current.w)/2-message->w/2,(current.h)/2-message3->h/2 + 100,0,0};
+				SDL_BlitSurface(message3,NULL,SDL_GetWindowSurface(Fenetre),&msg_3);
+
+				message4 = TTF_RenderText_Solid( police, "4- Retour.  ", textColor );
+				SDL_Rect msg_4= {(current.w)/2-message->w/2,(current.h)/2-message4->h/2 + 150,0,0};
+				SDL_BlitSurface(message4,NULL,SDL_GetWindowSurface(Fenetre),&msg_4); 
+
+				SDL_UpdateWindowSurface(Fenetre);
+				num_menu++;
+				SDL_Delay(500);
+			}
+			while ( SDL_PollEvent(&event2) ){
+				if(keystates[SDL_SCANCODE_ESCAPE] ||event2.window.event == SDL_WINDOWEVENT_CLOSE){				
+					SDL_DestroyWindow(Fenetre);
+					SDL_FreeSurface(Fond);
+					SDL_FreeSurface(message);
+					SDL_FreeSurface(message2);
+					SDL_FreeSurface(message3);
+					SDL_FreeSurface(message4);
+					SDL_Quit();
+					//Fermeture des Fonts qu'on a utilisé
+					TTF_CloseFont(police); 
+					//On quitte SDL_ttf 
+					TTF_Quit();
+                    		}
+				if(keystates[SDL_SCANCODE_1]){
+					choix=1;
+				}
+				if(keystates[SDL_SCANCODE_2]){
+					choix=2;
+				}
+				if(keystates[SDL_SCANCODE_3])
+					choix=3;
+				if(keystates[SDL_SCANCODE_4])
+					choix=4;
+			}
+		}
+		
+		else{
+			clearScreen();
+			printf("Menu :\n");
+			if(erreur) {
+				couleur("31");
+				printf("%s", mretour);
+				couleur("0");
+			}else printf("\n");
+			erreur = faux;
+			printf(" 1- Editer equipe 1.\t\t");
+			if(!liste_vide(&equipe1)) {
+				printf("L'equipe 1 est constituée de : ");
+				couleur("34;1");
+				afficher(&equipe1);
+				couleur("0");
+				printf("(%iPE restant)\n", PE1);
+			}else {
+				printf("L'equipe 1 est vide.");		
+				printf("(%iPE restant)\n", PE1);
+			}
+
+			printf(" 2- Editer equipe 2.\t\t");
+			if(!liste_vide(&equipe2)) {
+				printf("L'equipe 2 est constituée de : ");
+				couleur("31;1");
+				afficher(&equipe2);
+				couleur("0");
+				printf("(%iPE restant)\n", PE2);
+			}else {
+				printf("L'equipe 2 est vide.");		
+				printf("(%iPE restant)\n", PE2);
+			}
+
+			printf(" 3- Lancer Partie.\n");
+			printf("\n 4- Retour.\n");
+			printf("\nVotre choix : ");
+			scanclav(chaine, 30);
+			choix = strtol(chaine, &fin, 10);
+		}
+		/* Traitement du choix de l'utilisateur */
+		switch(choix) {
+			case 1: init_equipe(&equipe1, 1, &PE1,Fenetre,Fond,police,message,message2,message3,message4,sdl,current,num_menu); break;
+			case 2: init_equipe(&equipe2, 2, &PE2,Fenetre,Fond,police,message,message2,message3,message4,sdl,current,num_menu);  break;
+			case 3: if(liste_vide(&equipe1) || liste_vide(&equipe2) ){
+					strcpy(mretour, "\tLes deux equipes ne doivent pas etre vides\n");
+					erreur = vrai;
+					break;
+				}
+				else{			
+					init_partie(&equipe1,&equipe2,&ordre_action);
+					placer(&ordre_action, &carte);
+					carte=actumap(&ordre_action, carte);
+					afficherMat(carte);
+					en_tete(&ordre_action);
+					while (gagnant == 0){
+						gestion_tour(&ordre_action,&NbTour, &carte,&gagnant);
+					}
+					if(gagnant == -1) sprintf(mbilan, "\tLa partie bien a été enregistrée.\n");
+					else if(gagnant != -2) sprintf(mbilan, "\tLe joueur %i a gagné en %i tours\n", gagnant, NbTour);
+					choix = 4;
+					break;
+				}
+			default: strcpy(mretour, "\tVotre choix doit être compris entre 1 et 4\n"); erreur = vrai;
+		}
+	
+	}while(choix!=4);
+	
+	supprimer(&equipe1); /* comme ordre_action = equipe 1, pas besoin de free ordre_action */
+	supprimer(&equipe2);
+	free_map(carte);
+}
+
+void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 /**
  * \fn  quitter_partie(t_liste * ordre_action, int Nb_tours)
  * \brief demande au joueur si il souhaite vraiment quittez et si il souhaite sauvegarder la partie en cour
  * \param t_liste * ordre_action : la liste triés des personnages par ordre de jeu, int Nb_tours, le nombre de tours actuel de la sauvegarde
  */
 
-	int choix, i, erreur= faux;
+	int choix = -1, erreur= faux, nb_saves=0;
+	char mretour[100] = "\n", new_save[34];
+	int i =0;
 
-	do {
+	char chaine[30];
+	char* fin = NULL;
+
+	FILE * fic = NULL;
+	struct dirent * ent;
+
+	do{
 		clearScreen();
-		/* Affichage du menu et saisie d'une classe */
-		printf("Choisissez une sauvegarde : \n\n");
-		if(erreur) printf("Erreur: votre choix doit être compris entre 1 et 6\n");
+	
+		printf("Voulez-vous sauvegarder la partie avant de quitter ?\n");
+		if(erreur) {
+			couleur("31");
+			printf("%s", mretour);
+			couleur("0");
+		}else printf("\n");
 		erreur = faux;
 
-		printf(" 1- Save1.\n");
-		printf(" 2- Save2.\n");
-		printf(" 3- Save3.\n");
-		printf(" 4- Save4.\n");
-		printf(" 5- Save5.\n");
-		printf("\n 6- /!\\Annuler /!\\.\n");
+		printf(" 1- Sauvegarder et quitter.\n");
+		printf(" 2- Quitter sans sauvegarder.\n");
+		printf("\n 3- Annuler.\n"); 
 		printf("\nVotre choix : ");
-		scanf("%d", &choix);
+		scanclav(chaine, 30);
+		choix = strtol(chaine, &fin, 10);
 
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
-			case 1:  sauver_partie( "Save1.bin", ordre_action, Nb_tours); exit(0); break;
-			case 2:  sauver_partie( "Save2.bin", ordre_action, Nb_tours); exit(0); break;
-			case 3:  sauver_partie( "Save3.bin", ordre_action, Nb_tours); exit(0); break;
-			case 4:  sauver_partie( "Save4.bin", ordre_action, Nb_tours); exit(0); break;
-			case 5:  sauver_partie( "Save5.bin", ordre_action, Nb_tours); exit(0); break;
-			case 6: break;
-			default: erreur = vrai;
+			case 1:
+				do {
+					clearScreen();
+
+					nb_saves = 0;
+
+					printf("Choisissez une sauvegarde : \n");
+					if(erreur) {
+						couleur("31");
+						printf("%s",mretour);
+						couleur("0");
+					} else {
+						couleur("32");
+						printf("%s",mretour);
+						couleur("0");
+					}
+					erreur = faux;
+					strcpy(mretour,"\n");
+
+					DIR * rep = opendir("../Saves/");
+				     
+					if (rep != NULL) {
+						while ((ent = readdir(rep)) != NULL) {
+							if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
+					 		strcmp(ent->d_name, "..") != 0) { /*  Si le fichier n'est pas .. */
+								nb_saves++;
+								printf(" %i- %s\n", nb_saves, ent->d_name);
+							}
+						}
+						printf(" %i- Nouvelle Sauvegarde.\n", nb_saves+1);
+						printf("\n %i- Annuler\n", nb_saves+2);
+						printf("\nVotre choix : ");
+						scanclav(chaine, 30);
+						choix = strtol(chaine, &fin, 10);
+
+						/*Traitement du choix de l'utilisateur */
+						if(choix > 0 && choix < nb_saves+1) {
+							seekdir(rep,choix + 1);
+							ent = readdir(rep);
+							erreur = enregistrer_save(ent->d_name, ordre_action, Nb_tours);
+							closedir(rep);
+							if(erreur) {
+								strcpy(mretour, "\tCette sauvegarde n'existe pas.\n");
+							} else {
+								*gagnant = -1;
+								choix = nb_saves+2;
+							}
+
+						} else if (choix > nb_saves+2 || choix < 1) {
+							sprintf(mretour, "\tVotre choix doit être compris entre  1 et %i.\n", nb_saves+2);
+							erreur = vrai;
+						} else if (choix == nb_saves+1) {
+
+							clearScreen();
+
+							printf("Entrez le nom de votre sauvegarde (30 caractères max) :\n\t");
+
+							scanclav(new_save, 30);
+							
+							strcat(new_save,".bin");
+							erreur = enregistrer_save(new_save, ordre_action, Nb_tours);
+
+							if(erreur) {
+								strcpy(mretour, "\tLa sauvegarde n'a pas pu être créée.\n");
+							} else {
+								*gagnant = -1;
+								choix = nb_saves+2;
+							}
+						}
+
+					} else {
+						strcpy(mretour, "\tLe dossier de sauvegardes n'existe pas.\n");
+						erreur = vrai;
+						break;
+					}
+				} while(choix != nb_saves+2);
+				choix = 3;
+				break;
+			case 2:  *gagnant = -2; choix = 3; break;
+			case 3:  break;
+			default: strcpy(mretour, "\tVotre choix doit être compris entre 1 et 3\n"); erreur = vrai;
 		}
-	} while (choix != 2);
+	} while (choix != 3);
+}
+
+void gerer_save(char mbilan[100]) {
+
+	int choix = -1, erreur= faux, nb_saves=0;
+	char mretour[100] = "\n", new_name[34], new_dir[34];
+	char  dirsave[100];
+	int i =0;
+	char chaine[30];
+	char* fin = NULL;
+
+	FILE * fic = NULL;
+	struct dirent * ent;
+
+	do{
+		clearScreen();
+		/* Traitement du choix de l'utilisateur */
+		printf("Gestion des sauvegardes :\n");
+		printf("Choisissez une sauvegarde : \n");
+
+		nb_saves = 0;
+
+		if(erreur) {
+			couleur("31");
+			printf("%s",mretour);
+			couleur("0");
+		} else {
+			couleur("32");
+			printf("%s",mretour);
+			couleur("0");
+		}
+		erreur = faux;
+		strcpy(mretour,"\n");
+			DIR * rep = opendir("../Saves/");
+		     
+		if (rep != NULL) {
+			while ((ent = readdir(rep)) != NULL) {
+				if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
+		 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
+					nb_saves++;
+					printf(" %i- %s\n", nb_saves, ent->d_name);
+				}
+			}
+			printf("\n %i- Annuler\n", nb_saves+1);
+			printf("\nVotre choix : ");
+			scanclav(chaine, 30);
+			choix = strtol(chaine, &fin, 10);
+
+			if(choix > 0 && choix < nb_saves +1) {
+				seekdir(rep,choix + 1);
+				ent = readdir(rep);
+				
+				sprintf(dirsave, "../Saves/%s", ent->d_name);
+
+				printf("%s\n", ent->d_name);
+					
+				if( (fic = fopen(dirsave, "r")) == NULL) {
+					strcpy(mretour, "\tCette sauvegarde n'existe pas.\n");
+				} else {
+				
+					do {
+						clearScreen();
+						/* Traitement du choix de l'utilisateur */
+						printf("Gestion des sauvegardes :\n");
+						printf("Que souhaitez vous faire ?\n");
+
+
+						if(erreur) {
+							couleur("31");
+							printf("%s",mretour);
+							couleur("0");
+						} else {
+							couleur("32");
+							printf("%s",mretour);
+							couleur("0");
+						}
+						erreur = faux;
+						strcpy(mretour,"\n");				
+
+						printf(" 1- Renommer sauvegarde.\n");
+						printf(" 2- Supprimer sauvegarde.\n");
+						printf(" 3- Retour.\n");
+						
+						printf("\nVotre choix : ");
+						scanclav(chaine, 30);
+						choix = strtol(chaine, &fin, 10);
+							
+						switch(choix) {
+							case 1:
+								clearScreen();
+								printf("Entrez le nom de votre sauvegarde (30 caractères max) :\n\t");
+
+								scanclav(new_name, 30);
+							
+								strcat(new_name,".bin");
+								sprintf(new_dir, "../Saves/%s", new_name);
+
+								printf("%s\n", new_dir);
+
+								rename(dirsave, new_dir);
+								choix = 3;
+								break;
+							case 2: remove(dirsave); choix = 3; break;
+							case 3:break;
+							default : strcpy(mretour, "\tVotre choix doit être compris entre  1 et 3.\n"); erreur = vrai;
+						}
+					} while (choix != 3);
+					fclose(fic);
+					closedir(rep);
+					choix = -1;
+				}
+			} else if (choix > nb_saves+1 || choix < 1) {
+				sprintf(mretour, "\tVotre choix doit être compris entre  1 et %i.\n", nb_saves+2);
+				erreur = vrai;
+			}
+		} else {
+			strcpy(mretour, "\tLe dossier de sauvegardes n'existe pas.\n");
+			erreur = vrai;
+			break;
+		}
+	} while(choix != nb_saves+1);
 }

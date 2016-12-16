@@ -8,7 +8,8 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-#include "global.h"
+#include "../includes/global.h"
+
 
 void init_liste(t_liste * p) {
 	p->drapeau =  (t_element*)malloc (sizeof(t_element));

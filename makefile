@@ -7,31 +7,31 @@ LGDG.out: main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o fi
 	export LD_LIBRARY_PATH=~/SDL 
 	gcc $^ -o $@ ${LIB} ${INCLUDE} -lSDL2 -lSDL2_ttf -lm
 
-main.o: main.c global.h
+main.o: ./sources/main.c ./includes/global.h
 	gcc -c $< ${INCLUDE} -g -W
 
-ges_equipes.o: ges_equipes.c global.h
+ges_equipes.o: ./sources/ges_equipes.c ./includes/global.h
 	gcc -c $< ${INCLUDE} -g -W
 
-listes_ptr.o: listes_ptr.c global.h
+listes_ptr.o: ./sources/listes_ptr.c ./includes/global.h
 	gcc -c $< ${INCLUDE} -g -W
 
-classes.o: classes.c global.h
+classes.o: ./sources/classes.c ./includes/global.h
 	gcc -c $< ${INCLUDE} -g -W
 
-ges_partie.o: ges_partie.c global.h
+ges_partie.o: ./sources/ges_partie.c ./includes/global.h
 	gcc -c $< ${INCLUDE} -g -W
  
-Init_map.o: Init_map.c global.h
+Init_map.o: ./sources/Init_map.c ./includes/global.h
 	gcc -c $< ${INCLUDE} -g -W
 
-file_chemin.o: file_chemin.c global.h
+file_chemin.o: ./sources/file_chemin.c ./includes/global.h
 	gcc -c $< ${INCLUDE} -g -W
 	
-deplacement_simp.o: deplacement_simp.c global.h 
+deplacement_simp.o: ./sources/deplacement_simp.c ./includes/global.h 
 	gcc -c $< ${INCLUDE} -g -W
 
-save.o: save.c global.h 
+save.o: ./sources/save.c ./includes/global.h 
 	gcc -c $< ${INCLUDE} -g -W
 
 clean: 
