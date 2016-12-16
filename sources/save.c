@@ -29,7 +29,7 @@ int charger_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours) {
 	t_personnage persoc;
 	t_save save;
 
-	sprintf(dirsave, "../Saves/%s", nomsave);
+	sprintf(dirsave, "./Saves/%s", nomsave);
 	/*ouverture de la sauvegarde */
 	fic = fopen( dirsave,"r" );
 
@@ -159,7 +159,7 @@ void charger_partie(char mbilan[100]) {
 			printf("\nVotre choix : ");
 			scanclav(chaine, 30);
 			choix = strtol(chaine, &fin, 10);
-
+			printf("\n%i\n",choix);
 			/*Traitement du choix de l'utilisateur */
 			if(choix > 0 && choix < nb_saves+1) {
 				seekdir(rep,choix + 1);
@@ -347,7 +347,7 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 					erreur = faux;
 					strcpy(mretour,"\n");
 
-					DIR * rep = opendir("../Saves/");
+					DIR * rep = opendir("./Saves/");
 				     
 					if (rep != NULL) {
 						while ((ent = readdir(rep)) != NULL) {
