@@ -287,7 +287,7 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
 		}
 		degats = (stock*degats) -def;
 		persoc.pv = (persoc.pv) - degats;
-
+	
 		if ( persoc.pv<=0 ){
 			sprintf(message_tampon, "\tLe personnage %s a été vaincu !\n", persoc.classe.nom);
 			*gagnant = est_mort(ordre_action, carte);// on enlève les morts de la liste ordre_action et on vérifie si une équipe a été éliminée
@@ -295,8 +295,9 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
 			sprintf(message_tampon, "\tLe personnage %s perd %i points de vie !\n", persoc.classe.nom, degats);
 		}
 
-
-		ordre_action->ec= tampon;  
+		modif_elt(ordre_action, persoc);  
+		ordre_action->ec= tampon;
+		
 	}
 	strcat(mretour,message_tampon);
 }
@@ -414,6 +415,7 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 		if (choix >= 1 && choix <i+1){
 			attaquer(ordre_action,cible[choix-1],attaque,gagnant, carte, mretour);
 			persoc.pa -= attaque.coutPA;//Soustraction du coup en pa de l'attaque.
+			modif_elt(ordre_action, persoc);
 			choix = i+1;
 		} else if (choix > i+1){
 			strcpy(mretour, "Choix indisponible\n");
@@ -541,6 +543,7 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 				attaquer(ordre_action, tabchoix[choix-1][j], attaque, gagnant, carte, mretour);
 			}
 			persoc.pa -= attaque.coutPA;//Soustraction du coup en pa de l'attaque.
+			modif_elt(ordre_action, persoc);
 			choix = k+1;
 		} else if (choix > k+1) {
 			strcpy(mretour, "\tChoix indisponible\n");
@@ -679,10 +682,11 @@ void gestion_tour(t_liste *ordre_action,int *NbTour,t_map * carte,int *gagnant){
  */
 
 	t_personnage persoc;
-	valeur_elt(ordre_action, &persoc);
 	while(*gagnant ==0){
+		valeur_elt(ordre_action, &persoc);
                 if ((*NbTour) >1 && persoc.pa < 20){
                 	persoc.pa += (persoc.classe.gainPA);
+			modif_elt(ordre_action, persoc);
                 }
 		choix_action(ordre_action,carte,gagnant,NbTour);
 		
