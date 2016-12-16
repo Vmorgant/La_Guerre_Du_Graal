@@ -8,8 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "global.h"
-#include "listes_ptr.h"
+#include "../includes/global.h"
+#include "../includes/listes_ptr.h"
 
 t_map creerMat(){
 /**

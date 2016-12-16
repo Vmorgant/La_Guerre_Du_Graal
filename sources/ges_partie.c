@@ -9,11 +9,11 @@
 #include<stdlib.h>
 #include <time.h>
 #include <string.h>
-#include "global.h"
-#include "listes_ptr.h"
-#include "deplacement_simp.h"
-#include "Init_map.h"
-#include "save.h"
+#include "../includes/global.h"
+#include "../includes/listes_ptr.h"
+#include "../includes/deplacement_simp.h"
+#include "../includes/Init_map.h"
+#include "../includes/save.h"
 
 
 float Rand_atq(){

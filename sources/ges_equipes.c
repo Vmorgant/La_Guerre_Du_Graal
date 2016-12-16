@@ -10,9 +10,9 @@
 #include<stdlib.h>
 #include<string.h>
 #include <unistd.h>
-#include "global.h"
-#include "ges_equipes.h"
-#include"listes_ptr.h"
+#include "../includes/global.h"
+#include "../includes/ges_equipes.h"
+#include"../includes/listes_ptr.h"
 	
 int creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE, char mretour[100]) {
 /**

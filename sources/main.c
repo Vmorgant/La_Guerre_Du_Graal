@@ -9,14 +9,14 @@
 #include<stdlib.h> 
 #include <unistd.h>
 #include <string.h>
-#include "global.h"
-#include"ges_equipes.h"
-#include"listes_ptr.h"
-#include"file_chemin.h"
-#include"Init_map.h"
-#include"deplacement_simp.h"
-#include"ges_partie.h"
-#include "save.h"
+#include "../includes/global.h"
+#include"../includes/ges_equipes.h"
+#include"../includes/listes_ptr.h"
+#include"../includes/file_chemin.h"
+#include"../includes/Init_map.h"
+#include"../includes/deplacement_simp.h"
+#include"../includes/ges_partie.h"
+#include "../includes/save.h"
 
 
 void scanclav(char chaine[200], int i){

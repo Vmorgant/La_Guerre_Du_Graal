@@ -2,11 +2,11 @@
 #include<stdlib.h> 
 #include <unistd.h>
 #include <string.h>
-#include "global.h"
-#include"ges_equipes.h"
-#include"listes_ptr.h"
-#include"Init_map.h"
-#include"ges_partie.h"
+#include "../includes/global.h"
+#include "../includes/ges_equipes.h"
+#include "../includes/listes_ptr.h"
+#include "../includes/Init_map.h"
+#include "../includes/ges_partie.h"
 #include <dirent.h>
 
 /**

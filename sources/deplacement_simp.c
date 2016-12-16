@@ -8,12 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "global.h"
-#include "file_chemin.h"
-#include "Init_map.h"
+#include "../includes/global.h"
+#include "../includes/file_chemin.h"
+#include "../includes/Init_map.h"
 #include <time.h>
 #include <string.h>
-#include "listes_ptr.h"
+#include "../includes/listes_ptr.h"
 
 
 

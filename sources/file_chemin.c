@@ -7,8 +7,8 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include "global.h"
-#include "file_chemin.h"
+#include "../includes/global.h"
+#include "../includes/file_chemin.h"
 
 
 int tete,queue,nb_valeurs;
