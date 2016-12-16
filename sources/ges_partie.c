@@ -74,6 +74,7 @@ void init_partie(t_liste *equipe1,t_liste *equipe2, t_liste * ordre_action){
 		j = i;
 
 		/** Puis on trie la liste par insertion en fonction de l'initiative des personnages*/
+		/*on n'utilise pas les primitives d'accès auc liste ici, car dans le cas présent cela simplifie le code */
 		while(j > 0 && !bien_place) {
 			bien_place = (  (ordre_action ->ec -> personnage.classe.INI) <= (ordre_action ->ec->pred -> personnage.classe.INI) );
 
@@ -101,14 +102,14 @@ void placer(t_liste *ordre_action,t_map * carte){
 	char chaine[30];
 	char* fin = NULL;
 
-	t_personnage persoc;//Permet de stocker les informations du personnage
+	t_personnage persoc;/*Permet de stocker les informations du personnage*/
 	printf("\n");
 	
 	en_tete(ordre_action);
 	while (!hors_liste(ordre_action)){
 		valeur_elt(ordre_action, &persoc); 
 		if((persoc.joueur)==1){														
-		//Placer un personnage pour l'equipe 1
+		/*Placer un personnage pour l'equipe 1*/
 			printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n",persoc.classe.nom);
 			scanclav(chaine, 2);
 			x = strtol(chaine, &fin, 10);
@@ -117,12 +118,13 @@ void placer(t_liste *ordre_action,t_map * carte){
 			scanclav(chaine, 2);
 			y = strtol(chaine, &fin, 10);
 			printf("\n");
-		
+			
+			/*Tant que les coordonnées ne son pas valides*/
 			while (x >= carte->nlignes || y > 2 || x < 0 || y < 0 || carte->cell[x][y] != 0){
 
-				
+				/*Si les données sont hors map*/
 				if(x >= carte->nlignes || y > 2 || x < 0 || y < 0)  {
-				//On teste si on est pas hors map
+					/*refaire la saisie */
 					printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 2\n");
 					printf("Joueur 1, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
 					scanclav(chaine, 2);
@@ -133,9 +135,9 @@ void placer(t_liste *ordre_action,t_map * carte){
 					y = strtol(chaine, &fin, 10);
 					printf("\n");
 					printf("\n");
-				}
-				else if (carte->cell[x][y] != 0){
-				//On teste si la case est vide
+				/*Sinon si la case est déjà occupée*/
+				} else if (carte->cell[x][y] != 0){
+					/*refaire la saisie */
 					printf("La case est déjà occupée\n");
 					printf("Joueur 1, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
 					scanclav(chaine, 2);
@@ -151,7 +153,7 @@ void placer(t_liste *ordre_action,t_map * carte){
 			
 			
 		} else if((persoc.joueur)==2){													
-		//Placer un personnage pour l'equipe 2;
+		/*Placer un personnage pour l'equipe 2*/
 			printf("Joueur 2, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
 			scanclav(chaine, 2);
 			x = strtol(chaine, &fin, 10);
@@ -162,13 +164,12 @@ void placer(t_liste *ordre_action,t_map * carte){
 			y = strtol(chaine, &fin, 10);
 			printf("\n");
 			
-		
+			/*Tant que les coordonnées ne son pas valides*/
 			while (x >= carte->nlignes || y >= carte->ncolonnes || x < 0 || y < 7 || carte->cell[x][y] != 0){
 
-							
-					
-				
+				/*Si les données sont hors map*/
 				if(x >= carte->nlignes || y >= carte->ncolonnes || x < 0 || y < 7){
+					/*refaire la saisie */
 					printf("Les coordonnées doivent-être des entiers avec un y compris entre 7 et %i\n", carte->ncolonnes-1);
 					printf("Joueur 2, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
 					scanclav(chaine, 2);
@@ -178,8 +179,9 @@ void placer(t_liste *ordre_action,t_map * carte){
 					scanclav(chaine, 2);
 					y = strtol(chaine, &fin, 10);
 					printf("\n");
-				}
-				else if (carte->cell[x][y] != 0){
+				/*Sinon si la case est déjà occupée*/
+				} else if (carte->cell[x][y] != 0){
+					/*refaire la saisie */
 					printf("La case est déjà occupée\n");
 					printf("Joueur 2, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
 					scanclav(chaine, 2);
@@ -197,7 +199,7 @@ void placer(t_liste *ordre_action,t_map * carte){
 		persoc.x = x;
 		persoc.y = y;
 		modif_elt(ordre_action, persoc);
-		assert(persoc.x == x); //on vérifie que les coordonnées du personnages sont bien celle entrée par le joueur
+		assert(persoc.x == x); /*on vérifie que les coordonnées du personnages sont bien celle entrée par le joueur */
 		assert(persoc.y == y);
 
 		* carte = actumap(ordre_action, * carte);
@@ -215,11 +217,12 @@ int est_mort(t_liste *ordre_action, t_map * carte){
  * \return le numéro de l'équipe qui a gagnée.
  */
 	int i=0;
-        int nb_equipe1=0;//permet de stocker le nombre de personnage de l'équipe 1
+        int nb_equipe1=0;/*permet de stocker le nombre de personnage de l'équipe 1*/
         int nb_equipe2=0;
 	t_element *tampon = ordre_action->ec;
 	t_personnage persoc;
-
+	
+	/*recherche du personnage mort */
 	en_tete(ordre_action);
 	valeur_elt(ordre_action, &persoc); 
 	while(persoc.pv > 0 ) {
@@ -227,14 +230,16 @@ int est_mort(t_liste *ordre_action, t_map * carte){
 		valeur_elt(ordre_action, &persoc); 
         }	
 	
+	/*suppression du personnage mort de la partie */
         oter_elt(ordre_action);
 	
+	/*actualisation des affichages en conséquence */
  	clearScreen();
-
 	*carte = actumap(ordre_action, *carte);
 
         en_tete(ordre_action);
 
+	/*recherche d'un potentiel vainqeur */
         while (!hors_liste(ordre_action)){
 		valeur_elt(ordre_action, &persoc); 
                 if((persoc.joueur)==1){
@@ -245,7 +250,10 @@ int est_mort(t_liste *ordre_action, t_map * carte){
 		}
 		suivant(ordre_action);
 	}
+
 	ordre_action->ec = tampon;
+
+	/*si il y a un gagnant : renvoie de l'info pour terminer la partie */
 	if ( (nb_equipe2 == 0) ) { 
 		return 1;
 	}
@@ -262,7 +270,7 @@ void passer(t_liste *ordre_action,int *NbTour,t_map * carte){
  * \param t_liste *ordre_action : la liste des personnages joués triée int *NbTour le nombre ,t_map * carte
  */
 	suivant(ordre_action);
-	if(hors_liste(ordre_action)) {// Si l'ensemble des personnages ont joués ont se replace sur le premier de la liste
+	if(hors_liste(ordre_action)) {/*Si hors_liste, tour suivant */
         	en_tete(ordre_action);
        		(*NbTour)++;
     	}
@@ -277,46 +285,55 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
  */
 	t_personnage persoc;
 	t_element * tampon;
+
 	int degats = (attaque.mul_ATQ) * (ordre_action->ec->personnage.classe.ATQ);
+
 	int def=cible.classe.DEF;
 	float stock, blocage, pare = faux;
 	char message_tampon[100] = "";
 
-	strcpy(mretour,"");
 
-	stock = Rand_atq();
+	stock = Rand_atq();/*Calcul du pourcentage de dégat à appliquer */
 
-	/*Calcul des pourcentages de blocage, si l'attaquant réussi son attaque le défenseur a moins de chance de la bloquer */
-	if(stock <= 0.78)
+
+	if(stock <= 0.78) /* Si le pourcentage de dégat est "très faible" : */
 		blocage = 0.35;
-	else if(stock > 0.78 && stock < 1.15){
+	else if(stock > 0.78 && stock < 1.15){/* Si le pourcentage de dégat est "normal" : */
 		blocage = 0.08 * ((100 + def*10)/ 100);
-	}else if(stock >= 1.15)
+	}else if(stock >= 1.15)/* Si le pourcentage de dégat est "critique" : */
 		blocage = 0;
 	
+	/*calcul des chances de blocage */
 	pare = (blocage*100) + (rand()%100);
 
-	if(pare >= 100) {
+	if(pare >= 100) {/*si chances de blocage > 100 : attaque bloquée... */
 		sprintf(message_tampon, "\tL'Attaque a ete bloquee !\n");
-	} else {
+	} else {/*Sinon appliquation des dégats à la cible */
+
+		/*sauvegarde le l'element courrant */
 		tampon = ordre_action->ec;
+
+		/*recherche de la cible */
 		en_tete(ordre_action);
 		valeur_elt(ordre_action, &persoc);
 		while( persoc.x != cible.x || persoc.y != cible.y){
 			suivant(ordre_action);
 			valeur_elt(ordre_action, &persoc);
 		}
+
+		/*application des dégats */
 		degats = (stock*degats) -def;
 		persoc.pv -= degats;
 		modif_elt(ordre_action, persoc); 
 		
-		if ( persoc.pv<=0 ){
+		if ( persoc.pv<=0 ){/*la cible décède */
 			sprintf(message_tampon, "\tLe personnage %s a été vaincu !\n", persoc.classe.nom);
-			*gagnant = est_mort(ordre_action, carte);// on enlève les morts de la liste ordre_action et on vérifie si une équipe a été éliminée
+			*gagnant = est_mort(ordre_action, carte);/* on enlève le mort de la liste ordre_action et on vérifie si une équipe a été éliminée */
 		} else {
 			sprintf(message_tampon, "\tLe personnage %s perd %i points de vie !\n", persoc.classe.nom, degats);
 		}
- 
+ 		
+		/* replacage à l'element courrant */
 		ordre_action->ec= tampon;
 		
 	}
@@ -331,36 +348,48 @@ int test_obstacle(t_personnage attaquant,t_personnage cible,int portee, t_map * 
  * \return vrai s'il y a un obstacle
  */
 	int j;
+	
+	
 	if(portee >1){
 		if(attaquant.x == cible.x){
 			if(cible.y > attaquant.y){
-				for(j=1+attaquant.y; j < cible.y; j++){
-					if(carte->cell[attaquant.x][j]!=0)//on vérifie si la case est bien vide 
-						return vrai;		
+				for(j=1+attaquant.y; j < cible.y; j++){/*d'à coté de l'attaquant jusqu'a la portée max de l'attaque */
+					if(carte->cell[attaquant.x][j]!=0) /*si il y a un obstacle */
+						if(carte->cell[attaquant.x][j]>0) /*si c'est un personnage */
+							return vrai;	
+						else return faux;
 				}
 				return faux;
 			}else if(cible.y < attaquant.y){
-				for(j=cible.y+1; j < attaquant.y; j++){
-					if(carte->cell[attaquant.x][j]!=0)
-						return vrai;		
+				for(j=cible.y+1; j < attaquant.y; j++){/*d'à coté de l'attaquant jusqu'a la portée max de l'attaque */
+					if(carte->cell[attaquant.x][j]!=0)/*si il y a un obstacle */
+						if(carte->cell[attaquant.x][j]>0)/*si c'est un personnage */
+							return vrai;		
+						else return faux;
 				}
 				return faux;
 			}
+
 		} else if (attaquant.y == cible.y){
 			if(cible.x > attaquant.x){
-				for(j=1+attaquant.x; j < cible.x; j++){
-					if(carte->cell[j][attaquant.y]!=0)
-						return vrai;		
+				for(j=1+attaquant.x; j < cible.x; j++){/*d'à coté de l'attaquant jusqu'a la portée max de l'attaque */
+					if(carte->cell[j][attaquant.y]!=0)/*si il y a un obstacle */
+						if(carte->cell[attaquant.x][j]>0)/*si c'est un personnage */
+							return vrai;		
+						else return faux;
 				}
 				return faux;
 			}else if(cible.x < attaquant.x){
-				for(j=cible.x+1; j < attaquant.x; j++){
-					if(carte->cell[j][attaquant.y]!=0)
-						return vrai;		
+				for(j=cible.x+1; j < attaquant.x; j++){/*d'à coté de l'attaquant jusqu'a la portée max de l'attaque */
+					if(carte->cell[j][attaquant.y]!=0)/*si il y a un obstacle */
+						if(carte->cell[attaquant.x][j]>0)/*si c'est un personnage */
+							return vrai;		
+						else return faux;
 				}
 				return faux;
 			}
-		}		
+		}
+		
 	}else if (portee ==1) return faux;
 }
 
@@ -380,17 +409,21 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 	char* fin = NULL;
 
 	strcpy(mretour,"\n");
+
    	t_personnage  cible[4];
     	t_personnage persoc;
+
 	t_element * tampon = ordre_action->ec;
+
 	en_tete(ordre_action);
+
 	while(!hors_liste(ordre_action)){
 		valeur_elt(ordre_action, &persoc);
-		if ( persoc.x != tampon->personnage.x ||  persoc.y != tampon->personnage.y ){//On vérifie que la cible n'est pas le joueur.
-			if (tampon->personnage.joueur != persoc.joueur ){//On vérifie que la cible n'est pas dans l'équipe du joueur.
-				if( ( (tampon->personnage.x+portee >= persoc.x && tampon->personnage.x-portee <= persoc.x ) &&  tampon->personnage.y == persoc.y) ||( (tampon->personnage.y+portee >= persoc.y && tampon->personnage.y-portee <= persoc.y) && tampon->personnage.x == persoc.x) ){//On recherche les cibles à porté
+		if ( persoc.x != tampon->personnage.x ||  persoc.y != tampon->personnage.y ){/*On vérifie que la cible n'est pas le joueur.*/
+			if (tampon->personnage.joueur != persoc.joueur ){/*On vérifie que la cible n'est pas dans l'équipe du joueur.*/
+				if( ( (tampon->personnage.x+portee >= persoc.x && tampon->personnage.x-portee <= persoc.x ) &&  tampon->personnage.y == persoc.y) ||( (tampon->personnage.y+portee >= persoc.y && tampon->personnage.y-portee <= persoc.y) && tampon->personnage.x == persoc.x) ){/*On recherche les cibles à porté*/
 
-					if(!test_obstacle(tampon->personnage,persoc,portee,carte)){//On vérifie qu'il n'y a pas d'obstacle entre le personnage et la cible.
+					if(!test_obstacle(tampon->personnage,persoc,portee,carte)){/*On vérifie qu'il n'y a pas d'obstacle entre le personnage et la cible.*/
 						cible[i]= persoc;
 						i++;
 					}
@@ -406,6 +439,8 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 	do{
 		clearScreen();
 		afficherMat(*carte);
+
+		/* affichage des caractéristique du personnage en train d'être joué */
 		valeur_elt(ordre_action, &persoc);
 		if(persoc.joueur == 1)
 			couleur("34;1");
@@ -414,6 +449,7 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 		
 		couleur("0");
 
+		/* affichage du menu de choix de la cible */
 		printf("\nChoix de la cible :\n");
 
 		if(erreur) {
@@ -437,7 +473,8 @@ void choix_cible1(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 		printf("\nVotre choix : ");
 		scanclav(chaine, 30);
 		choix = strtol(chaine, &fin, 10);
-	
+
+		/*Traitement du choix de l'utilisateur */
 		if (choix >= 1 && choix <i+1){
 			attaquer(ordre_action,cible[choix-1],attaque,gagnant, carte, mretour);
 			persoc.pa -= attaque.coutPA;//Soustraction du coup en pa de l'attaque.
@@ -471,50 +508,73 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
     
 	t_element * tampon = ordre_action->ec;
 
-	for (i = 1; i <= portee; i++){
-		if( ((tampon->personnage.y + i) <= 9) && (carte->cell[tampon->personnage.x][tampon->personnage.y + i] > 0) ){
+	/*recherche des potentielles cibles pour chaque direction(haut, bas, gauche, droite) jusqu'à la portée de l'attaque */
+
+	for (i = 1; i <= portee; i++){/*pour les cases qui sont a coté de l'attaquant jusqu'à celle qui sont hors de portée de l'attaque */
+		/*si la case est dans la carte et qu'elle est occupée par un personnage*/
+		if( ((tampon->personnage.y + i) < carte->ncolonnes) && (carte->cell[tampon->personnage.x][tampon->personnage.y + i] > 0) ){
+
+			/* recherche de ce personnage dans la liste */
 			en_tete(ordre_action);
 			valeur_elt(ordre_action, &persoc);
 			while( (persoc.x != tampon->personnage.x || persoc.y != tampon->personnage.y + i) && !hors_liste(ordre_action) ){
 				suivant(ordre_action);
 				valeur_elt(ordre_action, &persoc);
 			}
+
+			/* s'il n'appartient pas à l'équipe de l'attanquant */
 			if(!hors_liste(ordre_action) && (persoc.joueur != tampon->personnage.joueur) ) {
+				/* ajout du personnage au tableau des cibles */
 				cible[0][nbcibles[0]]= ordre_action->ec->personnage;
 				nbcibles[0]++;
 			}
 		}
+		/*si la case est dans la carte et qu'elle est occupée par un personnage*/
 		if( ((tampon->personnage.y - i) >= 0) && (carte->cell[tampon->personnage.x][tampon->personnage.y - i] > 0) ){
+
+			/* recherche de ce personnage dans la liste */
 			en_tete(ordre_action);
 			valeur_elt(ordre_action, &persoc);
 			while( (persoc.x != tampon->personnage.x || persoc.y != tampon->personnage.y - i) && !hors_liste(ordre_action) ){
 				suivant(ordre_action);
 				valeur_elt(ordre_action, &persoc);
 			}
+
+			/* s'il n'appartient pas à l'équipe de l'attanquant */
 			if(!hors_liste(ordre_action) && (persoc.joueur != tampon->personnage.joueur) ) {
 				cible[1][nbcibles[1]]=persoc;
 				nbcibles[1]++;
 			}
 		}
-		if( ((tampon->personnage.x + i) <= 9) && (carte->cell[tampon->personnage.x + i][tampon->personnage.y] > 0) ){
+		/*si la case est dans la carte et qu'elle est occupée par un personnage*/
+		if( ((tampon->personnage.x + i) < carte->nlignes) && (carte->cell[tampon->personnage.x + i][tampon->personnage.y] > 0) ){
+
+			/* recherche de ce personnage dans la liste */
 			en_tete(ordre_action);
 			valeur_elt(ordre_action, &persoc);
 			while( (ordre_action->ec->personnage.x != tampon->personnage.x + i || ordre_action->ec->personnage.y != tampon->personnage.y) && !hors_liste(ordre_action) ){
 				suivant(ordre_action);
 				valeur_elt(ordre_action, &persoc);
 			}
+
+			/* s'il n'appartient pas à l'équipe de l'attanquant */
 			if(!hors_liste(ordre_action) && (persoc.joueur != tampon->personnage.joueur) ) {
 				cible[2][nbcibles[2]]= persoc;
 				nbcibles[2]++;
 			}
 		}
+		/*si la case est dans la carte et qu'elle est occupée par un personnage*/
 		if( ((tampon->personnage.x - i) >= 0) && (carte->cell[tampon->personnage.x - i][tampon->personnage.y] > 0) ){
+
+			/* recherche de ce personnage dans la liste */
 			en_tete(ordre_action);
 			valeur_elt(ordre_action, &persoc);
 			while( (persoc.x != tampon->personnage.x - i || persoc.y != tampon->personnage.y) && !hors_liste(ordre_action) ){
 				suivant(ordre_action);
 				valeur_elt(ordre_action, &persoc);
 			}
+
+			/* s'il n'appartient pas à l'équipe de l'attanquant */
 			if(!hors_liste(ordre_action) && (persoc.joueur != tampon->personnage.joueur) ) {
 				cible[3][nbcibles[3]]= persoc;
 				nbcibles[3]++;
@@ -527,6 +587,8 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 	do{
 		clearScreen();
 		afficherMat(*carte);
+
+		/* affichage des caractéristique du personnage en train d'être joué */
 		valeur_elt(ordre_action, &persoc);
 		if(ordre_action->ec->personnage.joueur == 1)
 			couleur("34;1");
@@ -535,6 +597,7 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 		
 		couleur("0");
 
+		/* affichage du menu de choix de la cible */
 		printf("\nChoix de la cible :\n");
 
 		if(erreur) {
@@ -569,7 +632,9 @@ void choix_cible2(t_liste *ordre_action, t_attaque attaque,int *gagnant, t_map *
 		scanclav(chaine, 30);
 		choix = strtol(chaine, &fin, 10);
 
+		/*Traitement du choix de l'utilisateur */
 		if(choix > 0 && choix < k+1) {
+			strcpy(mretour,"");
 			for( j = 0; j < nbchoix[choix-1]; j++ ){
 				attaquer(ordre_action, tabchoix[choix-1][j], attaque, gagnant, carte, mretour);
 			}
@@ -601,6 +666,8 @@ void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
 	do{
 		clearScreen();
 		afficherMat(*carte);
+
+		/* affichage des caractéristique du personnage en train d'être joué */
 		valeur_elt(ordre_action, &persoc);
 		if(persoc.joueur == 1)
 			couleur("34;1");
@@ -609,6 +676,7 @@ void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
 		
 		couleur("0");
 
+		/* affichage du menu de choix de la compétence */
 		printf("\nChoix de la compétence :\n");
 
 		if(erreur) {
@@ -630,6 +698,8 @@ void choix_competence(t_liste *ordre_action,int *gagnant,t_map * carte) {
 		printf("\nVotre choix : ");
 		scanclav(chaine, 30);
 		choix = strtol(chaine, &fin, 10);
+
+		/*Traitement du choix de l'utilisateur */
 		switch(choix){	
 
 				case 1:
@@ -671,18 +741,23 @@ void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour)
 	char* fin = NULL;
 
 	t_personnage persoc;
+
 	char mretour[100] = "\n";
+
 	do{
 		clearScreen();
 		afficherMat(*carte);
 		valeur_elt(ordre_action, &persoc);
-		if(ordre_action->ec->personnage.joueur == 1)
+
+		/* affichage des caractéristique du personnage en train d'être joué */
+		if(persoc.joueur == 1)
 			couleur("34;1");
 		else couleur("31;1");
 		printf("%s Equipe :%i %i/%i PV (%iPA) coordonnee %i %i\n",persoc.classe.nom,persoc.joueur, persoc.pv, persoc.classe.PVmax,persoc.pa,persoc.x,persoc.y);
 		
 		couleur("0");
 
+		/*Choix de l'action */
 		printf("\nChoix de l'action :\n");
 
 		if(erreur) {
@@ -704,6 +779,8 @@ void choix_action(t_liste *ordre_action, t_map * carte,int *gagnant,int *NbTour)
 		printf("\nVotre choix : ");
 		scanclav(chaine, 30);
 		choix = strtol(chaine, &fin, 10);
+
+		/*Traitement du choix de l'utilisateur */
 		switch(choix){	
 			case 1: deplacement(ordre_action,*carte); break;
 			case 2: choix_competence(ordre_action,gagnant,carte); break;
@@ -723,12 +800,18 @@ void gestion_tour(t_liste *ordre_action,int *NbTour,t_map * carte,int *gagnant){
  */
 
 	t_personnage persoc;
-	while(*gagnant ==0){
+	while(*gagnant ==0){ /*tant que la partie n'est pas terminée */
 		valeur_elt(ordre_action, &persoc);
-                if ((*NbTour) >1 && persoc.pa < 20){
-                	persoc.pa += (persoc.classe.gainPA);
+                if ((*NbTour) >1 && persoc.pa < 20){ /* ajout des pa à un perso s'il a moins de 20 pa */ 
+                	persoc.pa = persoc.pa + (persoc.classe.gainPA);
+
+			if (persoc.pa > 20 ) /*si le perso a plus de  20 pa, on les lui fixe à 20 */
+				persoc.pa  = 20;
+
 			modif_elt(ordre_action, persoc);
                 }
+		
+		/* choix de l'action à faire par l'utilisateur */
 		choix_action(ordre_action,carte,gagnant,NbTour);
 		
 	}

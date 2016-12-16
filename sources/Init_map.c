@@ -46,11 +46,13 @@ t_map actumap(t_liste * ordre_action, t_map map){
    t_personnage persoc;
    int i, j;
 
+   /* réinitialisation de la map */
    for (i=0; i < map.nlignes; i++){
         for (j=0; j < map.ncolonnes; j++)  	
         	map.cell[i][j] = 0;
    }
 
+   /*placement des indices sur la map en fonction des positions des personnages */
    en_tete(ordre_action);
    while(!hors_liste(ordre_action)){
 	valeur_elt(ordre_action, &persoc);

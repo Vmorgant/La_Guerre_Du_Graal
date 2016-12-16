@@ -79,6 +79,10 @@ void clearScreen();
  */
 
 void scanclav(char chaine[200], int i);
+/**
+ * \fn clearScreen
+ * \brief Fonction pour recupérer une saisie clavier
+ */
 
 typedef enum{vrai = 1, faux = 0}t_bool;
 /**

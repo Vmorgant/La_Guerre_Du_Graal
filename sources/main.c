@@ -20,18 +20,26 @@
 
 
 void scanclav(char chaine[200], int i){
-
+/**
+ * \fn clearScreen
+ * \brief Fonction pour recupérer une saisie clavier
+ * \param char chaine[200] : chiane dans laqulle ont stocke la saisie, int i : taille maximum de la chaine à lire
+ */
 	char *p, c;
 
 	if(c = fgets(chaine, i+1, stdin) != NULL){}; /* recupère la chaine */
-	if(strchr(chaine, '\n') == NULL){
-		while ((c = getchar()) != '\n' &&  c != EOF){} /* revide le buffer au cas ou il y ai plus de 30 caractères */
+	if(strchr(chaine, '\n') == NULL){ /* revide le buffer au cas ou il y ai plus de 30 caractères */
+		while ((c = getchar()) != '\n' &&  c != EOF){} 
 	}
 	p = strchr(chaine, '\n'); /* cherche le '\n' à la fin */
 	if (p) *p = 0; /* enleve le '\n' à la fin */
 }
 
 void clearScreen(){
+/**
+ * \fn clearScreen
+ * \brief Fonction permettant d'effacer l'écran
+ */
 	system("clear");
 }
 

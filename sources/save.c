@@ -30,12 +30,14 @@ int charger_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours) {
 	t_save save;
 
 	sprintf(dirsave, "../Saves/%s", nomsave);
+	/*ouverture de la sauvegarde */
 	fic = fopen( dirsave,"r" );
 
 	if( fic != NULL ) {
-
+		/*lecture des données de la sauvegarde */
 		fread(&save, sizeof(save) , 1 , fic);
 
+		/*récupération des données de la sauvegarde */
 		vider(ordre_action);
 		for(i = 0; i < save.nbpersos; i++){
 			en_queue(ordre_action);
@@ -49,6 +51,7 @@ int charger_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours) {
 			suivant(ordre_action);
 			valeur_elt(ordre_action, &persoc);
 		}
+
 		fclose(fic);
 		return faux;
 	} else return vrai;
@@ -67,9 +70,11 @@ int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours) {
 	t_save save;
 
 	sprintf(dirsave, "../Saves/%s", nomsave);
+	/*ouverture de la sauvegarde */
 	fic = fopen( dirsave,"w" );
 
 	if( fic != NULL ) {
+		/*enregistrement des données de la sauvegarde */
 		valeur_elt(ordre_action, &persoc);
 		save.persoc = persoc;
 
@@ -85,6 +90,8 @@ int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours) {
 		}
 		save.nbpersos = nbpersos;
 		save.nbtours = Nb_tours;
+
+		/*écriture des données de la sauvegarde */
 		fwrite(&save , sizeof(save) , 1 , fic);
 
 		fclose(fic);
@@ -152,6 +159,7 @@ void charger_partie(char mbilan[100]) {
 			scanclav(chaine, 30);
 			choix = strtol(chaine, &fin, 10);
 
+			/*Traitement du choix de l'utilisateur */
 			if(choix > 0 && choix < nb_saves+1) {
 				seekdir(rep,choix + 1);
 				ent = readdir(rep);
@@ -343,7 +351,7 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 					if (rep != NULL) {
 						while ((ent = readdir(rep)) != NULL) {
 							if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
-					 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
+					 		strcmp(ent->d_name, "..") != 0) { /*  Si le fichier n'est pas .. */
 								nb_saves++;
 								printf(" %i- %s\n", nb_saves, ent->d_name);
 							}
@@ -354,6 +362,7 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 						scanclav(chaine, 30);
 						choix = strtol(chaine, &fin, 10);
 
+						/*Traitement du choix de l'utilisateur */
 						if(choix > 0 && choix < nb_saves+1) {
 							seekdir(rep,choix + 1);
 							ent = readdir(rep);
