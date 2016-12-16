@@ -513,6 +513,8 @@ void deplacement(t_liste *ordre_action,t_map map){
     int dep_erreur = 0;	// Variables pour l'affichage des erreurs 
     int erreur = 0;
     char mretour[100] = "\n";
+    char chaine[30];
+    char * fin =NULL;
     int tete,queue,nb_valeurs;
     int cout = taille; /* cout_dep(ordre_action);*/	//cout du déplacement	
     initfile();
@@ -541,11 +543,14 @@ void deplacement(t_liste *ordre_action,t_map map){
 		strcpy(mretour,"\n");
 
 		printf("Rentrez un x pour le déplacement (-1 pour annuler) : ");	// Entrée des coordonnées objectifs
-		scanf("%i",&xobj);
+		scanclav(chaine, 2);
+		xobj = strtol(chaine, &fin, 10);
+		printf("\n");
 
 		if(xobj != -1) {
 			printf("Rentrez un y pour le déplacement (-1 pour annuler) : ");
-				scanf("%i",&yobj);
+				scanclav(chaine, 2);
+				yobj = strtol(chaine, &fin, 10);
 				printf("\n");
 			if(yobj != -1){
 			
