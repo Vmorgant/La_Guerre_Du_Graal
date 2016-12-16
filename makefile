@@ -1,13 +1,9 @@
 CC = gcc -c
 all: run
 
-run: LGDG.out clean
-	printf '\e[8;100;300t'
-	./LGDG.out
-	printf '\e[8;30;100t'
-	clear
+run: LGDG clean
 
-LGDG.out: main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o file_chemin.o deplacement_simp.o save.o
+LGDG: main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o file_chemin.o deplacement_simp.o save.o
 	gcc -o $@ $^ -lm
 
 main.o: ./sources/main.c ./includes/global.h 
