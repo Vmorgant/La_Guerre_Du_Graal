@@ -40,56 +40,175 @@ int creer_perso(t_liste * equipe, t_classe classe, int joueur, int * PE, char mr
 	}
 }
 
-void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
+void ajout_equipe(t_liste * equipe, int joueur, int * PE,SDL_Window* Fenetre,SDL_Surface* Fond,TTF_Font *police,SDL_Surface *message,SDL_Surface *message2,SDL_Surface *message3,SDL_Surface *message4,int sdl,SDL_DisplayMode current,int num_menu) {
 /**
  * \fn ajout_equipe(t_liste * equipe, int joueur, int * PE)
  * \brief Ajoute le personnage à l'équipe.
  * \param t_liste * equipe : la liste des personnage, int joueur : l'identifiant du joueur, int *PE le nombre de PE restant.
  */
 
-	int choix, i, erreur= faux;
+	int choix, i, erreur= faux,x,y;
 	char mretour[100] = "\n";
 	char chaine[30];
 	char* fin = NULL;
+	police = TTF_OpenFont("./Ressources/police/angelina.ttf", 63);
+	SDL_Surface* classe =SDL_LoadBMP("./Ressources/images/classe.bmp");//chargement de l'image représentant les classes
+	SDL_Color textColor = {255,255,255,255};//blanc
+	SDL_Event event;
+	const Uint8 *keystates = SDL_GetKeyboardState(NULL);/*stockage de l'état des touches du clavier*/
+	SDL_Rect select,pos_equipe;
+	pos_equipe.x = current.w/2;
+	pos_equipe.y = 0;
+	do {	
+		if(sdl==1){
+			if (num_menu ==4){
+				SDL_Rect HG = {0,0,0,0};/* Coin haut gauche du sprite en haut à gauche de la fenêtre*/
+       				
+				message = TTF_RenderText_Solid( police, "Cliquez sur le personnage a ajouter dans votre equipe ", textColor ); 
+				SDL_Rect C = {(current.w)/2-message->w/2,(current.h)/2-message->h/2,0,0};
+				SDL_BlitSurface(Fond,NULL,SDL_GetWindowSurface(Fenetre),&HG);
+				SDL_BlitSurface(classe,NULL,SDL_GetWindowSurface(Fenetre),&HG); 
+				SDL_BlitSurface(message,NULL,SDL_GetWindowSurface(Fenetre),&C);
+				message2 = TTF_RenderText_Solid( police, "L'equipe est composee de", textColor );
+				SDL_BlitSurface(message2,NULL,SDL_GetWindowSurface(Fenetre),&pos_equipe);
+				SDL_UpdateWindowSurface(Fenetre);
+				num_menu++;
+			}
+			while ( SDL_PollEvent(&event) ){
+				if(SDL_GetMouseState(&x,&y) & SDL_BUTTON(1)) {//si on clique gauche
+					if (pos_equipe.y+50+160 < current.h/2 )
+						pos_equipe.y=pos_equipe.y+50;	
+					else {
+						pos_equipe.y=50;
+						pos_equipe.x = pos_equipe.x+220;
+					}
+	   				 if (x < 213) { 
+						if(y <160){
+		                			choix=1;//Saber
+							SDL_Delay(500);
+							select.x=0;
+							select.y=0;
+							select.w=213;
+							select.h=160;
+							SDL_BlitSurface(classe,&select,SDL_GetWindowSurface(Fenetre),&pos_equipe);
+							SDL_UpdateWindowSurface(Fenetre);
+						}
+						else if (y < 320) { 
+							choix=2;//Archer
+				 			SDL_Delay(500);
+							select.x=0;
+							select.y=160;
+							select.w=213;
+							select.h=160;
+							SDL_BlitSurface(classe,&select,SDL_GetWindowSurface(Fenetre),&pos_equipe);;
+							SDL_UpdateWindowSurface(Fenetre);
+		               				
+						}
+						else if (y <480){
+							choix=4;//Berserker
+							SDL_Delay(500);
+							select.x=0;
+							select.y=320;
+							select.w=213;
+							select.h=160;
+							SDL_BlitSurface(classe,&select,SDL_GetWindowSurface(Fenetre),&pos_equipe);
+							SDL_UpdateWindowSurface(Fenetre);
 
-	do {
-		clearScreen();
-		/* Affichage du menu et saisie d'une classe */
-		printf("Choisissez une classe : \n");
-		if(erreur) {
-			couleur("31");				//Ecris en rouge
-			printf("%s", mretour);
-			couleur("0");
-		} else {
-			couleur("32");				//Ecris en vert
-			printf("%s", mretour);
-			couleur("0");
+						}
+		                 
+		            		}
+				
+					else if (x < 426) { 
+						if(y <160){
+		                			choix=5;//Lancer 
+							SDL_Delay(500);
+							select.x=213;
+							select.y=0;
+							select.w=213;
+							select.h=160;
+							SDL_BlitSurface(classe,&select,SDL_GetWindowSurface(Fenetre),&pos_equipe);
+							SDL_UpdateWindowSurface(Fenetre);
+							
+						}
+						else if (y < 320) { 
+		               				choix=3;//Caster
+							SDL_Delay(500);
+							select.x=213;
+							select.y=160;
+							select.w=213;
+							select.h=160;
+							SDL_BlitSurface(classe,&select,SDL_GetWindowSurface(Fenetre),&pos_equipe);
+							SDL_UpdateWindowSurface(Fenetre);
+							
+						}
+						else if (y < 480) { 
+		               				choix=6;//Rider 
+							SDL_Delay(500);
+							select.x=213;
+							select.y=320;
+							select.w=213;
+							select.h=160;
+							SDL_BlitSurface(classe,&select,SDL_GetWindowSurface(Fenetre),&pos_equipe);
+							SDL_UpdateWindowSurface(Fenetre);
+								
+		            			}
+		                
+		            		}
+					else if(x <640){
+						if(y <160){
+		                			choix=7;//Assassin 
+							SDL_Delay(500);
+							select.x=426;
+							select.y=0;
+							select.w=213;
+							select.h=160;
+							SDL_BlitSurface(classe,&select,SDL_GetWindowSurface(Fenetre),&pos_equipe);
+							SDL_UpdateWindowSurface(Fenetre);
+								
+						}
+					
+					}
+				}
+			}
 		}
-		strcpy(mretour, "\n");	
-		erreur = faux;		
+		else{
+			clearScreen();
+			/* Affichage du menu et saisie d'une classe */
+			printf("Choisissez une classe : \n");
+			if(erreur) {
+				couleur("31");				//Ecris en rouge
+				printf("%s", mretour);
+				couleur("0");
+			} else {
+				couleur("32");				//Ecris en vert
+				printf("%s", mretour);
+				couleur("0");
+			}	
+			strcpy(mretour, "\n");	
+			erreur = faux;		
 
-		if(!liste_vide(equipe)) {
-			printf("l'equipe %i est constituée de : ", joueur);
-			if(joueur == 1)
-				couleur("34;1");
-			else couleur("31;1");
-			afficher(equipe);
-			couleur("0");
-			printf("(%iPE restant)\n\n", *PE);
-		}else {
-			printf("l'equipe %i est vide.", joueur);		
-			printf("(%iPE restant)\n\n", *PE);
-		}
+			if(!liste_vide(equipe)) {
+				printf("l'equipe %i est constituée de : ", joueur);
+				if(joueur == 1)
+					couleur("34;1");
+				else couleur("31;1");
+					afficher(equipe);
+					couleur("0");
+					printf("(%iPE restant)\n\n", *PE);
+				}else {
+					printf("l'equipe %i est vide.", joueur);		
+					printf("(%iPE restant)\n\n", *PE);
+				}
 		
 		
-		for(i =1; i <= nb_classes; i++){
-			printf(" %i - %s (%iPE)\n", i, tab_classes[i-1].nom, tab_classes[i-1].coutPE);
+			for(i =1; i <= nb_classes; i++){
+				printf(" %i - %s (%iPE)\n", i, tab_classes[i-1].nom, tab_classes[i-1].coutPE);
+			}
+			printf("\n %i - Retour\n", nb_classes+1);
+			printf("\nVotre choix : ");
+			scanclav(chaine, 30);				//Scanf sécurisé pour éviter les erreurs de frappes
+			choix = strtol(chaine, &fin, 10);		//Conversion de la chaine de caractère en int
 		}
-		printf("\n %i - Retour\n", nb_classes+1);
-		printf("\nVotre choix : ");
-		scanclav(chaine, 30);				//Scanf sécurisé pour éviter les erreurs de frappes
-		choix = strtol(chaine, &fin, 10);		//Conversion de la chaine de caractère en int
-
 		/* Traitement du choix de l'utilisateur */
 		if(choix >= 1 && choix <= nb_classes){
 			erreur = creer_perso(equipe, tab_classes[choix-1], joueur, PE, mretour);
@@ -97,6 +216,7 @@ void ajout_equipe(t_liste * equipe, int joueur, int * PE) {
 			sprintf(mretour, "\tVotre choix doit être compris entre 1 et %i\n", nb_classes+1);
 			erreur = vrai;			
 		}
+
 	} while (choix != nb_classes+1);
 }
 
@@ -209,6 +329,7 @@ void init_equipe(t_liste * equipe, int joueur, int * PE,SDL_Window* Fenetre,SDL_
 				SDL_UpdateWindowSurface(Fenetre);
 				num_menu++;
 			}
+			
 			while ( SDL_PollEvent(&event) ){
 				if(keystates[SDL_SCANCODE_ESCAPE] ||event.window.event == SDL_WINDOWEVENT_CLOSE){
 					choix=3;				
@@ -225,19 +346,7 @@ void init_equipe(t_liste * equipe, int joueur, int * PE,SDL_Window* Fenetre,SDL_
 					TTF_Quit();
                     		}
 				else if(keystates[SDL_SCANCODE_1]){
-					sdl=0;
 					choix=1;
-					SDL_DestroyWindow(Fenetre);
-					SDL_FreeSurface(Fond);
-					SDL_FreeSurface(message);
-					SDL_FreeSurface(message2);
-					SDL_FreeSurface(message3);
-					SDL_FreeSurface(message4);
-					SDL_Quit();
-					//Fermeture des Fonts qu'on a utilisé
-					TTF_CloseFont(police); 
-					//On quitte SDL_ttf 
-					TTF_Quit();
 				}
 				else if(keystates[SDL_SCANCODE_2]){
 					sdl=0;
@@ -327,7 +436,7 @@ void init_equipe(t_liste * equipe, int joueur, int * PE,SDL_Window* Fenetre,SDL_
 		}
 		/* Traitement du choix de l'utilisateur */
 		switch(choix) {
-			case 1: ajout_equipe(equipe, joueur, PE); break;
+			case 1: ajout_equipe(equipe, joueur, PE,Fenetre,Fond,police,message,message2,message3,message4,sdl,current,num_menu); break;
 			case 2: oter_equipe(equipe, joueur, PE); break;
 			case 3: break;
 			case 4: vider(equipe); *PE = 10; choix = 3; break;
