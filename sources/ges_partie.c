@@ -812,9 +812,8 @@ void gestion_tour(t_liste *ordre_action,int *NbTour,t_map * carte,int *gagnant){
                 }
 		
 		/* choix de l'action à faire par l'utilisateur */
-		choix_action(ordre_action,carte,gagnant,NbTour);
+		choix_action(ordre_action, carte, gagnant, NbTour);
 		
 	}
-        
 }
 

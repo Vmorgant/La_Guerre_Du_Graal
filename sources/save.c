@@ -65,7 +65,7 @@ int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours) {
  */
 	FILE * fic = NULL;
 	char  dirsave[100];
-	int nbpersos, i, j;
+	int nbpersos, i;
 	t_personnage persoc;
 	t_save save;
 
@@ -106,11 +106,11 @@ void charger_partie(char mbilan[100]) {
  * \param t_liste * ordre_action : la liste triés des personnages par ordre de jeu, int Nb_tours, le nombre de tours actuel de la sauvegarde
  */
 
-	int choix = -1, nb_saves, erreur = faux;
+	int choix = -1, nb_saves, i, erreur = faux;
 	int Nb_tours=1;
-	int gagnant=0; 
+	int gagnant = 0; 
 	char mretour[100] = "\n";
-
+	char dirsave[34];
 	char chaine[30];
 	char* fin = NULL;
 
@@ -131,6 +131,7 @@ void charger_partie(char mbilan[100]) {
 		clearScreen();
 
 		nb_saves = 0;
+		i =0;
 
 		printf("Choisissez une sauvegarde : \n");
 		if(erreur) {
@@ -152,32 +153,46 @@ void charger_partie(char mbilan[100]) {
 				if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
 		 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
 					nb_saves++;
-					printf(" %i- %s\n", nb_saves, ent->d_name);
 				}
 			}
+
+			char tab_saves[nb_saves][34];
+			rewinddir(rep);
+
+			while ((ent = readdir(rep)) != NULL) {
+				if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
+		 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
+					i++;
+					printf(" %i- %s\n", i, ent->d_name);
+					strcpy(tab_saves[i],ent->d_name);
+				}
+			}
+
+			closedir(rep);
+
 			printf("\n %i- Annuler\n", nb_saves+1);
 			printf("\nVotre choix : ");
+
 			scanclav(chaine, 30);
 			choix = strtol(chaine, &fin, 10);
+
 			printf("\n%i\n",choix);
+
 			/*Traitement du choix de l'utilisateur */
 			if(choix > 0 && choix < nb_saves+1) {
-				seekdir(rep,choix + 1);
-				ent = readdir(rep);
-				closedir(rep);
-				if(ent == NULL) {
+
+				erreur = charger_save(tab_saves[choix], &ordre_action, &Nb_tours);
+
+				if(erreur) {
 					strcpy(mretour, "\tCette sauvegarde n'existe pas.\n");
-					erreur = vrai;
 				} else {
-					erreur = charger_save(ent->d_name, &ordre_action, &Nb_tours);
 					carte=actumap(&ordre_action, carte);
 					afficherMat(carte);
 					while (gagnant == 0){
-						gestion_tour(&ordre_action,&Nb_tours, &carte,&gagnant);
+						gestion_tour(&ordre_action, &Nb_tours, &carte, &gagnant);
 					}
-					if(gagnant == -1) sprintf(mbilan, "\tLa partie a bien été enregistrée.\n");
-					else if(gagnant != -2) sprintf(mbilan, "\tLe joueur %i a gagné en %i tours\n",gagnant,Nb_tours);
 					choix = nb_saves+1;
+					printf(" %i-\n", gagnant);
 				}
 
 			} else if (choix > nb_saves+1 || choix < 1) {
@@ -283,7 +298,6 @@ void nouvelle_partie(char mbilan[100]) {
 				}
 			default: strcpy(mretour, "\tVotre choix doit être compris entre 1 et 4\n"); erreur = vrai;
 		}
-	
 	}while(choix!=4);
 	
 	supprimer(&equipe1); /* comme ordre_action = equipe 1, pas besoin de free ordre_action */
@@ -298,7 +312,7 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
  * \param t_liste * ordre_action : la liste triés des personnages par ordre de jeu, int Nb_tours, le nombre de tours actuel de la sauvegarde
  */
 
-	int choix = -1, erreur= faux, nb_saves=0;
+	int choix = -1, erreur= faux, nb_saves;
 	char mretour[100] = "\n", new_save[34];
 	int i =0;
 
@@ -310,7 +324,6 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 
 	do{
 		clearScreen();
-	
 		printf("Voulez-vous sauvegarder la partie avant de quitter ?\n");
 		if(erreur) {
 			couleur("31");
@@ -333,6 +346,7 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 					clearScreen();
 
 					nb_saves = 0;
+					i =0;
 
 					printf("Choisissez une sauvegarde : \n");
 					if(erreur) {
@@ -346,29 +360,38 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 					}
 					erreur = faux;
 					strcpy(mretour,"\n");
-
 					DIR * rep = opendir("./Saves/");
 				     
 					if (rep != NULL) {
 						while ((ent = readdir(rep)) != NULL) {
 							if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
-					 		strcmp(ent->d_name, "..") != 0) { /*  Si le fichier n'est pas .. */
+					 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
 								nb_saves++;
-								printf(" %i- %s\n", nb_saves, ent->d_name);
 							}
 						}
+
+						char tab_saves[nb_saves][34];
+						rewinddir(rep);
+						while ((ent = readdir(rep)) != NULL) {
+							if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
+					 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
+								strcpy(tab_saves[i],ent->d_name);
+								i++;
+								printf(" %i- %s\n", i, ent->d_name);
+							}
+						}
+						closedir(rep);
+						
 						printf(" %i- Nouvelle Sauvegarde.\n", nb_saves+1);
 						printf("\n %i- Annuler\n", nb_saves+2);
 						printf("\nVotre choix : ");
+
 						scanclav(chaine, 30);
 						choix = strtol(chaine, &fin, 10);
 
 						/*Traitement du choix de l'utilisateur */
 						if(choix > 0 && choix < nb_saves+1) {
-							seekdir(rep,choix + 1);
-							ent = readdir(rep);
-							erreur = enregistrer_save(ent->d_name, ordre_action, Nb_tours);
-							closedir(rep);
+							erreur = enregistrer_save(tab_saves[choix-1], ordre_action, Nb_tours);
 							if(erreur) {
 								strcpy(mretour, "\tCette sauvegarde n'existe pas.\n");
 							} else {
@@ -377,22 +400,23 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 							}
 
 						} else if (choix > nb_saves+2 || choix < 1) {
+
 							sprintf(mretour, "\tVotre choix doit être compris entre  1 et %i.\n", nb_saves+2);
 							erreur = vrai;
+
 						} else if (choix == nb_saves+1) {
 
 							clearScreen();
-
 							printf("Entrez le nom de votre sauvegarde (30 caractères max) :\n\t");
-
 							scanclav(new_save, 30);
-							
 							strcat(new_save,".bin");
+
 							erreur = enregistrer_save(new_save, ordre_action, Nb_tours);
 
 							if(erreur) {
 								strcpy(mretour, "\tLa sauvegarde n'a pas pu être créée.\n");
 							} else {
+								printf("%i\n" , *gagnant);
 								*gagnant = -1;
 								choix = nb_saves+2;
 							}
@@ -415,7 +439,7 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 
 void gerer_save(char mbilan[100]) {
 
-	int choix = -1, erreur= faux, nb_saves=0;
+	int choix = -1, erreur= faux, nb_saves;
 	char mretour[100] = "\n", new_name[34], new_dir[34];
 	char  dirsave[100];
 	int i =0;
@@ -432,6 +456,7 @@ void gerer_save(char mbilan[100]) {
 		printf("Choisissez une sauvegarde : \n");
 
 		nb_saves = 0;
+		i = 0;
 
 		if(erreur) {
 			couleur("31");
@@ -451,7 +476,18 @@ void gerer_save(char mbilan[100]) {
 				if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
 		 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
 					nb_saves++;
-					printf(" %i- %s\n", nb_saves, ent->d_name);
+				}
+			}
+
+			char tab_saves[nb_saves][34];
+			rewinddir(rep);
+
+			while ((ent = readdir(rep)) != NULL) {
+				if (strcmp(ent->d_name, ".") != 0 && /* Si le fichier lu n'est pas . */
+		 		strcmp(ent->d_name, "..") != 0) { /*  Et n'est pas .. non plus */
+					i++;
+					printf(" %i- %s\n", i, ent->d_name);
+					strcpy(tab_saves[i],ent->d_name);
 				}
 			}
 			printf("\n %i- Annuler\n", nb_saves+1);
@@ -460,12 +496,8 @@ void gerer_save(char mbilan[100]) {
 			choix = strtol(chaine, &fin, 10);
 
 			if(choix > 0 && choix < nb_saves +1) {
-				seekdir(rep,choix + 1);
-				ent = readdir(rep);
 				
-				sprintf(dirsave, "./Saves/%s", ent->d_name);
-
-				printf("%s\n", ent->d_name);
+				sprintf(dirsave, "./Saves/%s", tab_saves[choix]);
 					
 				if( (fic = fopen(dirsave, "r")) == NULL) {
 					strcpy(mretour, "\tCette sauvegarde n'existe pas.\n");
