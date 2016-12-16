@@ -1,8 +1,10 @@
 all: run
 
-run:
-	printf '\e[8;50;230t'
+run: LGDG.out clean
+	printf '\e[8;100;300t'
 	./LGDG.out
+	printf '\e[8;30;100t'
+	clear
 
 LGDG.out: main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o file_chemin.o deplacement_simp.o save.o
 	gcc -o LGDG.out main.o listes_ptr.o ges_equipes.o classes.o ges_partie.o Init_map.o file_chemin.o deplacement_simp.o save.o -lm
@@ -36,10 +38,5 @@ save.o: sources/save.c includes/global.h
 
 clean: 
 	rm -rf *.~ *.o 
-
-op: 
-	xterm -maximized
-
-
 
 mrroper: clean
