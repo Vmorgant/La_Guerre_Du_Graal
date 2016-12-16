@@ -444,7 +444,7 @@ void gerer_save(char mbilan[100]) {
 		}
 		erreur = faux;
 		strcpy(mretour,"\n");
-			DIR * rep = opendir("../Saves/");
+			DIR * rep = opendir("./Saves/");
 		     
 		if (rep != NULL) {
 			while ((ent = readdir(rep)) != NULL) {
@@ -463,7 +463,7 @@ void gerer_save(char mbilan[100]) {
 				seekdir(rep,choix + 1);
 				ent = readdir(rep);
 				
-				sprintf(dirsave, "../Saves/%s", ent->d_name);
+				sprintf(dirsave, "./Saves/%s", ent->d_name);
 
 				printf("%s\n", ent->d_name);
 					
@@ -506,7 +506,7 @@ void gerer_save(char mbilan[100]) {
 								scanclav(new_name, 30);
 							
 								strcat(new_name,".bin");
-								sprintf(new_dir, "../Saves/%s", new_name);
+								sprintf(new_dir, "./Saves/%s", new_name);
 
 								printf("%s\n", new_dir);
 
