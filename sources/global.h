@@ -64,6 +64,8 @@
 #include<stdio.h>
 #include <unistd.h>
 #include <assert.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 /**
 *\file global.h
 *\brief Ce fichier contient les définitions de chaque structure globales utilisées dans le projet
@@ -77,7 +79,11 @@ void clearScreen();
  * \fn clearScreen
  * \brief Fonction permettant d'effacer l'écran
  */
-
+int init_SDL();
+/**
+ * \fn init_SDL
+ * \brief Fonction initialisant les différents modules de la SDL utilisés dans le jeu
+ */
 typedef enum{vrai = 1, faux = 0}t_bool;
 /**
 *\enum t_bool

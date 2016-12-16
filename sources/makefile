@@ -11,28 +11,28 @@ main.o: main.c global.h
 	gcc -c $< ${INCLUDE} -g -W
 
 ges_equipes.o: ges_equipes.c global.h
-	gcc -c $<
+	gcc -c $< ${INCLUDE} -g -W
 
 listes_ptr.o: listes_ptr.c global.h
-	gcc -c $<
+	gcc -c $< ${INCLUDE} -g -W
 
 classes.o: classes.c global.h
-	gcc -c $<
+	gcc -c $< ${INCLUDE} -g -W
 
 ges_partie.o: ges_partie.c global.h
-	gcc -c $<
+	gcc -c $< ${INCLUDE} -g -W
  
 Init_map.o: Init_map.c global.h
-	gcc -c $<
+	gcc -c $< ${INCLUDE} -g -W
 
 file_chemin.o: file_chemin.c global.h
-	gcc -c $<
+	gcc -c $< ${INCLUDE} -g -W
 	
 deplacement_simp.o: deplacement_simp.c global.h 
-	gcc -c $<
+	gcc -c $< ${INCLUDE} -g -W
 
 save.o: save.c global.h 
-	gcc -c $<
+	gcc -c $< ${INCLUDE} -g -W
 
 clean: 
 	rm -rf *.~ *.o 
