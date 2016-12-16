@@ -48,7 +48,7 @@ int main(void) {
 	int choix, erreur = faux;
 	
 	char mretour[100]="\n";
-	char chaine[30];
+	char chaine[30] ="";
 	char* fin = NULL;
 	char temp[50];
 clearScreen();
@@ -63,7 +63,7 @@ printf("\t\t\t|_______/__/     \\__\\     \\______|  \\______/  |_______|| _| `.
 printf("\n\n");
 couleur("0");
 printf("\t\t\t\t\t\t\t\t\t\t\t Appuyez sur Entrée pour continuer ");
-scanclav(mretour, 0);
+scanclav(chaine, 0);
 
 
 	

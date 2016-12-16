@@ -69,7 +69,7 @@ int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours) {
 	t_personnage persoc;
 	t_save save;
 
-	sprintf(dirsave, "../Saves/%s", nomsave);
+	sprintf(dirsave, "./Saves/%s", nomsave);
 	/*ouverture de la sauvegarde */
 	fic = fopen( dirsave,"w" );
 
@@ -127,6 +127,7 @@ void charger_partie(char mbilan[100]) {
 	struct dirent * ent;
 
 	do {
+
 		clearScreen();
 
 		nb_saves = 0;
@@ -144,7 +145,7 @@ void charger_partie(char mbilan[100]) {
 		erreur = faux;
 		strcpy(mretour,"\n");
 
-		DIR * rep = opendir("../Saves/");
+		DIR * rep = opendir("./Saves/");
 	     
 		if (rep != NULL) {
 			while ((ent = readdir(rep)) != NULL) {
