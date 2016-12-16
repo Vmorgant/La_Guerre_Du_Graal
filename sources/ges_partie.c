@@ -110,77 +110,86 @@ void placer(t_liste *ordre_action,t_map * carte){
 		if((persoc.joueur)==1){														
 		//Placer un personnage pour l'equipe 1
 			printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n",persoc.classe.nom);
-			scanf("%i", &x);
+			scanclav(chaine, 2);
+			x = strtol(chaine, &fin, 10);
 			printf("\n");
 			printf("Entrez un y pour votre %s entre 0 et 2 :\n", persoc.classe.nom);
-			scanf("%i", &y);
+			scanclav(chaine, 2);
+			y = strtol(chaine, &fin, 10);
 			printf("\n");
 		
-			while (x > 9 || y > 2 || x < 0 || y < 0 || carte->cell[x][y] != 0){
+			while (x >= carte->nlignes || y > 2 || x < 0 || y < 0 || carte->cell[x][y] != 0){
 
-				if (carte->cell[x][y] != 0){
-				//On teste si la case est vide
-					printf("La case est déjà occupée\n");
-					printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", persoc.classe.nom);
-					scanclav(chaine, 30);
-					x = strtol(chaine, &fin, 10);
-					printf("\n");
-					printf("Entrez un y pour votre %s entre 0 et 2 :\n", persoc.classe.nom);
-					scanclav(chaine, 30);
-					y = strtol(chaine, &fin, 10);
-					printf("\n");
-					
-				}
-				else{
+				
+				if(x >= carte->nlignes || y > 2 || x < 0 || y < 0)  {
 				//On teste si on est pas hors map
-					printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 4\n");
-					printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", persoc.classe.nom);
-					scanclav(chaine, 30);
+					printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 2\n");
+					printf("Joueur 1, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
+					scanclav(chaine, 2);
 					x = strtol(chaine, &fin, 10);
 					printf("\n");
 					printf("Entrez un y pour votre personnage entre 0 et 2 :\n");
-					scanclav(chaine, 30);
+					scanclav(chaine, 2);
 					y = strtol(chaine, &fin, 10);
 					printf("\n");
 					printf("\n");
+				}
+				else if (carte->cell[x][y] != 0){
+				//On teste si la case est vide
+					printf("La case est déjà occupée\n");
+					printf("Joueur 1, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
+					scanclav(chaine, 2);
+					x = strtol(chaine, &fin, 10);
+					printf("\n");
+					printf("Entrez un y pour votre %s entre 0 et 2 :\n", persoc.classe.nom);
+					scanclav(chaine, 2);
+					y = strtol(chaine, &fin, 10);
+					printf("\n");
+					
 				}
 			}
 			
 			
 		} else if((persoc.joueur)==2){													
 		//Placer un personnage pour l'equipe 2;
-			printf("Joueur 2, entrez un x pour votre %s entre 0 et 9 :\n", persoc.classe.nom);
-			scanf("%i", &x);
-			printf("\n");
-			printf("Entrez un y pour votre %s entre 7 et 9 :\n", persoc.classe.nom);
-			scanf("%i", &y);
+			printf("Joueur 2, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
+			scanclav(chaine, 2);
+			x = strtol(chaine, &fin, 10);
 			printf("\n");
 		
-			while (x > 10 || y > 10 || x < 0 || y < 7 || carte->cell[x][y] != 0){
+			printf("Entrez un y pour votre %s entre 7 et %i :\n", persoc.classe.nom, carte->ncolonnes-1);
+			scanclav(chaine, 2);
+			y = strtol(chaine, &fin, 10);
+			printf("\n");
+			
+		
+			while (x >= carte->nlignes || y >= carte->ncolonnes || x < 0 || y < 7 || carte->cell[x][y] != 0){
 
-				if (carte->cell[x][y] != 0){
-					printf("La case est déjà occupée\n");
-					printf("Joueur 2, entrez un x pour votre %s entre 0 et 9 :\n", persoc.classe.nom);
-					scanclav(chaine, 30);
-					x = strtol(chaine, &fin, 10);
-					printf("\n");
-					printf("Entrez un y pour votre %s entre 7 et 9 :\n", persoc.classe.nom);
-					scanclav(chaine, 30);
-					y = strtol(chaine, &fin, 10);
-					printf("\n");					
+							
 					
-				}
-				else{
-					printf("Les coordonnées doivent-être des entiers avec un y compris entre 7 et 9\n");
-					printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n", persoc.classe.nom);
-					scanclav(chaine, 30);
+				
+				if(x >= carte->nlignes || y >= carte->ncolonnes || x < 0 || y < 7){
+					printf("Les coordonnées doivent-être des entiers avec un y compris entre 7 et %i\n", carte->ncolonnes-1);
+					printf("Joueur 2, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
+					scanclav(chaine, 2);
 					x = strtol(chaine, &fin, 10);
 					printf("\n");
-					printf("Entrez un y pour votre %s entre 7 et 9 :\n", persoc.classe.nom);
-					scanclav(chaine, 30);
+					printf("Entrez un y pour votre %s entre 7 et %i :\n", persoc.classe.nom, carte->ncolonnes-1);
+					scanclav(chaine, 2);
 					y = strtol(chaine, &fin, 10);
 					printf("\n");
 				}
+				else if (carte->cell[x][y] != 0){
+					printf("La case est déjà occupée\n");
+					printf("Joueur 2, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
+					scanclav(chaine, 2);
+					x = strtol(chaine, &fin, 10);
+					printf("\n");
+					printf("Entrez un y pour votre %s entre 7 et %i :\n", persoc.classe.nom, carte->ncolonnes-1);
+					scanclav(chaine, 2);
+					y = strtol(chaine, &fin, 10);
+					printf("\n");	
+				}	
 			}
 		
 		}
@@ -213,7 +222,7 @@ int est_mort(t_liste *ordre_action, t_map * carte){
 
 	en_tete(ordre_action);
 	valeur_elt(ordre_action, &persoc); 
-	while(persoc.pv >0 ) {
+	while(persoc.pv > 0 ) {
 		suivant(ordre_action);
 		valeur_elt(ordre_action, &persoc); 
         }	
@@ -225,6 +234,7 @@ int est_mort(t_liste *ordre_action, t_map * carte){
 	*carte = actumap(ordre_action, *carte);
 
         en_tete(ordre_action);
+
         while (!hors_liste(ordre_action)){
 		valeur_elt(ordre_action, &persoc); 
                 if((persoc.joueur)==1){
@@ -297,16 +307,16 @@ void attaquer(t_liste *ordre_action,t_personnage cible, t_attaque attaque,int *g
 			valeur_elt(ordre_action, &persoc);
 		}
 		degats = (stock*degats) -def;
-		persoc.pv = (persoc.pv) - degats;
-	
+		persoc.pv -= degats;
+		modif_elt(ordre_action, persoc); 
+		
 		if ( persoc.pv<=0 ){
 			sprintf(message_tampon, "\tLe personnage %s a été vaincu !\n", persoc.classe.nom);
 			*gagnant = est_mort(ordre_action, carte);// on enlève les morts de la liste ordre_action et on vérifie si une équipe a été éliminée
 		} else {
 			sprintf(message_tampon, "\tLe personnage %s perd %i points de vie !\n", persoc.classe.nom, degats);
 		}
-
-		modif_elt(ordre_action, persoc);  
+ 
 		ordre_action->ec= tampon;
 		
 	}
