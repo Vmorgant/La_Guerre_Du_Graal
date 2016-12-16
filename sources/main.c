@@ -18,13 +18,34 @@
 #include"ges_partie.h"
 #include "save.h"
 
+
 void clearScreen(){
 	system("clear");
 }
 
+
 int main(void) {
 	int choix, erreur = faux;
-	char mretour[100];
+	
+	char mretour[100]="\n";
+	char temp[50];
+clearScreen();
+couleur("33");
+printf("\t\t\t __          ___           _______  __    __   _______ .______      .______       _______     _______   __    __       _______ .______          ___           ___       __      \n");
+printf("\t\t\t|  |        /   \\         /  _____||  |  |  | |   ____||   _  \\     |   _  \\     |   ____|   |       \\ |  |  |  |     /  _____||   _  \\        /   \\         /   \\     |  |     \n");
+printf("\t\t\t|  |       /  ^  \\       |  |  __  |  |  |  | |  |__   |  |_)  |    |  |_)  |    |  |__      |  .--.  ||  |  |  |    |  |  __  |  |_)  |      /  ^  \\       /  ^  \\    |  |     \n");
+printf("\t\t\t|  |      /  /_\\  \\      |  | |_ | |  |  |  | |   __|  |      /     |      /     |   __|     |  |  |  ||  |  |  |    |  | |_ | |      /      /  /_\\  \\     /  /_\\  \\   |  |     \n");
+printf("\t\t\t|  `----./  _____  \\     |  |__| | |  `--'  | |  |____ |  |\\  \\----.|  |\\  \\----.|  |____    |  '--'  ||  `--'  |    |  |__| | |  |\\  \\----./  _____  \\   /  _____  \\  |  `----.\n");
+printf("\t\t\t|_______/__/     \\__\\     \\______|  \\______/  |_______|| _| `._____|| _| `._____||_______|   |_______/  \\______/      \\______| | _| `._____/__/     \\__\\ /__/     \\__\\ |_______|\n");
+
+printf("\n\n\n\n\n\n\n\n\n\n");
+couleur("5");
+printf("\t\t\t\t\t\t\t\t\t Appuyez sur Entrée pour continuer\n\n\n\n\n\n");
+printf("\n\n\n\n\n\n\n\n\n\n");
+getchar();
+couleur("0");
+
+
 	
 	do {		
 		clearScreen();	
@@ -62,7 +83,7 @@ int main(void) {
 		}
 	
 	}
-	while(choix!=4);
+	while(choix!=5);
 
 	printf("Au revoir !\n");
 	sleep(2);
