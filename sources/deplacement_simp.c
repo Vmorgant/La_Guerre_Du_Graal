@@ -20,7 +20,7 @@
 
 float distance(int x,int y,int objx,int objy){
 /**
- * \fn  distance(int x,int y,int objx,int objy)
+ * \fn distance(int x,int y,int objx,int objy)
  * \brief Calcule le carré de la distance entre le point de départ et l'objectif
  * \param int x : Abscisse de départ, int y : Ordonnée de départ, int xobj : Abscisse cible; int yobj : Ordonnée cible
  */

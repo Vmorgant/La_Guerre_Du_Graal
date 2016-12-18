@@ -1,42 +1,47 @@
-\hypertarget{a00010}{}\section{Référence du fichier save.\+c}
-\label{a00010}\index{save.\+c@{save.\+c}}
+\hypertarget{a00010}{}\section{Référence de la structure t\+\_\+personnage}
+\label{a00010}\index{t\+\_\+personnage@{t\+\_\+personnage}}
 
 
-Ce fichier contient les définitions des fonctions permattant de sauvegarder et charger une partie.  
+contient les caractéristiques d\textquotesingle{}un personnage ainsi que son équipe  
 
 
-{\ttfamily \#include $<$stdio.\+h$>$}\\*
-{\ttfamily \#include $<$stdlib.\+h$>$}\\*
-{\ttfamily \#include $<$unistd.\+h$>$}\\*
-{\ttfamily \#include $<$string.\+h$>$}\\*
-{\ttfamily \#include \char`\"{}global.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}ges\+\_\+equipes.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}listes\+\_\+ptr.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}Init\+\_\+map.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}ges\+\_\+partie.\+h\char`\"{}}\\*
-{\ttfamily \#include $<$dirent.\+h$>$}\\*
-Graphe des dépendances par inclusion de save.\+c\+:
+
+
+{\ttfamily \#include $<$global.\+h$>$}
+
+
+
+Graphe de collaboration de t\+\_\+personnage\+:
 % FIG 0
-\subsection*{Fonctions}
+\subsection*{Attributs publics}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries nouvelle\+\_\+partie} (char mbilan\mbox{[}100\mbox{]})\hypertarget{a00010_a9081f16cfa0bd92678bdcffad6456630}{}\label{a00010_a9081f16cfa0bd92678bdcffad6456630}
+\hyperlink{a00005}{t\+\_\+classe} {\bfseries classe}\hypertarget{a00010_a18c157a21e38ce52460496f4e8441503}{}\label{a00010_a18c157a21e38ce52460496f4e8441503}
 
 \item 
-void {\bfseries gerer\+\_\+save} (char mbilan\mbox{[}100\mbox{]})\hypertarget{a00010_ad2efcf23a5a818ea578447b2e2997315}{}\label{a00010_ad2efcf23a5a818ea578447b2e2997315}
+int {\bfseries joueur}\hypertarget{a00010_a5f8b6b965089370703ee497fed009bf3}{}\label{a00010_a5f8b6b965089370703ee497fed009bf3}
+
+\item 
+int {\bfseries pa}\hypertarget{a00010_ad46d4ffac250f9a21dc6cbcf779420bc}{}\label{a00010_ad46d4ffac250f9a21dc6cbcf779420bc}
+
+\item 
+int {\bfseries pv}\hypertarget{a00010_a302ea68adf7704683638d6b969592dad}{}\label{a00010_a302ea68adf7704683638d6b969592dad}
+
+\item 
+int {\bfseries x}\hypertarget{a00010_abcb77f2685e4e78abc5e2805d58dc6bf}{}\label{a00010_abcb77f2685e4e78abc5e2805d58dc6bf}
+
+\item 
+int {\bfseries y}\hypertarget{a00010_a3b2c884de2778e0848e594347b20cc5f}{}\label{a00010_a3b2c884de2778e0848e594347b20cc5f}
+
+\item 
+\hyperlink{a00022_a0f3684078562a23c3ea21266d10cf275}{t\+\_\+etat} {\bfseries etat}\hypertarget{a00010_a7150dac11c035b7ee309da5c6d4980b0}{}\label{a00010_a7150dac11c035b7ee309da5c6d4980b0}
 
 \end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
-Ce fichier contient les définitions des fonctions permattant de sauvegarder et charger une partie. 
+contient les caractéristiques d\textquotesingle{}un personnage ainsi que son équipe 
 
-\begin{DoxyAuthor}{Auteur}
-Corentin Petit 
-\end{DoxyAuthor}
-\begin{DoxyVersion}{Version}
-1.\+0 
-\end{DoxyVersion}
-\begin{DoxyDate}{Date}
-05/12/2016 
-\end{DoxyDate}
+La documentation de cette structure a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00022}{global.\+h}\end{DoxyCompactItemize}

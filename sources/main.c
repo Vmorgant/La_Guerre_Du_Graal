@@ -2,7 +2,7 @@
 *\file main.c
 *\brief Menu principal et lancement de la partie
 *\version 1.0
-*\auteur Corentin Petit
+*\author Corentin Petit
 *\date 11/11/2016
 */
 #include<stdio.h>
@@ -21,9 +21,9 @@
 
 void scanclav(char chaine[200], int i){
 /**
- * \fn clearScreen
- * \brief Fonction pour recupérer une saisie clavier
- * \param char chaine[200] : chiane dans laqulle ont stocke la saisie, int i : taille maximum de la chaine à lire
+ * \fn scanclav
+ * \brief Fonction pour recupérer une saisie clavier.
+ * \param char chaine[200] : chaine dans laquelle ont stocke la saisie, int i : taille maximum de la chaine à lire
  */
 	char *p, c;
 
@@ -98,7 +98,7 @@ scanclav(chaine, 0);
 			case 1: nouvelle_partie(mretour); break;
 			case 2: charger_partie(mretour); break;
 			case 3: gerer_save(mretour); break;
-			case 4: strcpy(mretour, "\tJeux realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
+			case 4: strcpy(mretour, "\tJeu realise par Corentin Petit Martin Lebourdais et Victor Morgant \n retrouvez nous sur github https://github.com/Vmorgant/Projet_Algo ou sur gitter https://gitter.im/La-Guerre-du-Graal-L2-SPI"); break;
 			case 5: break;
 			default: strcpy(mretour, "\tErreur: votre choix doit etre compris entre 1 et 3\n"); erreur = vrai;
 		}

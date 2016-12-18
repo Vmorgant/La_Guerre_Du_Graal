@@ -1,6 +1,6 @@
 /**
 *\file deplacement_simp.h
-*\brief Ce fichier contient les en-tête de la version simplifiée des fonctions de déplacement sur la carte.
+*\brief Ce fichier contient les primitives des fonctions de déplacement sur la carte.
 *\author Martin Lebourdais
 *\version 1.0
 *\date 22/11/2016

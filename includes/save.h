@@ -1,6 +1,6 @@
 /**
-*\file global.h
-*\brief Ce fichier contient les définitions des primitives d'acces aux listes
+*\file save.h
+*\brief Ce fichier contient les définitions des fonctions permettant de sauvegarder et charger une partie
 *\author Corentin Petit
 *\version 1.0
 *\date 18/11/2016

@@ -1,30 +1,62 @@
-#La Guerre Du Graal
-# Projet Algorithmique et programmation
+#LaGuerreDuGraal
+#Projet Algorithmique et programmation
 #L2 SPI
 LEBOURDAIS Martin PETIT Corentin MORGANT Victor
 
-Règle du jeu : 2 équipes composées de différents personnages combattent (le nombre de personnages est limité par le nombre de points d’équipe défini dans les règles). Chaque joueur place ses personnages en début de partie de son coté de la map. Les joueurs contrôlent leurs personnages un à un et choisissent une ou plusieurs actions à effectuer pour un total de point d’action défini à l’avance. Chaque personnage gagne un nombre de point d’action pour chaque tour.
-La partie se termine lorsque l’une des équipes est éliminée(tous les personnages sont morts).
-Les personnage sont basés sur l’anime  et le jeu Fate Stay Night.
+#Présentation du jeu
 
-#Installation de la SDL : 
+Ce jeu a été réalisé dans le cadre du projet d’algorithmique de deuxième année de licence SPI. 2 équipes de composées de différents personnage s'affrontent dans un combat à mort.
+Chaque classe de personnage possède ses forces et faiblesses, ces classes s'inspirent du jeu et de l'animé Fate Stay Night.
+Vous devez utiliser un système unix pour pouvoir utiliser ce programme.
 
-*Télécharger les sources sur le site de la SDL http://libsdl.org/download-2.0.php et les extraire.
+# Installation
+Etape 1 : Téléchargement
+ 	Télécharger les sources du jeu https://github.com/Vmorgant/Projet_Algo.git 
+ 	Télécharger les sources de la SDL 2.0 (nécessaire pour la version 2.0) http://libsdl.org/download-2.0.php 
+ 	Télécharger les sources de la SDL_ttf2 (nécessaire pour la version 2.0)  https://www.libsdl.org/projects/SDL_ttf/ 
+	Ouvrir un terminal(pour les étapes suivantes). 
+Etape 2 : Installation de la SDL 2.0 et sdl 2.ttf (seulement pour la version 2.0)
+	Extraire les archives obtenues lors du téléchargement. 
+	Entrez la commande "cd" pour vous placer à la racine puis "mkdir SDL" pour créer le dossier de la SDL. 
+	Déplacez vous dans le dossier où vous avez extrait l'archive de la SDL2. 
+	Entrez la commande :\n
+		-"./configure " si vous êtes super-utilisateur
+		-"./configure --prefix=$HOME/SDL" sinon 
+	Entrez la commande "make" 
+	Entrez la commande :\n
+	-"sudo make install" si vous êtes super-utilisateur
+	-"make install" sinon 
+	Déplacez vous dans le dossier où vous avez extrait l'archive de la SDL_ttf. 
+	Entrez la commande :\n
+		-"./configure " si vous êtes super-utilisateur 
+		-"./configure --prefix=$HOME/SDL" sinon
+	Entrez la commande "make" 
+	Entrez la commande :\n
+	-"sudo make install" si vous êtes super-utilisateur
+	-"make install" sinon 
+Etape 3 : Installation de la SDL 2.0 et sdl 2.ttf (seulement pour la version 2.0)
+	Extraire les archives obtenues lors du téléchargement. 
+	Ouvrir un terminal. 
+	Entrez la commande "cd" pour vous placer à la racine puis "mkdir SDL" pour créer le dossier de la SDL. 
+	Déplacez vous dans le dossier où vous avez extrait l'archive de la SDL2. 
+	Entrez la commande :\n
+		-"./configure " si vous êtes super-utilisateur\n 
+		-"./configure --prefix=$HOME/SDL" sinon 
+	Entrez la commande "make" 
+	Entrez la commande :\n
+	-"sudo make install" si vous êtes super-utilisateur
+	-"make install" sinon 
+	Déplacez vous dans le dossier où vous avez extrait l'archive de la SDL_ttf. 
+	Entrez la commande :\n
+		-"./configure " si vous êtes super-utilisateur
+		-"./configure --prefix=$HOME/SDL" sinon 
+	Entrez la commande "make" 
+	Entrez la commande :\n
+	-"sudo make install" si vous êtes super-utilisateur
+	-"make install" sinon 
+Etape 4 : Installation du jeu
+	Déplacez vous dans le dossier où vous avez extrait l'archive du jeu. 
+	Utilisez la commande make. 
+	Lancez l'exécutable LGDG.out 
 
-*Ouvrir un terminal.
-
-*Entrez la commande "cd" pour vous placer à la racine puis "mkdir SDL" pour créer le dossier de la SDL.
-
-*Déplacer vous vers le dossier où vous avez extrait l'archive de la SDL2.
-*Entrez la commande : 
-
--"./configure " si vous êtes super-utilisateur
--"./configure --prefix=$HOME/SDL" sinon 
-
-*Entrez la commande "make"
-
-*Entrez la commande :
-
--"sudo make install" si vous êtes super-utilisateur
--"make install" sinon
 

@@ -1,0 +1,93 @@
+\hypertarget{a00030}{}\section{Référence du fichier save.\+h}
+\label{a00030}\index{save.\+h@{save.\+h}}
+
+
+Ce fichier contient les définitions des fonctions permettant de sauvegarder et charger une partie.  
+
+
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+% FIG 0
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries charger\+\_\+save} (char nomsave\mbox{[}34\mbox{]}, \hyperlink{a00007}{t\+\_\+liste} $\ast$ordre\+\_\+action, int Nb\+\_\+tours)\hypertarget{a00030_a01e568d0435d25ea27ddc9b9b94e4522}{}\label{a00030_a01e568d0435d25ea27ddc9b9b94e4522}
+
+\item 
+int {\bfseries enregistrer\+\_\+save} (char nomsave\mbox{[}34\mbox{]}, \hyperlink{a00007}{t\+\_\+liste} $\ast$ordre\+\_\+action, int $\ast$Nb\+\_\+tours)\hypertarget{a00030_ad3ae5a37a3aac10cd918e479c585fa98}{}\label{a00030_ad3ae5a37a3aac10cd918e479c585fa98}
+
+\item 
+void \hyperlink{a00030_a3432d62256256cc6e1bef17a4eaff1c7}{charger\+\_\+partie} (char mbilan\mbox{[}100\mbox{]})
+\item 
+void \hyperlink{a00030_a9081f16cfa0bd92678bdcffad6456630}{nouvelle\+\_\+partie} (char mbilan\mbox{[}100\mbox{]})
+\item 
+void \hyperlink{a00030_a6578c42b3ced64d7ebcb4c94acee1410}{quitter\+\_\+partie} (\hyperlink{a00007}{t\+\_\+liste} $\ast$ordre\+\_\+action, int Nb\+\_\+tours, int $\ast$gagnant)
+\item 
+void \hyperlink{a00030_ad2efcf23a5a818ea578447b2e2997315}{gerer\+\_\+save} (char mbilan\mbox{[}100\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Ce fichier contient les définitions des fonctions permettant de sauvegarder et charger une partie. 
+
+\begin{DoxyAuthor}{Auteur}
+Corentin Petit 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+18/11/2016 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\index{save.\+h@{save.\+h}!charger\+\_\+partie@{charger\+\_\+partie}}
+\index{charger\+\_\+partie@{charger\+\_\+partie}!save.\+h@{save.\+h}}
+\subsubsection[{\texorpdfstring{charger\+\_\+partie(char mbilan[100])}{charger_partie(char mbilan[100])}}]{\setlength{\rightskip}{0pt plus 5cm}void charger\+\_\+partie (
+\begin{DoxyParamCaption}
+\item[{char}]{mbilan\mbox{[}100\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{a00030_a3432d62256256cc6e1bef17a4eaff1c7}{}\label{a00030_a3432d62256256cc6e1bef17a4eaff1c7}
+Demande au joueur s’il souhaite vraiment charger une sauvegarde puis lui fait choisir celle qu’il souhaite. 
+\begin{DoxyParams}{Paramètres}
+{\em mbilan\mbox{[}100\mbox{]}} & permet de stocker le message de fin.\\
+\hline
+\end{DoxyParams}
+\index{save.\+h@{save.\+h}!gerer\+\_\+save@{gerer\+\_\+save}}
+\index{gerer\+\_\+save@{gerer\+\_\+save}!save.\+h@{save.\+h}}
+\subsubsection[{\texorpdfstring{gerer\+\_\+save(char mbilan[100])}{gerer_save(char mbilan[100])}}]{\setlength{\rightskip}{0pt plus 5cm}void gerer\+\_\+save (
+\begin{DoxyParamCaption}
+\item[{char}]{mbilan\mbox{[}100\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{a00030_ad2efcf23a5a818ea578447b2e2997315}{}\label{a00030_ad2efcf23a5a818ea578447b2e2997315}
+Suppression ou renommage des sauvegardes. 
+\begin{DoxyParams}{Paramètres}
+{\em mbilan\mbox{[}100\mbox{]}} & permet de stocker le message de fin.\\
+\hline
+\end{DoxyParams}
+\index{save.\+h@{save.\+h}!nouvelle\+\_\+partie@{nouvelle\+\_\+partie}}
+\index{nouvelle\+\_\+partie@{nouvelle\+\_\+partie}!save.\+h@{save.\+h}}
+\subsubsection[{\texorpdfstring{nouvelle\+\_\+partie(char mbilan[100])}{nouvelle_partie(char mbilan[100])}}]{\setlength{\rightskip}{0pt plus 5cm}void nouvelle\+\_\+partie (
+\begin{DoxyParamCaption}
+\item[{char}]{mbilan\mbox{[}100\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{a00030_a9081f16cfa0bd92678bdcffad6456630}{}\label{a00030_a9081f16cfa0bd92678bdcffad6456630}
+Initialisation des structures et libérations de la mémoire en fin de partie. 
+\begin{DoxyParams}{Paramètres}
+{\em mbilan\mbox{[}100\mbox{]}} & permet de stocker le message de fin.\\
+\hline
+\end{DoxyParams}
+\index{save.\+h@{save.\+h}!quitter\+\_\+partie@{quitter\+\_\+partie}}
+\index{quitter\+\_\+partie@{quitter\+\_\+partie}!save.\+h@{save.\+h}}
+\subsubsection[{\texorpdfstring{quitter\+\_\+partie(t\+\_\+liste $\ast$ordre\+\_\+action, int Nb\+\_\+tours, int $\ast$gagnant)}{quitter_partie(t_liste *ordre_action, int Nb_tours, int *gagnant)}}]{\setlength{\rightskip}{0pt plus 5cm}void quitter\+\_\+partie (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+liste} $\ast$}]{ordre\+\_\+action, }
+\item[{int}]{Nb\+\_\+tours, }
+\item[{int $\ast$}]{gagnant}
+\end{DoxyParamCaption}
+)}\hypertarget{a00030_a6578c42b3ced64d7ebcb4c94acee1410}{}\label{a00030_a6578c42b3ced64d7ebcb4c94acee1410}
+Demande au joueur si il souhaite vraiment quittez et si il souhaite sauvegarder la partie en cours. 
+\begin{DoxyParams}{Paramètres}
+{\em \hyperlink{a00007}{t\+\_\+liste}} & $\ast$ ordre\+\_\+action \+: la liste triés des personnages par ordre de jeu, int Nb\+\_\+tours, le nombre de tours actuel de la sauvegarde, int $\ast$gagnant permet de stocker l\textquotesingle{}état de la partie.\\
+\hline
+\end{DoxyParams}

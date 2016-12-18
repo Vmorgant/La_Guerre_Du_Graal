@@ -1,0 +1,130 @@
+\hypertarget{a00024}{}\section{Référence du fichier Init\+\_\+map.\+h}
+\label{a00024}\index{Init\+\_\+map.\+h@{Init\+\_\+map.\+h}}
+
+
+Ce fichier contient les définitions des fonctions permettant la création de la map.  
+
+
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries couleur}(param)~printf(\char`\"{}\textbackslash{}033\mbox{[}\%sm\char`\"{},param)\hypertarget{a00024_aabcb2d6536b6c0ab41f99493c911489b}{}\label{a00024_aabcb2d6536b6c0ab41f99493c911489b}
+
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00008}{t\+\_\+map} \hyperlink{a00024_aabb31eb0a9fed7b9013e4a396d92d8ae}{creer\+Mat} ()
+\begin{DoxyCompactList}\small\item\em Fonction initialisant la matrice 10/10. \end{DoxyCompactList}\item 
+\hyperlink{a00008}{t\+\_\+map} \hyperlink{a00024_aec2a5741ffb31e12f61b24165c7f68b4}{actumap} (\hyperlink{a00007}{t\+\_\+liste} $\ast$ordre\+\_\+action, \hyperlink{a00008}{t\+\_\+map} map)
+\begin{DoxyCompactList}\small\item\em Fontion qui actualise la map en placant les indices des personnages aux bonnes coordonnées de la matrice. \end{DoxyCompactList}\item 
+void \hyperlink{a00024_a1280978369430f0c5e9696d4ef52517c}{afficher\+Mat} (\hyperlink{a00008}{t\+\_\+map} mat)
+\begin{DoxyCompactList}\small\item\em Fontion qui affiche la carte dans le terminal en placant les trois premières lettre du nom de la classe à la case contenant l\textquotesingle{}indice correspondant. \end{DoxyCompactList}\item 
+void \hyperlink{a00024_a37963b5f2d2efb0fa80a11ac2999be5c}{free\+\_\+map} (\hyperlink{a00008}{t\+\_\+map} map)
+\begin{DoxyCompactList}\small\item\em Fontion qui libère la mémoire utilisée par la carte. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Ce fichier contient les définitions des fonctions permettant la création de la map. 
+
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Auteur}
+Martin Lebourdais 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+18/11/2016 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\index{Init\+\_\+map.\+h@{Init\+\_\+map.\+h}!actumap@{actumap}}
+\index{actumap@{actumap}!Init\+\_\+map.\+h@{Init\+\_\+map.\+h}}
+\subsubsection[{\texorpdfstring{actumap(t\+\_\+liste $\ast$ordre\+\_\+action, t\+\_\+map map)}{actumap(t_liste *ordre_action, t_map map)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf t\+\_\+map} actumap (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+liste} $\ast$}]{ordre\+\_\+action, }
+\item[{{\bf t\+\_\+map}}]{map}
+\end{DoxyParamCaption}
+)}\hypertarget{a00024_aec2a5741ffb31e12f61b24165c7f68b4}{}\label{a00024_aec2a5741ffb31e12f61b24165c7f68b4}
+
+
+Fontion qui actualise la map en placant les indices des personnages aux bonnes coordonnées de la matrice. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em \hyperlink{a00007}{t\+\_\+liste}} & $\ast$ ordre\+\_\+action la liste des personnages triée \hyperlink{a00008}{t\+\_\+map} map une matrice d\textquotesingle{}entier . \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+une matrice d\textquotesingle{}entier avec les indices des personnages à leurs coordonnées 
+\end{DoxyReturn}
+Fontion qui actualise la map en placant les indices des personnages aux bonnes coordonnées de la matrice 
+\begin{DoxyParams}{Paramètres}
+{\em \hyperlink{a00007}{t\+\_\+liste}} & $\ast$ ordre\+\_\+action la liste des personnages triée \hyperlink{a00008}{t\+\_\+map} map une matrice d\textquotesingle{}entier . \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+une matrice d\textquotesingle{}entier avec les indices des personnages à leurs coordonnées
+\end{DoxyReturn}
+\index{Init\+\_\+map.\+h@{Init\+\_\+map.\+h}!afficher\+Mat@{afficher\+Mat}}
+\index{afficher\+Mat@{afficher\+Mat}!Init\+\_\+map.\+h@{Init\+\_\+map.\+h}}
+\subsubsection[{\texorpdfstring{afficher\+Mat(t\+\_\+map mat)}{afficherMat(t_map mat)}}]{\setlength{\rightskip}{0pt plus 5cm}void afficher\+Mat (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+map}}]{mat}
+\end{DoxyParamCaption}
+)}\hypertarget{a00024_a1280978369430f0c5e9696d4ef52517c}{}\label{a00024_a1280978369430f0c5e9696d4ef52517c}
+
+
+Fontion qui affiche la carte dans le terminal en placant les trois premières lettre du nom de la classe à la case contenant l\textquotesingle{}indice correspondant. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em \hyperlink{a00007}{t\+\_\+liste}} & $\ast$ ordre\+\_\+action la liste des personnages triée \hyperlink{a00008}{t\+\_\+map} map une matrice d\textquotesingle{}entier . \\
+\hline
+\end{DoxyParams}
+Fontion qui affiche la carte dans le terminal en placant les trois premières lettre du nom de la classe à la case contenant l\textquotesingle{}indice correspondant 
+\begin{DoxyParams}{Paramètres}
+{\em \hyperlink{a00007}{t\+\_\+liste}} & $\ast$ ordre\+\_\+action la liste des personnages triée \hyperlink{a00008}{t\+\_\+map} map une matrice d\textquotesingle{}entier .\\
+\hline
+\end{DoxyParams}
+\index{Init\+\_\+map.\+h@{Init\+\_\+map.\+h}!creer\+Mat@{creer\+Mat}}
+\index{creer\+Mat@{creer\+Mat}!Init\+\_\+map.\+h@{Init\+\_\+map.\+h}}
+\subsubsection[{\texorpdfstring{creer\+Mat()}{creerMat()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf t\+\_\+map} creer\+Mat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{a00024_aabb31eb0a9fed7b9013e4a396d92d8ae}{}\label{a00024_aabb31eb0a9fed7b9013e4a396d92d8ae}
+
+
+Fonction initialisant la matrice 10/10. 
+
+\begin{DoxyReturn}{Renvoie}
+une matrice d\textquotesingle{}entier remplie de 0 
+\end{DoxyReturn}
+Fonction initialisant la matrice 10/10 \begin{DoxyReturn}{Renvoie}
+une matrice d\textquotesingle{}entier remplie de 0
+\end{DoxyReturn}
+\index{Init\+\_\+map.\+h@{Init\+\_\+map.\+h}!free\+\_\+map@{free\+\_\+map}}
+\index{free\+\_\+map@{free\+\_\+map}!Init\+\_\+map.\+h@{Init\+\_\+map.\+h}}
+\subsubsection[{\texorpdfstring{free\+\_\+map(t\+\_\+map map)}{free_map(t_map map)}}]{\setlength{\rightskip}{0pt plus 5cm}void free\+\_\+map (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+map}}]{map}
+\end{DoxyParamCaption}
+)}\hypertarget{a00024_a37963b5f2d2efb0fa80a11ac2999be5c}{}\label{a00024_a37963b5f2d2efb0fa80a11ac2999be5c}
+
+
+Fontion qui libère la mémoire utilisée par la carte. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em \hyperlink{a00008}{t\+\_\+map}} & map une matrice d\textquotesingle{}entier . \\
+\hline
+\end{DoxyParams}
+Fontion qui libère la mémoire utilisée par la carte. 
+\begin{DoxyParams}{Paramètres}
+{\em \hyperlink{a00008}{t\+\_\+map}} & map une matrice d\textquotesingle{}entier .\\
+\hline
+\end{DoxyParams}

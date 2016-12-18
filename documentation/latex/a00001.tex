@@ -1,15 +1,18 @@
-\hypertarget{a00001}{}\section{Référence de la structure t\+\_\+classe}
-\label{a00001}\index{t\+\_\+classe@{t\+\_\+classe}}
+\#\+La\+Guerre\+Du\+Graal \#\+Projet Algorithmique et programmation \#\+L2 S\+PI L\+E\+B\+O\+U\+R\+D\+A\+IS Martin P\+E\+T\+IT Corentin M\+O\+R\+G\+A\+NT Victor
 
+\#\+Présentation du jeu
 
-Définition des différentes classes de personnages.  
+Ce jeu a été réalisé dans le cadre du projet d’algorithmique de deuxième année de licence S\+PI. 2 équipes de composées de différents personnage s\textquotesingle{}affrontent dans un combat à mort. Chaque classe de personnage possède ses forces et faiblesses, ces classes s\textquotesingle{}inspirent du jeu et de l\textquotesingle{}animé Fate Stay Night. Vous devez utiliser un système unix pour pouvoir utiliser ce programme.
 
+\section*{Installation}
 
-
-
-\subsection{Description détaillée}
-Définition des différentes classes de personnages. 
-
-La documentation de cette structure a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
-\item 
-\hyperlink{a00002}{classes.\+c}\end{DoxyCompactItemize}
+Etape 1 \+: Téléchargement Télécharger les sources du jeu \href{https://github.com/Vmorgant/Projet_Algo.git}{\tt https\+://github.\+com/\+Vmorgant/\+Projet\+\_\+\+Algo.\+git} Télécharger les sources de la S\+DL 2.\+0 (nécessaire pour la version 2.\+0) \href{http://libsdl.org/download-2.0.php}{\tt http\+://libsdl.\+org/download-\/2.\+0.\+php} Télécharger les sources de la S\+D\+L\+\_\+ttf2 (nécessaire pour la version 2.\+0) \href{https://www.libsdl.org/projects/SDL_ttf/}{\tt https\+://www.\+libsdl.\+org/projects/\+S\+D\+L\+\_\+ttf/} Ouvrir un terminal(pour les étapes suivantes). Etape 2 \+: Installation de la S\+DL 2.\+0 et sdl 2.\+ttf (seulement pour la version 2.\+0) Extraire les archives obtenues lors du téléchargement. Entrez la commande \char`\"{}cd\char`\"{} pour vous placer à la racine puis \char`\"{}mkdir S\+D\+L\char`\"{} pour créer le dossier de la S\+DL. Déplacez vous dans le dossier où vous avez extrait l\textquotesingle{}archive de la S\+D\+L2. Entrez la commande \+:~\newline
+ -\/\char`\"{}./configure \char`\"{} si vous êtes super-\/utilisateur -\/\char`\"{}./configure -\/-\/prefix=\$\+H\+O\+M\+E/\+S\+D\+L\char`\"{} sinon Entrez la commande \char`\"{}make\char`\"{} Entrez la commande \+:~\newline
+ -\/\char`\"{}sudo make install\char`\"{} si vous êtes super-\/utilisateur -\/\char`\"{}make install\char`\"{} sinon Déplacez vous dans le dossier où vous avez extrait l\textquotesingle{}archive de la S\+D\+L\+\_\+ttf. Entrez la commande \+:~\newline
+ -\/\char`\"{}./configure \char`\"{} si vous êtes super-\/utilisateur -\/\char`\"{}./configure -\/-\/prefix=\$\+H\+O\+M\+E/\+S\+D\+L\char`\"{} sinon Entrez la commande \char`\"{}make\char`\"{} Entrez la commande \+:~\newline
+ -\/\char`\"{}sudo make install\char`\"{} si vous êtes super-\/utilisateur -\/\char`\"{}make install\char`\"{} sinon Etape 3 \+: Installation de la S\+DL 2.\+0 et sdl 2.\+ttf (seulement pour la version 2.\+0) Extraire les archives obtenues lors du téléchargement. Ouvrir un terminal. Entrez la commande \char`\"{}cd\char`\"{} pour vous placer à la racine puis \char`\"{}mkdir S\+D\+L\char`\"{} pour créer le dossier de la S\+DL. Déplacez vous dans le dossier où vous avez extrait l\textquotesingle{}archive de la S\+D\+L2. Entrez la commande \+:~\newline
+ -\/\char`\"{}./configure \char`\"{} si vous êtes super-\/utilisateur~\newline
+ -\/\char`\"{}./configure -\/-\/prefix=\$\+H\+O\+M\+E/\+S\+D\+L\char`\"{} sinon Entrez la commande \char`\"{}make\char`\"{} Entrez la commande \+:~\newline
+ -\/\char`\"{}sudo make install\char`\"{} si vous êtes super-\/utilisateur -\/\char`\"{}make install\char`\"{} sinon Déplacez vous dans le dossier où vous avez extrait l\textquotesingle{}archive de la S\+D\+L\+\_\+ttf. Entrez la commande \+:~\newline
+ -\/\char`\"{}./configure \char`\"{} si vous êtes super-\/utilisateur -\/\char`\"{}./configure -\/-\/prefix=\$\+H\+O\+M\+E/\+S\+D\+L\char`\"{} sinon Entrez la commande \char`\"{}make\char`\"{} Entrez la commande \+:~\newline
+ -\/\char`\"{}sudo make install\char`\"{} si vous êtes super-\/utilisateur -\/\char`\"{}make install\char`\"{} sinon Etape 4 \+: Installation du jeu Déplacez vous dans le dossier où vous avez extrait l\textquotesingle{}archive du jeu. Utilisez la commande make. Lancez l\textquotesingle{}exécutable L\+G\+D\+G.\+out 

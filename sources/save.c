@@ -11,7 +11,7 @@
 
 /**
 *\file save.c
-*\brief Ce fichier contient les définitions des fonctions permattant de sauvegarder et charger une partie
+*\brief Ce fichier contient les définitions des fonctions permettant de sauvegarder et charger une partie
 *\author Corentin Petit
 *\version 1.0
 *\date 05/12/2016
@@ -19,9 +19,9 @@
 
 int charger_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours) {
 /**
- * \fn  charger_partie( char  nomsave[10])
+ * \fn  charger_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours) 
  * \brief Charge les données d'une sauvegarde passée en paramètre  et retourne vrai si erreur
- * \param char nomsave[10] : le ,nom de la sauvegarde, t_liste * ordre_action : la liste triés des personnages par ordre de jeu
+ * \param char nomsave[10] : le ,nom de la sauvegarde, t_liste * ordre_action : la liste triés des personnages par ordre de jeu,int Nb_tours : le nombre de tours actuel de la sauvegarde
  */
 	int i;
 	FILE * fic = NULL;
@@ -59,9 +59,9 @@ int charger_save( char  nomsave[34], t_liste * ordre_action, int * Nb_tours) {
 
 int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours) {
 /**
- * \fn  sauver_partie( char  nomsave[10])
+ * \fn  enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours))
  * \brief Sauvegarde les données d'une parite dans un fichier dont le nom passée en paramètre
- * \param char nomsave[10] : le ,nom de la sauvegarde, t_liste * ordre_action : la liste triés des personnages par ordre de jeu
+ * \param char nomsave[10] : le ,nom de la sauvegarde, t_liste * ordre_action : la liste triés des personnages par ordre de jeu,int Nb_tours: le nombre de tours actuel de la sauvegarde
  */
 	FILE * fic = NULL;
 	char  dirsave[100];
@@ -102,8 +102,8 @@ int enregistrer_save( char  nomsave[34], t_liste * ordre_action, int Nb_tours) {
 void charger_partie(char mbilan[100]) {
 /**
  * \fn charger_partie()
- * \brief demande au joueur si il souhaite vraiment charger une asuvegarde puis la lui fait choisir
- * \param t_liste * ordre_action : la liste triés des personnages par ordre de jeu, int Nb_tours, le nombre de tours actuel de la sauvegarde
+ * \brief Demande au joueur s’il souhaite vraiment charger une sauvegarde puis lui fait choisir celle qu’il souhaite. 
+ * \param mbilan[100] permet de stocker le message de fin.
  */
 
 	int choix = -1, nb_saves, i, erreur = faux;
@@ -192,7 +192,6 @@ void charger_partie(char mbilan[100]) {
 						gestion_tour(&ordre_action, &Nb_tours, &carte, &gagnant);
 					}
 					choix = nb_saves+1;
-					printf(" %i-\n", gagnant);
 				}
 
 			} else if (choix > nb_saves+1 || choix < 1) {
@@ -211,7 +210,11 @@ void charger_partie(char mbilan[100]) {
 }
 
 void nouvelle_partie(char mbilan[100]) {
-
+/**
+ * \fn charger_partie()
+ * \brief Initialisation des structures et libérations de la mémoire en fin de partie.
+ * \param mbilan[100] permet de stocker le message de fin.
+ */
 	t_liste equipe1;
 	t_liste equipe2;
 	t_liste ordre_action;
@@ -308,8 +311,8 @@ void nouvelle_partie(char mbilan[100]) {
 void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 /**
  * \fn  quitter_partie(t_liste * ordre_action, int Nb_tours)
- * \brief demande au joueur si il souhaite vraiment quittez et si il souhaite sauvegarder la partie en cour
- * \param t_liste * ordre_action : la liste triés des personnages par ordre de jeu, int Nb_tours, le nombre de tours actuel de la sauvegarde
+ * \brief Demande au joueur si il souhaite vraiment quittez et si il souhaite sauvegarder la partie en cours.
+ * \param t_liste * ordre_action : la liste triés des personnages par ordre de jeu, int Nb_tours, le nombre de tours actuel de la sauvegarde, int *gagnant permet de stocker l'état de la partie.
  */
 
 	int choix = -1, erreur= faux, nb_saves;
@@ -438,7 +441,11 @@ void quitter_partie(t_liste * ordre_action, int Nb_tours, int *gagnant) {
 }
 
 void gerer_save(char mbilan[100]) {
-
+/**
+ * \fn gerer_save(char mbilan[100])
+ * \brief Suppression ou renommage des sauvegardes.
+ * \param mbilan[100] permet de stocker le message de fin.
+ */
 	int choix = -1, erreur= faux, nb_saves;
 	char mretour[100] = "\n", new_name[34], new_dir[34];
 	char  dirsave[100];

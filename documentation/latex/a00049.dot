@@ -1,0 +1,45 @@
+digraph "main.c"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="main.c",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="stdio.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="stdlib.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="unistd.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="string.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="../includes/global.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00022.html",tooltip="Ce fichier contient les définitions de chaque structure globales utilisées dans le projet..."];
+  Node6 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="assert.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="../includes/ges_equipes.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00019.html",tooltip="Ce fichier contient les définitions des fonctions permettant de modifier les équipes. "];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="../includes/listes\l_ptr.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00026.html",tooltip="Ce fichier contient les définitions des primitives d&#39;acces aux listes. "];
+  Node1 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="../includes/file_chemin.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00017.html",tooltip="Ce fichier contient les définitions des primitives d&#39;acces aux files de noeuds. "];
+  Node10 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="../includes/Init_map.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00024.html",tooltip="Ce fichier contient les définitions des fonctions permettant la création de la map. "];
+  Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="../includes/deplacement\l_simp.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00015.html",tooltip="Ce fichier contient les primitives des fonctions de déplacement sur la carte. "];
+  Node12 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 -> Node13 [color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="math.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node12 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid"];
+  Node14 [label="../includes/ges_partie.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00021.html",tooltip="Ce fichier contient les définitions des primitives de gestion de la parie. "];
+  Node1 -> Node15 [color="midnightblue",fontsize="10",style="solid"];
+  Node15 [label="../includes/save.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$a00030.html",tooltip="Ce fichier contient les définitions des fonctions permettant de sauvegarder et charger une partie..."];
+}

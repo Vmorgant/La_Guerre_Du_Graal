@@ -1,0 +1,117 @@
+\hypertarget{a00022}{}\section{Référence du fichier global.\+h}
+\label{a00022}\index{global.\+h@{global.\+h}}
+
+
+Ce fichier contient les définitions de chaque structure globales utilisées dans le projet.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+Graphe des dépendances par inclusion de global.\+h\+:
+% FIG 0
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+% FIG 1
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{a00012}{t\+\_\+spe}
+\begin{DoxyCompactList}\small\item\em boisson alcoolisée saveur tequila \end{DoxyCompactList}\item 
+struct \hyperlink{a00004}{t\+\_\+attaque}
+\begin{DoxyCompactList}\small\item\em contient les caractéristiques d\textquotesingle{}une attaque \end{DoxyCompactList}\item 
+struct \hyperlink{a00005}{t\+\_\+classe}
+\begin{DoxyCompactList}\small\item\em contient les caractéristiques d\textquotesingle{}une classe de personnage \end{DoxyCompactList}\item 
+struct \hyperlink{a00010}{t\+\_\+personnage}
+\begin{DoxyCompactList}\small\item\em contient les caractéristiques d\textquotesingle{}un personnage ainsi que son équipe \end{DoxyCompactList}\item 
+struct \hyperlink{a00003}{element}
+\item 
+struct \hyperlink{a00007}{t\+\_\+liste}
+\begin{DoxyCompactList}\small\item\em création du type liste (pour gérer simultanément plusieures listes de type \hyperlink{a00010}{t\+\_\+personnage} \end{DoxyCompactList}\item 
+struct \hyperlink{a00008}{t\+\_\+map}
+\begin{DoxyCompactList}\small\item\em défini la carte par son nombre de lignes/colonnes et une matrice. \end{DoxyCompactList}\item 
+struct \hyperlink{a00009}{t\+\_\+noeud}
+\begin{DoxyCompactList}\small\item\em contient les coordonnées d\textquotesingle{}un noeud \end{DoxyCompactList}\item 
+struct \hyperlink{a00011}{t\+\_\+save}
+\begin{DoxyCompactList}\small\item\em contient les données d\textquotesingle{}une sauvegarde \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries couleur}(param)~printf(\char`\"{}\textbackslash{}033\mbox{[}\%sm\char`\"{},param)\hypertarget{a00022_aabcb2d6536b6c0ab41f99493c911489b}{}\label{a00022_aabcb2d6536b6c0ab41f99493c911489b}
+
+\item 
+\#define {\bfseries nb\+\_\+classes}~7\hypertarget{a00022_a9004f50a6df5a9163b39f4f261b82888}{}\label{a00022_a9004f50a6df5a9163b39f4f261b82888}
+
+\end{DoxyCompactItemize}
+\subsection*{Définitions de type}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{a00003}{element} {\bfseries t\+\_\+element}\hypertarget{a00022_aaa9f09bf55fb32a9090e2dc051b75a6a}{}\label{a00022_aaa9f09bf55fb32a9090e2dc051b75a6a}
+
+\end{DoxyCompactItemize}
+\subsection*{Énumérations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{a00022_af9847afb81a785e63ca83f8594e45c72}{t\+\_\+bool} \{ {\bfseries vrai} = 1, 
+{\bfseries faux} = 0
+ \}\hypertarget{a00022_af9847afb81a785e63ca83f8594e45c72}{}\label{a00022_af9847afb81a785e63ca83f8594e45c72}
+\begin{DoxyCompactList}\small\item\em facilite l\textquotesingle{}identification d\textquotesingle{}un booleen \end{DoxyCompactList}
+\item 
+enum \hyperlink{a00022_a0f3684078562a23c3ea21266d10cf275}{t\+\_\+etat} \{ {\bfseries mort}, 
+{\bfseries vie}
+ \}\hypertarget{a00022_a0f3684078562a23c3ea21266d10cf275}{}\label{a00022_a0f3684078562a23c3ea21266d10cf275}
+\begin{DoxyCompactList}\small\item\em facilite l\textquotesingle{}identification de l\textquotesingle{}état d\textquotesingle{}un personnage \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{a00022_a9d7e8af417b6d543da691e9c0e2f6f9f}{clear\+Screen} ()
+\begin{DoxyCompactList}\small\item\em Fonction permettant d\textquotesingle{}effacer l\textquotesingle{}écran. \end{DoxyCompactList}\item 
+void \hyperlink{a00022_a067cc563e0d768fba761fe23d56c5983}{scanclav} (char chaine\mbox{[}200\mbox{]}, int i)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{a00005}{t\+\_\+classe} {\bfseries tab\+\_\+classes} \mbox{[}nb\+\_\+classes\mbox{]}\hypertarget{a00022_a61d1d67ae5f5040aa12b0bcc9d0e39f8}{}\label{a00022_a61d1d67ae5f5040aa12b0bcc9d0e39f8}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Ce fichier contient les définitions de chaque structure globales utilisées dans le projet. 
+
+\begin{DoxyAuthor}{Auteur}
+Corentin Petit, Martin Lebourdais, Victor Morgant 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+09/11/2016 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\index{global.\+h@{global.\+h}!clear\+Screen@{clear\+Screen}}
+\index{clear\+Screen@{clear\+Screen}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{clear\+Screen()}{clearScreen()}}]{\setlength{\rightskip}{0pt plus 5cm}void clear\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{a00022_a9d7e8af417b6d543da691e9c0e2f6f9f}{}\label{a00022_a9d7e8af417b6d543da691e9c0e2f6f9f}
+
+
+Fonction permettant d\textquotesingle{}effacer l\textquotesingle{}écran. 
+
+Fonction pour recupérer une saisie clavier. Fonction permettant d\textquotesingle{}effacer l\textquotesingle{}écran\index{global.\+h@{global.\+h}!scanclav@{scanclav}}
+\index{scanclav@{scanclav}!global.\+h@{global.\+h}}
+\subsubsection[{\texorpdfstring{scanclav(char chaine[200], int i)}{scanclav(char chaine[200], int i)}}]{\setlength{\rightskip}{0pt plus 5cm}void scanclav (
+\begin{DoxyParamCaption}
+\item[{char}]{chaine\mbox{[}200\mbox{]}, }
+\item[{int}]{i}
+\end{DoxyParamCaption}
+)}\hypertarget{a00022_a067cc563e0d768fba761fe23d56c5983}{}\label{a00022_a067cc563e0d768fba761fe23d56c5983}
+Fonction pour recupérer une saisie clavier. 
+\begin{DoxyParams}{Paramètres}
+{\em char} & chaine\mbox{[}200\mbox{]} \+: chaine dans laquelle ont stocke la saisie, int i \+: taille maximum de la chaine à lire\\
+\hline
+\end{DoxyParams}

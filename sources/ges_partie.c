@@ -110,22 +110,22 @@ void placer(t_liste *ordre_action,t_map * carte){
 		valeur_elt(ordre_action, &persoc); 
 		if((persoc.joueur)==1){														
 		/*Placer un personnage pour l'equipe 1*/
-			printf("Joueur 1, entrez un x pour votre %s entre 0 et 9 :\n",persoc.classe.nom);
+			printf("Joueur 1, entrez un x pour votre %s entre 0 et %i :\n",persoc.classe.nom,carte->nlignes-1);
 			scanclav(chaine, 2);
 			x = strtol(chaine, &fin, 10);
 			printf("\n");
-			printf("Entrez un y pour votre %s entre 0 et 2 :\n", persoc.classe.nom);
-			scanclav(chaine, 2);
-			y = strtol(chaine, &fin, 10);
-			printf("\n");
-			
+                        printf("Entrez un y pour votre %s entre 0 et 2 :\n", persoc.classe.nom);
+                        scanclav(chaine, 2);
+                        y = strtol(chaine, &fin, 10);
+                        printf("\n");
+                        
 			/*Tant que les coordonnées ne son pas valides*/
 			while (x >= carte->nlignes || y > 2 || x < 0 || y < 0 || carte->cell[x][y] != 0){
 
 				/*Si les données sont hors map*/
 				if(x >= carte->nlignes || y > 2 || x < 0 || y < 0)  {
 					/*refaire la saisie */
-					printf("Les coordonnées doivent-être des entiers avec un y compris entre 0 et 2\n");
+					printf("Erreur : les coordonnées doivent-être des entiers avec un x compris entre 0 et %i et un y compris entre 0 et 2\n",carte->nlignes-1);
 					printf("Joueur 1, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
 					scanclav(chaine, 2);
 					x = strtol(chaine, &fin, 10);
@@ -158,19 +158,18 @@ void placer(t_liste *ordre_action,t_map * carte){
 			scanclav(chaine, 2);
 			x = strtol(chaine, &fin, 10);
 			printf("\n");
-		
-			printf("Entrez un y pour votre %s entre 7 et %i :\n", persoc.classe.nom, carte->ncolonnes-1);
-			scanclav(chaine, 2);
-			y = strtol(chaine, &fin, 10);
-			printf("\n");
-			
+                        printf("Entrez un y pour votre %s entre 7 et %i :\n", persoc.classe.nom, carte->ncolonnes-1);
+                        scanclav(chaine, 2);
+                        y = strtol(chaine, &fin, 10);
+                        printf("\n");
+                        
 			/*Tant que les coordonnées ne son pas valides*/
 			while (x >= carte->nlignes || y >= carte->ncolonnes || x < 0 || y < 7 || carte->cell[x][y] != 0){
 
 				/*Si les données sont hors map*/
 				if(x >= carte->nlignes || y >= carte->ncolonnes || x < 0 || y < 7){
 					/*refaire la saisie */
-					printf("Les coordonnées doivent-être des entiers avec un y compris entre 7 et %i\n", carte->ncolonnes-1);
+					printf("Les coordonnées doivent-être des entiers avec un x compris entre 0 et %i et un y compris entre 7 et %i\n",carte->nlignes-1,carte->ncolonnes-1);
 					printf("Joueur 2, entrez un x pour votre %s entre 0 et %i :\n", persoc.classe.nom, carte->nlignes-1);
 					scanclav(chaine, 2);
 					x = strtol(chaine, &fin, 10);

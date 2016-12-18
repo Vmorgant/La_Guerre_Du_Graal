@@ -1,0 +1,99 @@
+\hypertarget{a00015}{}\section{Référence du fichier deplacement\+\_\+simp.\+h}
+\label{a00015}\index{deplacement\+\_\+simp.\+h@{deplacement\+\_\+simp.\+h}}
+
+
+Ce fichier contient les primitives des fonctions de déplacement sur la carte.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}global.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}file\+\_\+chemin.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Init\+\_\+map.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}listes\+\_\+ptr.\+h\char`\"{}}\\*
+Graphe des dépendances par inclusion de deplacement\+\_\+simp.\+h\+:
+% FIG 0
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+% FIG 1
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{a00015_a0adbaf4db93dc33c02b0c3d9e9e256e0}{distance} (int x, int y, int objx, int objy)
+\begin{DoxyCompactList}\small\item\em Calcule le carré de la distance entre le point de départ et l\textquotesingle{}objectif. \end{DoxyCompactList}\item 
+int \hyperlink{a00015_a2b683d97d1725e260c204a6f76777c29}{pathfinding} (int x, int y, int objx, int objy, \hyperlink{a00009}{t\+\_\+noeud} chemin\mbox{[}50\mbox{]}, int $\ast$taille, \hyperlink{a00008}{t\+\_\+map} map)
+\item 
+void \hyperlink{a00015_a0e5b60d03bc28acdaf242928b45e6084}{deplacement} (\hyperlink{a00007}{t\+\_\+liste} $\ast$ordre\+\_\+action, \hyperlink{a00008}{t\+\_\+map} map)
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Ce fichier contient les primitives des fonctions de déplacement sur la carte. 
+
+\begin{DoxyAuthor}{Auteur}
+Martin Lebourdais 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+22/11/2016 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\index{deplacement\+\_\+simp.\+h@{deplacement\+\_\+simp.\+h}!deplacement@{deplacement}}
+\index{deplacement@{deplacement}!deplacement\+\_\+simp.\+h@{deplacement\+\_\+simp.\+h}}
+\subsubsection[{\texorpdfstring{deplacement(t\+\_\+liste $\ast$ordre\+\_\+action, t\+\_\+map map)}{deplacement(t_liste *ordre_action, t_map map)}}]{\setlength{\rightskip}{0pt plus 5cm}void deplacement (
+\begin{DoxyParamCaption}
+\item[{{\bf t\+\_\+liste} $\ast$}]{ordre\+\_\+action, }
+\item[{{\bf t\+\_\+map}}]{map}
+\end{DoxyParamCaption}
+)}\hypertarget{a00015_a0e5b60d03bc28acdaf242928b45e6084}{}\label{a00015_a0e5b60d03bc28acdaf242928b45e6084}
+Fonction permettant de déplacer le personnage. 
+\begin{DoxyParams}{Paramètres}
+{\em \hyperlink{a00007}{t\+\_\+liste}} & $\ast$ordre\+\_\+action \+: ordre de jeu des personnages (util pour connaître le personnage qui se déplace),\hyperlink{a00008}{t\+\_\+map} map \+: Plateau de jeu\\
+\hline
+\end{DoxyParams}
+\index{deplacement\+\_\+simp.\+h@{deplacement\+\_\+simp.\+h}!distance@{distance}}
+\index{distance@{distance}!deplacement\+\_\+simp.\+h@{deplacement\+\_\+simp.\+h}}
+\subsubsection[{\texorpdfstring{distance(int x, int y, int objx, int objy)}{distance(int x, int y, int objx, int objy)}}]{\setlength{\rightskip}{0pt plus 5cm}float distance (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{objx, }
+\item[{int}]{objy}
+\end{DoxyParamCaption}
+)}\hypertarget{a00015_a0adbaf4db93dc33c02b0c3d9e9e256e0}{}\label{a00015_a0adbaf4db93dc33c02b0c3d9e9e256e0}
+
+
+Calcule le carré de la distance entre le point de départ et l\textquotesingle{}objectif. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em int} & x \+: Abscisse de départ, int y \+: Ordonnée de départ, int xobj \+: Abscisse cible; int yobj \+: Ordonnée cible \\
+\hline
+\end{DoxyParams}
+Calcule le carré de la distance entre le point de départ et l\textquotesingle{}objectif 
+\begin{DoxyParams}{Paramètres}
+{\em int} & x \+: Abscisse de départ, int y \+: Ordonnée de départ, int xobj \+: Abscisse cible; int yobj \+: Ordonnée cible\\
+\hline
+\end{DoxyParams}
+\index{deplacement\+\_\+simp.\+h@{deplacement\+\_\+simp.\+h}!pathfinding@{pathfinding}}
+\index{pathfinding@{pathfinding}!deplacement\+\_\+simp.\+h@{deplacement\+\_\+simp.\+h}}
+\subsubsection[{\texorpdfstring{pathfinding(int x, int y, int objx, int objy, t\+\_\+noeud chemin[50], int $\ast$taille, t\+\_\+map map)}{pathfinding(int x, int y, int objx, int objy, t_noeud chemin[50], int *taille, t_map map)}}]{\setlength{\rightskip}{0pt plus 5cm}int pathfinding (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{objx, }
+\item[{int}]{objy, }
+\item[{{\bf t\+\_\+noeud}}]{chemin\mbox{[}50\mbox{]}, }
+\item[{int $\ast$}]{taille, }
+\item[{{\bf t\+\_\+map}}]{map}
+\end{DoxyParamCaption}
+)}\hypertarget{a00015_a2b683d97d1725e260c204a6f76777c29}{}\label{a00015_a2b683d97d1725e260c204a6f76777c29}
+Trouve le chemin le plus court entre le point de départ et l\textquotesingle{}objectif et retourne ce chemin dans une file. 
+\begin{DoxyParams}{Paramètres}
+{\em int} & x \+: Abscisse de départ, int y \+: Ordonnée de départ, int xobj \+: Abscisse cible; int yobj \+: Ordonnée cible\\
+\hline
+\end{DoxyParams}
