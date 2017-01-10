@@ -373,7 +373,7 @@ int test_obstacle(t_personnage attaquant,t_personnage cible,int portee, t_map * 
 			if(cible.x > attaquant.x){
 				for(j=1+attaquant.x; j < cible.x; j++){/*d'à coté de l'attaquant jusqu'a la portée max de l'attaque */
 					if(carte->cell[j][attaquant.y]!=0)/*si il y a un obstacle */
-						if(carte->cell[attaquant.x][j]>0)/*si c'est un personnage */
+						if(carte->cell[j][attaquant.y]>0)/*si c'est un personnage */
 							return vrai;		
 						else return faux;
 				}
@@ -381,7 +381,7 @@ int test_obstacle(t_personnage attaquant,t_personnage cible,int portee, t_map * 
 			}else if(cible.x < attaquant.x){
 				for(j=cible.x+1; j < attaquant.x; j++){/*d'à coté de l'attaquant jusqu'a la portée max de l'attaque */
 					if(carte->cell[j][attaquant.y]!=0)/*si il y a un obstacle */
-						if(carte->cell[attaquant.x][j]>0)/*si c'est un personnage */
+						if(carte->cell[j][attaquant.y]>0)/*si c'est un personnage */
 							return vrai;		
 						else return faux;
 				}
